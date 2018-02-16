@@ -1,0 +1,109 @@
+<mat-sidenav-container style="background-color: white">
+    <!-- opened="{{media.isActive('xs')}}" -->
+    <mat-sidenav #sidenav opened="false" [mode]="'side'" style="background-color: white">
+        <mat-toolbar color="primary">
+            <!-- <span>Components</span> -->
+        </mat-toolbar>
+        <div style="margin: 20px">
+            <mat-list>
+                <mat-list-item [routerLink]="['/']" (click)="sidenav.toggle()">
+                    <mat-icon mat-list-icon svgIcon="app:home"></mat-icon>
+                    <h4 mat-line>Home</h4>
+                    <!-- <p mat-line>Extend your Web apps</p> -->
+                </mat-list-item>
+            </mat-list>
+            <mat-expansion-panel style="background-color: #eee" displayMode="'flat'">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <div fxLayout="row" fxLayoutAlign="center center">
+                            <span fxFlex>Authentication</span>
+                        </div>
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <mat-list>
+                    <mat-list-item *ngFor="let item of authenticationMenuItems" [routerLink]="item.url" (click)="!media.isActive('xs') && sidenav.toggle()">
+                        <mat-icon mat-list-icon svgIcon="app:{{item.icon}}"></mat-icon>
+                        <h4 mat-line>{{item.title}}</h4>
+                        <p mat-line>{{item.subTitle}}</p>
+                    </mat-list-item>
+                </mat-list>
+            </mat-expansion-panel>
+        </div>
+        <!-- <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    API Browser
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <mat-list>
+                <mat-list-item *ngFor="let item of apiMenuItms" [routerLink]="item.url" (click)="media.isActive('xs') && sidenav.toggle()">
+                    <mat-icon mat-list-icon svgIcon="app:{{item.icon}}"></mat-icon>
+                    <h4 mat-line>{{item.title}}</h4>
+                    <p mat-line>{{item.subTitle}}</p>
+                </mat-list-item>
+            </mat-list>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Other Components
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <mat-list>
+                <mat-list-item *ngFor="let item of otherComponentMenuItems" [routerLink]="item.url" (click)="media.isActive('xs') && sidenav.toggle()">
+                    <mat-icon mat-list-icon svgIcon="app:{{item.icon}}"></mat-icon>
+                    <h4 mat-line>{{item.title}}</h4>
+                    <p mat-line>{{item.subTitle}}</p>
+                </mat-list-item>
+            </mat-list>
+        </mat-expansion-panel>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Services
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <mat-list>
+                <mat-list-item>
+                    <mat-icon mat-list-icon svgIcon="app:date_range"> </mat-icon>
+                    <h4 mat-line>REST service</h4>
+                    <p mat-line>HATEOS Rest API helper</p>
+                </mat-list-item>
+            </mat-list>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Pipes
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <mat-list>
+                <mat-list-item>
+                    <mat-icon mat-list-icon svgIcon="app:date_range"> </mat-icon>
+                    <h4 mat-line>Camel Case</h4>
+                    <p mat-line>Text in to Camel Case</p>
+                </mat-list-item>
+            </mat-list>
+        </mat-expansion-panel> -->
+    </mat-sidenav>
+
+    <!-- Main content -->
+    <mat-toolbar color="primary">
+        <button mat-icon-button (click)="sidenav.toggle()" MatTooltip="Toggle SideNav">
+            <mat-icon>
+                <svg viewBox="0 0 24 24">
+                    <path d="M0 0h24v24H0z" fill="none" />
+                    <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+                </svg>
+            </mat-icon>
+        </button>
+        <span>Extendz</span>
+    </mat-toolbar>
+
+    <div>
+        <router-outlet></router-outlet>
+    </div>
+
+</mat-sidenav-container>

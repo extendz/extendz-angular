@@ -1,0 +1,45 @@
+<mat-tab-group>
+  <mat-tab label="Overview">
+    <div class="tab-content">
+      <h3 class="doc-header">Connect to Oauth2 servers</h3>
+      <p>With few lines of codes you can connect with a Oauth2 Enabled server</p>
+
+    </div>
+  </mat-tab>
+  <mat-tab label="API">
+    <div class="tab-content">
+    </div>
+  </mat-tab>
+  <mat-tab label="Demo">
+    <div class="tab-content">
+      <p>Try the following credentials to get an access token.</p>
+      <table>
+        <tr>
+          <th>Field</th>
+          <th>Value</th>
+        </tr>
+        <tr>
+          <td>User Name</td>
+          <td>
+            <strong>user</strong>
+          </td>
+        </tr>
+        <tr>
+          <td>Password</td>
+          <td>
+            <strong>password</strong>
+          </td>
+        </tr>
+      </table>
+
+      <hr>
+      <mat-card>
+        <ext-login-oauth2 [config]="config" (token)="onToken($event)"></ext-login-oauth2>
+      </mat-card>
+      <div>
+        <p style="word-break: break-all">
+          <strong>Access Token :</strong> {{accessToken?.access_token}}</p>
+      </div>
+    </div>
+  </mat-tab>
+</mat-tab-group>

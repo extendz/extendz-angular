@@ -1,0 +1,18 @@
+{
+  "extends": "../tsconfig.json",
+  "angularCompilerOptions": {
+    "paths": {
+      "@extend/login": ["../ext-login/src/index.ts"]
+    }
+  },
+  "compilerOptions": {
+    "outDir": "../out-tsc/app",
+    "baseUrl": "./",
+    "module": "es2015",
+    "types": [],
+    "paths": {
+      "@extend/login": ["../ext-login/src/index.ts"]
+    }
+  },
+  "exclude": ["test.ts", "**/*.spec.ts"]
+}

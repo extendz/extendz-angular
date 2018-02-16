@@ -1,0 +1,10 @@
+.bottom-right-fab{
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    color: white;
+  }
+
+.sign-in-form mat-form-field mat-icon{
+    color: #aaa;
+}
