@@ -22,6 +22,10 @@ const routes: Routes = [
   //   path: 'openlayer',
   //   loadChildren: './modules/openlayer-example/openlayer-example.module#OpenlayerExampleModule'
   // }
+  {
+    path: 'chart',
+    loadChildren: './modules/charts/charts.module#ChartsModule'
+  },
 ];
 
 @NgModule({
