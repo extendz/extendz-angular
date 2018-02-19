@@ -1,6 +1,6 @@
 <mat-sidenav-container style="background-color: white">
-    <!-- opened="{{media.isActive('xs')}}" -->
-    <mat-sidenav #sidenav opened="false" [mode]="'side'" style="background-color: white">
+    <!-- -->
+    <mat-sidenav #sidenav [opened]="media.isActive('xs') ? false :true" [mode]="media.isActive('xs') ? 'over' : 'side'" style="background-color: white">
         <mat-toolbar color="primary">
             <!-- <span>Components</span> -->
         </mat-toolbar>
