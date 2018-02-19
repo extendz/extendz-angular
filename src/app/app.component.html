@@ -5,7 +5,7 @@
             <!-- <span>Components</span> -->
         </mat-toolbar>
         <div style="margin: 20px">
-            <mat-list>
+            <mat-list dense>
                 <mat-list-item [routerLink]="['/']" (click)="sidenav.toggle()">
                     <mat-icon mat-list-icon svgIcon="app:home"></mat-icon>
                     <h4 mat-line>Home</h4>
@@ -20,7 +20,7 @@
                         </div>
                     </mat-panel-title>
                 </mat-expansion-panel-header>
-                <mat-list>
+                <mat-list dense>
                     <mat-list-item *ngFor="let item of authenticationMenuItems" [routerLink]="item.url" (click)="!media.isActive('xs') && sidenav.toggle()">
                         <mat-icon mat-list-icon svgIcon="app:{{item.icon}}"></mat-icon>
                         <h4 mat-line>{{item.title}}</h4>
