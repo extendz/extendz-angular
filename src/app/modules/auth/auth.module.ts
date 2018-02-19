@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatCardModule, MatTabsModule } from '@angular/material';
+import { CovalentHighlightModule } from '@covalent/highlight';
+
 
 import { AuthRoutingModule } from './auth-routing.module';
 import { AuthComponent } from './auth.component';
@@ -15,6 +17,7 @@ import { ExtendOauth2Module } from '../../../platform';
     AuthRoutingModule,
     ExtendOauth2Module,
     FlexLayoutModule,
+    CovalentHighlightModule,
     // Mat
     MatTabsModule,
     MatCardModule

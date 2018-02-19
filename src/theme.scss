@@ -11,5 +11,5 @@ $theme: mat-light-theme($primary, $accent, $warn);
 @include covalent-highlight-theme();
 .doc-header {
   color: mat-color($accent);
-  border-bottom: 1px solid mat-color($accent);
+ // border-bottom: 1px solid mat-color($accent);
 }
