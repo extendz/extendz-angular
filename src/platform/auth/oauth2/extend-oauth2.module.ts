@@ -24,6 +24,7 @@ import {
   MatInputModule,
   MatSnackBarModule
 } from '@angular/material';
+
 import { CovalentLoadingModule } from '@covalent/core/loading';
 
 import { Oauth2Service } from './oauth2.service';

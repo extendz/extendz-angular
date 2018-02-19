@@ -10,13 +10,13 @@ const routes: Routes = [
     path: 'login',
     loadChildren: './modules/auth/auth.module#AuthModule'
   },
+  {
+    path: 'map',
+    loadChildren: './modules/map/mapexample/mapexample.module#MapexampleModule'
+  }
   // {
   //   path: 'apis',
   //   loadChildren: './modules/api/api-example.module#ApiExampleModule'
-  // },
-  // {
-  //   path: 'map',
-  //   loadChildren: './modules/map/mapexample/mapexample.module#MapexampleModule'
   // },
   // {
   //   path: 'openlayer',

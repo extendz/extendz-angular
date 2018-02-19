@@ -85,8 +85,13 @@ export class MapService {
           this.polygon.setPaths(this.path);
         }
       );
+      
     }
   } // mapPolygon()
+
+  finishDraw(){
+    // this.s = 
+  }
 
   mapMarker(pointer: boolean, map?: any) {
     if (pointer) {
@@ -135,7 +140,7 @@ export class MapService {
     this.path.forEach(location => {
       points.push({ lat: location.lat(), lng: location.lng() });
     });
-
+    
     return points;
   }
 

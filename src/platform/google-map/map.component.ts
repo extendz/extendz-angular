@@ -28,7 +28,7 @@ export class MapComponent implements OnInit {
   @Output() onCrop = new EventEmitter<any>();
   @Output() onClose = new EventEmitter<boolean>();
 
-  constructor(private service: MapService) {}
+  constructor(public service: MapService) {}
 
   option: MapOptions;
 
