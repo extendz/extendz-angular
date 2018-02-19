@@ -1,6 +1,6 @@
 {
   "name": "@extendz/auth",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Extend UI Platform Authentication Modules",
   "main": "./bundles/auth.umd.js",
   "module": "./index.js",
