@@ -43,7 +43,7 @@ export class MapService {
         ref: any = d.getElementsByTagName('script')[0];
       gMap = d.createElement('script');
       gMap.async = true;
-      gMap.src = 'http://maps.googleapis.com/maps/api/js?key=' + this.mapConf.apiKey;
+      gMap.src = 'https://maps.googleapis.com/maps/api/js?key=' + this.mapConf.apiKey;
 
       gMap.onload = function() {
         observer.next({});

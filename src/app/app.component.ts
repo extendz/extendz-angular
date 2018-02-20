@@ -22,7 +22,7 @@ export class AppComponent {
   ) {
     iconRegistry.addSvgIconSetInNamespace(
       'app',
-      sanitizer.bypassSecurityTrustResourceUrl('/assets/svg/icons.svg')
+      sanitizer.bypassSecurityTrustResourceUrl('./assets/svg/icons.svg')
     );
     this.authenticationMenuItems = [
       {
