@@ -11,7 +11,7 @@ before_script:
   - npm i angular-cli-ghpages
 
 script:
-  - ng build --prod --base-href "https://extendz.github.io"
+  - ng build --prod --base-href "https://extendz.github.io/extendz-live"
 
 after_success:
   - ngh --repo=https://$GITHUB_TOKEN@github.com/extendz/extendz-live.git --name="rumes" --email=rs.kumarasinghe89@gmail.com --dir=dist/app --no-silent
