@@ -15,7 +15,7 @@ script:
   - ng build --prod --base-href "https://extendz.github.io/extendz-live/"
 
 after_success:
-  - ngh --repo=https://$GITHUB_TOKEN@github.com/extendz/extendz-live --name="rumes" --email=jk.rumes@gmail.com
+  - ngh --repo=https://$GITHUB_TOKEN@github.com/extendz/extendz-live --name="rumes" --email=rs.kumarasinghe89@gmail.com
 
   notifications:
   email:
