@@ -1,18 +1,18 @@
-#@extendz/google-map
+# @extendz/google-map
 
-##per request 
+## per request 
 
 ⋅⋅⋅*angular 2,4,5
 ⋅⋅⋅*nodejs 6 or above
 ⋅⋅⋅*npm
 
-##installation 
+## installation 
 
 `npm i @extendz/google-map`
 
-##usage
+## usage
 
-###mapexample.module.ts
+### mapexample.module.ts
 
 ```typescript 
 import { MapModule } from ‘@extendz/google-map’;
@@ -30,7 +30,7 @@ export class MapexampleModule {}
 
 ```
 
-###mapexample.component.html
+### mapexample.component.html
 
 ```html
 <div style="height: 90vh">
@@ -42,7 +42,7 @@ export class MapexampleModule {}
 </div>
 ```
 
-###mapexample.component.ts
+### mapexample.component.ts
 
 ```typescript
 import { Component, OnInit } from '@angular/core';
@@ -68,7 +68,7 @@ export class MapexampleComponent implements OnInit {
 }
 ```
 
-###@Input
+### @Input
 
 Options | Type | Description
 ------- | ---- | -----------
@@ -78,7 +78,7 @@ zoom | Number | Zoom level
 center | LatLng | Define Map center according to given latitude and longitude
 
 
-###@Output
+### @Output
 
  Options | Type | Description
 ------- | ---- | -----------
