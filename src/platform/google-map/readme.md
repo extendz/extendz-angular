@@ -5,9 +5,9 @@
 
 ## per request 
 
-⋅⋅⋅*angular 2,4,5
-⋅⋅⋅*nodejs 6 or above
-⋅⋅⋅*npm
+⋅⋅⋅* angular 2,4,5
+⋅⋅⋅* nodejs 6 or above
+⋅⋅⋅* npm
 
 ## installation 
 
