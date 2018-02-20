@@ -13,10 +13,11 @@ before_script:
 
 script:
   - ng build --prod --base-href "https://extendz.github.io/extendz-live/"
-  - ngh --repo=https://$GITHUB_TOKEN@github.com/extendz/extendz-live --name="rumes" --email=rs.rumes@gmail.com
 
+after_success:
+  - ngh --repo=https://$GITHUB_TOKEN@github.com/extendz/extendz-live --name="rumes" --email=jk.rumes@gmail.com
 
-notifications:
+  notifications:
   email:
     on_failure: change
     on_success: change
