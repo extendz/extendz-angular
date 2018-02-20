@@ -16,8 +16,4 @@ script:
 
 after_success:
   - ngh --repo=https://$GITHUB_TOKEN@github.com/extendz/extendz-live --name="rumes" --email=rs.kumarasinghe89@gmail.com
-
-  notifications:
-  email:
-    on_failure: change
-    on_success: change
+  
