@@ -13,15 +13,8 @@ before_script:
 
 script:
   - ng build --prod --base-href "https://extendz.github.io/extendz-live/"
-  - ngh --repo=https://github.com/extendz/extendz-live
+  - ngh --repo=https://$GITHUB_TOKEN@github.com/extendz/extendz-live --name="rumes" --email=rs.rumes@gmail.com
 
-deploy:
-  provider: pages
-  skip_cleanup: true
-  github_token: $GITHUB_TOKEN
-  local_dir: dist
-  on: 
-    branch: master 
 
 notifications:
   email:
