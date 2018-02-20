@@ -1,5 +1,8 @@
 # @extendz/google-map
 
+## demo
+ you can find example and demo [here](https://extendz.github.io/extendz-live/map)
+
 ## per request 
 
 ⋅⋅⋅*angular 2,4,5
