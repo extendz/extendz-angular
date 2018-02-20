@@ -6,6 +6,10 @@ branches:
   only:
     - master
 
+before_script:
+  - npm rebuild node-sass
+  - npm i angular-cli-ghpages
+
 script:
   - ng build --prod --base-href "https://extendz.github.io/extendz-live/"
 
