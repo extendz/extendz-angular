@@ -16,7 +16,7 @@ export class AppComponent {
   otherComponentMenuItems: MenuItem[];
 
   constructor(
-    private media: ObservableMedia,
+    public media: ObservableMedia,
     private iconRegistry: MatIconRegistry,
     private sanitizer: DomSanitizer
   ) {
