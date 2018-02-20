@@ -1,0 +1,27 @@
+language: node_js
+node_js:
+  - "6.9"
+
+branches:
+  only:
+    - master
+
+before_script:
+  - npm install -g @angular/cli
+
+script:
+  - ng build --prod --base-href "https://extendz.github.io/extendz-live/"
+  - ngh --repo=https://github.com/extendz/extendz-live
+
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  local_dir: dist
+  on: 
+    branch: master 
+
+notifications:
+  email:
+    on_failure: change
+    on_success: change
