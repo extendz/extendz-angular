@@ -2,8 +2,8 @@
 @import '~@covalent/core/theming/all-theme';
 @import '~@covalent/highlight/highlight-theme';
 @include mat-core();
-$primary: mat-palette($mat-light-green);
-$accent: mat-palette($mat-light-blue, 600, A100, A400);
+$primary: mat-palette($mat-light-blue);
+$accent: mat-palette($mat-green);
 $warn: mat-palette($mat-red, 600);
 $theme: mat-light-theme($primary, $accent, $warn);
 @include angular-material-theme($theme);

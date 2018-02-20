@@ -37,30 +37,30 @@ export class AppComponent {
         subTitle: 'Login with Facebook',
         url: ['login', 'facebook']
       },
-      {
-        icon: 'google',
-        title: 'Google',
-        subTitle: 'Login with Google',
-        url: ['login', 'google']
-      },
-      {
-        icon: 'keycloak',
-        title: 'Keycloak Oauth2',
-        subTitle: 'Wrapper arround the oauth2',
-        url: ['login', 'keycloak-oauth2']
-      },
-      {
-        icon: 'keycloak',
-        title: 'Keycloak Users',
-        subTitle: 'Get keycloak users',
-        url: ['login', 'keycloak-users']
-      },
-      {
-        icon: 'keycloak',
-        title: 'Keycloak Sign Up',
-        subTitle: 'Register new Keycloak user',
-        url: ['login', 'keycloak-register']
-      }
+      // {
+      //   icon: 'google',
+      //   title: 'Google',
+      //   subTitle: 'Login with Google',
+      //   url: ['login', 'google']
+      // },
+      // {
+      //   icon: 'keycloak',
+      //   title: 'Keycloak Oauth2',
+      //   subTitle: 'Wrapper arround the oauth2',
+      //   url: ['login', 'keycloak-oauth2']
+      // },
+      // {
+      //   icon: 'keycloak',
+      //   title: 'Keycloak Users',
+      //   subTitle: 'Get keycloak users',
+      //   url: ['login', 'keycloak-users']
+      // },
+      // {
+      //   icon: 'keycloak',
+      //   title: 'Keycloak Sign Up',
+      //   subTitle: 'Register new Keycloak user',
+      //   url: ['login', 'keycloak-register']
+      // }
     ];
 
     this.apiMenuItms = [

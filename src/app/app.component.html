@@ -1,26 +1,26 @@
 <mat-sidenav-container style="background-color: white">
     <!-- -->
-    <mat-sidenav #sidenav [opened]="media.isActive('xs') ? false :true" [mode]="media.isActive('xs') ? 'over' : 'side'" style="background-color: white">
-        <mat-toolbar color="primary">
+    <mat-sidenav #sidenav [opened]="media.isActive('xs') ? false :true" [mode]="media.isActive('xs') ? 'over' : 'side'" style="background-color: #3C3A37">
+        <mat-toolbar color="primary" style="background-color: #3C3A37">
             <button mat-icon-button (click)="sidenav.toggle()" MatTooltip="Toggle SideNav">
-                <mat-icon>
+                <mat-icon style="color: white">
                     <svg viewBox="0 0 24 24">
                         <path d="M0 0h24v24H0z" fill="none" />
                         <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
                     </svg>
                 </mat-icon>
             </button>
-            <span>Extendz</span>
+            <span style="color: white">Extendz</span>
         </mat-toolbar>
         <div style="margin: 20px">
-            <mat-list dense>
-                <mat-list-item [routerLink]="['/']">
-                    <mat-icon mat-list-icon svgIcon="app:home"></mat-icon>
+            <mat-list>
+                <mat-list-item [routerLink]="['/']" style="color: white">
+                    <mat-icon mat-list-icon svgIcon="app:home" style="color: white"></mat-icon>
                     <h4 mat-line>Home</h4>
                     <!-- <p mat-line>Extend your Web apps</p> -->
                 </mat-list-item>
             </mat-list>
-            <mat-expansion-panel style="background-color: #eee" displayMode="'flat'">
+            <mat-expansion-panel displayMode="'flat'">
                 <mat-expansion-panel-header>
                     <mat-panel-title>
                         <div fxLayout="row" fxLayoutAlign="center center">
