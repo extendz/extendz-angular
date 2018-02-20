@@ -3,10 +3,12 @@ import { CommonModule } from '@angular/common';
 import { MapexampleComponent } from './mapexample.component';
 import { MapModule } from '../../../../platform/google-map';
 import { MapExampleRoutingModule } from './mapexample.routing';
+import { MatTabsModule } from '@angular/material';
 
 @NgModule({
   imports: [
     CommonModule,
+    MatTabsModule,
     MapModule.forRoot({
       apiKey:"AIzaSyCGqeyOzgZyvKq0kwn35H4DSCudBsdRBAA",
       center:{
