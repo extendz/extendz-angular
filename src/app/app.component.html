@@ -98,7 +98,7 @@
     </mat-sidenav>
 
     <!-- Main content -->
-    <mat-toolbar color="primary">
+    <mat-toolbar color="primary" class="mat-elevation-z1">
         <button *ngIf="!sidenav.opened" mat-icon-button (click)="sidenav.toggle()" MatTooltip="Toggle SideNav">
             <mat-icon>
                 <svg viewBox="0 0 24 24">
@@ -108,6 +108,10 @@
             </mat-icon>
         </button>
         <span *ngIf="!sidenav.opened">Extendz</span>
+        <span fxFlex></span>
+        <a target="_blank" href="https://github.com/extendz/extendz-angular" mat-button>
+            <mat-icon svgIcon="app:github"></mat-icon> Github
+        </a>
     </mat-toolbar>
 
     <div>

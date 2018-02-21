@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg>
     <defs>
-            <svg id="oauth2" viewBox="0 0 256 256">
+        <svg id="oauth2" viewBox="0 0 256 256">
             <g>
                 <path d="M118.922624,0.37140771 C175.483691,-3.5505123 212.986837,24.1282078 234.430251,57.8515157 C245.182251,74.7603157 255.731584,100.441382 255.780224,126.827729 C255.832277,155.497169 246.544597,180.324476 234.430251,198.541009 C221.979264,217.264422 205.875157,232.728956 185.709184,242.883196 C151.999957,259.857276 104.889984,260.321489 74.033024,243.978022 C39.6684361,225.777276 13.2466761,199.798822 3.41456926,154.746662 C-0.520150741,136.717436 -0.972417408,113.421862 4.50939593,93.4346624 C5.79579605,88.7460224 8.13350272,83.8116224 9.98395605,79.2014891 C18.8765427,57.0472491 34.0125427,37.7823945 52.6834773,24.4580211 C60.185984,19.1042078 69.2876373,13.7794078 77.3179307,10.2248478 C87.3096107,5.80244779 104.132224,1.3966877 118.922624,0.37140771 L118.922624,0.37140771 Z" fill="#FFFFFF"></path>
                 <path d="M226.211797,130.015782 C226.211797,183.471996 182.876971,226.803836 129.421611,226.803836 C75.9662507,226.803836 32.6322761,183.471996 32.6322761,130.015782 C32.6322761,76.5608491 75.9662507,33.2255945 129.421611,33.2255945 C182.876544,33.2255945 226.211797,76.5608491 226.211797,130.015782 L226.211797,130.015782 Z" fill="#000000"></path>
@@ -80,7 +80,7 @@
                 <path d="M130.55,50.479 C155.064,50.479 171.6,61.068 181.029,69.917 L217.873,33.943 C195.245,12.91 165.798,0 130.55,0 C79.49,0 35.393,29.301 13.925,71.947 L56.136,104.73 C66.726,73.253 96.027,50.479 130.55,50.479" fill="#EB4335"></path>
             </g>
         </svg>
-        <svg viewBox="0 0 24 24" id="date_range">
+        <svg id="date_range" viewBox="0 0 24 24">
             <path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z"/>
             <path d="M0 0h24v24H0z" fill="none"/>
         </svg>
@@ -97,89 +97,48 @@
             </g>
             <g id="Layer_1_1_"></g>
         </svg>
-        <svg id="api"  x="0px" y="0px" viewBox="0 0 1000 1000">
-<metadata> Svg Vector Icons : http://www.onlinewebfonts.com/icon </metadata>
-<g><path d="M824.6,458.4C822.2,317.5,707,203.5,566.2,203.5c-95.5,0-183.7,53.9-229.1,137.2c-20.8-14.7-45.3-23.3-71-23.3c-66.1,0-120.1,53.9-120.1,120.1c0,2.4,0,6.1,0,8.6C66.4,464.5,10,535.5,10,618.8c0,98,79.6,177.6,177.6,177.6H821c93.1,0,169-75.9,169-169C990,535.5,916.5,460.8,824.6,458.4z M821,772H187.6c-84.5,0-153.1-68.6-153.1-153.1c0-74.7,53.9-138.4,127.4-150.7l12.3-2.4l-2.5-12.3c-1.2-6.1-1.2-11-1.2-15.9c0-52.7,42.9-95.6,95.6-95.6c24.5,0,47.8,9.8,66.1,26.9l12.3,12.3l7.3-14.7c38-83.3,122.5-137.2,214.4-137.2c129.8,0,235.2,105.4,235.2,235.2c0,2.4,0,4.9,0,6.1v14.7l15.9-1.2c2.4,0,3.7,0,6.1,0C903,484.1,968,549,968,628.6C968,708.3,900.6,772,821,772z"/><path d="M386.1,493.9L386.1,493.9c-6.1,0-12.2,3.7-13.5,9.8l-62.5,158l22,8.6l18.4-45.3h72.3l18.4,45.3l22.1-8.6l-62.5-158C397.1,497.6,392.2,493.9,386.1,493.9z M359.1,600.4l26.9-68.6l27,68.6H359.1z"/><path d="M553.9,487.8h-74.7V500v105.4v61.3h23.3v-61.3h51.4c31.8,0,58.8-25.7,58.8-58.8C612.7,513.5,587,487.8,553.9,487.8z M553.9,580.9h-51.4v-68.6h51.4c19.6,0,34.3,15.9,34.3,34.3C588.2,564.9,573.5,580.9,553.9,580.9z"/><path d="M642.1,500h23.3v165.4h-23.3V500z"/></g>
-</svg>
-<svg id="home" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
-
+        <svg id="api" x="0px" y="0px" viewBox="0 0 1000 1000">
+            <metadata> Svg Vector Icons : http://www.onlinewebfonts.com/icon </metadata>
+            <g>
+                <path d="M824.6,458.4C822.2,317.5,707,203.5,566.2,203.5c-95.5,0-183.7,53.9-229.1,137.2c-20.8-14.7-45.3-23.3-71-23.3c-66.1,0-120.1,53.9-120.1,120.1c0,2.4,0,6.1,0,8.6C66.4,464.5,10,535.5,10,618.8c0,98,79.6,177.6,177.6,177.6H821c93.1,0,169-75.9,169-169C990,535.5,916.5,460.8,824.6,458.4z M821,772H187.6c-84.5,0-153.1-68.6-153.1-153.1c0-74.7,53.9-138.4,127.4-150.7l12.3-2.4l-2.5-12.3c-1.2-6.1-1.2-11-1.2-15.9c0-52.7,42.9-95.6,95.6-95.6c24.5,0,47.8,9.8,66.1,26.9l12.3,12.3l7.3-14.7c38-83.3,122.5-137.2,214.4-137.2c129.8,0,235.2,105.4,235.2,235.2c0,2.4,0,4.9,0,6.1v14.7l15.9-1.2c2.4,0,3.7,0,6.1,0C903,484.1,968,549,968,628.6C968,708.3,900.6,772,821,772z"/>
+                <path d="M386.1,493.9L386.1,493.9c-6.1,0-12.2,3.7-13.5,9.8l-62.5,158l22,8.6l18.4-45.3h72.3l18.4,45.3l22.1-8.6l-62.5-158C397.1,497.6,392.2,493.9,386.1,493.9z M359.1,600.4l26.9-68.6l27,68.6H359.1z"/>
+                <path d="M553.9,487.8h-74.7V500v105.4v61.3h23.3v-61.3h51.4c31.8,0,58.8-25.7,58.8-58.8C612.7,513.5,587,487.8,553.9,487.8z M553.9,580.9h-51.4v-68.6h51.4c19.6,0,34.3,15.9,34.3,34.3C588.2,564.9,573.5,580.9,553.9,580.9z"/>
+                <path d="M642.1,500h23.3v165.4h-23.3V500z"/>
+            </g>
+        </svg>
+        <svg id="home" viewBox="0 0 24 24">
+            <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+        </svg>
         <svg viewBox="0 0 24 24" id = "map">
             <path d="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM15 19l-6-2.11V5l6 2.11V19z"/>
             <path d="M0 0h24v24H0z" fill="none"/>
         </svg>
-
-<svg
-   id="openlayer"
-   viewBox="0 0 100 100">
-  <defs
-     id="defs3861">
-    <clipPath
-       id="clipPath3849">
-      <rect
-         width="394.26315"
-         height="396.80566"
-         ry="89.573692"
-         x="699.2251"
-         y="-1761.3143"
-         transform="matrix(-0.47673484,0.87904715,-0.95035547,-0.31116633,0,0)"
-         id="rect3851"
-         style="color:#000000;fill:none;stroke:#000000;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
-    </clipPath>
-  </defs>
-  <metadata
-     id="metadata3864">
-    <rdf:RDF>
-      <cc:Work
-         rdf:about="">
-        <dc:format>image/svg+xml</dc:format>
-        <dc:type
-           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
-      </cc:Work>
-    </rdf:RDF>
-  </metadata>
-  <g
-     transform="translate(0,-952.36218)"
-     id="layer1">
-    <g
-       transform="matrix(0.147975,0,0,0.147975,-3.8629317,928.80463)"
-       id="g3853">
-      <rect
-         width="480.20621"
-         height="483.30295"
-         ry="109.09932"
-         x="-438.58575"
-         y="426.20682"
-         transform="matrix(0.76602035,-0.64281632,0.76990078,0.6381636,0,0)"
-         id="rect3017-1"
-         style="color:#000000;fill:#325158;fill-opacity:1;fill-rule:nonzero;stroke:none;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
-      <rect
-         width="480.20621"
-         height="483.30295"
-         ry="109.09932"
-         x="-396.65982"
-         y="384.49219"
-         transform="matrix(0.76602035,-0.64281632,0.76990078,0.6381636,0,0)"
-         id="rect3017-7"
-         style="color:#000000;fill:#e2e4e1;fill-opacity:1;fill-rule:nonzero;stroke:none;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
-      <rect
-         width="480.20621"
-         height="483.30295"
-         ry="109.09932"
-         x="-350.26178"
-         y="338.328"
-         transform="matrix(0.76602035,-0.64281632,0.76990078,0.6381636,0,0)"
-         id="rect3017"
-         style="color:#000000;fill:#83bcc5;fill-opacity:1;fill-rule:nonzero;stroke:none;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
-      <path
-         d="m 1233.8003,1119.4669 c -53.8878,178.2803 -220.6429,298.2666 -406.80645,292.7119 l -32.97308,-83.598 164.08844,-297.9751 z"
-         transform="matrix(-1.133035,-0.44689667,0.44689667,-1.133035,991.42559,2357.536)"
-         clip-path="url(#clipPath3849)"
-         id="path3812"
-         style="color:#000000;fill:#70b3be;fill-opacity:1;fill-rule:nonzero;stroke:none;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
-    </g>
-  </g>
-</svg>
-
+        <svg id="github" viewBox="0 0 24 24">
+            <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+        </svg>
+        <svg id="openlayer" viewBox="0 0 100 100">
+            <defs id="defs3861">
+                <clipPath id="clipPath3849">
+                    <rect width="394.26315" height="396.80566" ry="89.573692" x="699.2251" y="-1761.3143" transform="matrix(-0.47673484,0.87904715,-0.95035547,-0.31116633,0,0)" id="rect3851" style="color:#000000;fill:none;stroke:#000000;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+                </clipPath>
+            </defs>
+            <metadata id="metadata3864">
+                <rdf:RDF>
+                    <cc:Work rdf:about="">
+                        <dc:format>image/svg+xml</dc:format>
+                        <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+                        <dc:title></dc:title>
+                    </cc:Work>
+                </rdf:RDF>
+            </metadata>
+            <g transform="translate(0,-952.36218)" id="layer1">
+                <g transform="matrix(0.147975,0,0,0.147975,-3.8629317,928.80463)" id="g3853">
+                    <rect width="480.20621" height="483.30295" ry="109.09932" x="-438.58575" y="426.20682" transform="matrix(0.76602035,-0.64281632,0.76990078,0.6381636,0,0)" id="rect3017-1" style="color:#000000;fill:#325158;fill-opacity:1;fill-rule:nonzero;stroke:none;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+                    <rect width="480.20621" height="483.30295" ry="109.09932" x="-396.65982" y="384.49219" transform="matrix(0.76602035,-0.64281632,0.76990078,0.6381636,0,0)" id="rect3017-7" style="color:#000000;fill:#e2e4e1;fill-opacity:1;fill-rule:nonzero;stroke:none;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+                    <rect width="480.20621" height="483.30295" ry="109.09932" x="-350.26178" y="338.328" transform="matrix(0.76602035,-0.64281632,0.76990078,0.6381636,0,0)" id="rect3017" style="color:#000000;fill:#83bcc5;fill-opacity:1;fill-rule:nonzero;stroke:none;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+                    <path d="m 1233.8003,1119.4669 c -53.8878,178.2803 -220.6429,298.2666 -406.80645,292.7119 l -32.97308,-83.598 164.08844,-297.9751 z" transform="matrix(-1.133035,-0.44689667,0.44689667,-1.133035,991.42559,2357.536)" clip-path="url(#clipPath3849)" id="path3812" style="color:#000000;fill:#70b3be;fill-opacity:1;fill-rule:nonzero;stroke:none;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
+                </g>
+            </g>
+        </svg>
     </defs>
 </svg>
