@@ -1,45 +1,105 @@
-<mat-tab-group>
-  <mat-tab label="Overview">
-    <div class="tab-content">
-      <h3 class="doc-header">Connect to Oauth2 servers</h3>
-      <p>With few lines of codes you can connect with a Oauth2 Enabled server</p>
-
-    </div>
-  </mat-tab>
-  <mat-tab label="API">
-    <div class="tab-content">
-    </div>
-  </mat-tab>
+<mat-tab-group mat-stretch-tabs="yes">
   <mat-tab label="Demo">
     <div class="tab-content">
-      <p>Try the following credentials to get an access token.</p>
-      <table>
-        <tr>
-          <th>Field</th>
-          <th>Value</th>
-        </tr>
-        <tr>
-          <td>User Name</td>
-          <td>
-            <strong>user</strong>
-          </td>
-        </tr>
-        <tr>
-          <td>Password</td>
-          <td>
-            <strong>password</strong>
-          </td>
-        </tr>
-      </table>
-
-      <hr>
-      <mat-card>
-        <ext-login-oauth2 [config]="config" (token)="onToken($event)"></ext-login-oauth2>
+      <h3 class="doc-header">Oauth2 Authentication</h3>
+      <p>Secure your web application with simple configurations.</p>
+      <p>Use
+        <strong>user</strong> and
+        <strong>password</strong> as credentials in the demo bellow</p>
+      <mat-card class="mat-elevation-z6">
+        <ext-login-oauth2 [config]="config" (userInfo)="onUserInfo($event)" (token)="onToken($event)"></ext-login-oauth2>
       </mat-card>
+
       <div>
         <p style="word-break: break-all">
-          <strong>Access Token :</strong> {{accessToken?.access_token}}</p>
+          <strong *ngIf="accessToken?.access_token">Access Token :</strong> {{accessToken?.access_token}}</p>
+      </div>
+      <div>
+        <p>
+          <strong *ngIf="userInfo?.preferred_username">Preferred User Name :</strong>{{userInfo?.preferred_username}}
+        </p>
       </div>
     </div>
+
   </mat-tab>
+  <mat-tab label="Setup">
+    <div class="tab-content">
+      <h3 class="doc-header">Installing</h3>
+      <td-highlight lang="bash">
+        <![CDATA[
+          npm i -- save @extendz/auth
+            ]]>
+      </td-highlight>
+
+      <h3 class="doc-header">Register</h3>
+
+      <td-highlight lang="typescript">
+        <![CDATA[
+        
+        import {ExtendOauth2Module} from "@extendz/auth"
+
+        @NgModule({
+          imports: [
+            ExtendOauth2Module,
+            ...           
+          ],
+        })
+          ]]>
+      </td-highlight>
+
+      <h3 class="doc-header">Setup</h3>
+
+      <p>Provide your Oauth2 Server details.You can find other options listed
+        <a target="_blank" href="https://github.com/extendz/extendz-angular/blob/master/src/platform/auth/oauth2/models/oauth2.conf.ts">here</a>.In this demo we use
+        <a target="_blank" href="http://www.keycloak.org/">Keycloak</a> server hosted at
+        <a target="_blank" href="https://www.heroku.com/">Heroku</a>
+      </p>
+
+      <td-highlight lang="typescript">
+        <![CDATA[
+          
+          config: Oauth2Config = {
+            tokenUrl: 'https://extendz-keycloak.herokuapp.com/auth/...', // required
+            userInfoUrl: 'https://extendz-keycloak.herokuapp.com/auth/...', // required
+            clinetId: 'angular',
+            grantType: 'password'
+          };
+
+         ]]>
+      </td-highlight>
+
+      <p>Define html code</p>
+
+      <td-highlight lang="html">
+        <![CDATA[
+          <ext-login-oauth2 [config]="config" (userInfo)="onUserInfo($event)" (token)="onToken($event)"></ext-login-oauth2>
+          ]]>
+      </td-highlight>
+
+    </div>
+  </mat-tab>
+
+  <mat-tab label="API">
+    <div class="tab-content">
+      <h3 class="doc-header">Events</h3>
+      <td-highlight lang="typescript">
+        <![CDATA[
+
+        import { AccessToken, UserInfo } from '@extendz/auth';
+
+        /***
+        * On successful token.
+        **/
+        token(accessToken: AccessToken) {}
+
+        /***
+        * On successful user Info.
+        **/
+        userInfo(userInfo:UserInfo) {}
+
+           ]]>
+      </td-highlight>
+    </div>
+  </mat-tab>
+
 </mat-tab-group>
