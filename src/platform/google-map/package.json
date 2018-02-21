@@ -1,15 +1,27 @@
 {
   "name": "@extendz/google-map",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Extend UI Platform built on Angular Material",
   "main": "./bundles/core.umd.js",
   "module": "./index.js",
   "typings": "./index.d.ts",
-  "keywords": ["angular", "material", "material design", "components", "extend", "reusable","angular-map", "ng-map"],
+  "keywords": [
+    "angular",
+    "material",
+    "material design",
+    "components",
+    "extend",
+    "reusable",
+    "angular-map",
+    "ng-map"
+  ],
   "scripts": {},
   "license": "MIT",
   "author": "Rumes Shyaman",
-  "contributors": ["Rumes Shyaman <jk.rumes@gmail.com>","Randika Hapugoda <hrandika@hotmail.com>"],
+  "contributors": [
+    "Rumes Shyaman <jk.rumes@gmail.com>",
+    "Randika Hapugoda <hrandika@hotmail.com>"
+  ],
   "dependencies": {
     "tslib": "^1.7.1",
     "@angular/cdk": "^5.0.0",
@@ -19,5 +31,9 @@
     "@angular/common": "^5.0.0",
     "@angular/core": "^5.0.0",
     "rxjs": "^5.4.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/extendz/extendz-angular.git"
   }
 }
