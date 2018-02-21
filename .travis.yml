@@ -15,3 +15,8 @@ script:
 
 after_success:
   - ngh --repo=https://$GITHUB_TOKEN@github.com/extendz/extendz-live.git --name="rumes" --email=rs.kumarasinghe89@gmail.com --dir=dist/app --no-silent
+
+
+cache:
+  directories:
+    - node_modules
