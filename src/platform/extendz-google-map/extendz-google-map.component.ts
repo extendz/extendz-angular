@@ -9,15 +9,15 @@ import {
   HostListener
 } from '@angular/core';
 
-import { MapService } from './map.service';
+import { ExtendzGoogleMapService } from './extendz-google-map.service';
 import { LatLng, MapOptions, LatLngInterface } from './models';
 
 @Component({
-  selector: 'app-google-map',
-  templateUrl: './map.component.html',
-  styleUrls: ['./map.component.css']
+  selector: 'extendz-google-map',
+  templateUrl: './extendz-google-map.component.html',
+  styleUrls: ['./extendz-google-map.component.css']
 })
-export class MapComponent implements OnInit {
+export class ExtendzGoogleMapComponent implements OnInit {
   @ViewChild('gmap') googleMap: ElementRef;
   @Input('zoom') zoom: number;
   @Input('center') center: LatLng;
@@ -28,7 +28,7 @@ export class MapComponent implements OnInit {
   @Output() onCrop = new EventEmitter<any>();
   @Output() onClose = new EventEmitter<boolean>();
 
-  constructor(public service: MapService) {}
+  constructor(public service: ExtendzGoogleMapService) {}
 
   option: MapOptions;
 

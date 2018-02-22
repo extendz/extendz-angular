@@ -11,7 +11,7 @@ import { MapConfig, LatLng, MapOptions, LatLngInterface } from './models';
 import { forEach } from '@angular/router/src/utils/collection';
 
 @Injectable()
-export class MapService {
+export class ExtendzGoogleMapService {
   map: any;
   polygon: any;
   marker: any;

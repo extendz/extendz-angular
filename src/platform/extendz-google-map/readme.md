@@ -1,4 +1,4 @@
-# @extendz/google-map
+# @extendz/extendz-google-map
 
 ## demo
  you can find example and demo [here](https://extendz.github.io/extendz-live/map)
@@ -11,19 +11,19 @@
 
 ## installation 
 
-`npm i @extendz/google-map`
+`npm i @extendz/extendz-google-map`
 
 ## usage
 
 ### mapexample.module.ts
 
 ```typescript 
-import { MapModule } from ‘@extendz/google-map’;
+import { ExtendzGoogleMapModule } from ‘@extendz/extendz-google-map’;
 
 @NgModule({
 	imports: [
 		CommonModule,
-		MapModule.forRoot({
+		ExtendzGoogleMapModule.forRoot({
 			apiKey:"AIzaSyCGqeyOzgZyvKq0kwn3", ←--- Google map key
 		})
 	],
@@ -37,11 +37,11 @@ export class MapexampleModule {}
 
 ```html
 <div style="height: 90vh">
-	<app-google-map 
+	<extendz-google-map 
 		[center]= "latLng"  ←-- LatLng Object ex :- {lat:23.3872873, lng:45.3443344}
 		[zoom] ="4"  ←-- map zoom level
 	>
-	</app-google-map>
+	</extendz-google-map>
 </div>
 ```
 
@@ -49,7 +49,7 @@ export class MapexampleModule {}
 
 ```typescript
 import { Component, OnInit } from '@angular/core';
-import { LatLng } from '@extendz/google-map';
+import { LatLng } from '@extendz/extendz-google-map';
 
 @Component({
 	selector: 'app-mapexample',
