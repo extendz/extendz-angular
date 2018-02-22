@@ -109,28 +109,18 @@
         <svg id="home" viewBox="0 0 24 24">
             <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
         </svg>
-        <svg viewBox="0 0 24 24" id = "map">
+        <svg id="map" viewBox="0 0 24 24">
             <path d="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM15 19l-6-2.11V5l6 2.11V19z"/>
             <path d="M0 0h24v24H0z" fill="none"/>
+        </svg>
+        <svg id="menu" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0z" fill="none" />
+            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
         </svg>
         <svg id="github" viewBox="0 0 24 24">
             <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
         </svg>
         <svg id="openlayer" viewBox="0 0 100 100">
-            <defs id="defs3861">
-                <clipPath id="clipPath3849">
-                    <rect width="394.26315" height="396.80566" ry="89.573692" x="699.2251" y="-1761.3143" transform="matrix(-0.47673484,0.87904715,-0.95035547,-0.31116633,0,0)" id="rect3851" style="color:#000000;fill:none;stroke:#000000;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
-                </clipPath>
-            </defs>
-            <metadata id="metadata3864">
-                <rdf:RDF>
-                    <cc:Work rdf:about="">
-                        <dc:format>image/svg+xml</dc:format>
-                        <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-                        <dc:title></dc:title>
-                    </cc:Work>
-                </rdf:RDF>
-            </metadata>
             <g transform="translate(0,-952.36218)" id="layer1">
                 <g transform="matrix(0.147975,0,0,0.147975,-3.8629317,928.80463)" id="g3853">
                     <rect width="480.20621" height="483.30295" ry="109.09932" x="-438.58575" y="426.20682" transform="matrix(0.76602035,-0.64281632,0.76990078,0.6381636,0,0)" id="rect3017-1" style="color:#000000;fill:#325158;fill-opacity:1;fill-rule:nonzero;stroke:none;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
