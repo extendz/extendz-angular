@@ -12,6 +12,7 @@ import { MenuItem } from './models';
 })
 export class AppComponent {
   title: string = 'Extendz';
+  pagesMenuItems: MenuItem[];
   authenticationMenuItems: MenuItem[];
   apiMenuItms: MenuItem[];
   otherComponentMenuItems: MenuItem[];
@@ -25,6 +26,21 @@ export class AppComponent {
       'app',
       sanitizer.bypassSecurityTrustResourceUrl('./assets/svg/icons.svg')
     );
+    this.pagesMenuItems = [
+      {
+        icon: 'home',
+        title: 'Home',
+        subTitle: 'Home Page',
+        url: ['']
+      },
+      {
+        icon: 'pages',
+        title: 'Docs',
+        subTitle: 'Documentation',
+        url: ['docs']
+      }
+    ];
+
     this.authenticationMenuItems = [
       {
         icon: 'oauth2',
