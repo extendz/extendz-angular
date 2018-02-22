@@ -109,7 +109,11 @@
         <svg id="home" viewBox="0 0 24 24">
             <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
         </svg>
-        <svg viewBox="0 0 24 24" id = "map">
+        <svg id="menu" viewBox="0 0 24 24">
+            <path d="M0 0h24v24H0z" fill="none" />
+            <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+        </svg>
+        <svg id="map" viewBox="0 0 24 24">
             <path d="M20.5 3l-.16.03L15 5.1 9 3 3.36 4.9c-.21.07-.36.25-.36.48V20.5c0 .28.22.5.5.5l.16-.03L9 18.9l6 2.1 5.64-1.9c.21-.07.36-.25.36-.48V3.5c0-.28-.22-.5-.5-.5zM15 19l-6-2.11V5l6 2.11V19z"/>
             <path d="M0 0h24v24H0z" fill="none"/>
         </svg>
@@ -122,15 +126,6 @@
                     <rect width="394.26315" height="396.80566" ry="89.573692" x="699.2251" y="-1761.3143" transform="matrix(-0.47673484,0.87904715,-0.95035547,-0.31116633,0,0)" id="rect3851" style="color:#000000;fill:none;stroke:#000000;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />
                 </clipPath>
             </defs>
-            <metadata id="metadata3864">
-                <rdf:RDF>
-                    <cc:Work rdf:about="">
-                        <dc:format>image/svg+xml</dc:format>
-                        <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-                        <dc:title></dc:title>
-                    </cc:Work>
-                </rdf:RDF>
-            </metadata>
             <g transform="translate(0,-952.36218)" id="layer1">
                 <g transform="matrix(0.147975,0,0,0.147975,-3.8629317,928.80463)" id="g3853">
                     <rect width="480.20621" height="483.30295" ry="109.09932" x="-438.58575" y="426.20682" transform="matrix(0.76602035,-0.64281632,0.76990078,0.6381636,0,0)" id="rect3017-1" style="color:#000000;fill:#325158;fill-opacity:1;fill-rule:nonzero;stroke:none;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate" />

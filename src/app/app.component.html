@@ -1,17 +1,13 @@
 <mat-sidenav-container style="background-color: white">
     <!-- -->
-    <mat-sidenav #sidenav [opened]="media.isActive('xs') ? false :true" [mode]="media.isActive('xs') ? 'over' : 'side'" style="background-color: #3C3A37">
-        <mat-toolbar color="primary" style="background-color: #3C3A37">
+    <mat-sidenav #sidenav [opened]="media.isActive('xs') ? false :true" [mode]="media.isActive('xs') ? 'over' : 'side'" class="dark">
+        <mat-toolbar color="primary" class="dark">
             <button mat-icon-button (click)="sidenav.toggle()" MatTooltip="Toggle SideNav">
-                <mat-icon style="color: white">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M0 0h24v24H0z" fill="none" />
-                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
-                    </svg>
-                </mat-icon>
+                <mat-icon svgIcon="app:menu"> </mat-icon>
             </button>
-            <span style="color: white">Extendz</span>
+            <span>Extendz</span>
         </mat-toolbar>
+
         <div style="margin: 20px">
             <mat-list>
                 <mat-list-item [routerLink]="['/']" style="color: white">
