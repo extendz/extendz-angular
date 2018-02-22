@@ -11,6 +11,7 @@ import { MenuItem } from './models';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  title: string = 'Extendz';
   authenticationMenuItems: MenuItem[];
   apiMenuItms: MenuItem[];
   otherComponentMenuItems: MenuItem[];
@@ -36,7 +37,7 @@ export class AppComponent {
         title: 'Facebook',
         subTitle: 'Login with Facebook',
         url: ['login', 'facebook']
-      },
+      }
       // {
       //   icon: 'google',
       //   title: 'Google',

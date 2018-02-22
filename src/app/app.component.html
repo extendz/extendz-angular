@@ -1,16 +1,11 @@
 <mat-sidenav-container style="background-color: white">
     <!-- -->
-    <mat-sidenav #sidenav [opened]="media.isActive('xs') ? false :true" [mode]="media.isActive('xs') ? 'over' : 'side'" style="background-color: #3C3A37">
-        <mat-toolbar color="primary" style="background-color: #3C3A37">
+    <mat-sidenav #sidenav [opened]="media.isActive('xs') ? false :true" [mode]="media.isActive('xs') ? 'over' : 'side'" class="dark">
+        <mat-toolbar color="primary" class="mat-elevation-z1">
             <button mat-icon-button (click)="sidenav.toggle()" MatTooltip="Toggle SideNav">
-                <mat-icon style="color: white">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M0 0h24v24H0z" fill="none" />
-                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
-                    </svg>
-                </mat-icon>
+                <mat-icon svgIcon="app:menu"> </mat-icon>
             </button>
-            <span style="color: white">Extendz</span>
+            <span>{{title}}</span>
         </mat-toolbar>
         <div style="margin: 20px">
             <mat-list>
@@ -29,7 +24,7 @@
                     </mat-panel-title>
                 </mat-expansion-panel-header>
                 <mat-list dense>
-                    <mat-list-item *ngFor="let item of authenticationMenuItems" [routerLink]="item.url" (click)="!media.isActive('xs') && sidenav.toggle()">
+                    <mat-list-item *ngFor="let item of authenticationMenuItems" [routerLink]="item.url" (click)="media.isActive('xs') && sidenav.toggle()">
                         <mat-icon mat-list-icon svgIcon="app:{{item.icon}}"></mat-icon>
                         <h4 mat-line>{{item.title}}</h4>
                         <p mat-line>{{item.subTitle}}</p>
@@ -37,7 +32,7 @@
                 </mat-list>
             </mat-expansion-panel>
 
-            <mat-expansion-panel style="background-color: #eee" displayMode="'flat'">
+            <mat-expansion-panel>
                 <mat-expansion-panel-header>
                     <mat-panel-title>
                         <div fxLayout="row" fxLayoutAlign="center center">
@@ -47,7 +42,7 @@
                 </mat-expansion-panel-header>
                 <mat-list>
                     <mat-list-item [routerLink]="['map']" (click)="!media.isActive('xs') && sidenav.toggle()">
-                        <mat-icon mat-list-icon svgIcon="app:google"></mat-icon>
+                        <mat-icon mat-list-icon svgIcon="app:map"></mat-icon>
                         <h4 mat-line>Google Map</h4>
                         <!-- <p mat-line>{{item.subTitle}}</p> -->
                     </mat-list-item>
@@ -117,14 +112,9 @@
     <!-- Main content -->
     <mat-toolbar color="primary" class="mat-elevation-z1">
         <button *ngIf="!sidenav.opened" mat-icon-button (click)="sidenav.toggle()" MatTooltip="Toggle SideNav">
-            <mat-icon>
-                <svg viewBox="0 0 24 24">
-                    <path d="M0 0h24v24H0z" fill="none" />
-                    <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
-                </svg>
-            </mat-icon>
+            <mat-icon svgIcon="app:menu"> </mat-icon>
         </button>
-        <span *ngIf="!sidenav.opened">Extendz</span>
+        <span *ngIf="!sidenav.opened">{{title}}</span>
         <span fxFlex></span>
         <a target="_blank" href="https://github.com/extendz/extendz-angular" mat-button>
             <mat-icon svgIcon="app:github"></mat-icon> Github
