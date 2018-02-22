@@ -1,5 +1,5 @@
 {
-  "name": "@extendz/google-map",
+  "name": "@extendz/extendz-google-map",
   "version": "0.0.2",
   "description": "Extend UI Platform built on Angular Material",
   "main": "./bundles/core.umd.js",
