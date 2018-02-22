@@ -20,7 +20,20 @@
  * @see https://openid.net/specs/openid-connect-core-1_0.html#StandardClaims
  */
 export class UserInfo {
-  sub: string;
-  preferred_username: string;
+  /**
+   * Subject - Identifier for the End-User at the Issuer.
+   */
+  sub?: string;
+  /**
+   * End-User's full name in displayable form including all name parts, possibly including titles and suffixes, ordered according to the End-User's locale and preferences.
+   */
+  name?: string;
+  /**
+   * image. Note that this URL SHOULD specifically reference a profile photo of the End-User suitable for displaying when describing the End-User, rather than an arbitrary photo taken by the End-User.
+   */
+  picture?: string;
+
+  preferred_username?: string;
+
   email?: string;
 }
