@@ -13,7 +13,7 @@ import { ExtendzGoogleMapService } from './extendz-google-map.service';
 import { LatLng, MapOptions, LatLngInterface } from './models';
 
 @Component({
-  selector: 'extendz-google-map',
+  selector: 'ext-google-map',
   templateUrl: './extendz-google-map.component.html',
   styleUrls: ['./extendz-google-map.component.css']
 })

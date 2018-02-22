@@ -37,11 +37,11 @@ export class MapexampleModule {}
 
 ```html
 <div style="height: 90vh">
-	<extendz-google-map 
+	<ext-google-map 
 		[center]= "latLng"  ←-- LatLng Object ex :- {lat:23.3872873, lng:45.3443344}
 		[zoom] ="4"  ←-- map zoom level
 	>
-	</extendz-google-map>
+	</ext-google-map>
 </div>
 ```
 
