@@ -23,8 +23,8 @@ export const EXT_MAP_CONFIG = new InjectionToken<ExtendzGoogleMapModule>('extMap
     MatProgressBarModule,
     MatInputModule
   ],
-  declarations: [ExtendzGoogleMapService],
-  exports: [ExtendzGoogleMapService],
+  declarations: [ExtendzGoogleMapComponent],
+  exports: [ExtendzGoogleMapComponent],
   providers: [ExtendzGoogleMapService]
 })
 export class ExtendzGoogleMapModule {
