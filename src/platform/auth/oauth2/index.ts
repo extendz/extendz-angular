@@ -13,5 +13,5 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-export * from './extend-oauth2.module';
+export * from './extendz-oauth2.module';
 export * from './models';

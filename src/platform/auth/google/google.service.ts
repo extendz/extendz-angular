@@ -1,3 +1,18 @@
+/**
+ * Copyright 2012-2018 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 import { Injectable, OnInit, EventEmitter, Output } from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';
@@ -7,23 +22,29 @@ import { take } from 'rxjs/operators/take';
 import { of } from 'rxjs/observable/of';
 
 import { GoogleConf } from './models/google.conf';
-import { PrincipalService, TokenExchangeService } from '../common';
-import { UserInfo, AccessToken } from '../common';
+import { PrincipalService, TokenExchangeService, UserInfo, AccessToken } from '../common';
 
 declare let gapi: any;
 export const PROVIDER = 'google';
-
+/**
+ * Google auth Api handling service.
+ * @author Randika Hapugoda
+ * @see https://developers.google.com/identity/sign-in/web/reference#googleusergetid
+ */
 @Injectable()
 export class GoogleService {
   gauth: any;
-  @Output() token: EventEmitter<AccessToken>;
-  @Output() userInfo: EventEmitter<UserInfo>;
+  @Output() tokenEmmiter: EventEmitter<AccessToken>;
+  @Output() userInfoEmitter: EventEmitter<UserInfo>;
   constructor(
     private config: GoogleConf,
     private principal: PrincipalService,
     private tokenExService: TokenExchangeService
   ) {}
 
+  /**
+   * Initialize the scripts that is need to call Google services.
+   */
   init(): Observable<Object> {
     return Observable.create((observer: Observer<Object>) => {
       let d = document,
@@ -50,9 +71,11 @@ export class GoogleService {
   } // init()
 
   login(
-    token: EventEmitter<AccessToken>,
-    userInfo: EventEmitter<UserInfo>
+    tokenEmmiter: EventEmitter<AccessToken>,
+    userInfoEmitter: EventEmitter<UserInfo>
   ): Observable<AccessToken> {
+    this.tokenEmmiter = tokenEmmiter;
+    this.userInfoEmitter = userInfoEmitter;
     return this.init().pipe(
       mergeMap(() => this.doLogin()),
       mergeMap((accssToken: AccessToken) => {
@@ -78,27 +101,29 @@ export class GoogleService {
         this.fetchGoogleUserDetails(observer);
       }
     });
-  } // login()
+  } // doLogin()
 
   private fetchGoogleUserDetails(observer) {
     let currentUser = this.gauth.currentUser.get();
-    // Emit the token
-    let act: AccessToken = {
+    // Emmit the token
+    let accessToken: AccessToken = {
       access_token: currentUser.getAuthResponse().access_token,
-      token_type: 'bearer'
-      //expires_in: currentUser.getAuthResponse()
+      expires_in: currentUser.getAuthResponse.expires_in,
+      token_type: currentUser.getAuthResponse.token_type
     };
-    this.token.emit(act);
+    this.tokenEmmiter.emit(accessToken);
 
     let profile = currentUser.getBasicProfile();
-
-    // return {
-
-    //   uid: profile.getId(),
-    //   name: profile.getName(),
-    //   email: profile.getEmail(),
-    //   image: profile.getImageUrl(),
-    //   provider: PROVIDER
-    // };
-  } // End _fetchGoogleUserDetails()
-} // End class GoogleService
+    let userInfo: UserInfo = {
+      name: profile.getName(),
+      email: profile.getEmail(),
+      picture: profile.getImageUrl(),
+      given_name: profile.getGivenName(),
+      family_name: profile.getFamilyName()
+    };
+    // Emmit userInfo
+    this.userInfoEmitter.emit(userInfo);
+    observer.complete();
+    return userInfo;
+  } // fetchGoogleUserDetails()
+} // class

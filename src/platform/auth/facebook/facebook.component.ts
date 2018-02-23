@@ -1,3 +1,18 @@
+/**
+ * Copyright 2012-2018 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 import { Component, NgZone, Output, EventEmitter, OnDestroy } from '@angular/core';
 import { TdLoadingService } from '@covalent/core/loading';
 
@@ -14,8 +29,10 @@ import { AccessToken, UserInfo } from '../common/models';
   styleUrls: ['./facebook.component.css']
 })
 export class FacebookComponent implements OnDestroy {
-  login$: Subscription;
-
+  /**
+   * All subscriptions
+   */
+  all$: Subscription;
   /**
    * Emmit on successful token receive.
    */
@@ -34,13 +51,13 @@ export class FacebookComponent implements OnDestroy {
 
   login() {
     this.loadingService.register('fbLoading');
-    this.login$ = this.facebookService
+    this.all$ = this.facebookService
       .login(this.token, this.userInfo)
       .pipe(finalize(() => this.zone.run(() => this.loadingService.resolve('fbLoading'))))
       .subscribe();
   } // login()
 
   ngOnDestroy(): void {
-    if (this.login$) this.login$.unsubscribe();
+    if (this.all$) this.all$.unsubscribe();
   }
 } // class

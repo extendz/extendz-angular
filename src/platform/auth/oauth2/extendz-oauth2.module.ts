@@ -29,7 +29,7 @@ import { CovalentLoadingModule } from '@covalent/core/loading';
 
 import { Oauth2Service } from './oauth2.service';
 import { Oauth2Component } from './oauth2.component';
-import { ExtendAuthCommonModule } from '../common';
+import { ExtendzAuthCommonModule } from '../common';
 
 @NgModule({
   imports: [
@@ -38,7 +38,7 @@ import { ExtendAuthCommonModule } from '../common';
     ReactiveFormsModule,
     HttpClientModule,
     // Covalent
-    ExtendAuthCommonModule,
+    ExtendzAuthCommonModule,
     CovalentLoadingModule,
     // Material modules
     MatInputModule,
@@ -50,4 +50,4 @@ import { ExtendAuthCommonModule } from '../common';
   providers: [Oauth2Service],
   exports: [Oauth2Component]
 })
-export class ExtendOauth2Module {}
+export class ExtendzOauth2Module {}
