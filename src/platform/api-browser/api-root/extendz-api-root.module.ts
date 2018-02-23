@@ -13,25 +13,31 @@
  *    See the License for the specific language governing permissions and
  *    limitations under the License.
  */
-
-import { NgModule } from '@angular/core';
+import { NgModule, ModuleWithProviders, InjectionToken } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MatButtonModule, MatIconModule, MatCardModule } from '@angular/material';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
-import { ApiRootExampleRoutingModule } from './api-root-example-routing.module';
-import { ApiRootExampleComponent } from './api-root-example.component';
-import { MatTabsModule } from '@angular/material';
-import { ExtendzApiRootModule, ExtendzApiModule } from '../../../../platform';
+import { ApiRootService } from './api-root.service';
+
+import { ApiRootRoutingModule } from './api-root-routing.module';
+import { ApiRootComponent } from './api-root.component';
+
+import { ExtendPipesModule } from '../../common';
 
 @NgModule({
   imports: [
     CommonModule,
-    ApiRootExampleRoutingModule,
-    MatTabsModule,
-    ExtendzApiModule.forRoot({
-      svgIconSet: 'assets/svg/api-icons.svg'
-    }),
-    ExtendzApiRootModule
+    ApiRootRoutingModule,
+    FlexLayoutModule,
+    ExtendPipesModule,
+    // Mat
+    MatButtonModule,
+    MatIconModule,
+    MatCardModule
   ],
-  declarations: [ApiRootExampleComponent]
+  declarations: [ApiRootComponent],
+  exports: [ApiRootComponent],
+  providers: [ApiRootService]
 })
-export class ApiRootExampleModule {}
+export class ExtendzApiRootModule {}

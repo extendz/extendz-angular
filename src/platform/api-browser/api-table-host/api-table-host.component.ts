@@ -13,6 +13,23 @@
  *    See the License for the specific language governing permissions and
  *    limitations under the License.
  */
-export * from './models';
-export * from './rest.service';
-export * from './extendz-rest.module';
+
+import { Component, OnInit, Input } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
+@Component({
+  selector: 'app-api-table-host',
+  templateUrl: './api-table-host.component.html',
+  styleUrls: ['./api-table-host.component.css']
+})
+export class ApiTableHostComponent implements OnInit {
+  model: string;
+
+  constructor(private activatedRoute: ActivatedRoute) {}
+
+  ngOnInit() {
+    this.activatedRoute.params.subscribe(param => {
+      this.model = param.name;
+    });
+  } // ngOnInit()
+} // class

@@ -13,7 +13,4 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-export * from './api-browser';
-export * from './auth';
-export * from './common';
-export * from './google-map';
+export * from './extendz-api-root.module';

@@ -1,12 +1,17 @@
-<mat-sidenav-container style="background-color: white">
+<mat-toolbar color="primary" class="mat-elevation-z1">
+    <button mat-icon-button (click)="sidenav.toggle()" MatTooltip="Toggle SideNav">
+        <mat-icon svgIcon="app:menu"> </mat-icon>
+    </button>
+    <span>{{title}}</span>
+    <span fxFlex></span>
+    <a target="_blank" href="https://github.com/extendz/extendz-angular" mat-icon-button>
+        <mat-icon svgIcon="app:github"></mat-icon>
+    </a>
+</mat-toolbar>
+<mat-sidenav-container style="background-color: white;min-height: 100vh">
     <!-- -->
     <mat-sidenav #sidenav [opened]="media.isActive('xs') ? false :true" [mode]="media.isActive('xs') ? 'over' : 'side'" class="dark">
-        <mat-toolbar color="primary" class="mat-elevation-z1">
-            <button mat-icon-button (click)="sidenav.toggle()" MatTooltip="Toggle SideNav">
-                <mat-icon svgIcon="app:menu"> </mat-icon>
-            </button>
-            <span>{{title}}</span>
-        </mat-toolbar>
+
         <div style="margin: 5px">
             <mat-expansion-panel>
                 <mat-expansion-panel-header>
@@ -123,16 +128,13 @@
     </mat-sidenav>
 
     <!-- Main content -->
-    <mat-toolbar color="primary" class="mat-elevation-z1">
+    <!-- <mat-toolbar color="primary" class="mat-elevation-z1">
         <button *ngIf="!sidenav.opened" mat-icon-button (click)="sidenav.toggle()" MatTooltip="Toggle SideNav">
             <mat-icon svgIcon="app:menu"> </mat-icon>
         </button>
         <span *ngIf="!sidenav.opened">{{title}}</span>
-        <span fxFlex></span>
-        <a target="_blank" href="https://github.com/extendz/extendz-angular" mat-icon-button>
-            <mat-icon svgIcon="app:github"></mat-icon>
-        </a>
-    </mat-toolbar>
+        
+    </mat-toolbar> -->
 
     <div>
         <router-outlet></router-outlet>

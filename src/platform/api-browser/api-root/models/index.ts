@@ -13,6 +13,6 @@
  *    See the License for the specific language governing permissions and
  *    limitations under the License.
  */
-export * from './models';
-export * from './rest.service';
-export * from './extendz-rest.module';
+
+export * from './apiRoot.conf';
+export * from './model';
