@@ -1,0 +1,20 @@
+<mat-tab-group>
+    <mat-tab label="Overview">
+        <div class="tab-content">
+            <h3 class="doc-header">Use Openlayer</h3>
+            <p>With few lines of codes you can use open layer in anywhere in your angular app </p>
+        </div>
+    </mat-tab>
+    <mat-tab label="API">
+        <div class="tab-content">
+            hello world
+        </div>
+    </mat-tab>
+    <mat-tab label="Demo">
+        <div class="tab-content" style="width: 100%; height: 100%;">
+            <ext-openlayer [image]="tiffImage" [drawtype]="openlayerTool.POINT" [points]="polygon" [polygontyps]="polygonOptions" [pointstyps]="pointOptions"
+                [drawcolor]="'rgba(204,0,0,0.5)'" (onDraw)="onDraw($event)">
+            </ext-openlayer>
+        </div>
+    </mat-tab>
+</mat-tab-group>

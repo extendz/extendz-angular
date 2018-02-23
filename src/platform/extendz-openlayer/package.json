@@ -1,0 +1,55 @@
+{
+  "name": "@extendz/extendz-openlayer",
+  "version": "0.0.1",
+  "description": "Extend UI Platform built on Angular Material",
+  "main": "./bundles/core.umd.js",
+  "module": "./index.js",
+  "typings": "./index.d.ts",
+  "keywords": [
+    "angular", 
+    "openlayer", 
+    "open layer", 
+    "Openlayer", 
+    "OpenLayer", 
+    "Open Layer", 
+    "reusable",
+    "angular-openlayer",
+    "angular-Openlayer",
+    "angular-OpenLayer",
+    "angular-open layer",
+    "angular-Open Layer",
+    "ng-openlayer",
+    "ng-Openlayer",
+    "ng-OpenLayer",
+    "ng-open layer",
+    "ng-Open Layer", 
+    "angular4-openlayer",
+    "angular4-Openlayer",
+    "angular4-OpenLayer",
+    "angular4-open layer",
+    "angular4-Open Layer",
+    "angular5-openlayer",
+    "angular5-Openlayer",
+    "angular5-OpenLayer",
+    "angular5-open layer",
+    "angular5-Open Layer",
+    "ng-openlayer"
+  ],
+  "scripts": {},
+  "license": "AL2",
+  "author": "Rumes Shyaman",
+  "contributors": ["Rumes Shyaman <jk.rumes@gmail.com>","Randika Hapugoda <hrandika@hotmail.com>"],
+  "dependencies": {
+    "tslib": "^1.7.1",
+    "@angular/cdk": "^5.0.0",
+    "@angular/material": "^5.0.0",
+    "openlayers": "^4.6.4",
+    "rxjs": "^5.4.2",
+    "zone.js": "^0.8.19"
+  },
+  "peerDependencies": {
+    "@angular/common": "^5.0.0",
+    "@angular/core": "^5.0.0"
+    
+  }
+}

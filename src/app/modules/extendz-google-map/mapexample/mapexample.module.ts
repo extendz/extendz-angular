@@ -7,12 +7,12 @@ import { MatTabsModule } from '@angular/material';
 
 @NgModule({
   imports: [
+    MapExampleRoutingModule,
     CommonModule,
     MatTabsModule,
     ExtendzGoogleMapModule.forRoot({
       apiKey:"AIzaSyCGqeyOzgZyvKq0kwn35H4DSCudBsdRBAA"
-    }),
-    MapExampleRoutingModule
+    })
   ],
   declarations: [MapexampleComponent]
 })
