@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { ServiceWorkerModule } from '@angular/service-worker';
 import {
   MatInputModule,
   MatSidenavModule,
@@ -10,11 +11,12 @@ import {
   MatIconModule,
   MatButtonModule,
   MatListModule,
-  MatExpansionModule
+  MatExpansionModule,
+  MatTooltipModule
 } from '@angular/material';
-
+import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
-import { ExtendOauth2Module, ExtendAuthCommonModule, TokenInterceptor } from '../platform';
+import { ExtendzOauth2Module, ExtendzAuthCommonModule, TokenInterceptor } from '../platform';
 import { AppRoutingModule } from './app-routing.module';
 import { ExtendRestModule } from '../platform/common/index';
 
@@ -26,7 +28,11 @@ import { ExtendRestModule } from '../platform/common/index';
     BrowserModule,
     HttpClientModule,
     FlexLayoutModule,
-    ExtendAuthCommonModule,
+    ServiceWorkerModule.register('/ngsw-worker.js', {
+      enabled: environment.production
+    }),
+    // Extendz
+    ExtendzAuthCommonModule,
     ExtendRestModule.forRoot({
       basePath: '/api'
     }),
@@ -36,6 +42,7 @@ import { ExtendRestModule } from '../platform/common/index';
     MatButtonModule,
     MatSidenavModule,
     MatToolbarModule,
+    MatTooltipModule,
     MatListModule,
     MatIconModule
   ],

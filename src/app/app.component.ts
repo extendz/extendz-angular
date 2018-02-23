@@ -11,6 +11,8 @@ import { MenuItem } from './models';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  title: string = 'Extendz';
+  pagesMenuItems: MenuItem[];
   authenticationMenuItems: MenuItem[];
   apiMenuItms: MenuItem[];
   otherComponentMenuItems: MenuItem[];
@@ -18,14 +20,29 @@ export class AppComponent {
   chartItems: MenuItem[];
 
   constructor(
-    private media: ObservableMedia,
+    public media: ObservableMedia,
     private iconRegistry: MatIconRegistry,
     private sanitizer: DomSanitizer
   ) {
     iconRegistry.addSvgIconSetInNamespace(
       'app',
-      sanitizer.bypassSecurityTrustResourceUrl('/assets/svg/icons.svg')
+      sanitizer.bypassSecurityTrustResourceUrl('./assets/svg/icons.svg')
     );
+    this.pagesMenuItems = [
+      {
+        icon: 'home',
+        title: 'Home',
+        subTitle: 'Home Page',
+        url: ['']
+      },
+      {
+        icon: 'pages',
+        title: 'Docs',
+        subTitle: 'Documentation',
+        url: ['docs']
+      }
+    ];
+
     this.authenticationMenuItems = [
       {
         icon: 'oauth2',
@@ -44,25 +61,25 @@ export class AppComponent {
         title: 'Google',
         subTitle: 'Login with Google',
         url: ['login', 'google']
-      },
-      {
-        icon: 'keycloak',
-        title: 'Keycloak Oauth2',
-        subTitle: 'Wrapper arround the oauth2',
-        url: ['login', 'keycloak-oauth2']
-      },
-      {
-        icon: 'keycloak',
-        title: 'Keycloak Users',
-        subTitle: 'Get keycloak users',
-        url: ['login', 'keycloak-users']
-      },
-      {
-        icon: 'keycloak',
-        title: 'Keycloak Sign Up',
-        subTitle: 'Register new Keycloak user',
-        url: ['login', 'keycloak-register']
       }
+      // {
+      //   icon: 'keycloak',
+      //   title: 'Keycloak Oauth2',
+      //   subTitle: 'Wrapper arround the oauth2',
+      //   url: ['login', 'keycloak-oauth2']
+      // },
+      // {
+      //   icon: 'keycloak',
+      //   title: 'Keycloak Users',
+      //   subTitle: 'Get keycloak users',
+      //   url: ['login', 'keycloak-users']
+      // },
+      // {
+      //   icon: 'keycloak',
+      //   title: 'Keycloak Sign Up',
+      //   subTitle: 'Register new Keycloak user',
+      //   url: ['login', 'keycloak-register']
+      // }
     ];
 
     this.apiMenuItms = [
