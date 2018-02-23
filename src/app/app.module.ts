@@ -16,7 +16,7 @@ import {
 } from '@angular/material';
 import { environment } from '../environments/environment';
 import { AppComponent } from './app.component';
-import { ExtendOauth2Module, ExtendAuthCommonModule, TokenInterceptor } from '../platform';
+import { ExtendzOauth2Module, ExtendzAuthCommonModule, TokenInterceptor } from '../platform';
 import { AppRoutingModule } from './app-routing.module';
 import { ExtendRestModule } from '../platform/common/index';
 
@@ -32,7 +32,7 @@ import { ExtendRestModule } from '../platform/common/index';
       enabled: environment.production
     }),
     // Extendz
-    ExtendAuthCommonModule,
+    ExtendzAuthCommonModule,
     ExtendRestModule.forRoot({
       basePath: '/api'
     }),

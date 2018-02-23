@@ -1,13 +1,13 @@
 <mat-tab-group mat-stretch-tabs="yes">
     <mat-tab label="Demo">
         <div class="tab-content">
-            <h3 class="doc-header">Facebook Authentication</h3>
-            <p>Add Facebook login to your angular application.</p>
-            <p>Use your Facebook application to authenticate your web application</p>
+            <h3 class="doc-header">Google Authentication</h3>
+            <p>Add Google login to your angular application.</p>
+            <p>Use your Google application to authenticate your web application</p>
             <mat-card class="mat-elevation-z6">
                 <div fxLayout="row" fxLayoutAlign="start center">
-                    <ext-login-facebook (userInfo)="onUserInfo($event)" (token)="onToken($event)"> </ext-login-facebook>
-                    <span>Login with Facebook</span>
+                    <ext-login-google (userInfo)="onUserInfo($event)" (token)="onToken($event)"></ext-login-google>
+                    <span>Login with Google</span>
                 </div>
             </mat-card>
 
@@ -38,20 +38,15 @@
 
             <td-highlight lang="typescript">
                 <![CDATA[          
-                    import {ExtendzFacebookModule} from "@extendz/auth"
+                    import {ExtendzGoogleModule} from "@extendz/auth"
             
-                    @NgModule({
-                        imports: [
-                            ExtendzFacebookModule.forRoot({
-                                appId: '1160717500690676',
-                                exchangeServer: {
-                                    url: 'https://extendz-keycloak.herokuapp.com/auth/...',
-                                    client_id: 'angular'
-                                }
-                            }),
-                        ...           
-                        ],
-                    })
+                    ExtendzGoogleModule.forRoot({
+                        client_id: '476518848997-iivshtcbmvqur358fc566muejigf978s.apps.googleusercontent.com',
+                        exchangeServer: {
+                          url: 'https://extendz-keycloak.herokuapp.com/auth/...',
+                          client_id: 'angular'
+                        }
+                      }),
                 ]]>
             </td-highlight>
 
@@ -59,7 +54,7 @@
 
             <td-highlight lang="html">
                 <![CDATA[
-                    <ext-login-facebook (userInfo)="onUserInfo($event)" (token)="onToken($event)"> </ext-login-facebook>
+                <ext-login-google (userInfo)="onUserInfo($event)" (token)="onToken($event)"></ext-login-google>
                 ]]>
             </td-highlight>
 

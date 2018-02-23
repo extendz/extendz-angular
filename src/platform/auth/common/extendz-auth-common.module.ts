@@ -28,6 +28,6 @@ import { TokenExchangeService } from './services/tokenExchange.service';
  */
 @NgModule({
   imports: [CommonModule, Ng2Webstorage],
-  providers: [TokenService, PrincipalService, TokenExchangeService],
+  providers: [TokenService, PrincipalService, TokenExchangeService]
 })
-export class ExtendAuthCommonModule {}
+export class ExtendzAuthCommonModule {}

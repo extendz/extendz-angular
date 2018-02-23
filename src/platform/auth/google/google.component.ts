@@ -20,19 +20,15 @@ import { Subscription } from 'rxjs/Subscription';
 import { take } from 'rxjs/operators/take';
 import { finalize } from 'rxjs/operators/finalize';
 
-import { FacebookService } from './facebook.service';
-import { AccessToken, UserInfo } from '../common/models';
+import { GoogleService } from './google.service';
+import { AccessToken, UserInfo } from '../common';
 
 @Component({
-  selector: 'ext-login-facebook',
-  templateUrl: './facebook.component.html',
-  styleUrls: ['./facebook.component.css']
+  selector: 'ext-login-google',
+  templateUrl: './google.component.html',
+  styleUrls: ['./google.component.css']
 })
-export class FacebookComponent implements OnDestroy {
-  /**
-   * All subscriptions
-   */
-  all$: Subscription;
+export class GoogleComponent implements OnDestroy {
   /**
    * Emmit on successful token receive.
    */
@@ -42,19 +38,23 @@ export class FacebookComponent implements OnDestroy {
    * Emmit on successful user infomation receive.
    */
   @Output() userInfo: EventEmitter<UserInfo> = new EventEmitter<UserInfo>();
-
+  /**
+   * All the subscriptions
+   */
+  all$: Subscription;
   constructor(
-    private facebookService: FacebookService,
+    private googleService: GoogleService,
     private zone: NgZone,
     private loadingService: TdLoadingService
   ) {}
 
   login() {
-    this.loadingService.register('fbLoading');
-    this.all$ = this.facebookService
+    this.loadingService.register('gl');
+    let loging$ = this.googleService
       .login(this.token, this.userInfo)
-      .pipe(finalize(() => this.zone.run(() => this.loadingService.resolve('fbLoading'))))
+      .pipe(finalize(() => this.zone.run(() => this.loadingService.resolve('gl'))), take(1))
       .subscribe();
+    this.all$.add(loging$);
   } // login()
 
   ngOnDestroy(): void {

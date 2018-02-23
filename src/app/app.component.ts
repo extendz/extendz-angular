@@ -53,13 +53,13 @@ export class AppComponent {
         title: 'Facebook',
         subTitle: 'Login with Facebook',
         url: ['login', 'facebook']
+      },
+      {
+        icon: 'google',
+        title: 'Google',
+        subTitle: 'Login with Google',
+        url: ['login', 'google']
       }
-      // {
-      //   icon: 'google',
-      //   title: 'Google',
-      //   subTitle: 'Login with Google',
-      //   url: ['login', 'google']
-      // },
       // {
       //   icon: 'keycloak',
       //   title: 'Keycloak Oauth2',
