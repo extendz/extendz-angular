@@ -31,4 +31,4 @@ import { HighchartComponent } from './highchart.component';
   declarations: [HighchartComponent],
   exports: [HighchartComponent]
 })
-export class HighchartModule { }
+export class ExtendzHighchartModule { }

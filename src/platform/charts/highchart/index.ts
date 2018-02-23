@@ -1,1 +1,1 @@
-export * from './highchart.module';
+export * from './extendz-highchart.module';
