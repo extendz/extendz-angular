@@ -66,10 +66,6 @@ export class ExtedzOpenlayerComponent implements OnInit {
     this.polygontyps = this.polygontyps ? this.polygontyps : [];
     this.pointstyps = this.pointstyps ? this.pointstyps : [];
     this.drawcolor = this.drawcolor ? this.drawcolor : "rgba(0,0,255,0.5)";
-    
-    
-    
-    
 
     this.olOptions = {
       tiffImage : this.tiffImage,
@@ -79,7 +75,9 @@ export class ExtedzOpenlayerComponent implements OnInit {
       tooltype : this.tooltype,
       points : this.points,
       color : this.drawcolor
-    }
+    };
+    console.log(this.olOptions);
+    
     this.service.initMap(this.olOptions);
   }
 

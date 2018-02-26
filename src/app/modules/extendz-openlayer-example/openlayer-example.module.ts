@@ -10,7 +10,8 @@ import { MatTabsModule } from '@angular/material';
     OpenlayerExampleRoutingModule,
     CommonModule,
     MatTabsModule,
-    ExtendzOpenlayerModule
+    ExtendzOpenlayerModule,
+    
     
     // 
   ],
