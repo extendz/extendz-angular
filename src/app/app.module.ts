@@ -10,7 +10,8 @@ import {
   MatIconModule,
   MatButtonModule,
   MatListModule,
-  MatExpansionModule
+  MatExpansionModule,
+  MatTooltipModule
 } from '@angular/material';
 
 import { AppComponent } from './app.component';
@@ -36,6 +37,7 @@ import { ExtendRestModule } from '../platform/common/index';
     MatButtonModule,
     MatSidenavModule,
     MatToolbarModule,
+    MatTooltipModule,
     MatListModule,
     MatIconModule
   ],

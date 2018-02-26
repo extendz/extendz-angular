@@ -28,40 +28,39 @@
     <mat-tab label="Setup">
         <div class="tab-content">
             <h3 class="doc-header">Installing</h3>
+
             <td-highlight lang="bash">
                 <![CDATA[
-            npm i -- save @extendz/auth
-              ]]>
+                    npm i -- save @extendz/auth
+                ]]>
             </td-highlight>
-
             <h3 class="doc-header">Register</h3>
 
             <td-highlight lang="typescript">
-                <![CDATA[
-          
-          import {ExtendzFacebookModule} from "@extendz/auth"
-  
-          @NgModule({
-            imports: [
-                ExtendzFacebookModule.forRoot({
-                    appId: '1160717500690676',
-                    exchangeServer: {
-                        url: 'http://localhost:8080/auth/realms/extendz/protocol/openid-connect/token',
-                        client_id: 'angular'
-                    }
-                }),
-              ...           
-            ],
-          })
-            ]]>
+                <![CDATA[          
+                    import {ExtendzFacebookModule} from "@extendz/auth"
+            
+                    @NgModule({
+                        imports: [
+                            ExtendzFacebookModule.forRoot({
+                                appId: '1160717500690676',
+                                exchangeServer: {
+                                    url: 'https://extendz-keycloak.herokuapp.com/auth/...',
+                                    client_id: 'angular'
+                                }
+                            }),
+                        ...           
+                        ],
+                    })
+                ]]>
             </td-highlight>
 
             <h3 class="doc-header">Setup</h3>
 
             <td-highlight lang="html">
                 <![CDATA[
-             <ext-login-facebook (userInfo)="onUserInfo($event)" (token)="onToken($event)"> </ext-login-facebook>
-            ]]>
+                    <ext-login-facebook (userInfo)="onUserInfo($event)" (token)="onToken($event)"> </ext-login-facebook>
+                ]]>
             </td-highlight>
 
             <h3 class="doc-header">Optinal Setup</h3>

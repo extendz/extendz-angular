@@ -21,7 +21,8 @@
       "styles": [
         "styles.css",
         "theme.scss",
-        "../node_modules/roboto-fontface/css/roboto/roboto-fontface.css"
+        "../node_modules/roboto-fontface/css/roboto/sass/roboto-fontface-regular.scss",
+        "../node_modules/roboto-fontface/css/roboto/sass/roboto-fontface-light.scss"
       ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",
