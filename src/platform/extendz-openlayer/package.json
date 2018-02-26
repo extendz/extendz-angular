@@ -1,6 +1,6 @@
 {
   "name": "@extendz/extendz-openlayer",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Extend UI Platform built on Angular Material",
   "main": "./bundles/core.umd.js",
   "module": "./index.js",

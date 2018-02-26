@@ -103,7 +103,7 @@ export class GoogleService {
     });
   } // doLogin()
 
-  private fetchGoogleUserDetails(observer) {
+  private fetchGoogleUserDetails(observer : Observer<AccessToken>) {
     let currentUser = this.gauth.currentUser.get();
     // Emmit the token
     let accessToken: AccessToken = {
