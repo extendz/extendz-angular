@@ -1,6 +1,6 @@
 {
   "name": "extend",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "license": "MIT",
   "scripts": {
@@ -49,6 +49,7 @@
     "@angular/service-worker": "^5.2.6",
     "@covalent/core": "^1.0.0-rc.4",
     "@covalent/highlight": "^1.0.0-rc.4",
+    "@types/openlayers": "^4.6.0",
     "core-js": "^2.4.1",
     "ngx-webstorage": "^2.0.1",
     "openlayers": "^4.6.4",

@@ -1,6 +1,6 @@
 {
   "name": "@extendz/common",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Extend UI Platform built on Angular Material",
   "main": "./bundles/core.umd.js",
   "module": "./index.js",
