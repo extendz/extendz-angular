@@ -50,9 +50,9 @@ export class ExtedzOpenlayerComponent implements OnInit {
 
   featureDeleted :boolean =false;
 
-  private currentToolType:OpenLayerToolType;
+  public currentToolType:OpenLayerToolType;
 
-  constructor(private service:ExtendzOpenlayerService) {
+  constructor(public service:ExtendzOpenlayerService) {
     // console.log(this.service.featureDeleted);
     this.featureDeleted = this.service.featureDeleted;
     
