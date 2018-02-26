@@ -1,23 +1,16 @@
 import { NgModule, InjectionToken, ModuleWithProviders } from '@angular/core';
 import { MatIconModule, MatButtonModule } from '@angular/material';
-import { HttpClientModule } from '@angular/common/http';
 import { CovalentLoadingModule } from '@covalent/core/loading';
 
 import { FacebookComponent } from './facebook.component';
 import { FacebookConfig } from './models/facebook.conf';
 import { FacebookService } from './facebook.service';
-import { ExtendAuthCommonModule } from '../common';
+import { ExtendzAuthCommonModule } from '../common';
 
 export const EXT_FACEBOOK_CONFIG = new InjectionToken<ExtendzFacebookModule>('extFacebook.config');
 
 @NgModule({
-  imports: [
-    MatIconModule,
-    MatButtonModule,
-    HttpClientModule,
-    CovalentLoadingModule,
-    ExtendAuthCommonModule
-  ],
+  imports: [MatIconModule, MatButtonModule, CovalentLoadingModule, ExtendzAuthCommonModule],
   declarations: [FacebookComponent],
   exports: [FacebookComponent],
   providers: [FacebookService]

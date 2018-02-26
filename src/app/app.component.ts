@@ -12,6 +12,7 @@ import { MenuItem } from './models';
 })
 export class AppComponent {
   title: string = 'Extendz';
+  pagesMenuItems: MenuItem[];
   authenticationMenuItems: MenuItem[];
   apiMenuItms: MenuItem[];
   otherComponentMenuItems: MenuItem[];
@@ -25,6 +26,21 @@ export class AppComponent {
       'app',
       sanitizer.bypassSecurityTrustResourceUrl('./assets/svg/icons.svg')
     );
+    this.pagesMenuItems = [
+      {
+        icon: 'home',
+        title: 'Home',
+        subTitle: 'Home Page',
+        url: ['']
+      },
+      {
+        icon: 'pages',
+        title: 'Docs',
+        subTitle: 'Documentation',
+        url: ['docs']
+      }
+    ];
+
     this.authenticationMenuItems = [
       {
         icon: 'oauth2',
@@ -37,13 +53,13 @@ export class AppComponent {
         title: 'Facebook',
         subTitle: 'Login with Facebook',
         url: ['login', 'facebook']
+      },
+      {
+        icon: 'google',
+        title: 'Google',
+        subTitle: 'Login with Google',
+        url: ['login', 'google']
       }
-      // {
-      //   icon: 'google',
-      //   title: 'Google',
-      //   subTitle: 'Login with Google',
-      //   url: ['login', 'google']
-      // },
       // {
       //   icon: 'keycloak',
       //   title: 'Keycloak Oauth2',
