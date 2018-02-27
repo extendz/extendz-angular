@@ -34,11 +34,11 @@ export class OpenlayerExampleComponent implements OnInit {
   pointOptions : Array<Tool> = [
  
       {
-        name : "CAR",
+        name : "Red Point",
         color: "rgba(204,0,0,0.5)"
       },
       {
-        name : "CAR PRODUCTIONS",
+        name : "Green Point",
         color: "rgba(95,156,55,0.5)"
       },
 
@@ -46,11 +46,11 @@ export class OpenlayerExampleComponent implements OnInit {
 
   polygonOptions : Array<Tool> =[
       {
-        name : "CONCENTRATES",
+        name : "Red Polygon",
         color: "rgba(204,0,0,0.5)"
       },
       {
-        name : "STOCK",
+        name : "Green Polygon",
         color: "rgba(95,156,55,0.5)"
       },
     ];
