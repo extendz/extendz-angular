@@ -31,6 +31,12 @@
 </div>
 
 <ng-template #loading>
-    <div style="height: 75vh"></div>
-    <div class="signal"></div>
+    <div fxLayout="row">
+        <span fxFlex></span>
+        <span fxFlex>
+            <h3 align="center">Loading</h3>
+            <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+        </span>
+        <span fxFlex></span>
+    </div>
 </ng-template>

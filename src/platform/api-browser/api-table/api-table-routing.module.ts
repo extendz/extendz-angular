@@ -7,10 +7,11 @@ const routes: Routes = [
     path: '',
     component: ApiTableComponent
   }
-  ,{
-    path:':id',
-    loadChildren: '../../api-item/api-item.module#ApiItemModule'
-  }
+  ,
+  // {
+  //   path:':id',
+  //   loadChildren: '../../api-item/api-item.module#ApiItemModule'
+  // }
 ];
 
 @NgModule({

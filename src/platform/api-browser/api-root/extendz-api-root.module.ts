@@ -15,7 +15,13 @@
  */
 import { NgModule, ModuleWithProviders, InjectionToken } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatButtonModule, MatIconModule, MatCardModule } from '@angular/material';
+import {
+  MatButtonModule,
+  MatIconModule,
+  MatCardModule,
+  MatProgressSpinnerModule,
+  MatProgressBarModule
+} from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { ApiRootService } from './api-root.service';
@@ -34,7 +40,8 @@ import { ExtendPipesModule } from '../../common';
     // Mat
     MatButtonModule,
     MatIconModule,
-    MatCardModule
+    MatCardModule,
+    MatProgressBarModule
   ],
   declarations: [ApiRootComponent],
   exports: [ApiRootComponent],

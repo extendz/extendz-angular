@@ -6,6 +6,10 @@ const routes: Routes = [
   {
     path: '',
     component: ApiTableHostComponent
+  },
+  {
+    path: ':id',
+    loadChildren: '../api-item/api-item.module#ApiItemModule'
   }
 ];
 
