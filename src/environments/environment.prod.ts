@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  basePath:"https://extendz-springboot.herokuapp.com/api"
 };
