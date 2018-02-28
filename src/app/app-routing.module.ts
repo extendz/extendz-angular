@@ -17,11 +17,12 @@ const routes: Routes = [
   {
     path: 'apis',
     loadChildren: './modules/api/api-example.module#ApiExampleModule'
+  },
+  {
+    path: 'openlayer',
+    loadChildren:
+      './modules/extendz-openlayer-example/openlayer-example.module#OpenlayerExampleModule'
   }
-  // {
-  //   path: 'openlayer',
-  //   loadChildren: './modules/openlayer-example/openlayer-example.module#OpenlayerExampleModule'
-  // }
 ];
 
 @NgModule({

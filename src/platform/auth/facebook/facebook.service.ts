@@ -22,6 +22,8 @@ import { take } from 'rxjs/operators/take';
 import { mergeMap } from 'rxjs/operators/mergeMap';
 import { of } from 'rxjs/observable/of';
 
+import * as fb from 'fb';
+
 import { FacebookConfig } from './models/facebook.conf';
 import {
   TokenService,
@@ -115,7 +117,7 @@ export class FacebookService {
     });
   } // login
 
-  handleResponse(response, observer) {
+  handleResponse(response : fb.LoginStatusResponse , observer :Observer<AccessToken>) {
     if (response.authResponse) {
       // Emit the token
       let act: AccessToken = {
@@ -131,7 +133,7 @@ export class FacebookService {
     }
   }
 
-  callUseInfoApi(observer) {
+  callUseInfoApi(observer :Observer<AccessToken>) {
     FB.api('/me?fields=name,email,picture', (res: any) => {
       if (!res || res.error) {
         observer.error(res.error);

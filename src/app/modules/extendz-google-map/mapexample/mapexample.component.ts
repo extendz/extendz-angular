@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LatLng } from '../../../../platform/google-map/index';
+import { LatLng } from '../../../../platform/extendz-google-map';
 
 @Component({
   selector: 'app-mapexample',

@@ -19,7 +19,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { ServiceWorkerModule } from '@angular/service-worker';
+// import { ServiceWorkerModule } from '@angular/service-worker';
 import {
   MatInputModule,
   MatSidenavModule,
@@ -49,9 +49,9 @@ import { ExtendzRestModule } from '../platform/common/index';
     BrowserModule,
     HttpClientModule,
     FlexLayoutModule,
-    ServiceWorkerModule.register('/ngsw-worker.js', {
-      enabled: environment.production
-    }),
+    // ServiceWorkerModule.register('/ngsw-worker.js', {
+    //   enabled: environment.production
+    // }),
     // Extendz
     ExtendzAuthCommonModule,
     ExtendzRestModule.forRoot({
