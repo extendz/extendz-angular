@@ -16,4 +16,5 @@
 export * from './api-browser';
 export * from './auth';
 export * from './common';
-export * from './google-map';
+export * from './extendz-google-map';
+

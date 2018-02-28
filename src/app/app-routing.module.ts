@@ -12,7 +12,6 @@ const routes: Routes = [
   },
   {
     path: 'map',
-
     loadChildren: './modules/google-map-example/mapexample/mapexample.module#MapexampleModule'
   },
   {
