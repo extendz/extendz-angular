@@ -1,0 +1,43 @@
+/**
+ *   Copyright 2018 the original author or authors
+ *
+ *   Licensed under the Apache License, Version 2.0 (the "License");
+ *   you may not use this file except in compliance with the License.
+ *   You may obtain a copy of the License at
+ *
+ *       http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *   Unless required by applicable law or agreed to in writing, software
+ *   distributed under the License is distributed on an "AS IS" BASIS,
+ *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *   See the License for the specific language governing permissions and
+ *   limitations under the License.
+ */
+
+@import '~@angular/material/theming';
+.container {
+  padding: 1vw;
+}
+
+mat-icon.size-32 {
+  width: 32px;
+  height: 32px;
+  line-height: 32px;
+  background-color: #eee;
+  border-radius: 50px;
+}
+
+.primary {
+  padding: 5px;
+  color: #03A9F4;
+}
+
+.white-card {
+  padding: 2vw;
+  background-color: white;
+  margin-bottom: 5px;
+}
+
+.title {
+  font-weight: bolder;
+}
