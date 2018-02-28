@@ -39,7 +39,7 @@ import {
   ExtendzApiModule
 } from '../platform';
 import { AppRoutingModule } from './app-routing.module';
-import { ExtendzRestModule } from '../platform/common/index';
+import { ExtendzRestModule } from '../platform/common/services';
 
 @NgModule({
   declarations: [AppComponent],
@@ -55,7 +55,7 @@ import { ExtendzRestModule } from '../platform/common/index';
     // Extendz
     ExtendzAuthCommonModule,
     ExtendzRestModule.forRoot({
-      basePath: '/api'
+      basePath: environment.basePath
     }),
     // Mat
     MatInputModule,
