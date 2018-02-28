@@ -12,7 +12,7 @@ const routes: Routes = [
   },
   {
     path: 'map',
-    loadChildren: './modules/extendz-google-map/mapexample/mapexample.module#MapexampleModule'
+    loadChildren: './modules/google-map-example/mapexample/mapexample.module#MapexampleModule'
   },
   // {
   //   path: 'apis',
@@ -20,7 +20,7 @@ const routes: Routes = [
   // },
   {
     path: 'openlayer',
-    loadChildren: './modules/extendz-openlayer-example/openlayer-example.module#OpenlayerExampleModule'
+    loadChildren: './modules/openlayer-example/openlayer-example.module#OpenlayerExampleModule'
   }
 ];
 
