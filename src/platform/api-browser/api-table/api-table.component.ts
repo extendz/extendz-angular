@@ -14,7 +14,7 @@
  *    limitations under the License.
  */
 
-import { Component, OnInit, OnDestroy, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { SelectionModel } from '@angular/cdk/collections';
 import { PageEvent } from '@angular/material';
@@ -55,6 +55,8 @@ export class ApiTableComponent implements OnInit, OnDestroy {
 
   @Input() model: string;
 
+  @Output() select: EventEmitter<ObjectWithLinks> = new EventEmitter<ObjectWithLinks>;
+
   tableResponse: TableResponse;
   selection = new SelectionModel<Object>(true, []);
 
@@ -93,6 +95,13 @@ export class ApiTableComponent implements OnInit, OnDestroy {
     console.log('data', this.data);
     this.tableDataSource = new TableDataSource(of(this.data));
   } // handdleDataResponse()
+
+  /**
+   * Fire when add new item clicked
+   */
+  public addNew(){
+    this.select.emit({})
+  }// addNew()
 
   pageEvent(event: PageEvent) {
     let pageAndSort: PageAndSort = {

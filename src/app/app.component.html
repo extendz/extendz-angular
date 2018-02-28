@@ -10,7 +10,8 @@
 </mat-toolbar>
 <mat-sidenav-container style="background-color: white;min-height: 100vh">
     <!-- -->
-    <mat-sidenav #sidenav [opened]="media.isActive('xs') ? false :true" [mode]="media.isActive('xs') ? 'over' : 'side'" class="dark">
+    <mat-sidenav #sidenav [opened]="media.isActive('xs') || media.isActive('sm')   ? false :true" [mode]="media.isActive('xs') ? 'over' : 'side'"
+        class="dark">
 
         <div style="border-right: 1px solid #3c3a37">
             <mat-expansion-panel>
