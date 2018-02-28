@@ -1,20 +1,27 @@
 /* You can add global styles to this file, and also import other style files */
 
-html,
-body,
+html {
+    overflow: auto;
+}
+
+body {
+    margin: 0;
+    width: 100%;
+    height: auto;
+    min-height: 100%
+}
+
 mat-sidenav-container {
-  font-family: 'Roboto-Regular';
-  margin: 0;
-  width: 100%;
-  height: 100%;
+    font-family: 'Roboto-Regular';
+    margin: 0;
 }
 
 mat-card-content {
-  font-family: 'Roboto-Regular';
+    font-family: 'Roboto-Regular';
 }
 
 .tab-content {
-  font-family: 'Roboto-Light';
-  padding-left: 4vw;
-  padding-right: 4vw;
+    font-family: 'Roboto-Light';
+    padding-left: 4vw;
+    padding-right: 4vw;
 }
