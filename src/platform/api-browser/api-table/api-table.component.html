@@ -1,7 +1,7 @@
 <div fxLayout="row" fxLayoutGap="2vw" style="padding: 1vw">
     <h3>{{model}}</h3>
     <span fxFlex></span>
-    <mat-form-field>
+    <!-- <mat-form-field>
       <input matInput autofocus (keyup)="applyFilter($event.target.value)" placeholder="Search">
       <button mat-icon-button [matMenuTriggerFor]="appMenu" matSuffix>
         <mat-icon>
@@ -12,7 +12,7 @@
           </svg>
         </mat-icon>
       </button>
-    </mat-form-field>
+    </mat-form-field> -->
     <mat-menu #appMenu="matMenu">
       <button mat-menu-item *ngFor="let prop of modelMeta?.properties">{{prop.name | camelCase}}</button>
     </mat-menu>
