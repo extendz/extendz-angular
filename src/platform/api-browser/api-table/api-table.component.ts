@@ -63,7 +63,7 @@ export class ApiTableComponent implements OnInit, OnDestroy {
   data: Object[];
 
   constructor(
-    private media: ObservableMedia,
+    public media: ObservableMedia,
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private service: ApiTableService

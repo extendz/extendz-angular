@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { NgModule, ModuleWithProviders, InjectionToken } from '@angular/core';
 
-import { MapService } from './map.service';
-import { MapComponent } from './map.component';
+import { ExtendzGoogleMapService } from './extendz-google-map.service';
+import { ExtendzGoogleMapComponent } from './extendz-google-map.component';
 import { MapConfig } from './models';
 
 // Material Component Imports
@@ -12,7 +12,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatInputModule} from '@angular/material/input';
 
-export const EXT_MAP_CONFIG = new InjectionToken<MapModule>('extMap.config');
+export const EXT_MAP_CONFIG = new InjectionToken<ExtendzGoogleMapModule>('extMap.config');
 
 @NgModule({
   imports: [
@@ -23,14 +23,14 @@ export const EXT_MAP_CONFIG = new InjectionToken<MapModule>('extMap.config');
     MatProgressBarModule,
     MatInputModule
   ],
-  declarations: [MapComponent],
-  exports: [MapComponent],
-  providers: [MapService]
+  declarations: [ExtendzGoogleMapComponent],
+  exports: [ExtendzGoogleMapComponent],
+  providers: [ExtendzGoogleMapService]
 })
-export class MapModule {
+export class ExtendzGoogleMapModule {
   public static forRoot(config: MapConfig): ModuleWithProviders {
     return {
-      ngModule: MapModule,
+      ngModule: ExtendzGoogleMapModule,
       providers: [
         {
           provide: EXT_MAP_CONFIG,

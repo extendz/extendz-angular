@@ -12,16 +12,16 @@ const routes: Routes = [
   },
   {
     path: 'map',
-    loadChildren: './modules/map/mapexample/mapexample.module#MapexampleModule'
+    loadChildren: './modules/google-map-example/mapexample/mapexample.module#MapexampleModule'
   },
   {
     path: 'apis',
     loadChildren: './modules/api/api-example.module#ApiExampleModule'
+  },
+  {
+    path: 'openlayer',
+    loadChildren: './modules/openlayer-example/openlayer-example.module#OpenlayerExampleModule'
   }
-  // {
-  //   path: 'openlayer',
-  //   loadChildren: './modules/openlayer-example/openlayer-example.module#OpenlayerExampleModule'
-  // }
 ];
 
 @NgModule({

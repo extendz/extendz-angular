@@ -57,6 +57,13 @@
                         <h4 mat-line>Google Map</h4>
                     </a>
                 </mat-list>
+                <mat-list>
+                    <mat-list-item [routerLink]="['openlayer']" (click)="!media.isActive('xs') && sidenav.toggle()">
+                        <mat-icon mat-list-icon svgIcon="app:openlayer" style="color: white"></mat-icon>
+                        <h4 mat-line>Openlayer</h4>
+                        <!-- <p mat-line>{{item.subTitle}}</p> -->
+                    </mat-list-item>
+                </mat-list>
             </mat-expansion-panel>
 
             <mat-expansion-panel>

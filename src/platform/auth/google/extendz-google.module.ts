@@ -1,5 +1,4 @@
 import { NgModule, InjectionToken, ModuleWithProviders } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
 import { MatButtonModule, MatIconModule } from '@angular/material';
 import { CovalentLoadingModule } from '@covalent/core/loading';
 
@@ -10,7 +9,7 @@ import { GoogleComponent } from './google.component';
 export const EXT_GOOGLE_CONFIG = new InjectionToken<ExtendzGoogleModule>('extGoogle.config');
 
 @NgModule({
-  imports: [MatIconModule, MatButtonModule, HttpClientModule, CovalentLoadingModule],
+  imports: [MatIconModule, MatButtonModule, CovalentLoadingModule],
   declarations: [GoogleComponent],
   exports: [GoogleComponent],
   providers: [GoogleService]

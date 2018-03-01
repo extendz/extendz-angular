@@ -19,7 +19,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { ServiceWorkerModule } from '@angular/service-worker';
+// import { ServiceWorkerModule } from '@angular/service-worker';
 import {
   MatInputModule,
   MatSidenavModule,
@@ -39,7 +39,7 @@ import {
   ExtendzApiModule
 } from '../platform';
 import { AppRoutingModule } from './app-routing.module';
-import { ExtendzRestModule } from '../platform/common/index';
+import { ExtendzRestModule } from '../platform/common/services';
 
 @NgModule({
   declarations: [AppComponent],
@@ -49,14 +49,13 @@ import { ExtendzRestModule } from '../platform/common/index';
     BrowserModule,
     HttpClientModule,
     FlexLayoutModule,
-    ServiceWorkerModule.register('/ngsw-worker.js', {
-      enabled: environment.production
-    }),
+    // ServiceWorkerModule.register('/ngsw-worker.js', {
+    //   enabled: environment.production
+    // }),
     // Extendz
     ExtendzAuthCommonModule,
     ExtendzRestModule.forRoot({
-      //basePath: 'https://extendz-springboot.herokuapp.com/api'
-      basePath: 'http://localhost:8080/api'
+      basePath: environment.basePath
     }),
     // Mat
     MatInputModule,

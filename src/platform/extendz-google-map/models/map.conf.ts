@@ -2,9 +2,9 @@ import { LatLng } from "./index";
 import { MapToolType } from "../enums/index";
 
 export class MapConfig {
-    apiKey: string;
-    center: LatLng;
-    zoom: number;
+    apiKey : string;
+    center ?: LatLng;
+    zoom ?: number;
     mapElement ?: HTMLElement;
     tools?:Array<MapToolType>;
     linksControl?:boolean = false;
