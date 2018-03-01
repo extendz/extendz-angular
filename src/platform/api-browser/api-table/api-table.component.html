@@ -1,30 +1,31 @@
-<div fxLayout="row" fxLayoutGap="2vw" style="padding: 1vw">
-    <h3>{{model}}</h3>
-    <span fxFlex></span>
-    <!-- <mat-form-field>
-      <input matInput autofocus (keyup)="applyFilter($event.target.value)" placeholder="Search">
-      <button mat-icon-button [matMenuTriggerFor]="appMenu" matSuffix>
-        <mat-icon>
-          <svg id="more_vert" viewBox="0 0 24 24">
-            <path d="M0 0h24v24H0z" fill="none" />
-            <path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"
-            />
-          </svg>
-        </mat-icon>
-      </button>
-    </mat-form-field> -->
-    <mat-menu #appMenu="matMenu">
-      <button mat-menu-item *ngFor="let prop of modelMeta?.properties">{{prop.name | camelCase}}</button>
-    </mat-menu>
-  </div>
-<!-- <mat-form-field>
-    <mat-select placeholder="F">
-      <mat-option *ngFor="let food of foods" [value]="food.value">
-        {{ food.viewValue }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field> -->
-
+<!-- Search bar -->
+<div fxLayout="row" fxLayoutGap="2vw" fxLayoutAlign="center center" style="padding: 1vw">
+  <button mat-icon-button (click)="addNew()">
+    <mat-icon>
+      <svg id="add" viewBox="0 0 24 24">
+        <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
+        <path d="M0 0h24v24H0z" fill="none" />
+      </svg>
+    </mat-icon>
+  </button>
+  <h3>{{model | camelCase}}</h3>
+  <span fxFlex></span>
+  <mat-form-field>
+    <input matInput autofocus (keyup)="applyFilter($event.target.value)" placeholder="Search">
+    <button mat-icon-button [matMenuTriggerFor]="appMenu" matSuffix>
+      <mat-icon>
+        <svg id="more_vert" viewBox="0 0 24 24">
+          <path d="M0 0h24v24H0z" fill="none" />
+          <path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"
+          />
+        </svg>
+      </mat-icon>
+    </button>
+  </mat-form-field>
+  <mat-menu #appMenu="matMenu">
+    <button mat-menu-item *ngFor="let prop of modelMeta?.properties">{{prop.name | camelCase}}</button>
+  </mat-menu>
+</div>
 
 <div *ngIf="media.isActive('xs');else desktop">
   <!-- Mobile -->
@@ -143,17 +144,15 @@
     <mat-header-row *matHeaderRowDef="allColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: allColumns;"></mat-row>
   </mat-table>
-  <mat-paginator class="mat-elevation-z1" [length]="tableResponse?.page?.totalPages" (page)="pageEvent($event)" [pageSize]="tableResponse?.page?.size"
-    [pageSizeOptions]="[10, 20, 50]">
+
+  <mat-paginator style="position: fixed;bottom: 0;left: 0;right: 0" class="mat-elevation-z1" [length]="tableResponse?.page?.totalPages"
+    (page)="pageEvent($event)" [pageSize]="tableResponse?.page?.size" [pageSizeOptions]="[10, 20, 50]">
   </mat-paginator>
 </ng-template>
-<div *ngIf="searchClicked==false">
+
+<!-- fab -->
+<!-- <div *ngIf="searchClicked==false">
   <button mat-fab class="bottom-right" [routerLink]="[0]">
-    <mat-icon>
-      <svg id="add" viewBox="0 0 24 24">
-        <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
-        <path d="M0 0h24v24H0z" fill="none" />
-      </svg>
-    </mat-icon>
+
   </button>
-</div>
+</div> -->

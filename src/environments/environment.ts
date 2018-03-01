@@ -5,5 +5,5 @@
 
 export const environment = {
   production: false,
-  basePath:"/api"
+  basePath:"http://localhost:8080/api"
 };

@@ -29,7 +29,7 @@ export class ApiTableService {
     if (pageAndSort) {
       params = params.append('page', pageAndSort.page.toString());
     }
-    return this.http.get<TableResponse>(meta.url, { params });
+    return this.http.get<TableResponse>(this.conf.basePath + meta.url, { params });
   } // getTableData()
 
   getItemId(url: string) {
