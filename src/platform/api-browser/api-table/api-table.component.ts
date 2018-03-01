@@ -55,7 +55,7 @@ export class ApiTableComponent implements OnInit, OnDestroy {
 
   @Input() model: string;
 
-  @Output() select: EventEmitter<ObjectWithLinks> = new EventEmitter<ObjectWithLinks>;
+  @Output() select: EventEmitter<ObjectWithLinks> = new EventEmitter<ObjectWithLinks>();
 
   tableResponse: TableResponse;
   selection = new SelectionModel<Object>(true, []);
@@ -70,7 +70,6 @@ export class ApiTableComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    console.log('Model in table', this.model);
     this.all$ = this.service
       .getModel(this.model)
       .pipe(
@@ -99,9 +98,9 @@ export class ApiTableComponent implements OnInit, OnDestroy {
   /**
    * Fire when add new item clicked
    */
-  public addNew(){
-    this.select.emit({})
-  }// addNew()
+  public addNew() {
+    this.select.emit({});
+  } // addNew()
 
   pageEvent(event: PageEvent) {
     let pageAndSort: PageAndSort = {

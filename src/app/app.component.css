@@ -1,24 +1,31 @@
-.dark {
+/* .dark {
     background-color: #3c3a37;
-}
+} */
 
 mat-list a {
     text-decoration: none
 }
 
-mat-panel-title {
-    color: white
-}
 
-mat-expansion-panel {
+/* mat-panel-title {
+    color: white
+} */
+
+
+/* mat-expansion-panel {
     background-color: #3c3a37;
 }
 
 mat-list a,
 mat-icon {
     color: white
-}
+} */
 
 mat-panel-title mat-icon {
     margin-right: 1vw;
+    color: #999;
+}
+
+mat-sidenav-container {
+    background-color: white;
 }

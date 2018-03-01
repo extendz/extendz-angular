@@ -8,7 +8,7 @@
       </svg>
     </mat-icon>
   </button>
-  <h3>{{model}}</h3>
+  <h3>{{model | camelCase}}</h3>
   <span fxFlex></span>
   <mat-form-field>
     <input matInput autofocus (keyup)="applyFilter($event.target.value)" placeholder="Search">

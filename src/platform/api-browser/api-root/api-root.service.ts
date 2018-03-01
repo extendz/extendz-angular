@@ -21,10 +21,12 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators/map';
 
-import { ExtRestConfig } from '../../common';
+import { ExtRestConfig, ObjectWithLinks, RestService } from '../../common';
 
 import { Model } from './models/';
 import { ExtendzApiConfig } from '../models';
+import { of } from 'rxjs/observable/of';
+import { Href } from '../../common/services/rest/models/href';
 
 @Injectable()
 export class ApiRootService {
@@ -33,7 +35,8 @@ export class ApiRootService {
     private restConfig: ExtRestConfig,
     private iconRegistry: MatIconRegistry,
     private sanitizer: DomSanitizer,
-    private http: HttpClient
+    private http: HttpClient,
+    private rest: RestService
   ) {
     this.iconRegistry.addSvgIconSetInNamespace(
       'api-root',
@@ -41,7 +44,24 @@ export class ApiRootService {
     );
   } // constructor()
 
-  getRoot(): Observable<Model[]> {
-    return this.http.get<Model[]>(this.restConfig.basePath + '/' + this.apiConfig.modelsEndpont);
-  } // getRoot()
+  public getRoot(): Observable<Model[]> {
+    return this.rest.http.get<Model[]>(this.restConfig.basePath + '/models');
+  }
+
+  // getRoot(): Observable<Model[]> {
+  //   return this.http.get<ObjectWithLinks>(this.restConfig.basePath).pipe(
+  //     map((res: ObjectWithLinks) => {
+  //       return Object.keys(res._links).map(prop => {
+  //         //if (prop == 'profile') return;
+  //         let self: any = res._links[prop];
+  //         let url = this.rest.clearUrl(self.href);
+  //         let model: Model = {
+  //           name: prop,
+  //           url
+  //         };
+  //         return model;
+  //       });
+  //     })
+  //   );
+  // } // getRoot()
 } // class

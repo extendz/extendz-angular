@@ -30,7 +30,6 @@ export class ApiTableHostComponent implements OnInit {
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(param => {
-      console.log('param', param.name);
       this.model = param.name;
     });
   } // ngOnInit()
