@@ -1,6 +1,5 @@
 <mat-sidenav-container>
-    <mat-sidenav  #sidenav [opened]="media.isActive('xs') || media.isActive('sm')   ? false :true"
-        [mode]="media.isActive('xs') ? 'over' : 'side'">
+    <mat-sidenav #sidenav [opened]="media.isActive('xs') || media.isActive('sm')   ? false :true" [mode]="media.isActive('xs') ? 'over' : 'side'">
         <mat-toolbar color="primary" class="mat-elevation-z1">
             <button mat-icon-button (click)="sidenav.toggle()" MatTooltip="Toggle SideNav">
                 <mat-icon svgIcon="app:menu"> </mat-icon>
@@ -48,7 +47,7 @@
                     <mat-panel-title>
                         <div fxLayout="row" fxLayoutAlign="center center">
                             <mat-icon mat-list-icon svgIcon="app:map"></mat-icon>
-                            <span>Mpas</span>
+                            <span>Maps</span>
                         </div>
                     </mat-panel-title>
                 </mat-expansion-panel-header>
@@ -78,6 +77,24 @@
                 </mat-expansion-panel-header>
                 <mat-list>
                     <a mat-list-item *ngFor="let item of apiMenuItms" [routerLink]="item.url" (click)="media.isActive('xs') && sidenav.toggle()">
+                        <mat-icon mat-list-icon svgIcon="app:{{item.icon}}"></mat-icon>
+                        <h4 mat-line>{{item.title}}</h4>
+                    </a>
+                </mat-list>
+            </mat-expansion-panel>
+
+            <!--Other-->
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <div fxLayout="row" fxLayoutAlign="center center">
+                            <mat-icon mat-list-icon svgIcon="app:date_range"></mat-icon>
+                            <span>Other components</span>
+                        </div>
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <mat-list>
+                    <a mat-list-item *ngFor="let item of otherComponentMenuItems" [routerLink]="item.url" (click)="media.isActive('xs') && sidenav.toggle()">
                         <mat-icon mat-list-icon svgIcon="app:{{item.icon}}"></mat-icon>
                         <h4 mat-line>{{item.title}}</h4>
                     </a>
