@@ -1,12 +1,13 @@
-<mat-sidenav-container >
-    <mat-sidenav #sidenav [opened]="media.isActive('xs') || media.isActive('sm')   ? false :true" [mode]="media.isActive('xs') ? 'over' : 'side'">
+<mat-sidenav-container>
+    <mat-sidenav  #sidenav [opened]="media.isActive('xs') || media.isActive('sm')   ? false :true"
+        [mode]="media.isActive('xs') ? 'over' : 'side'">
         <mat-toolbar color="primary" class="mat-elevation-z1">
             <button mat-icon-button (click)="sidenav.toggle()" MatTooltip="Toggle SideNav">
                 <mat-icon svgIcon="app:menu"> </mat-icon>
             </button>
             <span>{{title}}</span>
         </mat-toolbar>
-        <div style="margin: 5px;" >
+        <div style="margin: 5px;">
             <!--Pages -->
             <mat-expansion-panel>
                 <mat-expansion-panel-header>
@@ -53,7 +54,7 @@
                 </mat-expansion-panel-header>
                 <mat-list>
                     <a mat-list-item [routerLink]="['map']" (click)="!media.isActive('xs') && sidenav.toggle()">
-                        <mat-icon mat-list-icon svgIcon="app:map" ></mat-icon>
+                        <mat-icon mat-list-icon svgIcon="app:map"></mat-icon>
                         <h4 mat-line>Google Map</h4>
                     </a>
                 </mat-list>
