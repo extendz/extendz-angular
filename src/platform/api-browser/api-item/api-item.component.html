@@ -15,15 +15,15 @@
 -->
 
 <div>
-  <div fxFlex="10%"></div>
+  <div fxFlex="10%" fxFlex.xs="0"></div>
   <div fxFlex>
     <div fxLayout="row" fxLayoutAlign="center center">
       <h3>
-        <span *ngIf="id==0">New </span>{{modelMeta?.name |camelCase}}
+        <span *ngIf="id==0" class="primary">New </span>{{modelMeta?.name |camelCase}}
         <span *ngIf="id!=0">: {{id}}</span>
       </h3>
       <span fxFlex></span>
-      <button mat-icon-button (click)="delete()">
+      <button *ngIf="id!=0" mat-icon-button (click)="delete()">
         <mat-icon>
           <svg id="delete" viewBox="0 0 24 24">
             <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z" />
@@ -35,7 +35,8 @@
     <mat-card>
       <form [formGroup]="itemFormGroup" fxLayout="column">
         <div *ngFor="let prop of modelMeta?.properties">
-          <mat-form-field fxFlex>
+          <!-- String -->
+          <mat-form-field fxFlex *ngIf="prop.type == 'string'">
             <input matInput [placeholder]="prop.name | camelCase" [formControlName]="prop.name">
             <button matSuffix mat-icon-button *ngIf="prop.type == 'object'" (click)="openDialog()">
               <mat-icon>
@@ -47,11 +48,17 @@
               </mat-icon>
             </button>
           </mat-form-field>
+          <!-- Date -->
+          <mat-form-field fxFlex *ngIf="prop.type == 'date'">
+            <input matInput [matDatepicker]="picker" [placeholder]="prop.name | camelCase" [formControlName]="prop.name">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
         </div>
       </form>
     </mat-card>
   </div>
-  <div fxFlex="10%"></div>
+  <div fxFlex="10%" fxFlex.xs="0"></div>
 </div>
 
 <button mat-fab class="bottom-right" (click)="save()">
@@ -63,3 +70,5 @@
     </svg>
   </mat-icon>
 </button>
+
+<div style="height: 85px"></div>

@@ -12,3 +12,7 @@ $theme: mat-light-theme($primary, $accent, $warn);
 .doc-header {
     color: mat-color($accent);
 }
+
+.primary {
+    color: mat-color($primary);
+}

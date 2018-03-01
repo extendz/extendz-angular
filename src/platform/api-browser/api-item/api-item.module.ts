@@ -6,8 +6,10 @@ import {
   MatInputModule,
   MatIconModule,
   MatButtonModule,
-  MatDialogModule
+  MatDialogModule,
+  MatDatepickerModule
 } from '@angular/material';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -25,7 +27,8 @@ import { ApiItemAddDialogComponent } from './dialog/api-item-add-dialog.componen
     ApiItemRoutingModule,
     FlexLayoutModule,
     ReactiveFormsModule,
-    //
+    MatMomentDateModule,
+    //Exentedz
     ExtendPipesModule,
     //Mat
     MatInputModule,
@@ -33,7 +36,8 @@ import { ApiItemAddDialogComponent } from './dialog/api-item-add-dialog.componen
     MatIconModule,
     MatCardModule,
     MatButtonModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatDatepickerModule
   ],
   declarations: [ApiItemComponent, ApiItemAddDialogComponent],
   entryComponents: [ApiItemAddDialogComponent],
