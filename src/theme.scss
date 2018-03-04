@@ -10,9 +10,12 @@ $theme: mat-light-theme($primary, $accent, $warn);
 @include covalent-theme($theme);
 @include covalent-highlight-theme();
 .doc-header {
-    color: mat-color($accent);
+  color: mat-color($accent);
 }
 
 .primary {
-    color: mat-color($primary);
+  color: mat-color($primary);
+}
+.primary-text{
+    color: mat-color($primary, 50);
 }

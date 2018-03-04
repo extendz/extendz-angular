@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/Observable';
 import { TableResponse, PageAndSort, ModelMeta } from './models/';
 
 import { RestService, ExtRestConfig } from '../../common';
-import { ExtendzApiConfig } from '..';
+import { ExtendzApiConfig } from '../models';
 
 @Injectable()
 export class ApiTableService {
@@ -19,8 +19,6 @@ export class ApiTableService {
 
   getModel(model: string): Observable<ModelMeta> {
     let url = this.conf.basePath + '/' + this.apiConfig.modelsEndpont + '/' + model.toLowerCase();
-    console.log(url);
-
     return this.http.get<ModelMeta>(url);
   } // getModel()
 

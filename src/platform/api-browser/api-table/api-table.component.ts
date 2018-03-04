@@ -21,9 +21,9 @@ import { PageEvent } from '@angular/material';
 import { ObservableMedia } from '@angular/flex-layout';
 
 import { ApiTableService } from './api-table.service';
-import { ModelMeta } from './models/modelMeta';
+import { PageAndSort, ModelMeta, ObjectWithLinks } from './models';
 
-import { debounceTime } from 'rxjs/operators';
+import { debounceTime } from 'rxjs/operators/debounceTime';
 import { Subscription } from 'rxjs/Subscription';
 import { tap } from 'rxjs/operators/tap';
 import { mergeMap } from 'rxjs/operators/mergeMap';
@@ -31,13 +31,11 @@ import { map } from 'rxjs/operators/map';
 import { of } from 'rxjs/observable/of';
 
 import { TableResponse } from './models/modelData/tableResponse';
-import { PageAndSort } from './models';
 
 import { TableDataSource } from './dataSource/tableDataSource';
-import { ObjectWithLinks } from './models/modelData/objectWithLinks';
 
 @Component({
-  selector: 'app-api-table',
+  selector: 'ext-api-table',
   templateUrl: './api-table.component.html',
   styleUrls: ['./api-table.component.css']
 })
@@ -70,13 +68,14 @@ export class ApiTableComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.all$ = this.service
-      .getModel(this.model)
-      .pipe(
-        mergeMap((meta: ModelMeta) => this.handleMetaModel(meta)),
-        map((tableResponse: TableResponse) => this.handdleDataResponse(tableResponse))
-      )
-      .subscribe(d => {});
+    console.log(ApiTableComponent.name,'init',this.model)
+    // this.all$ = this.service
+    //   .getModel(this.model)
+    //   .pipe(
+    //     mergeMap((meta: ModelMeta) => this.handleMetaModel(meta)),
+    //     map((tableResponse: TableResponse) => this.handdleDataResponse(tableResponse))
+    //   )
+    //   .subscribe(d => {});
   } // ngOnInit()
 
   private handleMetaModel(meta: ModelMeta) {
@@ -91,7 +90,6 @@ export class ApiTableComponent implements OnInit, OnDestroy {
     this.url = this.modelMeta.url;
     this.selector = this.url.substring(this.url.lastIndexOf('/') + 1);
     this.data = tableResponse._embedded[this.selector];
-    console.log('data', this.data);
     this.tableDataSource = new TableDataSource(of(this.data));
   } // handdleDataResponse()
 
@@ -101,6 +99,15 @@ export class ApiTableComponent implements OnInit, OnDestroy {
   public addNew() {
     this.select.emit({});
   } // addNew()
+
+  /**
+   * Fire When existing item it clicked
+   * @param item
+   */
+  public editRow(item: ObjectWithLinks) {
+    let id = this.service.getItemId(item._links.self.href);
+    this.router.navigate([id], { relativeTo: this.activatedRoute });
+  } // editRow()
 
   pageEvent(event: PageEvent) {
     let pageAndSort: PageAndSort = {
@@ -117,11 +124,6 @@ export class ApiTableComponent implements OnInit, OnDestroy {
     const numRows = this.data.length;
     return numSelected === numRows;
   }
-
-  editRow(item: ObjectWithLinks) {
-    let id = this.service.getItemId(item._links.self.href);
-    this.router.navigate([id], { relativeTo: this.activatedRoute });
-  } // editRow()
 
   /** Selects all rows if they are not all selected; otherwise clear selection. */
   masterToggle() {

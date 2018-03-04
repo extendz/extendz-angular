@@ -8,9 +8,11 @@ import { MatIconModule, MatButtonModule } from '@angular/material';
 
 @NgModule({
   imports: [
-    ApiTableHostRoutingModule,
     CommonModule,
+    ApiTableHostRoutingModule,
+    // Extendz
     ExtendzApiTableModule,
+    // Mat
     MatIconModule,
     MatButtonModule
   ],

@@ -9,7 +9,7 @@ const routes: Routes = [
   },
   {
     path: ':id',
-    loadChildren: '../api-item/api-item.module#ApiItemModule'
+    loadChildren: '../extendz-api-item-host/extendz-api-item-host.module#ExtendzApiItemHostModule'
   }
 ];
 

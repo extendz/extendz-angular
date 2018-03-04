@@ -1,1 +1,1 @@
-export * from './api-item.module';
+export * from './extendz-api-item.module';

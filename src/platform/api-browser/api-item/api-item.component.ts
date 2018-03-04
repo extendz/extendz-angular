@@ -1,12 +1,12 @@
 /**
  *    Copyright 2018 the original author or authors
- * 
+ *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
  *    You may obtain a copy of the License at
- * 
+ *
  *        http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  *    Unless required by applicable law or agreed to in writing, software
  *    distributed under the License is distributed on an "AS IS" BASIS,
  *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -14,7 +14,7 @@
  *    limitations under the License.
  */
 
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { ObservableMedia } from '@angular/flex-layout';
 import { MatSnackBar, MatDialog } from '@angular/material';
@@ -32,19 +32,29 @@ import { ApiItemAddDialogComponent } from './dialog/api-item-add-dialog.componen
 import { ModelMeta, ObjectWithLinks, Property } from '../api-table/models';
 
 @Component({
-  selector: 'app-api-item',
+  selector: 'ext-api-item',
   templateUrl: './api-item.component.html',
   styleUrls: ['./api-item.component.css']
 })
 export class ApiItemComponent implements OnInit, OnDestroy {
   all$: Subscription;
   modelMeta: ModelMeta;
-  id: number | string;
-  itemFormGroup: FormGroup = new FormGroup({});
   item: ObjectWithLinks;
+  /**
+   * Id for the selected item
+   */
+  @Input() id: number | string;
+  /**
+   * Model name for the selected/new item
+   */
+  @Input() model: string;
+  /**
+   * Form used to create an item(Entity)
+   */
+  itemFormGroup: FormGroup = new FormGroup({});
 
   constructor(
-    private media: ObservableMedia,
+    public media: ObservableMedia,
     private activatedRoute: ActivatedRoute,
     private apiTableService: ApiTableService,
     public dialog: MatDialog,
@@ -53,11 +63,9 @@ export class ApiItemComponent implements OnInit, OnDestroy {
   ) {} // constructor()
 
   ngOnInit(): void {
-    this.all$ = this.activatedRoute.params
-      .pipe(
-        mergeMap((param: Params) => this.handleParam(param)),
-        mergeMap((meta: ModelMeta) => this.handleMetaModel(meta))
-      )
+    this.apiTableService
+      .getModel(this.model)
+      .pipe(mergeMap((meta: ModelMeta) => this.handleMetaModel(meta)))
       .subscribe(
         (response: ObjectWithLinks) => {
           this.item = response;
@@ -76,6 +84,25 @@ export class ApiItemComponent implements OnInit, OnDestroy {
       );
   } // ngOnInit()
 
+  private handleParam(param: Params) {
+    this.id = param.id;
+    return this.apiTableService.getModel(param.name);
+  } // handleParam()
+
+  private handleMetaModel(meta: ModelMeta) {
+    this.modelMeta = meta;
+    this.modelMeta.properties.forEach(prop => {
+      let testCtrl = new FormControl('init value');
+      this.itemFormGroup.addControl(prop.name, testCtrl);
+    });
+
+    // _links ctrl
+    let _links = new FormControl();
+    this.itemFormGroup.addControl('_links', _links);
+
+    return this.service.getItem(this.modelMeta, this.id);
+  } // handleMetaModel()
+
   ngOnDestroy(): void {
     this.all$.unsubscribe();
   } // ngOnDestroy()
@@ -91,7 +118,7 @@ export class ApiItemComponent implements OnInit, OnDestroy {
   } // save()
 
   delete(): void {
-    console.log(this.item._links.self)
+    console.log(this.item._links.self);
     this.service.delete(this.item);
   } // delete
 
@@ -120,23 +147,4 @@ export class ApiItemComponent implements OnInit, OnDestroy {
       console.log('The dialog was closed');
     });
   }
-
-  private handleParam(param: Params) {
-    this.id = param.id;
-    return this.apiTableService.getModel(param.name);
-  } // handleParam()
-
-  private handleMetaModel(meta: ModelMeta) {
-    this.modelMeta = meta;
-    this.modelMeta.properties.forEach(prop => {
-      let testCtrl = new FormControl('init value');
-      this.itemFormGroup.addControl(prop.name, testCtrl);
-    });
-
-    // _links ctrl
-    let _links = new FormControl();
-    this.itemFormGroup.addControl('_links', _links);
-
-    return this.service.getItem(this.modelMeta, this.id);
-  } // handleMetaModel()
 } // class

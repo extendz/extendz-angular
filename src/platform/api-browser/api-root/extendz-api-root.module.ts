@@ -36,6 +36,7 @@ import { ExtendPipesModule, ExtendzRestModule, RestService } from '../../common'
     CommonModule,
     ApiRootRoutingModule,
     FlexLayoutModule,
+    // Extentz
     ExtendPipesModule,
     ExtendzRestModule,
     // Mat

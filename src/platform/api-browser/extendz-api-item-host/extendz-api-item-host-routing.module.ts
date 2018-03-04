@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ApiTableComponent } from './api-table.component';
+import { ExtendzApiItemHostComponent } from './extendz-api-item-host.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: ApiTableComponent
+    component: ExtendzApiItemHostComponent
   }
 ];
 
@@ -13,4 +13,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class ApiTableRoutingModule {}
+export class ExtendzApiItemHostRoutingModule {}

@@ -44,4 +44,4 @@ import { ApiItemAddDialogComponent } from './dialog/api-item-add-dialog.componen
   exports: [ApiItemComponent],
   providers: [ApiTableService, ApiItemService]
 })
-export class ApiItemModule {}
+export class ExtendzApiItemModule {}

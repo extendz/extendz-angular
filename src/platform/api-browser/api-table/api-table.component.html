@@ -1,17 +1,12 @@
 <!-- Search bar -->
 <div fxLayout="row" fxLayoutGap="2vw" fxLayoutAlign="center center" style="padding: 1vw">
-  <button mat-icon-button (click)="addNew()">
-    <mat-icon>
-      <svg id="add" viewBox="0 0 24 24">
-        <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
-        <path d="M0 0h24v24H0z" fill="none" />
-      </svg>
-    </mat-icon>
-  </button>
+  <!-- <button mat-icon-button (click)="addNew()">
+   
+  </button> -->
   <h3>{{model | camelCase}}</h3>
   <span fxFlex></span>
   <mat-form-field>
-      <!-- (keyup)="applyFilter($event.target.value)"  -->
+    <!-- (keyup)="applyFilter($event.target.value)"  -->
     <input matInput autofocus placeholder="Search">
     <button mat-icon-button [matMenuTriggerFor]="appMenu" matSuffix>
       <mat-icon>
@@ -145,15 +140,20 @@
     <mat-header-row *matHeaderRowDef="allColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: allColumns;"></mat-row>
   </mat-table>
-
-  <mat-paginator style="position: fixed;bottom: 0;left: 0;right: 0" class="mat-elevation-z1" [length]="tableResponse?.page?.totalPages"
-    (page)="pageEvent($event)" [pageSize]="tableResponse?.page?.size" [pageSizeOptions]="[10, 20, 50]">
+  <!-- style="position: fixed;bottom: 0;left: 0;right: 0" -->
+  <mat-paginator class="mat-elevation-z1" [length]="tableResponse?.page?.totalPages" (page)="pageEvent($event)" [pageSize]="tableResponse?.page?.size"
+    [pageSizeOptions]="[10, 20, 50]">
   </mat-paginator>
 </ng-template>
 
 <!-- fab -->
-<!-- <div *ngIf="searchClicked==false">
+<div>
   <button mat-fab class="bottom-right" [routerLink]="[0]">
-
+    <mat-icon>
+      <svg id="add" viewBox="0 0 24 24">
+        <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
+        <path d="M0 0h24v24H0z" fill="none" />
+      </svg>
+    </mat-icon>
   </button>
-</div> -->
+</div>

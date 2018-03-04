@@ -46,10 +46,19 @@ export class RestService {
     return url;
   } //  clearUrl()
 
+  /**
+   * Get Id from a url with tailing id
+   * @param url
+   */
   getId(url: string) {
     return url.substring(url.lastIndexOf('/') + 1);
   } // getId()
 
+  /**
+   * Get All the data elements and paging information
+   * @param modelName
+   * @param httpOptions
+   */
   findAll(modelName: string, httpOptions: Object): Observable<ObjectWithLinks> {
     return this.http
       .get(this.restConfig.basePath + '/' + modelName, httpOptions)

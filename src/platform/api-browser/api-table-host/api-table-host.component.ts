@@ -19,7 +19,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ObjectWithLinks } from '../api-table/models';
 
 @Component({
-  selector: 'app-api-table-host',
+  selector: 'ext-api-table-host',
   templateUrl: './api-table-host.component.html',
   styleUrls: ['./api-table-host.component.css']
 })
@@ -29,7 +29,8 @@ export class ApiTableHostComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute, private router: Router) {}
 
   ngOnInit() {
-    this.activatedRoute.params.subscribe(param => {
+    console.log(ApiTableHostComponent.name, 'consructor');
+    this.activatedRoute.params.subscribe(param => {    
       this.model = param.name;
     });
   } // ngOnInit()

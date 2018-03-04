@@ -15,7 +15,7 @@
 -->
 
 <div>
-  <div fxFlex="10%" fxFlex.xs="0"></div>
+  <div fxFlex="10%" fxFlex.xs="1vw"></div>
   <div fxFlex>
     <div fxLayout="row" fxLayoutAlign="center center">
       <h3>
@@ -32,7 +32,7 @@
         </mat-icon>
       </button>
     </div>
-    <mat-card>
+    <mat-card [ngClass]="{'mat-elevation-z0' : media.isActive('xs')}">
       <form [formGroup]="itemFormGroup" fxLayout="column">
         <div *ngFor="let prop of modelMeta?.properties">
           <!-- String -->
@@ -52,7 +52,7 @@
           <mat-form-field fxFlex *ngIf="prop.type == 'date'">
             <input matInput [matDatepicker]="picker" [placeholder]="prop.name | camelCase" [formControlName]="prop.name">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
+            <mat-datepicker [touchUi]="media.isActive('xs')" #picker></mat-datepicker>
           </mat-form-field>
         </div>
       </form>
@@ -63,7 +63,7 @@
 
 <button mat-fab class="bottom-right" (click)="save()">
   <mat-icon>
-    <svg id="save" viewBox="0 0 24 24">
+    <svg id="save" viewBox="0 0 24 24" class="primary-text">
       <path d="M0 0h24v24H0z" fill="none" />
       <path d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-5 16c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-10H5V5h10v4z"
       />
