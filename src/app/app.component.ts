@@ -109,7 +109,7 @@ export class AppComponent {
         url: ['calendar']
       },
       {
-        icon: 'openlayer',
+        icon: 'layers',
         title: 'Openlayer',
         subTitle: 'Openlayer',
         url: ['openlayer']
