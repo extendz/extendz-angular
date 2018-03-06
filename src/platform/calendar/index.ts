@@ -1,3 +1,1 @@
-//export * from './extendz-google-map.module';
-//export * from './models'
-
+export * from './basic/extendz-calendar.module';
