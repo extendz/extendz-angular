@@ -14,6 +14,16 @@
  *   limitations under the License.
  */
 
-.padding2{
-    padding-top: 2vh;
+.heightchenge {
+    max-height: 50vh;
+    padding: 10px;
+}
+
+.changeSize {
+    padding-top: 10px;
+    width: 100vw;
+}
+
+.advance-card {
+    min-height: 30vh
 }

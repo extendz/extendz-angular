@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { CalendarExampleService } from './calendar-example.service';
+import { Subscription } from 'rxjs/Subscription';
+import { Observable } from 'rxjs/Observable';
+import { CalendarEvent } from './models/calendarEvent';
 
 @Component({
   selector: 'app-calendar-example',
@@ -6,10 +10,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./calendar-example.component.css']
 })
 export class CalendarExampleComponent implements OnInit {
+  constructor(private service: CalendarExampleService) {}
 
-  constructor() { }
+  events$: Observable<CalendarEvent>;
 
   ngOnInit() {
+    this.events$ = this.service.getCalendarEvents();
   }
-
 }

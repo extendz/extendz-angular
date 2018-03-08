@@ -14,6 +14,46 @@
  *   limitations under the License.
  */
 
-.padding2{
+.date {
+    padding: 1vh;
+    color: black;
+    font-weight: 300;
+    cursor: pointer;
+}
+
+.dissabled {
+    color: #999;
+}
+
+.event {
+    color: mat-color(primary);
+}
+
+.dayOfWeek {
+    padding: 1vh;
+    font-weight: bolder;
+}
+
+.dayOfWeek p {
+    padding: 0;
+    margin: 0;
+    font-weight: bolder;
+}
+
+.row {
+    padding-left: 2vw;
+    min-height: 10vh;
+    height: auto;
     padding-top: 2vh;
+    border-bottom: 1px solid #eee;
+}
+
+.today {
+    background-color: #0277BD;
+    padding: 5px;
+    font-weight: 400;
+    width: 10px;
+    height: 10px;
+    border-radius: 500px;
+    color: white;
 }

@@ -1,0 +1,22 @@
+<div fxLayout=row fxLayout.xs="column" fxLayoutGap="1vw">
+
+  <!-- calendar.component.html -->
+  <div fxFlex="40">
+    <ext-calendar [startMonth]="startMonth" [startYear]="startYear" (select)="onSelect($event)"></ext-calendar>
+  </div>
+
+  <!-- date and month -->
+  <div fxFlex>
+    <mat-card class="advance-card">
+      <!-- <mat-card-header>
+        <mat-card-subtitle class="example-title">{{month}}</mat-card-subtitle>
+        <mat-card-title class="example-title2">{{day}}</mat-card-title>
+      </mat-card-header> -->
+
+      <mat-card-content>
+        <ng-content></ng-content>
+      </mat-card-content>
+
+    </mat-card>
+  </div>
+</div>

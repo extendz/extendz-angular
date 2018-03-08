@@ -1,7 +1,24 @@
 <mat-tab-group mat-stretch-tabs="yes">
   <mat-tab label="Demo">
-    <div class="tab-content">
+    <div class="tab-content padding2">
+      <!-- Basic -->
+      <h3 class="doc-header">Basic Calendar</h3>
       <ext-calendar></ext-calendar>
+      <hr>
+      <!--Advance -->
+      <h3 class="doc-header">Advance Calendar</h3>
+      <ext-calendar-advance>
+
+        <mat-list role="list">
+          <mat-list-item *ngFor="let event of events$ | async">
+            <mat-icon mat-list-icon [svgIcon]="event.icon"></mat-icon>
+            <h4 mat-line>{{event.title}}</h4>
+            <p mat-line> {{event.description}} </p>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+        </mat-list>
+
+      </ext-calendar-advance>
     </div>
 
   </mat-tab>

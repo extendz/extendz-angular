@@ -1,13 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatTabsModule, MatCardModule } from '@angular/material';
-
+import {
+  MatTabsModule,
+  MatCardModule,
+  MatListModule,
+  MatIconModule,
+  MatButtonModule
+} from '@angular/material';
 import { CovalentHighlightModule } from '@covalent/highlight';
 
 import { CalendarExampleComponent } from './calendar-example.component';
 import { CalendarExampleRoutingModule } from './calendar-example-routing.module';
-import { ExtendzCalendarModule } from '../../../../platform';
+import { CalendarExampleService } from './calendar-example.service';
+
+import { ExtendzCalendarModule, ExtendzCalendarAdvanceModule } from '../../../../platform';
 
 @NgModule({
   imports: [
@@ -17,10 +24,15 @@ import { ExtendzCalendarModule } from '../../../../platform';
     CovalentHighlightModule,
     // Extendz
     ExtendzCalendarModule,
+    ExtendzCalendarAdvanceModule,
     // Mat
     MatTabsModule,
-    MatCardModule
+    MatIconModule,
+    MatButtonModule,
+    MatCardModule,
+    MatListModule
   ],
-  declarations: [CalendarExampleComponent]
+  declarations: [CalendarExampleComponent],
+  providers: [CalendarExampleService]
 })
 export class CalendarExampleModule {}
