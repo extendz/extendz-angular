@@ -3,14 +3,12 @@
 } */
 
 mat-list a {
-    text-decoration: none
+  text-decoration: none;
 }
-
 
 /* mat-panel-title {
     color: white
 } */
-
 
 /* mat-expansion-panel {
     background-color: #3c3a37;
@@ -22,10 +20,11 @@ mat-icon {
 } */
 
 mat-panel-title mat-icon {
-    margin-right: 1vw;
-    color: #999;
+  margin-right: 1vw;
+  color: #999;
 }
 
 mat-sidenav-container {
-    background-color: white;
+  background-color: white;
 }
+
