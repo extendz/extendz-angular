@@ -84,6 +84,10 @@ export class ApiItemComponent implements OnInit, OnDestroy {
       );
   } // ngOnInit()
 
+  ngOnDestroy(): void {
+    if (this.all$) this.all$.unsubscribe();
+  } // ngOnDestroy()
+
   private handleParam(param: Params) {
     this.id = param.id;
     return this.apiTableService.getModel(param.name);
@@ -102,10 +106,6 @@ export class ApiItemComponent implements OnInit, OnDestroy {
 
     return this.service.getItem(this.modelMeta, this.id);
   } // handleMetaModel()
-
-  ngOnDestroy(): void {
-    this.all$.unsubscribe();
-  } // ngOnDestroy()
 
   save(): void {
     let saved: Subscription = this.service.save(this.itemFormGroup.value, this.modelMeta).subscribe(

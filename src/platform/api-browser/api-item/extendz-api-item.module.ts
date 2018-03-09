@@ -13,7 +13,6 @@ import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { ApiItemRoutingModule } from './api-item-routing.module';
 import { ApiItemComponent } from './api-item.component';
 import { ApiTableService } from '../api-table/api-table.service';
 import { ApiItemService } from './api-item.service';
@@ -24,7 +23,6 @@ import { ApiItemAddDialogComponent } from './dialog/api-item-add-dialog.componen
 @NgModule({
   imports: [
     CommonModule,
-    ApiItemRoutingModule,
     FlexLayoutModule,
     ReactiveFormsModule,
     MatMomentDateModule,
