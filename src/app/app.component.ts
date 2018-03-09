@@ -45,7 +45,7 @@ export class AppComponent {
 
     this.authenticationMenuItems = [
       {
-        icon: 'oauth2',
+        icon: 'security',
         title: 'Oauth2',
         subTitle: 'Login with oauth2',
         url: ['login', 'oauth2']
@@ -84,13 +84,13 @@ export class AppComponent {
 
     this.apiMenuItms = [
       {
-        icon: 'api',
+        icon: 'brightness_auto',
         title: 'Api Browser',
         subTitle: 'HATEOS API Browser',
         url: ['apis', 'root']
       },
       {
-        icon: 'api',
+        icon: 'brightness_auto',
         title: 'Api Select',
         subTitle: 'HATEOS API Selector',
         url: ['apis', 'selector']
@@ -111,7 +111,7 @@ export class AppComponent {
         url: ['calendar']
       },
       {
-        icon: 'openlayer',
+        icon: 'layers',
         title: 'Openlayer',
         subTitle: 'Openlayer',
         url: ['openlayer']

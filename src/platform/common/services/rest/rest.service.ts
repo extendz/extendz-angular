@@ -32,6 +32,20 @@ export class RestService {
     public dialog: MatDialog
   ) {}
 
+  /**
+   * Clear invalied url from server.
+   * Ex: http://localhost:8080/api/users{?page,size,sort}
+   *
+   * @param url invalid url
+   */
+  public clearUrl(url: string) {
+    let paraStart = url.indexOf('{?');
+    if (paraStart > 0) {
+      url = url.substring(0, paraStart);
+    }
+    return url;
+  } //  clearUrl()
+
   getId(url: string) {
     return url.substring(url.lastIndexOf('/') + 1);
   } // getId()
