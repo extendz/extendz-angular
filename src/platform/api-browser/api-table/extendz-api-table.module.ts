@@ -15,21 +15,18 @@ import {
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { ApiTableComponent } from './api-table.component';
-import { ApiTableRoutingModule } from './api-table-routing.module';
 import { ApiTableService } from './api-table.service';
 
-import { ExtendPipesModule, ExtendzRestModule } from '../../common';
+import { ExtendPipesModule } from '../../common';
 
 @NgModule({
   imports: [
     CommonModule,
-    ApiTableRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     FlexLayoutModule,
     // Extend
     ExtendPipesModule,
-    ExtendzRestModule,
     // Mat
     MatButtonModule,
     MatMenuModule,

@@ -141,19 +141,9 @@
     <mat-row *matRowDef="let row; columns: allColumns;"></mat-row>
   </mat-table>
   <!-- style="position: fixed;bottom: 0;left: 0;right: 0" -->
-  <mat-paginator class="mat-elevation-z1" [length]="tableResponse?.page?.totalPages" (page)="pageEvent($event)" [pageSize]="tableResponse?.page?.size"
+  <mat-paginator class="mat-elevation-z0" [length]="tableResponse?.page?.totalPages" (page)="pageEvent($event)" [pageSize]="tableResponse?.page?.size"
     [pageSizeOptions]="[10, 20, 50]">
   </mat-paginator>
 </ng-template>
 
 <!-- fab -->
-<div>
-  <button mat-fab class="bottom-right" [routerLink]="[0]">
-    <mat-icon>
-      <svg id="add" viewBox="0 0 24 24">
-        <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
-        <path d="M0 0h24v24H0z" fill="none" />
-      </svg>
-    </mat-icon>
-  </button>
-</div>

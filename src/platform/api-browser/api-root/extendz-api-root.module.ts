@@ -29,7 +29,7 @@ import { ApiRootService } from './api-root.service';
 import { ApiRootRoutingModule } from './api-root-routing.module';
 import { ApiRootComponent } from './api-root.component';
 
-import { ExtendPipesModule, ExtendzRestModule, RestService } from '../../common';
+import { ExtendPipesModule, RestService } from '../../common';
 
 @NgModule({
   imports: [
@@ -38,7 +38,6 @@ import { ExtendPipesModule, ExtendzRestModule, RestService } from '../../common'
     FlexLayoutModule,
     // Extentz
     ExtendPipesModule,
-    ExtendzRestModule,
     // Mat
     MatButtonModule,
     MatIconModule,

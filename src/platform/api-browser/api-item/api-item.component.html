@@ -19,8 +19,8 @@
   <div fxFlex>
     <div fxLayout="row" fxLayoutAlign="center center">
       <h3>
-        <span *ngIf="id==0" class="primary">New </span>{{modelMeta?.name |camelCase}}
-        <span *ngIf="id!=0">: {{id}}</span>
+        <span *ngIf="!item?._links?.self?.href" class="primary">New </span>{{modelMeta?.name |camelCase}}
+        <span *ngIf="item?._links?.self?.href">: {{id}}</span>
       </h3>
       <span fxFlex></span>
       <button *ngIf="id!=0" mat-icon-button (click)="delete()">
@@ -38,7 +38,11 @@
           <!-- String -->
           <mat-form-field fxFlex *ngIf="prop.type == 'string'">
             <input matInput [placeholder]="prop.name | camelCase" [formControlName]="prop.name">
-            <button matSuffix mat-icon-button *ngIf="prop.type == 'object'" (click)="openDialog()">
+          </mat-form-field>
+          <!-- Object -->
+          <mat-form-field fxFlex *ngIf="prop.type == 'object'">
+            <input matInput [placeholder]="prop.name | camelCase" [formControlName]="prop.name">
+            <button matSuffix mat-icon-button (click)="openDialog(prop)">
               <mat-icon>
                 <svg id="open_in_new" viewBox="0 0 24 24">
                   <path d="M0 0h24v24H0z" fill="none" />
@@ -48,6 +52,7 @@
               </mat-icon>
             </button>
           </mat-form-field>
+
           <!-- Date -->
           <mat-form-field fxFlex *ngIf="prop.type == 'date'">
             <input matInput [matDatepicker]="picker" [placeholder]="prop.name | camelCase" [formControlName]="prop.name">

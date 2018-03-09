@@ -14,29 +14,44 @@
  *    limitations under the License.
  */
 
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ObjectWithLinks } from '../api-table/models';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'ext-api-table-host',
   templateUrl: './api-table-host.component.html',
   styleUrls: ['./api-table-host.component.css']
 })
-export class ApiTableHostComponent implements OnInit {
+export class ApiTableHostComponent implements OnInit, OnDestroy {
+  /**
+   * Selected model name
+   */
   model: string;
+  /**
+   * Id for the selected item.0 for a new object
+   */
+  id: string;
+  /***
+   * All Subscriptions
+   */
+  all$: Subscription;
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router) {}
 
   ngOnInit() {
-    console.log(ApiTableHostComponent.name, 'consructor');
-    this.activatedRoute.params.subscribe(param => {    
+    this.all$ = this.activatedRoute.params.subscribe(param => {
       this.model = param.name;
+      this.id = param.id;
     });
   } // ngOnInit()
 
+  ngOnDestroy(): void {
+    if (this.all$) this.all$.unsubscribe();
+  }
+
   onSelect(item: ObjectWithLinks) {
-    console.log(ApiTableHostComponent.name, 'selected item', item);
     this.router.navigate([this.router.url, '0']);
   } //onSelect
 } // class

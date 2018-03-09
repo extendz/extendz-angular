@@ -29,7 +29,6 @@ export class ExtendzApiItemHostComponent implements OnInit, OnDestroy {
     this.all$ = this.activatedRoute.params.subscribe(param => {
       this.id = param.id;
       this.model = param.name;
-      console.log(param);
     });
   } // ngOnInit()
 

@@ -50,12 +50,15 @@ export class ApiTableComponent implements OnInit, OnDestroy {
   selector: string;
   @Input() selectorName: string;
   @Input() searchClicked: boolean;
-
+  /**
+   * Selected model name
+   */
   @Input() model: string;
 
   @Output() select: EventEmitter<ObjectWithLinks> = new EventEmitter<ObjectWithLinks>();
 
   tableResponse: TableResponse;
+
   selection = new SelectionModel<Object>(true, []);
 
   data: Object[];
@@ -68,14 +71,13 @@ export class ApiTableComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    console.log(ApiTableComponent.name,'init',this.model)
-    // this.all$ = this.service
-    //   .getModel(this.model)
-    //   .pipe(
-    //     mergeMap((meta: ModelMeta) => this.handleMetaModel(meta)),
-    //     map((tableResponse: TableResponse) => this.handdleDataResponse(tableResponse))
-    //   )
-    //   .subscribe(d => {});
+    this.all$ = this.service
+      .getModel(this.model)
+      .pipe(
+        mergeMap((meta: ModelMeta) => this.handleMetaModel(meta)),
+        map((tableResponse: TableResponse) => this.handdleDataResponse(tableResponse))
+      )
+      .subscribe(d => {});
   } // ngOnInit()
 
   private handleMetaModel(meta: ModelMeta) {

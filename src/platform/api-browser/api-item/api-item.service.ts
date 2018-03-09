@@ -10,7 +10,7 @@ import { RestService, ExtRestConfig } from '../../common';
 
 @Injectable()
 export class ApiItemService {
-  constructor(private rest: RestService, private conf: ExtRestConfig) {}
+  constructor(public rest: RestService, private conf: ExtRestConfig) {}
 
   getItem(meta: ModelMeta, id: number | string): Observable<ObjectWithLinks> {
     if (id == 0) {

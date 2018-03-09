@@ -1,1 +1,7 @@
-<h1>Simple Dialog</h1>
+<mat-dialog-content>
+    <ext-api-table [model]="property.name" (select)="onSelect($event)"></ext-api-table>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-button mat-dialog-close>No</button>
+    <button mat-button [mat-dialog-close]="true">Yes</button>
+</mat-dialog-actions>

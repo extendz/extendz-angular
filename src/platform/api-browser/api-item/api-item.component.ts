@@ -15,7 +15,6 @@
  */
 
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
 import { ObservableMedia } from '@angular/flex-layout';
 import { MatSnackBar, MatDialog } from '@angular/material';
 import { FormGroup, FormControl } from '@angular/forms';
@@ -30,6 +29,7 @@ import { ApiTableService } from '../api-table/api-table.service';
 import { ApiItemAddDialogComponent } from './dialog/api-item-add-dialog.component';
 
 import { ModelMeta, ObjectWithLinks, Property } from '../api-table/models';
+import { Params } from '@angular/router';
 
 @Component({
   selector: 'ext-api-item',
@@ -55,7 +55,6 @@ export class ApiItemComponent implements OnInit, OnDestroy {
 
   constructor(
     public media: ObservableMedia,
-    private activatedRoute: ActivatedRoute,
     private apiTableService: ApiTableService,
     public dialog: MatDialog,
     private snackBar: MatSnackBar,
@@ -67,14 +66,8 @@ export class ApiItemComponent implements OnInit, OnDestroy {
       .getModel(this.model)
       .pipe(mergeMap((meta: ModelMeta) => this.handleMetaModel(meta)))
       .subscribe(
-        (response: ObjectWithLinks) => {
-          this.item = response;
-          this.modelMeta.properties.forEach((prop: Property) => {
-            this.itemFormGroup.controls[prop.name].patchValue(response[prop.name]);
-          });
-          if (response._links) {
-            this.itemFormGroup.controls['_links'].patchValue(response._links);
-          }
+        (res: ObjectWithLinks) => {
+          this.handleResponse(res);
         },
         err => {
           this.snackBar.open(err.message, '', {
@@ -87,6 +80,27 @@ export class ApiItemComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     if (this.all$) this.all$.unsubscribe();
   } // ngOnDestroy()
+
+  save(): void {
+    this.all$ = this.service.save(this.itemFormGroup.value, this.modelMeta).subscribe(
+      (res: ObjectWithLinks) => {
+        this.handleResponse(res);
+        this.id = this.service.rest.getId(res._links.self.href);
+        this.snackBar.open('Saved', '', { duration: 1000 });
+      },
+      error => this.handleErrors(error)
+    );
+  } // save()
+
+  private handleResponse(response: ObjectWithLinks) {
+    this.item = response;
+    this.modelMeta.properties.forEach((prop: Property) => {
+      this.itemFormGroup.controls[prop.name].patchValue(response[prop.name]);
+    });
+    if (response._links) {
+      this.itemFormGroup.controls['_links'].patchValue(response._links);
+    }
+  } // handleResponse()
 
   private handleParam(param: Params) {
     this.id = param.id;
@@ -107,18 +121,7 @@ export class ApiItemComponent implements OnInit, OnDestroy {
     return this.service.getItem(this.modelMeta, this.id);
   } // handleMetaModel()
 
-  save(): void {
-    let saved: Subscription = this.service.save(this.itemFormGroup.value, this.modelMeta).subscribe(
-      saved => {
-        this.snackBar.open('Saved', '', { duration: 1000 });
-      },
-      error => this.handleErrors(error)
-    );
-    this.all$.add(saved);
-  } // save()
-
   delete(): void {
-    console.log(this.item._links.self);
     this.service.delete(this.item);
   } // delete
 
@@ -138,9 +141,10 @@ export class ApiItemComponent implements OnInit, OnDestroy {
     });
   } // handleErrors()
 
-  openDialog(): void {
+  openDialog(property: Property): void {
     let dialogRef = this.dialog.open(ApiItemAddDialogComponent, {
-      width: '250px'
+      width: '99%',
+      data: property
     });
 
     dialogRef.afterClosed().subscribe(result => {
