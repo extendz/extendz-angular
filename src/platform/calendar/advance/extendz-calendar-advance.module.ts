@@ -7,7 +7,7 @@ import { ExtendzCalendarAdvanceComponent } from './extendz-calendar-advance.comp
 import { ExtendzCalendarModule } from '../basic/extendz-calendar.module';
 
 @NgModule({
-  imports: [CommonModule, FlexLayoutModule, ExtendzCalendarModule, MatCardModule],
+  imports: [CommonModule, FlexLayoutModule, ExtendzCalendarModule],
   declarations: [ExtendzCalendarAdvanceComponent],
   exports: [ExtendzCalendarAdvanceComponent]
 })

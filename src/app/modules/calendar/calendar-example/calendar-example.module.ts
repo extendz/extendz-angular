@@ -14,7 +14,7 @@ import { CalendarExampleComponent } from './calendar-example.component';
 import { CalendarExampleRoutingModule } from './calendar-example-routing.module';
 import { CalendarExampleService } from './calendar-example.service';
 
-import { ExtendzCalendarModule, ExtendzCalendarAdvanceModule } from '../../../../platform';
+import { ExtendzCalendarModule } from '../../../../platform';
 
 @NgModule({
   imports: [
@@ -24,7 +24,6 @@ import { ExtendzCalendarModule, ExtendzCalendarAdvanceModule } from '../../../..
     CovalentHighlightModule,
     // Extendz
     ExtendzCalendarModule,
-    ExtendzCalendarAdvanceModule,
     // Mat
     MatTabsModule,
     MatIconModule,

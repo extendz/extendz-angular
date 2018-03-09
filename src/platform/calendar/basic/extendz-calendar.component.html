@@ -1,19 +1,23 @@
-<div fxLayout="column">
+<div fxLayout="column" style="border: 1px solid #999">
   <mat-toolbar color="primary">
-    <button mat-icon-button (click)="previous()">
+    <button  mat-icon-button (click)="previous()">
       <mat-icon>
-        <svg viewBox="0 0 24 24">
+        <svg id="previous" viewBox="0 0 24 24">
           <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
           <path d="M0 0h24v24H0z" fill="none" />
         </svg>
       </mat-icon>
     </button>
+    
     <span fxFlex></span>
+    
     <span>{{calendar.start | date:titleFormat:timezone}}</span>
+    
     <span fxFlex></span>
+
     <button mat-icon-button (click)="next()">
       <mat-icon>
-        <svg viewBox="0 0 24 24">
+        <svg id="next" viewBox="0 0 24 24">
           <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
           <path d="M0 0h24v24H0z" fill="none" />
         </svg>
@@ -22,26 +26,6 @@
   </mat-toolbar>
 
   <div fxLayout="column" fxFlex="100%" style="height:30vh">
-
-    <!-- Agenda View -->
-    <div *ngIf="media.isActive('xs')">
-
-      <!-- <mat-datepicker></mat-datepicker> -->
-
-      <!-- <div *ngFor="let week of calendar.weeks" fxLayout="column">
-
-        <div [ngClass]="{ 'today' : isToday(day), 'dissabled': !sameMonth(day),'row' : true }" *ngFor="let day of week" (click)="onDayClick(day)">
-          <div fxLayout="column" fxLayoutGap="0.5vh">
-            <span>{{ day | date:dayFormat }}</span>
-            <span *ngFor="let event of [1,2,3,4,5]">
-              Events
-            </span>
-          </div>
-        </div>
-
-      </div> -->
-    </div>
-
     <!-- Calendar View -->
     <div fxLayout="column" fxFlex>
       <div fxLayout="row">
@@ -54,7 +38,7 @@
         <div class="date" [ngClass]="{'dissabled': !sameMonth(day) }" *ngFor="let day of week" (click)="onDayClick(day)" fxLayout="column"
           fxFlex>
           <div fxLayout="column" fxLayoutGap="0.5vh">
-            <span style="text-align:center" >
+            <span style="text-align:center">
               <span [ngClass]="{ 'today' : isToday(day)}"> {{ day | date:dayFormat }}</span>
             </span>
           </div>
