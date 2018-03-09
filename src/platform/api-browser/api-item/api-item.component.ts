@@ -26,7 +26,7 @@ import { mergeMap } from 'rxjs/operators/mergeMap';
 import { ApiItemService } from './api-item.service';
 import { ApiTableService } from '../api-table/api-table.service';
 
-import { ModelMeta, ObjectWithLinks, Property } from '../api-table/models';
+import { ModelMeta, ObjectWithLinks, Property, Href } from '../api-table/models';
 
 @Component({
   selector: 'ext-api-item',
@@ -92,8 +92,14 @@ export class ApiItemComponent implements OnInit, OnDestroy {
   private handleResponse(response: ObjectWithLinks) {
     this.item = response;
     this.modelMeta.properties.forEach((prop: Property) => {
-      this.itemFormGroup.controls[prop.name].patchValue(response[prop.name]);
+      let val: any = response._links[prop.name];
+      if (val) {
+        let href = val.href;
+        this.itemFormGroup.controls[prop.name].patchValue(href);
+      } else this.itemFormGroup.controls[prop.name].patchValue(response[prop.name]);
     });
+
+    // Manualy inject the _links.
     if (response._links) {
       this.itemFormGroup.controls['_links'].patchValue(response._links);
     }
