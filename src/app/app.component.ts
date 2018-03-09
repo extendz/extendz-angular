@@ -120,13 +120,13 @@ export class AppComponent {
 
     this.chartItems = [
       {
-        icon: 'map',
+        icon: 'highchart',
         title: 'Highchart',
         subTitle: 'Highcgart Component',
         url: ['chart']
       },
       {
-        icon: 'date_range',
+        icon: 'heatmap',
         title: 'Heat Map',
         subTitle: 'Heat Map component',
         url: ['heat-map']
