@@ -18,8 +18,8 @@ import { ApiTableService } from '../api-table/api-table.service';
 import { ApiItemService } from './api-item.service';
 
 import { ExtendPipesModule } from '../../common/pipes/extend-pipes.module';
-import { ApiItemAddDialogComponent } from './dialog/api-item-add-dialog.component';
-import { ExtendzApiTableModule } from '../api-table/extendz-api-table.module';
+import { ExtendzApiSelectModule } from '../extendz-api-select/extendz-api-select.module';
+
 
 @NgModule({
   imports: [
@@ -29,7 +29,7 @@ import { ExtendzApiTableModule } from '../api-table/extendz-api-table.module';
     MatMomentDateModule,
     //Exentedz
     ExtendPipesModule,
-    ExtendzApiTableModule,
+    ExtendzApiSelectModule,
     //Mat
     MatInputModule,
     MatDialogModule,
@@ -39,8 +39,7 @@ import { ExtendzApiTableModule } from '../api-table/extendz-api-table.module';
     MatSnackBarModule,
     MatDatepickerModule
   ],
-  declarations: [ApiItemComponent, ApiItemAddDialogComponent],
-  entryComponents: [ApiItemAddDialogComponent],
+  declarations: [ApiItemComponent],
   exports: [ApiItemComponent],
   providers: [ApiTableService, ApiItemService]
 })

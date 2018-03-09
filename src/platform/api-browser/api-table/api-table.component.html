@@ -3,7 +3,7 @@
   <!-- <button mat-icon-button (click)="addNew()">
    
   </button> -->
-  <h3>{{model | camelCase}}</h3>
+  <h3>{{model | camelCase}} ({{selection.selected.length}})</h3>
   <span fxFlex></span>
   <mat-form-field>
     <!-- (keyup)="applyFilter($event.target.value)"  -->
@@ -98,7 +98,7 @@
         </mat-checkbox>
       </mat-header-cell>
       <mat-cell *matCellDef="let row">
-        <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)">
+        <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null;selectionChange(row)" [checked]="selection.isSelected(row)">
         </mat-checkbox>
       </mat-cell>
     </ng-container>

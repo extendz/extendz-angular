@@ -45,23 +45,33 @@ export class ApiTableComponent implements OnInit, OnDestroy {
   columns: string[];
   allColumns: string[];
   modelMeta: ModelMeta;
+  tableResponse: TableResponse;
+  data: Object[];
 
   url: string;
   selector: string;
   @Input() selectorName: string;
+
   @Input() searchClicked: boolean;
   /**
    * Selected model name
    */
   @Input() model: string;
-
+  /**
+   * Table to have multiple selection
+   */
+  @Input() multSelect: boolean = true;
+  /**
+   * Fire on selecting and item
+   */
   @Output() select: EventEmitter<ObjectWithLinks> = new EventEmitter<ObjectWithLinks>();
 
-  tableResponse: TableResponse;
-
-  selection = new SelectionModel<Object>(true, []);
-
-  data: Object[];
+  @Input() selected: ObjectWithLinks[];
+  @Output() selectedChange: EventEmitter<ObjectWithLinks[]> = new EventEmitter<ObjectWithLinks[]>();
+  /**
+   * Selection model
+   */
+  selection: SelectionModel<ObjectWithLinks>;
 
   constructor(
     public media: ObservableMedia,
@@ -71,6 +81,7 @@ export class ApiTableComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
+    this.selection = new SelectionModel<ObjectWithLinks>(this.multSelect, []);
     this.all$ = this.service
       .getModel(this.model)
       .pipe(
@@ -127,11 +138,16 @@ export class ApiTableComponent implements OnInit, OnDestroy {
     return numSelected === numRows;
   }
 
+  selectionChange(event) {
+    this.selected = this.selection.selected;
+    this.selectedChange.emit(this.selected);
+  }
+
   /** Selects all rows if they are not all selected; otherwise clear selection. */
   masterToggle() {
     this.isAllSelected()
       ? this.selection.clear()
-      : this.data.forEach(row => this.selection.select(row));
+      : this.data.forEach((row: ObjectWithLinks) => this.selection.select(row));
   }
   ngOnDestroy(): void {
     if (this.all$) this.all$.unsubscribe();

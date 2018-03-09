@@ -35,13 +35,19 @@
     <mat-card [ngClass]="{'mat-elevation-z0' : media.isActive('xs')}">
       <form [formGroup]="itemFormGroup" fxLayout="column">
         <div *ngFor="let prop of modelMeta?.properties">
+
           <!-- String -->
           <mat-form-field fxFlex *ngIf="prop.type == 'string'">
             <input matInput [placeholder]="prop.name | camelCase" [formControlName]="prop.name">
           </mat-form-field>
+
           <!-- Object -->
-          <mat-form-field fxFlex *ngIf="prop.type == 'object'">
-            <input matInput [placeholder]="prop.name | camelCase" [formControlName]="prop.name">
+          <div fxFlex *ngIf="prop.type == 'object'">
+            <ext-api-select [property]="prop" [formControlName]="prop.name"></ext-api-select>
+          </div>
+
+          <!-- <mat-form-field fxFlex *ngIf="prop.type == 'object'">
+            <input matInput [placeholder]="prop.name | camelCase" [formControlName]="prop.name" [value]="prop.name" >
             <button matSuffix mat-icon-button (click)="openDialog(prop)">
               <mat-icon>
                 <svg id="open_in_new" viewBox="0 0 24 24">
@@ -51,7 +57,7 @@
                 </svg>
               </mat-icon>
             </button>
-          </mat-form-field>
+          </mat-form-field> -->
 
           <!-- Date -->
           <mat-form-field fxFlex *ngIf="prop.type == 'date'">

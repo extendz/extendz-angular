@@ -13,6 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-export * from './camelCase.pipe';
-export * from './showTitle.pipe';
-export * from './extend-pipes.module';
+import { Pipe, PipeTransform } from '@angular/core';
+
+/**
+ * Show the title from the object
+ * @author Randika Hapugoda
+ */
+@Pipe({ name: 'showTitle', pure: false })
+export class ShowTitlePipe implements PipeTransform {
+  transform(input: string, length: number): string {
+    console.log('change the name', input);
+    return 'name';
+  } // transform
+} // class

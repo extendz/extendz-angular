@@ -16,7 +16,7 @@
 
 import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { ObservableMedia } from '@angular/flex-layout';
-import { MatSnackBar, MatDialog } from '@angular/material';
+import { MatSnackBar } from '@angular/material';
 import { FormGroup, FormControl } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 
@@ -26,10 +26,7 @@ import { mergeMap } from 'rxjs/operators/mergeMap';
 import { ApiItemService } from './api-item.service';
 import { ApiTableService } from '../api-table/api-table.service';
 
-import { ApiItemAddDialogComponent } from './dialog/api-item-add-dialog.component';
-
 import { ModelMeta, ObjectWithLinks, Property } from '../api-table/models';
-import { Params } from '@angular/router';
 
 @Component({
   selector: 'ext-api-item',
@@ -37,6 +34,7 @@ import { Params } from '@angular/router';
   styleUrls: ['./api-item.component.css']
 })
 export class ApiItemComponent implements OnInit, OnDestroy {
+  static ApiItemAddDialogComponent: any;
   all$: Subscription;
   modelMeta: ModelMeta;
   item: ObjectWithLinks;
@@ -56,7 +54,6 @@ export class ApiItemComponent implements OnInit, OnDestroy {
   constructor(
     public media: ObservableMedia,
     private apiTableService: ApiTableService,
-    public dialog: MatDialog,
     private snackBar: MatSnackBar,
     private service: ApiItemService
   ) {} // constructor()
@@ -102,11 +99,6 @@ export class ApiItemComponent implements OnInit, OnDestroy {
     }
   } // handleResponse()
 
-  private handleParam(param: Params) {
-    this.id = param.id;
-    return this.apiTableService.getModel(param.name);
-  } // handleParam()
-
   private handleMetaModel(meta: ModelMeta) {
     this.modelMeta = meta;
     this.modelMeta.properties.forEach(prop => {
@@ -140,15 +132,4 @@ export class ApiItemComponent implements OnInit, OnDestroy {
       duration: 3000
     });
   } // handleErrors()
-
-  openDialog(property: Property): void {
-    let dialogRef = this.dialog.open(ApiItemAddDialogComponent, {
-      width: '99%',
-      data: property
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
-  }
 } // class
