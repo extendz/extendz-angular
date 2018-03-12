@@ -1,5 +1,5 @@
 /**
- *    Copyright 2018 the original author or authors
+ *    Copyright 2018 user
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -16,9 +16,18 @@
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ApiExampleRoutingModule } from './api-example-routing.module';
+import { MatDialogModule, MatButtonModule } from '@angular/material';
+import { ExtendzApiTableModule } from '../../api-table/extendz-api-table.module';
 
 @NgModule({
-  imports: [CommonModule, ApiExampleRoutingModule]
+  imports: [
+    CommonModule,
+    //extendz
+    ExtendzApiTableModule,
+    //material
+    MatDialogModule,
+    MatButtonModule
+  ],
+  declarations: []
 })
-export class ApiExampleModule {}
+export class DialogModule {}

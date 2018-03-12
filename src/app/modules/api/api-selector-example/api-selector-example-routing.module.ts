@@ -16,9 +16,13 @@
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ApiExampleRoutingModule } from './api-example-routing.module';
+import { ApiSelectorExampleComponent } from './api-selector-example.component';
+import { Routes, RouterModule } from '@angular/router';
+
+const routes: Routes = [{ path: '', component: ApiSelectorExampleComponent }];
 
 @NgModule({
-  imports: [CommonModule, ApiExampleRoutingModule]
+  imports: [RouterModule.forChild(routes)],
+  exports: [RouterModule]
 })
-export class ApiExampleModule {}
+export class ApiSelectorExampleRoutingModule {}

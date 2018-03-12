@@ -16,51 +16,40 @@
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ApiSelectorExampleRoutingModule } from './api-selector-example-routing.module';
+import { ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
+import { ExtendzApiModule } from '../../../../platform';
+import { ExtendzApiTableHostModule } from '../../../../platform/api-browser/api-table-host/extendz-api-table-host.module';
 import {
-  MatTableModule,
-  MatCardModule,
-  MatIconModule,
-  MatButtonModule,
-  MatCheckboxModule,
-  MatPaginatorModule,
   MatInputModule,
-  MatSelectModule,
-  MatMenuModule
+  MatCardModule,
+  MatButtonModule,
+  MatIconModule,
+  MatTabsModule
 } from '@angular/material';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
-import { ApiTableComponent } from './api-table.component';
-import { ApiTableRoutingModule } from './api-table-routing.module';
-import { ApiTableService } from './api-table.service';
-import { ApiSearchService } from '../services/api-search.service';
-
-import { ExtendPipesModule, ExtendzRestModule } from '../../common';
+import { ApiSelectorExampleComponent } from './api-selector-example.component';
+import { ExtendzApiSelectorModule } from '../../../../platform/api-browser/api-selector/extendz-api-selector.module';
 
 @NgModule({
   imports: [
     CommonModule,
-    ApiTableRoutingModule,
-    FormsModule,
+    ApiSelectorExampleRoutingModule,
     ReactiveFormsModule,
     FlexLayoutModule,
     // Extend
-    ExtendPipesModule,
-    ExtendzRestModule,
+    ExtendzApiSelectorModule,
+    ExtendzApiTableHostModule,
+    ExtendzApiModule.forRoot({
+      svgIconSet: '/assets/svg/api-icons.svg'
+    }),
     // Mat
-    MatButtonModule,
-    MatMenuModule,
-    MatCheckboxModule,
-    MatTableModule,
-    MatCardModule,
-    MatIconModule,
-    MatTableModule,
-    MatPaginatorModule,
     MatInputModule,
-    MatSelectModule
+    MatCardModule,
+    MatButtonModule,
+    MatIconModule,
+    MatTabsModule
   ],
-  declarations: [ApiTableComponent],
-  exports: [ApiTableComponent],
-  providers: [ApiTableService, ApiSearchService]
+  declarations: [ApiSelectorExampleComponent]
 })
-export class ExtendzApiTableModule {}
+export class ApiSelectorExampleModule {}

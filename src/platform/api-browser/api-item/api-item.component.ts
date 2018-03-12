@@ -25,11 +25,10 @@ import { Subscription } from 'rxjs/Subscription';
 import { mergeMap } from 'rxjs/operators/mergeMap';
 
 import { ApiItemService } from './api-item.service';
-import { ApiTableService } from '../api-table/api-table.service';
-
 import { ApiItemAddDialogComponent } from './dialog/api-item-add-dialog.component';
 
 import { ModelMeta, ObjectWithLinks, Property } from '../api-table/models';
+import { ApiSearchService } from '../services/api-search.service';
 
 @Component({
   selector: 'app-api-item',
@@ -46,7 +45,7 @@ export class ApiItemComponent implements OnInit, OnDestroy {
   constructor(
     private media: ObservableMedia,
     private activatedRoute: ActivatedRoute,
-    private apiTableService: ApiTableService,
+    private apiSearchService: ApiSearchService,
     public dialog: MatDialog,
     private snackBar: MatSnackBar,
     private service: ApiItemService
@@ -123,7 +122,7 @@ export class ApiItemComponent implements OnInit, OnDestroy {
 
   private handleParam(param: Params) {
     this.id = param.id;
-    return this.apiTableService.getModel(param.name);
+    return this.apiSearchService.getModel(param.name);
   } // handleParam()
 
   private handleMetaModel(meta: ModelMeta) {

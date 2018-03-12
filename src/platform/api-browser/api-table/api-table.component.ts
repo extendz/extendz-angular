@@ -17,7 +17,7 @@
 import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { SelectionModel } from '@angular/cdk/collections';
-import { PageEvent } from '@angular/material';
+import { PageEvent, MatCheckboxChange } from '@angular/material';
 import { ObservableMedia } from '@angular/flex-layout';
 
 import { ApiTableService } from './api-table.service';
@@ -35,6 +35,7 @@ import { PageAndSort } from './models';
 
 import { TableDataSource } from './dataSource/tableDataSource';
 import { ObjectWithLinks } from './models/modelData/objectWithLinks';
+import { ApiSearchService } from '../services/api-search.service';
 
 @Component({
   selector: 'app-api-table',
@@ -47,6 +48,10 @@ export class ApiTableComponent implements OnInit, OnDestroy {
   columns: string[];
   allColumns: string[];
   modelMeta: ModelMeta;
+
+  searchText: string;
+
+  @Input() textValue: string = '';
 
   url: string;
   selector: string;
@@ -62,27 +67,45 @@ export class ApiTableComponent implements OnInit, OnDestroy {
 
   data: Object[];
 
+  selectedProperty: string;
+
+  //checkbox select
+  check: MatCheckboxChange;
+
   constructor(
     public media: ObservableMedia,
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private service: ApiTableService
+    private service: ApiTableService,
+    private searchService: ApiSearchService
   ) {}
 
   ngOnInit() {
-    this.all$ = this.service
+    this.searchText = this.textValue;
+    this.all$ = this.searchService
       .getModel(this.model)
       .pipe(
         mergeMap((meta: ModelMeta) => this.handleMetaModel(meta)),
         map((tableResponse: TableResponse) => this.handdleDataResponse(tableResponse))
       )
-      .subscribe(d => {});
+      .subscribe(d => {
+        if (this.selectorName != null) {
+          this.search(this.selectorName);
+        } else {
+          this.search(this.selectedProperty);
+        }
+      });
   } // ngOnInit()
 
   private handleMetaModel(meta: ModelMeta) {
     this.modelMeta = meta;
     this.columns = meta.properties.map(p => p.name);
-    this.allColumns = ['select', ...this.columns, 'edit'];
+    if (this.searchClicked == true) {
+      this.allColumns = ['select', ...this.columns];
+    } else {
+      this.allColumns = ['select', ...this.columns, 'edit'];
+    }
+    this.selectedProperty = this.allColumns[1];
     return this.service.getTableData(meta);
   } // handleMetaModel()
 
@@ -133,16 +156,34 @@ export class ApiTableComponent implements OnInit, OnDestroy {
     if (this.all$) this.all$.unsubscribe();
   } // ngOnDestroy()
 
-  // applyFilter(filterValue: string) {
-  //   filterValue = filterValue.trim(); // Remove whitespace
-  //   console.log('filter value:', filterValue);
-  //   this.selectorService
-  //     .search(this.selector, filterValue, this.selectorName)
-  //     .pipe(debounceTime(1000))
-  //     .subscribe((json: any) => {
-  //       this.data = json;
-  //       console.log('data2', json);
-  //       this.tableDataSource = new TableDataSource(of(this.data));
-  //     });
-  // }
+  /** search text value asign */
+  applyFilter(filterValue: string) {
+    this.searchText = filterValue;
+    if (this.selectorName != null) {
+      this.search(this.selectorName);
+    } else {
+      this.search(this.selectedProperty);
+    }
+  }
+
+  /**If clicked which property wants to search then set value in data table*/
+  search(propName: string) {
+    this.selectedProperty = propName;
+    this.searchService.search(this.selector, this.searchText, propName).subscribe((json: any) => {
+      this.data = json;
+      this.tableDataSource = new TableDataSource(of(this.data));
+    });
+  }
+
+  //select checkbox on click event
+  checkClicked(event: MatCheckboxChange, item: ObjectWithLinks) {
+    this.check = event;
+    if (this.check && this.check.checked) {
+      this.selection.select(item);
+      console.log('cheked true', this.selection.selected);
+    } else {
+      this.selection.deselect(item);
+      console.log('checked false', this.selection.selected);
+    }
+  }
 }

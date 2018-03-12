@@ -1,3 +1,19 @@
+<!--
+    Copyright 2018 the original author or authors
+ 
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+ 
+        http://www.apache.org/licenses/LICENSE-2.0
+ 
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+
 <!-- Search bar -->
 <div fxLayout="row" fxLayoutGap="2vw" fxLayoutAlign="center center" style="padding: 1vw">
   <button mat-icon-button (click)="addNew()">
@@ -11,8 +27,13 @@
   <h3>{{model | camelCase}}</h3>
   <span fxFlex></span>
   <mat-form-field>
-      <!-- (keyup)="applyFilter($event.target.value)" -->
-    <input matInput autofocus  placeholder="Search">
+    <!-- (keyup)="applyFilter($event.target.value)" -->
+    <input matInput autofocus placeholder="Search" (keyup)="applyFilter($event.target.value)" [value]="textValue">
+    <mat-hint matSuffix>
+      <strong>
+        <span> ( {{selectedProperty}} )</span>
+      </strong>
+    </mat-hint>
     <button mat-icon-button [matMenuTriggerFor]="appMenu" matSuffix>
       <mat-icon>
         <svg id="more_vert" viewBox="0 0 24 24">
@@ -24,10 +45,13 @@
     </button>
   </mat-form-field>
   <mat-menu #appMenu="matMenu">
-    <button mat-menu-item *ngFor="let prop of modelMeta?.properties">{{prop.name | camelCase}}</button>
+    <button mat-menu-item *ngFor="let prop of modelMeta?.properties" (click)="search(prop.name)">{{prop.name | camelCase}}</button>
   </mat-menu>
 </div>
+<div>
 
+  <h4>Selected : {{selection.selected.length}}</h4>
+</div>
 <div *ngIf="media.isActive('xs');else desktop">
   <!-- Mobile -->
   <div style="background-color: #eee;">
@@ -103,8 +127,8 @@
         </mat-checkbox>
       </mat-header-cell>
       <mat-cell *matCellDef="let row">
-        <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)">
-        </mat-checkbox>
+        <mat-checkbox (click)="$event.stopPropagation()" (change)="checkClicked($event,row) && $event ? selection.toggle(row) : null"
+          [checked]="selection.isSelected(row)" [value]="row"> </mat-checkbox>
       </mat-cell>
     </ng-container>
 
