@@ -574,8 +574,7 @@ export class ExtendzOpenlayerService {
   subcribeToCurrentDrawEvent<E>(eventName: string): Observable<E> {
     return Observable.create((observer: Observer<E>) => {
       this.currentDraw.on(eventName, (arg: E) => {
-        // this.zone.run(() => observer.next(arg));
-        return true;
+        this.zone.run(() => observer.next(arg));
       });
     });
   } // End subcribeToPolygonEvent ()
@@ -602,8 +601,7 @@ export class ExtendzOpenlayerService {
   subcribeToSelectEvent<E>(eventName: string): Observable<E> {
     return Observable.create((observer: Observer<E>) => {
       this.selectionInteraction.on(eventName, (arg: E) =>{
-        // this.zone.run(() => observer.next(arg));
-        return true;
+        this.zone.run(() => observer.next(arg));
       } )
       
     });
