@@ -29,7 +29,7 @@ import { ApiRootService } from './api-root.service';
 import { ApiRootRoutingModule } from './api-root-routing.module';
 import { ApiRootComponent } from './api-root.component';
 
-import { ExtendPipesModule } from '../../common';
+import { ExtendPipesModule, ExtendzRestModule, RestService } from '../../common';
 
 @NgModule({
   imports: [
@@ -37,6 +37,7 @@ import { ExtendPipesModule } from '../../common';
     ApiRootRoutingModule,
     FlexLayoutModule,
     ExtendPipesModule,
+    ExtendzRestModule,
     // Mat
     MatButtonModule,
     MatIconModule,
@@ -45,6 +46,6 @@ import { ExtendPipesModule } from '../../common';
   ],
   declarations: [ApiRootComponent],
   exports: [ApiRootComponent],
-  providers: [ApiRootService]
+  providers: [ApiRootService, RestService]
 })
 export class ExtendzApiRootModule {}

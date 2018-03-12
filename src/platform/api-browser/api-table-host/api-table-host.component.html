@@ -1,5 +1,5 @@
-<app-api-table [model]="model"></app-api-table>
-<div>
+<app-api-table [model]="model" (select)="onSelect($event)"></app-api-table>
+<!-- <div>
     <button mat-fab class="bottom-right" [routerLink]="[0]">
         <mat-icon>
             <svg id="add" viewBox="0 0 24 24">
@@ -8,4 +8,4 @@
             </svg>
         </mat-icon>
     </button>
-</div>
+</div> -->
