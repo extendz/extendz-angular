@@ -14,8 +14,8 @@
     limitations under the License.
 -->
 <div *ngIf="models$ | async as models else loading" fxLayout="row" fxLayout.xs="column" fxLayoutGap.xs="2vw" fxLayoutGap.md="1%"
-    fxLayoutGap="1vw" fxLayoutWrap>
-    <div fxFlex="50vw" fxFlex.md="49%" fxFlex.xs="100" fxFlex.sm="80" *ngFor="let item of models ">
+    fxLayoutGap="1vw" fxLayoutGap.lg="1vw" fxLayoutWrap>
+    <div fxFlex="50vw" fxFlex.lg="25vw" fxFlex.md="49%" fxFlex.xs="100" fxFlex.sm="80" *ngFor="let item of models ">
         <mat-card style="margin: 1%">
             <mat-card-header>
                 <mat-icon mat-card-avatar svgIcon="api-root:{{item.name.toLowerCase()}}" class="primary size-32"></mat-icon>

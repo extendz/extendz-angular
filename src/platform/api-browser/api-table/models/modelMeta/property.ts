@@ -1,10 +1,13 @@
 export enum RelationTypes {
-  OneToOne = 'onetoone'
+  SINGLE = 'SINGLE',
+  MUTIPLE = 'MUTIPLE',
+  ENUM = 'ENUM'
 }
 
 export interface Property {
   name?: string;
   type?: string;
   required?: boolean;
-  relation?: RelationTypes;
+  relationShipType?: RelationTypes;
+  reference?: string;
 }

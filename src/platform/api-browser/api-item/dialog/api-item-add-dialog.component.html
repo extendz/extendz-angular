@@ -1,8 +1,7 @@
 <mat-dialog-content>
-
-    <ext-api-table [model]="property.name" [multSelect]="multSelect" [(selected)]="selected"></ext-api-table>
-
+    <ext-api-table [model]="data.property.reference" [multiSelect]="multiSelect" [(selected)]="selected"></ext-api-table>
 </mat-dialog-content>
+
 <mat-dialog-actions>
     <button mat-button mat-dialog-close>Cancel</button>
     <span fxFlex></span>

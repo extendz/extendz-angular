@@ -18,6 +18,7 @@ import { ApiTableComponent } from './api-table.component';
 import { ApiTableService } from './api-table.service';
 
 import { ExtendPipesModule } from '../../common';
+import { ExtendzApiItemModule } from '../api-item/extendz-api-item.module';
 
 @NgModule({
   imports: [

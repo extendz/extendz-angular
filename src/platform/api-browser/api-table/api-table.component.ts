@@ -60,18 +60,20 @@ export class ApiTableComponent implements OnInit, OnDestroy {
   /**
    * Table to have multiple selection
    */
-  @Input() multSelect: boolean = true;
+  @Input() multiSelect: boolean = true;
   /**
-   * Fire on selecting and item
+   * Fire on selecting and item or empty one to indicate a emty item
    */
   @Output() select: EventEmitter<ObjectWithLinks> = new EventEmitter<ObjectWithLinks>();
-
-  @Input() selected: ObjectWithLinks[];
-  @Output() selectedChange: EventEmitter<ObjectWithLinks[]> = new EventEmitter<ObjectWithLinks[]>();
+  /**
+   * Selected Items
+   */
+  @Input() selected: string[];
+  @Output() selectedChange: EventEmitter<string[]> = new EventEmitter<string[]>();
   /**
    * Selection model
    */
-  selection: SelectionModel<ObjectWithLinks>;
+  selection: SelectionModel<string>;
 
   constructor(
     public media: ObservableMedia,
@@ -81,14 +83,17 @@ export class ApiTableComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.selection = new SelectionModel<ObjectWithLinks>(this.multSelect, []);
+    this.selection = new SelectionModel<string>(this.multiSelect, []);
     this.all$ = this.service
       .getModel(this.model)
       .pipe(
         mergeMap((meta: ModelMeta) => this.handleMetaModel(meta)),
         map((tableResponse: TableResponse) => this.handdleDataResponse(tableResponse))
       )
-      .subscribe(d => {});
+      .subscribe(d => {
+        // Select the values from input
+        if (this.selected) this.selected.forEach((row: string) => this.selection.select(row));
+      });
   } // ngOnInit()
 
   private handleMetaModel(meta: ModelMeta) {
@@ -136,7 +141,7 @@ export class ApiTableComponent implements OnInit, OnDestroy {
     const numSelected = this.selection.selected.length;
     const numRows = this.data.length;
     return numSelected === numRows;
-  }
+  } // isAllSelected()
 
   selectionChange(event) {
     this.selected = this.selection.selected;
@@ -147,22 +152,10 @@ export class ApiTableComponent implements OnInit, OnDestroy {
   masterToggle() {
     this.isAllSelected()
       ? this.selection.clear()
-      : this.data.forEach((row: ObjectWithLinks) => this.selection.select(row));
+      : this.data.forEach((row: ObjectWithLinks) => this.selection.select(row._links.self.href));
   }
+
   ngOnDestroy(): void {
     if (this.all$) this.all$.unsubscribe();
   } // ngOnDestroy()
-
-  // applyFilter(filterValue: string) {
-  //   filterValue = filterValue.trim(); // Remove whitespace
-  //   console.log('filter value:', filterValue);
-  //   this.selectorService
-  //     .search(this.selector, filterValue, this.selectorName)
-  //     .pipe(debounceTime(1000))
-  //     .subscribe((json: any) => {
-  //       this.data = json;
-  //       console.log('data2', json);
-  //       this.tableDataSource = new TableDataSource(of(this.data));
-  //     });
-  // }
 }

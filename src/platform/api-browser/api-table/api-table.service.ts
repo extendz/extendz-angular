@@ -3,7 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
 
-import { TableResponse, PageAndSort, ModelMeta } from './models/';
+import { TableResponse, PageAndSort, ModelMeta, ObjectWithLinks } from './models/';
 
 import { RestService, ExtRestConfig } from '../../common';
 import { ExtendzApiConfig } from '../models';
@@ -33,4 +33,8 @@ export class ApiTableService {
   getItemId(url: string) {
     return this.rest.getId(url);
   } // getItemId
+
+  getItem(url: any): Observable<ObjectWithLinks> {
+    return this.rest.http.get<ObjectWithLinks>(url);
+  }
 } // class

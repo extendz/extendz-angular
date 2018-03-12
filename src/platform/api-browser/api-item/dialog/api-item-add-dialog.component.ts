@@ -2,21 +2,24 @@ import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Property, RelationTypes } from '../../api-table/models';
 import { ObjectWithLinks } from '../../..';
+import { DialogData } from './models/dialogData';
 
 @Component({
   selector: 'ext-api-item-add',
   templateUrl: './api-item-add-dialog.component.html'
 })
 export class ApiItemAddDialogComponent {
-  public multSelect: boolean = true;
-  public selected: ObjectWithLinks[];
+  public multiSelect: boolean = true;
+  public selected: string[];
 
   constructor(
     public dialogRef: MatDialogRef<ApiItemAddDialogComponent>,
-    @Inject(MAT_DIALOG_DATA) public property: Property
+    @Inject(MAT_DIALOG_DATA) public data: DialogData
   ) {
-    if (property.relation === 'onetoone') {
-      this.multSelect = false;
+    console.log(data.response)
+    this.selected = data.response.map(d => d._links.self.href);
+    if (data.property.relationShipType === RelationTypes.SINGLE) {
+      this.multiSelect = false;
     }
   } // constructor()
 

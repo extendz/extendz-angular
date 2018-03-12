@@ -14,10 +14,10 @@
  *    limitations under the License.
  */
 
-import { Component, OnInit, OnDestroy, Input } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input, ElementRef } from '@angular/core';
 import { ObservableMedia } from '@angular/flex-layout';
 import { MatSnackBar } from '@angular/material';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators, ValidationErrors } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 
 import { Subscription } from 'rxjs/Subscription';
@@ -79,23 +79,25 @@ export class ApiItemComponent implements OnInit, OnDestroy {
   } // ngOnDestroy()
 
   save(): void {
-    this.all$ = this.service.save(this.itemFormGroup.value, this.modelMeta).subscribe(
-      (res: ObjectWithLinks) => {
-        this.handleResponse(res);
-        this.id = this.service.rest.getId(res._links.self.href);
-        this.snackBar.open('Saved', '', { duration: 1000 });
-      },
-      error => this.handleErrors(error)
-    );
+    //console.log(this.itemFormGroup.value)
+    if (this.itemFormGroup.valid) {
+      this.all$ = this.service.save(this.itemFormGroup.value, this.modelMeta).subscribe(
+        (res: ObjectWithLinks) => {
+          this.handleResponse(res);
+          this.id = this.service.rest.getId(res._links.self.href);
+          this.snackBar.open('Saved', '', { duration: 1000 });
+        },
+        error => this.handleErrors(error)
+      );
+    }
   } // save()
 
   private handleResponse(response: ObjectWithLinks) {
     this.item = response;
     this.modelMeta.properties.forEach((prop: Property) => {
-      let val: any = response._links[prop.name];
-      if (val) {
-        let href = val.href;
-        this.itemFormGroup.controls[prop.name].patchValue(href);
+      if (response._links && response._links[prop.name]) {
+        let val: any = response._links[prop.name];
+        this.itemFormGroup.controls[prop.name].patchValue(val.href);
       } else this.itemFormGroup.controls[prop.name].patchValue(response[prop.name]);
     });
 
@@ -108,14 +110,15 @@ export class ApiItemComponent implements OnInit, OnDestroy {
   private handleMetaModel(meta: ModelMeta) {
     this.modelMeta = meta;
     this.modelMeta.properties.forEach(prop => {
-      let testCtrl = new FormControl('init value');
+      let testCtrl = new FormControl();
+      if (prop.required) testCtrl.setValidators(Validators.required);
       this.itemFormGroup.addControl(prop.name, testCtrl);
     });
 
     // _links ctrl
     let _links = new FormControl();
     this.itemFormGroup.addControl('_links', _links);
-
+    console.log(this.itemFormGroup);
     return this.service.getItem(this.modelMeta, this.id);
   } // handleMetaModel()
 
