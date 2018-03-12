@@ -1,0 +1,49 @@
+<mat-toolbar class="map-tool-bar" *ngIf="advance">
+
+    <button mat-icon-button (click)="cropChange()" mdTooltip="Crop (C)">
+        <mat-icon>
+            <svg viewBox="0 0 24 24">
+                <path d="M0 0h24v24H0z" fill="none" />
+                <path d="M17 15h2V7c0-1.1-.9-2-2-2H9v2h8v8zM7 17V1H5v4H1v2h4v10c0 1.1.9 2 2 2h10v4h2v-4h4v-2H7z" />
+            </svg>
+        </mat-icon>
+    </button>
+
+    <button mat-icon-button (click)="pointChange()" mdTooltip="Crop (C)">
+        <mat-icon>
+            <svg viewBox="0 0 24 24">
+                <path d="M18 8c0-3.31-2.69-6-6-6S6 4.69 6 8c0 4.5 6 11 6 11s6-6.5 6-11zm-8 0c0-1.1.9-2 2-2s2 .9 2 2-.89 2-2 2c-1.1 0-2-.9-2-2zM5 20v2h14v-2H5z"
+                />
+                <path d="M0 0h24v24H0z" fill="none" />
+            </svg>
+        </mat-icon>
+    </button>
+
+    <span class="spacer"></span>
+
+    <button mat-icon-button (click)="close()" mdTooltip="Close (G)">
+        <mat-icon>
+            <svg viewBox="0 0 24 24">
+                <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
+                <path d="M0 0h24v24H0z" fill="none" />
+            </svg>
+        </mat-icon>
+    </button>
+    <!-- Second Row -->
+    <mat-toolbar-row *ngIf="loading">
+        <mat-progress-bar color="warn" mode="indeterminate"></mat-progress-bar>
+    </mat-toolbar-row>
+
+</mat-toolbar>
+<div #gmap style="height: 100%">
+</div>
+<div>
+    <button mat-fab (click)="mapDone()" mdTooltip="Crop (C)" *ngIf="(service.path?.length > 2 && polygon) || (service.path?.length > 0 && point)" id="doneButton" class="bottom-right">
+        <mat-icon>
+            <svg viewBox="0 0 24 24">
+                <path d="M0 0h24v24H0z" fill="none" />
+                <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z" />
+            </svg>
+        </mat-icon>
+    </button>
+</div>

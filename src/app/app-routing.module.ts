@@ -10,18 +10,18 @@ const routes: Routes = [
     path: 'login',
     loadChildren: './modules/auth/auth.module#AuthModule'
   },
-  // {
-  //   path: 'apis',
-  //   loadChildren: './modules/api/api-example.module#ApiExampleModule'
-  // },
-  // {
-  //   path: 'map',
-  //   loadChildren: './modules/map/mapexample/mapexample.module#MapexampleModule'
-  // },
-  // {
-  //   path: 'openlayer',
-  //   loadChildren: './modules/openlayer-example/openlayer-example.module#OpenlayerExampleModule'
-  // }
+  {
+    path: 'map',
+    loadChildren: './modules/google-map-example/mapexample/mapexample.module#MapexampleModule'
+  },
+  {
+    path: 'apis',
+    loadChildren: './modules/api/api-example.module#ApiExampleModule'
+  },
+  {
+    path: 'openlayer',
+    loadChildren: './modules/openlayer-example/openlayer-example.module#OpenlayerExampleModule'
+  }
 ];
 
 @NgModule({

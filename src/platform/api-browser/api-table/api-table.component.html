@@ -1,0 +1,159 @@
+<!-- Search bar -->
+<div fxLayout="row" fxLayoutGap="2vw" fxLayoutAlign="center center" style="padding: 1vw">
+  <button mat-icon-button (click)="addNew()">
+    <mat-icon>
+      <svg id="add" viewBox="0 0 24 24">
+        <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
+        <path d="M0 0h24v24H0z" fill="none" />
+      </svg>
+    </mat-icon>
+  </button>
+  <h3>{{model | camelCase}}</h3>
+  <span fxFlex></span>
+  <mat-form-field>
+      <!-- (keyup)="applyFilter($event.target.value)" -->
+    <input matInput autofocus  placeholder="Search">
+    <button mat-icon-button [matMenuTriggerFor]="appMenu" matSuffix>
+      <mat-icon>
+        <svg id="more_vert" viewBox="0 0 24 24">
+          <path d="M0 0h24v24H0z" fill="none" />
+          <path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"
+          />
+        </svg>
+      </mat-icon>
+    </button>
+  </mat-form-field>
+  <mat-menu #appMenu="matMenu">
+    <button mat-menu-item *ngFor="let prop of modelMeta?.properties">{{prop.name | camelCase}}</button>
+  </mat-menu>
+</div>
+
+<div *ngIf="media.isActive('xs');else desktop">
+  <!-- Mobile -->
+  <div style="background-color: #eee;">
+    <span fxFlex="2%"></span>
+    <!-- Header -->
+    <div fxLayout="column" fxFlex fxLayoutGap="5px" style="margin-top: 1vh">
+      <mat-card>
+        <div fxLayout="row" fxLayoutAlign="center center">
+          <mat-checkbox></mat-checkbox>
+          <span fxFlex></span>
+          <button mat-icon-button (click)="delete(tableRow)">
+            <mat-icon (click)="editRow(tableRow)">
+              <svg id="delete" viewBox="0 0 24 24">
+                <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z" />
+                <path d="M0 0h24v24H0z" fill="none" />
+              </svg>
+            </mat-icon>
+          </button>
+        </div>
+      </mat-card>
+      <!-- Table -->
+      <div *ngFor="let tableRow of data">
+        <mat-card fxFlex>
+          <mat-card-content>
+            <div *ngFor="let prop of modelMeta?.properties" fxLayout="column" style=" margin-bottom: 6px;">
+              <div fxLayout="row" style="border-bottom: 1px solid #eee">
+                <span fxFlex style="color:#888;">{{prop.name | camelCase}}</span>
+                <span style="font-size:16px;">{{tableRow[prop.name]}}</span>
+              </div>
+            </div>
+          </mat-card-content>
+          <mat-card-actions>
+            <div fxLayout="row" fxLayoutAlign="center center">
+              <mat-checkbox></mat-checkbox>
+              <span fxFlex></span>
+
+              <button mat-icon-button (click)="editRow(tableRow)">
+                <mat-icon>
+                  <svg id="edit" viewBox="0 0 24 24">
+                    <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"
+                    />
+                    <path d="M0 0h24v24H0z" fill="none" />
+                  </svg>
+                </mat-icon>
+              </button>
+
+              <button mat-icon-button (click)="delete(tableRow)">
+                <mat-icon (click)="editRow(tableRow)">
+                  <svg id="delete" viewBox="0 0 24 24">
+                    <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z" />
+                    <path d="M0 0h24v24H0z" fill="none" />
+                  </svg>
+                </mat-icon>
+              </button>
+            </div>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </div>
+    <span fxFlex="2%"></span>
+  </div>
+  <mat-paginator class="mat-elevation-z10" [length]="tableResponse?.page?.totalPages" (page)="pageEvent($event)" [pageSize]="tableResponse?.page?.size"
+    [pageSizeOptions]="[10, 20, 50]">
+  </mat-paginator>
+</div>
+
+<ng-template #desktop>
+
+  <mat-table #table [dataSource]="tableDataSource ">
+    <ng-container matColumnDef="select">
+      <mat-header-cell *matHeaderCellDef>
+        <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()">
+        </mat-checkbox>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)">
+        </mat-checkbox>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="edit">
+      <mat-header-cell *matHeaderCellDef>
+        Edit
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <button mat-icon-button (click)="editRow(row)">
+          <mat-icon>
+            <svg id="edit" viewBox="0 0 24 24">
+              <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"
+              />
+              <path d="M0 0h24v24H0z" fill="none" />
+            </svg>
+          </mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+    <ng-container *ngFor="let column of columns" matColumnDef={{column}}>
+      <mat-header-cell *matHeaderCellDef>
+        <p>{{column | camelCase}}</p>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <ng-container *ngIf="column === 'Select All';else name">
+          <p style="margin-left: 15px">
+            <mat-checkbox [checked]="false" (change)="selectAll($event)"></mat-checkbox>
+          </p>
+        </ng-container>
+
+        <ng-template #name>
+          <p>{{element[column]}}</p>
+        </ng-template>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="allColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: allColumns;"></mat-row>
+  </mat-table>
+
+  <mat-paginator style="position: fixed;bottom: 0;left: 0;right: 0" class="mat-elevation-z1" [length]="tableResponse?.page?.totalPages"
+    (page)="pageEvent($event)" [pageSize]="tableResponse?.page?.size" [pageSizeOptions]="[10, 20, 50]">
+  </mat-paginator>
+</ng-template>
+
+<!-- fab -->
+<!-- <div *ngIf="searchClicked==false">
+  <button mat-fab class="bottom-right" [routerLink]="[0]">
+
+  </button>
+</div> -->

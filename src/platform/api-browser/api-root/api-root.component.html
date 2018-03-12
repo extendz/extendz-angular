@@ -1,0 +1,42 @@
+<!--
+    Copyright 2018 the original author or authors
+ 
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+ 
+        http://www.apache.org/licenses/LICENSE-2.0
+ 
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<div *ngIf="models$ | async as models else loading" fxLayout="row" fxLayout.xs="column" fxLayoutGap.xs="2vw" fxLayoutGap.md="1%"
+    fxLayoutGap="1vw" fxLayoutWrap>
+    <div fxFlex="50vw" fxFlex.md="49%" fxFlex.xs="100" *ngFor="let item of models ">
+        <mat-card style="margin: 1%">
+            <mat-card-header>
+                <mat-icon mat-card-avatar svgIcon="api-root:{{item.name.toLowerCase()}}" class="primary size-32"></mat-icon>
+                <mat-card-title>{{item.name | camelCase}}</mat-card-title>
+                <mat-card-subtitle>{{item.url}}</mat-card-subtitle>
+                <span fxFlex> </span>
+                <div fxLayoutAlign="center center">
+                    <button mat-button [routerLink]="[item.name]">View</button>
+                </div>
+            </mat-card-header>
+        </mat-card>
+    </div>
+</div>
+
+<ng-template #loading>
+    <div fxLayout="row">
+        <span fxFlex></span>
+        <span fxFlex>
+            <h3 align="center">Loading</h3>
+            <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+        </span>
+        <span fxFlex></span>
+    </div>
+</ng-template>

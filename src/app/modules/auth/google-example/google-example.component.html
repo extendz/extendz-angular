@@ -1,0 +1,92 @@
+<mat-tab-group mat-stretch-tabs="yes">
+    <mat-tab label="Demo">
+        <div class="tab-content">
+            <h3 class="doc-header">Google Authentication</h3>
+            <p>Add Google login to your angular application.</p>
+            <p>Use your Google application to authenticate your web application</p>
+            <mat-card class="mat-elevation-z6">
+                <div fxLayout="row" fxLayoutAlign="start center">
+                    <ext-login-google (userInfo)="onUserInfo($event)" (token)="onToken($event)"></ext-login-google>
+                    <span>Login with Google</span>
+                </div>
+            </mat-card>
+
+            <div>
+                <p style="word-break: break-all">
+                    <strong *ngIf="accessToken?.access_token">Access Token :</strong> {{accessToken?.access_token}}</p>
+            </div>
+            <div fxLayout="row" fxLayoutAlign="start center">
+                <img *ngIf="userInfo?.picture" [src]="userInfo?.picture" alt="">
+                <div fxLayout="column" style="margin-left: 2vw">
+                    <span>{{userInfo?.name}}</span>
+                    <span>{{userInfo?.email}}</span>
+                </div>
+            </div>
+        </div>
+
+    </mat-tab>
+    <mat-tab label="Setup">
+        <div class="tab-content">
+            <h3 class="doc-header">Installing</h3>
+
+            <td-highlight lang="bash">
+                <![CDATA[
+                    npm i -- save @extendz/auth
+                ]]>
+            </td-highlight>
+            <h3 class="doc-header">Register</h3>
+
+            <td-highlight lang="typescript">
+                <![CDATA[          
+                    import {ExtendzGoogleModule} from "@extendz/auth"
+            
+                    ExtendzGoogleModule.forRoot({
+                        client_id: '476518848997-iivshtcbmvqur358fc566muejigf978s.apps.googleusercontent.com',
+                        exchangeServer: {
+                          url: 'https://extendz-keycloak.herokuapp.com/auth/...',
+                          client_id: 'angular'
+                        }
+                      }),
+                ]]>
+            </td-highlight>
+
+            <h3 class="doc-header">Setup</h3>
+
+            <td-highlight lang="html">
+                <![CDATA[
+                <ext-login-google (userInfo)="onUserInfo($event)" (token)="onToken($event)"></ext-login-google>
+                ]]>
+            </td-highlight>
+
+            <h3 class="doc-header">Token Exchange Server Setup (optional)</h3>
+            <p>You can exchange your Facebook token to an internal token so that you can use within a private API. Currently
+                keycloak can be configured to do a token exchange.Do to so you have to provide the Keycloak server details
+                and some other configuration in keycloak server.</p>
+
+        </div>
+    </mat-tab>
+
+    <mat-tab label="API">
+        <div class="tab-content">
+            <h3 class="doc-header">Events</h3>
+            <td-highlight lang="typescript">
+                <![CDATA[
+  
+          import { AccessToken, UserInfo } from '@extendz/auth';
+  
+          /***
+          * On successful token.
+          **/
+          token(accessToken: AccessToken) {}
+  
+          /***
+          * On successful user Info.
+          **/
+          userInfo(userInfo:UserInfo) {}
+  
+             ]]>
+            </td-highlight>
+        </div>
+    </mat-tab>
+
+</mat-tab-group>

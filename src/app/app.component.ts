@@ -11,12 +11,14 @@ import { MenuItem } from './models';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  title: string = 'Extendz';
+  pagesMenuItems: MenuItem[];
   authenticationMenuItems: MenuItem[];
   apiMenuItms: MenuItem[];
   otherComponentMenuItems: MenuItem[];
 
   constructor(
-    private media: ObservableMedia,
+    public media: ObservableMedia,
     private iconRegistry: MatIconRegistry,
     private sanitizer: DomSanitizer
   ) {
@@ -24,9 +26,24 @@ export class AppComponent {
       'app',
       sanitizer.bypassSecurityTrustResourceUrl('./assets/svg/icons.svg')
     );
+    this.pagesMenuItems = [
+      {
+        icon: 'home',
+        title: 'Home',
+        subTitle: 'Home Page',
+        url: ['']
+      },
+      {
+        icon: 'pages',
+        title: 'Docs',
+        subTitle: 'Documentation',
+        url: ['docs']
+      }
+    ];
+
     this.authenticationMenuItems = [
       {
-        icon: 'oauth2',
+        icon: 'security',
         title: 'Oauth2',
         subTitle: 'Login with oauth2',
         url: ['login', 'oauth2']
@@ -42,36 +59,36 @@ export class AppComponent {
         title: 'Google',
         subTitle: 'Login with Google',
         url: ['login', 'google']
-      },
-      {
-        icon: 'keycloak',
-        title: 'Keycloak Oauth2',
-        subTitle: 'Wrapper arround the oauth2',
-        url: ['login', 'keycloak-oauth2']
-      },
-      {
-        icon: 'keycloak',
-        title: 'Keycloak Users',
-        subTitle: 'Get keycloak users',
-        url: ['login', 'keycloak-users']
-      },
-      {
-        icon: 'keycloak',
-        title: 'Keycloak Sign Up',
-        subTitle: 'Register new Keycloak user',
-        url: ['login', 'keycloak-register']
       }
+      // {
+      //   icon: 'keycloak',
+      //   title: 'Keycloak Oauth2',
+      //   subTitle: 'Wrapper arround the oauth2',
+      //   url: ['login', 'keycloak-oauth2']
+      // },
+      // {
+      //   icon: 'keycloak',
+      //   title: 'Keycloak Users',
+      //   subTitle: 'Get keycloak users',
+      //   url: ['login', 'keycloak-users']
+      // },
+      // {
+      //   icon: 'keycloak',
+      //   title: 'Keycloak Sign Up',
+      //   subTitle: 'Register new Keycloak user',
+      //   url: ['login', 'keycloak-register']
+      // }
     ];
 
     this.apiMenuItms = [
       {
-        icon: 'api',
+        icon: 'brightness_auto',
         title: 'Api Browser',
         subTitle: 'HATEOS API Browser',
         url: ['apis', 'root']
       },
       {
-        icon: 'api',
+        icon: 'brightness_auto',
         title: 'Api Select',
         subTitle: 'HATEOS API Selector',
         url: ['apis', 'selector']
@@ -92,7 +109,7 @@ export class AppComponent {
         url: ['calendar']
       },
       {
-        icon: 'openlayer',
+        icon: 'layers',
         title: 'Openlayer',
         subTitle: 'Openlayer',
         url: ['openlayer']
