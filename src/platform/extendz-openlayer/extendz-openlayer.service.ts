@@ -572,6 +572,7 @@ export class ExtendzOpenlayerService {
     this.onDelete.emit(this.returnCoordinate);
     this.featureDeleted = true;
   }
+
   subcribeToCurrentDrawEvent<Event>(eventName: string): Observable<Event> {
     return Observable.create((observer: Observer<Event>) => {
       this.currentDraw.on(eventName, (arg: Event) => {
@@ -598,6 +599,7 @@ export class ExtendzOpenlayerService {
       });
     });
   } // End subcribeToPolygonEvent ()
+
 
   subcribeToSelectEvent<Event>(eventName: string): Observable<Event> {
     return Observable.create((observer: Observer<Event>) => {
