@@ -572,9 +572,9 @@ export class ExtendzOpenlayerService {
     this.onDelete.emit(this.returnCoordinate);
     this.featureDeleted = true;
   }
-  subcribeToCurrentDrawEvent<E>(eventName: string): Observable<E> {
-    return Observable.create((observer: Observer<E>) => {
-      this.currentDraw.on(eventName, (arg: E) => {
+  subcribeToCurrentDrawEvent<Event>(eventName: string): Observable<Event> {
+    return Observable.create((observer: Observer<Event>) => {
+      this.currentDraw.on(eventName, (arg: Event) => {
         this.zone.run(() => observer.next(arg));
       });
     });
@@ -599,9 +599,9 @@ export class ExtendzOpenlayerService {
     });
   } // End subcribeToPolygonEvent ()
 
-  subcribeToSelectEvent<E>(eventName: string): Observable<E> {
-    return Observable.create((observer: Observer<E>) => {
-      this.selectionInteraction.on(eventName, (arg: E) => {
+  subcribeToSelectEvent<Event>(eventName: string): Observable<Event> {
+    return Observable.create((observer: Observer<Event>) => {
+      this.selectionInteraction.on(eventName, (arg: Event) => {
         this.zone.run(() => observer.next(arg));
       });
     });
