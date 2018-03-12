@@ -367,8 +367,7 @@ export class ExtendzOpenlayerService {
   createPolygon(toolType: string) {
     this.subcribeToCurrentDrawEvent<{}>('drawstart').subscribe(
       (event: ol.interaction.Draw.Event) => {
-        this.shapeDrawStartTime = new Date();
-        
+        this.shapeDrawStartTime = new Date();      
         this.drawStarted = true;
       }
     );
@@ -572,12 +571,9 @@ export class ExtendzOpenlayerService {
     this.onDelete.emit(this.returnCoordinate);
     this.featureDeleted = true;
   }
-
-  subcribeToCurrentDrawEvent<Event>(eventName: string): Observable<Event> {
-    return Observable.create((observer: Observer<Event>) => {
-      this.currentDraw.on(eventName, (arg: Event) => {
-        this.zone.run(() => observer.next(arg));
-      });
+  subcribeToCurrentDrawEvent<E>(eventName: string): Observable<E> {
+    return Observable.create((observer: Observer<E>) => {
+      this.currentDraw.on(eventName, (arg: E) => this.zone.run(() => observer.next(arg)));
     });
   } // End subcribeToPolygonEvent ()
 
@@ -600,12 +596,9 @@ export class ExtendzOpenlayerService {
     });
   } // End subcribeToPolygonEvent ()
 
-
-  subcribeToSelectEvent<Event>(eventName: string): Observable<Event> {
-    return Observable.create((observer: Observer<Event>) => {
-      this.selectionInteraction.on(eventName, (arg: Event) => {
-        this.zone.run(() => observer.next(arg));
-      });
+  subcribeToSelectEvent<E>(eventName: string): Observable<E> {
+    return Observable.create((observer: Observer<E>) => {
+      this.selectionInteraction.on(eventName, (arg: E) => this.zone.run(() => observer.next(arg)));
     });
   }
 
