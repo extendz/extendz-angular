@@ -574,7 +574,7 @@ export class ExtendzOpenlayerService {
   subcribeToCurrentDrawEvent<E>(eventName: string): Observable<E> {
     return Observable.create((observer: Observer<E>) => {
       this.currentDraw.on(eventName, (arg: E) => {
-        this.zone.run(() => observer.next(arg));
+        // this.zone.run(() => observer.next(arg));
         return true;
       });
     });
@@ -602,7 +602,7 @@ export class ExtendzOpenlayerService {
   subcribeToSelectEvent<E>(eventName: string): Observable<E> {
     return Observable.create((observer: Observer<E>) => {
       this.selectionInteraction.on(eventName, (arg: E) =>{
-        this.zone.run(() => observer.next(arg));
+        // this.zone.run(() => observer.next(arg));
         return true;
       } )
       
