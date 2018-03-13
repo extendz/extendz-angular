@@ -1,0 +1,12 @@
+<div fxLayout=row fxLayout.xs="column" fxLayoutGap="1vw">
+
+  <!-- calendar.component.html -->
+  <div fxFlex="40">
+    <ext-calendar [startMonth]="startMonth" [startYear]="startYear" (select)="onSelect($event)"></ext-calendar>
+  </div>
+
+  <!-- date and month -->
+  <div fxFlex>
+    <ng-content></ng-content>
+  </div>
+</div>
