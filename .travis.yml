@@ -1,13 +1,14 @@
 language: node_js
 node_js:
   - "6.9"
-
-branches:
-  only:
-    - master
+  
+cache:
+  directories:
+    - node_modules
 
 before_script:
   - npm i angular-cli-ghpages
+  - npm rebuild node-sass
 
 script:
   - ng build --prod --base-href "https://extendz.github.io/extendz-live/"
@@ -16,6 +17,3 @@ after_success:
   - ngh --repo=https://$GITHUB_TOKEN@github.com/extendz/extendz-live.git --name="rumes" --email=rs.kumarasinghe89@gmail.com --dir=dist/app --no-silent
 
 
-cache:
-  directories:
-    - node_modules

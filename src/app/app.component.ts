@@ -101,6 +101,12 @@ export class AppComponent {
         title: 'Calendar',
         subTitle: 'Material Calendar',
         url: ['calendar']
+      },
+      {
+        icon: 'layers',
+        title: 'Openlayer',
+        subTitle: 'Openlayer',
+        url: ['openlayer']
       }
     ];
   } // constructor()
