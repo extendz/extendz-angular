@@ -50,6 +50,15 @@
             <ext-api-select [property]="prop" [formControlName]="prop.name"></ext-api-select>
           </div>
 
+          <!--Enum -->
+          <mat-form-field fxFlex *ngIf="prop.relationShipType && prop.relationShipType === 'ENUM'">
+            <mat-select [placeholder]="prop.name | camelCase" [formControlName]="prop.name">
+              <mat-option *ngFor="let enum of prop.enums" [value]="enum">
+                {{ enum  }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
           <!-- <mat-form-field fxFlex *ngIf="prop.type == 'object'">
             <input matInput [placeholder]="prop.name | camelCase" [formControlName]="prop.name" [value]="prop.name" >
             <button matSuffix mat-icon-button (click)="openDialog(prop)">
