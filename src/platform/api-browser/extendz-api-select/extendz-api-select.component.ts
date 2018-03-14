@@ -168,17 +168,22 @@ export class ExtendzApiSelectComponent implements OnInit, OnDestroy, ControlValu
   private handleMultipleResponse(response: TableResponse) {
     let data: ObjectWithLinks[] = response._embedded[this.property.name];
     this.response = data;
+    this.value = data.map(d => d._links.self.href);
     if (data.length !== 0) {
       let firstItem = data[0];
       if (this.modelMeta.title) {
         let str: any = firstItem[this.modelMeta.title];
         this.displayValue = str;
         if (data.length) {
-          this.displayValue = this.displayValue + ' ,and ' + (data.length - 1) + ' more...';
+          this.setMultipleDisplay(data.length);
         }
       }
     }
   } // handleMultipleResponse()
+
+  private setMultipleDisplay(more: number) {
+    this.displayValue = this.displayValue + ' and ' + (more - 1) + ' more...';
+  }
 
   private handleSingleResponse(response: ObjectWithLinks) {
     this.response = [response];
@@ -195,7 +200,6 @@ export class ExtendzApiSelectComponent implements OnInit, OnDestroy, ControlValu
   private handleResponse(response: ObjectWithLinks | TableResponse, selectedObjects: number) {
     switch (this.property.relationShipType) {
       case RelationTypes.MULTIPLE:
-        console.log('tavle response', response);
         //this.value = response;
         let tableResponse: TableResponse = response;
         let data: ObjectWithLinks[] = tableResponse._embedded[this.property.name];
@@ -209,7 +213,7 @@ export class ExtendzApiSelectComponent implements OnInit, OnDestroy, ControlValu
         if (this.modelMeta.title) {
           this.displayValue = item[this.modelMeta.title];
           if (selectedObjects) {
-            this.displayValue = this.displayValue + ' ,and ' + (selectedObjects - 1) + ' more';
+            this.setMultipleDisplay(selectedObjects);
           }
         } else {
           // this.displayValue = response._links.self.href;

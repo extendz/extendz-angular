@@ -13,7 +13,6 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 -->
-
 <div>
   <div fxFlex="10%" fxFlex.xs="1vw"></div>
   <div fxFlex>
@@ -68,6 +67,7 @@
             </mat-select>
           </mat-form-field>
 
+
           <!-- <mat-form-field fxFlex *ngIf="prop.type == 'object'">
             <input matInput [placeholder]="prop.name | camelCase" [formControlName]="prop.name" [value]="prop.name" >
             <button matSuffix mat-icon-button (click)="openDialog(prop)">
@@ -103,6 +103,16 @@
           </mat-icon>
         </button>
       </form>
+
+      <!-- File Input dialog -->
+      <div *ngIf="item?._links">
+        <div *ngFor="let prop of modelMeta?.properties">
+          <div *ngIf="prop.type == 'file'">
+            <ext-file-upload [property]="prop" [item]="item"></ext-file-upload>
+          </div>
+        </div>
+      </div>
+
     </mat-card>
   </div>
   <div fxFlex="10%" fxFlex.xs="0"></div>

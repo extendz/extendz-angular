@@ -20,7 +20,7 @@ import { ApiItemService } from './api-item.service';
 
 import { ExtendPipesModule } from '../../common/pipes/extend-pipes.module';
 import { ExtendzApiSelectModule } from '../extendz-api-select/extendz-api-select.module';
-
+import { ExtendzFileUploadModule } from '../..';
 
 @NgModule({
   imports: [
@@ -31,6 +31,7 @@ import { ExtendzApiSelectModule } from '../extendz-api-select/extendz-api-select
     //Exentedz
     ExtendPipesModule,
     ExtendzApiSelectModule,
+    ExtendzFileUploadModule,
     //Mat
     MatInputModule,
     MatSelectModule,

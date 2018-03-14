@@ -1,0 +1,7 @@
+<div fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="1vw">
+  <div fxLayout>{{property?.name | camelCase}}</div>
+  <div>
+    <button style="width: 10vw;height: 10vw;" type="button" mat-button (click)="imgFileInput.click()">+</button>
+    <input hidden type="file" #imgFileInput (change)="handleFile($event)" />
+  </div>
+</div>
