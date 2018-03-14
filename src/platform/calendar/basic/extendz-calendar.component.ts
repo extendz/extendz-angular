@@ -21,6 +21,7 @@ import { DatePipe } from '@angular/common';
 import { ObservableMedia } from '@angular/flex-layout';
 
 import { Calendar } from './models/calendar';
+import { Color } from 'openlayers';
 
 @Component({
   selector: 'ext-calendar',
@@ -45,7 +46,7 @@ export class ExtendzCalendarComponent implements OnInit {
   @Input() disableSelection: boolean = false;
   @Input() disableFutureSelection: boolean = false;
 
-  private calendar: Calendar;
+  public calendar: Calendar;
 
   constructor(private datePipe: DatePipe, public media: ObservableMedia) {} // constructor
 
@@ -99,9 +100,12 @@ export class ExtendzCalendarComponent implements OnInit {
    * @description When clicked the one of day on calendar their retrieve date.
    * And emit that day for select event to calendar-date component.
    */
+selectDay:Date
   onDayClick(day: Date) {
     this.selectDate = this.datePipe.transform(day, this.dateFormat);
     this.select.emit(this.selectDate);
+    this.selectDay=day;
+
   } // onDayClick()
 
   /**

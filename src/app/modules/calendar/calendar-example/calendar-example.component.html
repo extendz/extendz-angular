@@ -7,7 +7,7 @@
 
         <!-- calendar.component.html -->
         <div fxFlex="40">
-          <ext-calendar></ext-calendar>
+          <ext-calendar (select)="onSelect($event)"></ext-calendar>
         </div>
 
         <!-- date and month -->
@@ -15,7 +15,7 @@
           <mat-card class="advance-card">
             <mat-card-content>
               <mat-list role="list">
-                <mat-list-item *ngFor="let event of events$ | async">
+                <mat-list-item *ngFor="let event of events$">
                   <mat-icon mat-list-icon [svgIcon]="event.icon"></mat-icon>
                   <h4 mat-line>{{event.title}}</h4>
                   <p mat-line> {{event.description}} </p>
@@ -30,6 +30,145 @@
   </mat-tab>
   <mat-tab label="Setup">
     <div class="tab-content">
+      <div>
+        <br>
+        <br>
+        <hr>
+        <h2 class="demo-header">
+          Material Calender Demo
+        </h2>
+        <p class="demo-info">
+          <b>The normal calender shows on left corner.When we clicked on the date.we can see what events are involved to that
+            days.
+          </b>
+        </p>
+
+        <h2 class="demo-header">
+          How to get started
+        </h2>
+        <p class="demo-info">
+          <b>Create mainly two packages.called basic and advanced.Our calender interfaces are included In basic packeges.and
+            other lists views are included on advance package. To get start install following material and flex layout by
+            following this command
+            <br>
+          </b>
+        </p>
+        <td-highlight lang="typescript">
+          <![CDATA[
+              
+              npm install --save @angular/material @angular/cdk
+              npm install @angular/flex-layout@latest --save
+              
+                    ]]>
+        </td-highlight>
+        <h2 class="demo-header">
+          Dependencies and Imports
+        </h2>
+        <p class="demo-info">
+          <b>Imports following imports to the advance package module.ts file.
+            <br>
+          </b>
+          <br>
+          <td-highlight lang="typescript">
+            <![CDATA[
+                    
+                    @NgModule({
+                      imports: [
+                        CommonModule,
+                        MatCardModule,
+                        FlexLayoutModule,
+                        CalendarModules,
+                      ],
+                    })
+                          ]]>
+          </td-highlight>
+          <br>
+          <br>
+
+          <b>Imports following imports to the basic package module.ts file.
+            <br>
+          </b>
+          <br>
+          <td-highlight lang="typescript">
+            <![CDATA[
+                        
+                    @NgModule({
+                      imports: [
+                        CommonModule,
+                        FlexLayoutModule,
+                        MatIconModule,
+                        MatToolbarModule,
+                        MatButtonModule,
+                        HttpClientModule
+                      ],
+                    })
+                              ]]>
+          </td-highlight>
+        </p>
+        <h2 class="demo-header">
+          Calender-date.component.ts
+        </h2>
+        <p class="demo-info">
+          <b>We used @Output() / @Input() directives for data transing and assigning.
+            <br>
+            <br> @Output() :
+            <br> Event handling,data emit
+            <br>
+            <br> @Input() :
+            <br> Property binding,data retrieve
+
+
+          </b>
+        </p>
+        <td-highlight lang="typescript">
+          <![CDATA[
+                            
+                    export class CalendarDateComponent {
+                      fullday: string[];
+                      @Input() day: string;
+                      @Input() month: string;
+                      data: object;
+                      sendDate: string;
+                    
+                      @Output() selected: EventEmitter<string> = new EventEmitter<string>();
+                    
+                      constructor() {}
+                    
+                      onDateSelect(date: string) {
+                        this.sendDate = date;
+                        this.selected.emit(this.sendDate);
+                      }
+                    
+                    }
+                    
+                                  ]]>
+        </td-highlight>
+        <h2 class="demo-header">
+          Calender.service.ts
+        </h2>
+        <br>
+        <td-highlight lang="typescript">
+          <![CDATA[
+                                
+                  import { Injectable } from '@angular/core';
+                  import { HttpClient } from '@angular/common/http';
+                  import { Observable } from 'rxjs/Observable';
+                  import 'rxjs';
+                  @Injectable()
+                  export class CalendarService {
+                    constructor(private http: HttpClient) {}
+                  
+                    public getJSON(): Observable<any> {
+                      return this.http.get('assets/db.json');
+                    }
+                  }
+                        
+                                      ]]>
+        </td-highlight>
+
+
+      </div>
+
     </div>
   </mat-tab>
 
