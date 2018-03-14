@@ -36,6 +36,15 @@
       <form [formGroup]="itemFormGroup" fxLayout="column">
         <div *ngFor="let prop of modelMeta?.properties">
 
+          <!-- Number -->
+          <mat-form-field fxFlex *ngIf="prop.type == 'number'">
+            <input matInput type="number" [placeholder]="prop.name | camelCase" [formControlName]="prop.name">
+            <mat-error *ngIf="itemFormGroup.controls[prop.name].hasError('required')">
+              {{prop.name | camelCase}}
+              <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+
           <!-- String -->
           <mat-form-field fxFlex *ngIf="prop.type == 'string'">
             <input matInput [placeholder]="prop.name | camelCase" [formControlName]="prop.name">
@@ -54,7 +63,7 @@
           <mat-form-field fxFlex *ngIf="prop.relationShipType && prop.relationShipType === 'ENUM'">
             <mat-select [placeholder]="prop.name | camelCase" [formControlName]="prop.name">
               <mat-option *ngFor="let enum of prop.enums" [value]="enum">
-                {{ enum  }}
+                {{ enum }}
               </mat-option>
             </mat-select>
           </mat-form-field>
@@ -77,6 +86,10 @@
             <input matInput [matDatepicker]="picker" [placeholder]="prop.name | camelCase" [formControlName]="prop.name">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker [touchUi]="media.isActive('xs')" #picker></mat-datepicker>
+            <mat-error *ngIf="itemFormGroup.controls[prop.name].hasError('required')">
+              {{prop.name | camelCase}}
+              <strong>required</strong>
+            </mat-error>
           </mat-form-field>
         </div>
 

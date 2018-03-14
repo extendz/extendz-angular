@@ -16,7 +16,6 @@ export class ApiItemAddDialogComponent {
     public dialogRef: MatDialogRef<ApiItemAddDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData
   ) {
-    console.log(data.response)
     this.selected = data.response.map(d => d._links.self.href);
     if (data.property.relationShipType === RelationTypes.SINGLE) {
       this.multiSelect = false;

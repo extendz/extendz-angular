@@ -79,7 +79,7 @@ export class ApiItemComponent implements OnInit, OnDestroy {
   } // ngOnDestroy()
 
   save(): void {
-    //console.log(this.itemFormGroup.value)
+    //  console.log(this.itemFormGroup.value)
     if (this.itemFormGroup.valid) {
       this.all$ = this.service.save(this.itemFormGroup.value, this.modelMeta).subscribe(
         (res: ObjectWithLinks) => {
@@ -118,7 +118,6 @@ export class ApiItemComponent implements OnInit, OnDestroy {
     // _links ctrl
     let _links = new FormControl();
     this.itemFormGroup.addControl('_links', _links);
-    console.log(this.itemFormGroup);
     return this.service.getItem(this.modelMeta, this.id);
   } // handleMetaModel()
 

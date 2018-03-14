@@ -1,6 +1,6 @@
 export enum RelationTypes {
   SINGLE = 'SINGLE',
-  MUTIPLE = 'MUTIPLE',
+  MULTIPLE = 'MULTIPLE',
   ENUM = 'ENUM'
 }
 
