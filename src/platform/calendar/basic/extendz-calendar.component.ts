@@ -100,12 +100,11 @@ export class ExtendzCalendarComponent implements OnInit {
    * @description When clicked the one of day on calendar their retrieve date.
    * And emit that day for select event to calendar-date component.
    */
-selectDay:Date
+  selectDay: Date;
   onDayClick(day: Date) {
     this.selectDate = this.datePipe.transform(day, this.dateFormat);
     this.select.emit(this.selectDate);
-    this.selectDay=day;
-
+    this.selectDay = day;
   } // onDayClick()
 
   /**
