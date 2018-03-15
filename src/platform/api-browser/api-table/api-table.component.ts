@@ -98,7 +98,7 @@ export class ApiTableComponent implements OnInit, OnDestroy {
 
   private handleMetaModel(meta: ModelMeta) {
     this.modelMeta = meta;
-    this.columns = meta.properties.map(p => p.name);
+    this.columns = meta.properties.filter(r => r.type !== 'file').map(p => p.name);
     this.allColumns = ['select', ...this.columns, 'edit'];
     return this.service.getTableData(meta);
   } // handleMetaModel()

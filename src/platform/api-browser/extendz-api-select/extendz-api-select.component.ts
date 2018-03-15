@@ -50,7 +50,7 @@ export class ExtendzApiSelectComponent implements OnInit, OnDestroy, ControlValu
   /**
    * When selected with the dialog box the first element response it taken to consideration.
    */
-  response: ObjectWithLinks[];
+  response: ObjectWithLinks[] = null;
   /**
    * Display value for the current value.
    * Seperation is needed since the acctual selected value is an URL and the display values is a human readble text.
@@ -138,8 +138,8 @@ export class ExtendzApiSelectComponent implements OnInit, OnDestroy, ControlValu
   set value(val: Object) {
     // If the value changed then get the reponse.Otherwise there will be a loop
     //if (this.item !== val) this.getResponse(val);
-    if (!this.response) this.getResponse(val);
-    this.item = [val];
+    if (this.response === null) this.getResponse(val);
+    //this.item = [val];
     this.onChange(val);
     this.onTouched();
   }
@@ -152,17 +152,22 @@ export class ExtendzApiSelectComponent implements OnInit, OnDestroy, ControlValu
     let res: Subscription = this.apiTableService
       .getItem(url)
       .pipe(take(1))
-      .subscribe((response: any) => {
-        console.log(response);
-        let tableResponse: TableResponse = response;
-        if (tableResponse._embedded && tableResponse._embedded[this.property.name]) {
-          this.handleMultipleResponse(tableResponse);
-        } else {
-          let singleResponse: ObjectWithLinks = response;
-          this.handleSingleResponse(singleResponse);
+      .subscribe(
+        (response: any) => {
+          let tableResponse: TableResponse = response;
+          if (tableResponse._embedded && tableResponse._embedded[this.property.name]) {
+            this.handleMultipleResponse(tableResponse);
+          } else {
+            let singleResponse: ObjectWithLinks = response;
+            this.handleSingleResponse(singleResponse);
+          }
+          //this.handleResponse(response, selectedObjects);
+        },
+        error => {
+          this.response = undefined;
+          this.value = null;
         }
-        //this.handleResponse(response, selectedObjects);
-      });
+      );
   } // getResponse()
 
   private handleMultipleResponse(response: TableResponse) {

@@ -53,8 +53,17 @@
             </mat-error>
           </mat-form-field>
 
+           <!-- String -->
+           <mat-form-field fxFlex *ngIf="prop.type == 'color'">
+              <input type="color" matInput [placeholder]="prop.name | camelCase" [formControlName]="prop.name">
+              <mat-error *ngIf="itemFormGroup.controls[prop.name].hasError('required')">
+                {{prop.name | camelCase}}
+                <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+
           <!-- Object -->
-          <div fxFlex *ngIf="prop.relationShipType && prop.relationShipType !== 'ENUM'">
+          <div fxFlex *ngIf="prop.relationShipType && (prop.relationShipType === 'SINGLE'|| prop.relationShipType === 'MULTIPLE')  && prop.type !== 'file'">
             <ext-api-select [property]="prop" [formControlName]="prop.name"></ext-api-select>
           </div>
 

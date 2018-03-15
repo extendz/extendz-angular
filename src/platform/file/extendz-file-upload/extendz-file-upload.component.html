@@ -1,7 +1,42 @@
 <div fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="1vw">
-  <div fxLayout>{{property?.name | camelCase}}</div>
-  <div>
-    <button style="width: 10vw;height: 10vw;" type="button" mat-button (click)="imgFileInput.click()">+</button>
-    <input hidden type="file" #imgFileInput (change)="handleFile($event)" />
+  <mat-form-field fxFlex style="width: 100%">
+    <input matInput disabled type="number" [placeholder]="property?.name | camelCase">
+  </mat-form-field>
+  <!-- <div fxLayout>{{property?.name | camelCase}}</div> -->
+  <div fxLayout fxLayoutWrap fxLayoutAlign="start center">
+    <!-- Add button -->
+    <button *ngIf="allowMultiple || imageUrls.length === 0" class="upload-button image-title" type="button" mat-button (click)="imgFileInput.click()">
+      <mat-icon>
+        <svg id="add" viewBox="0 0 24 24">
+          <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
+          <path d="M0 0h24v24H0z" fill="none" />
+        </svg>
+      </mat-icon>
+    </button>
+
+
+    <span *ngFor="let url of imageUrls">
+      <div fxLayout="column">
+        <button [ngStyle]="{'background-image': 'url(' + url + ')'}" [matMenuTriggerFor]="appMenu" class="upload-button" type="button"
+          mat-button>
+          <mat-icon>
+            <svg id="edit" viewBox="0 0 24 24">
+              <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"
+              />
+              <path d="M0 0h24v24H0z" fill="none" />
+            </svg>
+          </mat-icon>
+        </button>
+        <mat-menu #appMenu="matMenu" yPosition="above">
+          <!-- <button mat-menu-item (click)="imgFileInput.click()">Edit</button> -->
+          <button disabled mat-menu-item>Remove</button>
+        </mat-menu>
+      </div>
+    </span>
+
+
+
+    <input hidden [multiple]="allowMultiple" type="file" #imgFileInput (change)="handleFile($event)" />
   </div>
+  <!-- <img *ngIf="imageFile" [src]="imageFile" [alt]="property.name" style="width: 10vw;height: auto"> -->
 </div>

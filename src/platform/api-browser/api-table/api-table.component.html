@@ -94,6 +94,7 @@
     </mat-paginator>
   </div>
 
+  <!-- Desktop -->
   <ng-template #desktop>
 
     <mat-table #table [dataSource]="tableDataSource ">
@@ -103,7 +104,8 @@
           </mat-checkbox>
         </mat-header-cell>
         <mat-cell *matCellDef="let row">
-          <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row._links.self.href) : null;selectionChange(row._links.self.href)" [checked]="selection.isSelected(row._links.self.href)">
+          <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row._links.self.href) : null;selectionChange(row._links.self.href)"
+            [checked]="selection.isSelected(row._links.self.href)">
           </mat-checkbox>
         </mat-cell>
       </ng-container>

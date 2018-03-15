@@ -1,0 +1,10 @@
+.upload-button {
+  background: rgba(0, 0, 0, 0.5);
+  background-blend-mode: multiply;
+  width: 10vw;
+  height: 10vw;
+  color: white;
+  background-size: cover;
+  background-position: center center;
+  margin: 1vw;
+}

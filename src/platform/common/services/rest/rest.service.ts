@@ -65,6 +65,18 @@ export class RestService {
       .pipe(map((res: any) => res._embedded[modelName]));
   } // findAll
 
+  save(item: ObjectWithLinks): Observable<ObjectWithLinks> {
+    if (item._links) {
+      return this.patch(item);
+    } else {
+      return this.http.post<ObjectWithLinks>(item._links.self.href, item);
+    }
+  } // save()
+
+  patch(item: ObjectWithLinks): Observable<ObjectWithLinks> {
+    return this.http.patch<ObjectWithLinks>(item._links.self.href, item);
+  }
+
   deleteWithConfirm(url: string): void {
     let dialogRef = this.dialog.open(DeleteDialogComponent);
     dialogRef.afterClosed().subscribe(result => {
