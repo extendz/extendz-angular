@@ -21,4 +21,5 @@ export class ReturnObject{
     coordiantes : Array<LatLng>;
     drawType : string;
     drawTool : string;
+    duration : number;
 }
