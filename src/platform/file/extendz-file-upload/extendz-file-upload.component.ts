@@ -40,27 +40,30 @@ export class ExtendzFileUploadComponent implements OnInit {
   updateImageList(): void {
     this.imageUrls = [];
     if (this.item[this.property.name]) {
-      let imageNames: any = this.item[this.property.name];
+      let imageNames = this.item[this.property.name];
       // Single image
       if (typeof imageNames == 'string') {
         this.imageUrls = [this.getFileUrl(imageNames)];
       } else {
-        imageNames.forEach(imageName => {
+        let list: string[] = <string[]>imageNames;
+        list.forEach(imageName => {
           this.imageUrls.push(this.getFileUrl(imageName));
         });
       }
     } // if
   }
 
-  handleFile(event) {
+  handleFile(event: EventTarget) {
+    let eventObj: MSInputMethodContext = <MSInputMethodContext>event;
+    let target: HTMLInputElement = <HTMLInputElement>eventObj.target;
     //this.imageUrls.unshift('local');
     /**
      * There should be at least one image selected.
      */
-    if (event.target.files && event.target.files.length > 0) {
+    if (target.files && target.files.length > 0) {
       // Create form data
       let formData = new FormData();
-      let files = event.target.files;
+      let files = target.files;
       for (var i = 0, numFiles = files.length; i < numFiles; i++) {
         let file = files[i];
         formData.append(this.property.name, file);
@@ -88,18 +91,11 @@ export class ExtendzFileUploadComponent implements OnInit {
     }
   } // handleFile()
 
-  @ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
-
-  onRightClick(event: MouseEvent) {
-    event.preventDefault();
-    console.log(this.trigger.openMenu());
-  }
-
   private getUrl(): string {
     return this.item._links.self.href + '/' + this.property.name;
   } // getUrl()
 
-  private getFileUrl(fileName): string {
+  private getFileUrl(fileName: string): string {
     return this.getUrl() + '/' + fileName;
   }
 } // class

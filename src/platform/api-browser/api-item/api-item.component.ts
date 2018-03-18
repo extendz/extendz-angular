@@ -34,7 +34,6 @@ import { ModelMeta, ObjectWithLinks, Property, Href } from '../api-table/models'
   styleUrls: ['./api-item.component.css']
 })
 export class ApiItemComponent implements OnInit, OnDestroy {
-  static ApiItemAddDialogComponent: any;
   all$: Subscription;
   modelMeta: ModelMeta;
   item: ObjectWithLinks;

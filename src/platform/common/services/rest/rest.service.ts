@@ -59,7 +59,7 @@ export class RestService {
    * @param modelName
    * @param httpOptions
    */
-  findAll(modelName: string, httpOptions: Object): Observable<ObjectWithLinks> {
+  findAll(modelName: string, httpOptions?: Object): Observable<ObjectWithLinks[]> {
     return this.http
       .get(this.restConfig.basePath + '/' + modelName, httpOptions)
       .pipe(map((res: any) => res._embedded[modelName]));

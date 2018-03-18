@@ -13,6 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-export * from './pipes/';
-export * from './services';
-export * from './directives';
+import { NgModule } from '@angular/core';
+import { ApiImageDirective } from './api-image.directive';
+
+/**
+ * Commonly use Directives
+ * @author Randika Hapugoda
+ */
+@NgModule({
+  declarations: [ApiImageDirective],
+  exports: [ApiImageDirective]
+})
+export class ExtendzDirectiveModule {}

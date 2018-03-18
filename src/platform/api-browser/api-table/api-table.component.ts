@@ -17,7 +17,7 @@
 import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { SelectionModel } from '@angular/cdk/collections';
-import { PageEvent } from '@angular/material';
+import { PageEvent, MatCheckboxChange } from '@angular/material';
 import { ObservableMedia } from '@angular/flex-layout';
 
 import { ApiTableService } from './api-table.service';
@@ -31,6 +31,7 @@ import { map } from 'rxjs/operators/map';
 import { of } from 'rxjs/observable/of';
 
 import { TableResponse } from './models/modelData/tableResponse';
+import { Property } from './models/modelMeta/property';
 
 import { TableDataSource } from './dataSource/tableDataSource';
 
@@ -98,7 +99,16 @@ export class ApiTableComponent implements OnInit, OnDestroy {
 
   private handleMetaModel(meta: ModelMeta) {
     this.modelMeta = meta;
-    this.columns = meta.properties.filter(r => r.type !== 'file').map(p => p.name);
+    let properties: Property[] = null;
+    let projections = meta.projections;
+    // Check for projections
+    // if (projections && projections['dataTable']) {
+    //   properties = projections['dataTable'];
+    // } else {
+    //   properties = meta.properties;
+    // }
+    properties = meta.properties;
+    this.columns = properties.filter(r => r.type !== 'file').map(p => p.name);
     this.allColumns = ['select', ...this.columns, 'edit'];
     return this.service.getTableData(meta);
   } // handleMetaModel()
@@ -143,7 +153,7 @@ export class ApiTableComponent implements OnInit, OnDestroy {
     return numSelected === numRows;
   } // isAllSelected()
 
-  selectionChange(event) {
+  selectionChange(event: MatCheckboxChange) {
     this.selected = this.selection.selected;
     this.selectedChange.emit(this.selected);
   }

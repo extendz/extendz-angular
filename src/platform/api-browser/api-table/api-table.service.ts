@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { ObservableMedia } from '@angular/flex-layout';
 
 import { Observable } from 'rxjs/Observable';
 
@@ -12,22 +13,23 @@ import { ExtendzApiConfig } from '../models';
 export class ApiTableService {
   constructor(
     private conf: ExtRestConfig,
+    private media: ObservableMedia,
     private apiConfig: ExtendzApiConfig,
-    private http: HttpClient,
     private rest: RestService
   ) {}
 
   getModel(model: string): Observable<ModelMeta> {
     let url = this.conf.basePath + '/' + this.apiConfig.modelsEndpont + '/' + model.toLowerCase();
-    return this.http.get<ModelMeta>(url);
+    return this.rest.http.get<ModelMeta>(url);
   } // getModel()
 
   getTableData(meta: ModelMeta, pageAndSort?: PageAndSort): Observable<TableResponse> {
     let params: HttpParams = new HttpParams();
+    params = params.append('projection', 'dataTable');
     if (pageAndSort) {
       params = params.append('page', pageAndSort.page.toString());
     }
-    return this.http.get<TableResponse>(this.conf.basePath + meta.url, { params });
+    return this.rest.http.get<TableResponse>(this.conf.basePath + meta.url, { params });
   } // getTableData()
 
   getItemId(url: string) {

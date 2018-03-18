@@ -6,6 +6,7 @@ export class ModelMeta {
   url: string;
   title?: string;
   properties?: Property[];
-  projections?: Projection[];
-  projection?: Property[];
+  projections?: {
+    [key: string]: Property[];
+  };
 }
