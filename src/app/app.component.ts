@@ -16,6 +16,7 @@ export class AppComponent {
   authenticationMenuItems: MenuItem[];
   apiMenuItms: MenuItem[];
   otherComponentMenuItems: MenuItem[];
+  QRMenuItms: MenuItem[];
 
   constructor(
     public media: ObservableMedia,
@@ -92,6 +93,21 @@ export class AppComponent {
         title: 'Api Select',
         subTitle: 'HATEOS API Selector',
         url: ['apis', 'selector']
+      }
+    ];
+
+    this.QRMenuItms = [
+      {
+        icon: '',
+        title: 'QR Generator',
+        subTitle: 'QR Generator',
+        url: ['qr', 'generator']
+      },
+      {
+        icon: '',
+        title: 'QR Reader',
+        subTitle: 'QR Reader',
+        url: ['qr', 'reader']
       }
     ];
 

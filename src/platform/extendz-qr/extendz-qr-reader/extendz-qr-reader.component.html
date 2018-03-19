@@ -1,0 +1,46 @@
+<!-- Copyright 2012-2018 the original author or authors.
+ 
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+ 
+       http://www.apache.org/licenses/LICENSE-2.0
+ 
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License. -->
+
+<span *ngIf="availableDevices">
+  <mat-form-field>
+    <mat-select placeholder="Select your camera" id="video-input-select" (change)="onDeviceSelectChange($event.value)">
+      <mat-option value="">
+        No Device
+      </mat-option>
+      <mat-option *ngFor="let device of availableDevices" [value]="device.deviceId">
+        {{ device.label }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</span>
+
+<div [hidden]="!hasCameras">
+
+  <zxing-scanner #scanner class="test-class" [scannerEnabled]="scannerEnabled" [device]="selectedDevice" (camerasFound)="displayCameras($event)"
+    (scanSuccess)="handleQrCodeResult($event)" [cssClass]="{customClass:true}"></zxing-scanner>
+
+  <h2 *ngIf="!this.selectedDevice">No camera selected.</h2>
+
+  <p>
+    Result:
+    <strong>{{ qrResultString }}</strong>
+  </p>
+
+</div>
+
+<div [hidden]="hasCameras">
+
+  <h1>Looks like your actual device does not have cameras, or I could not find'em. </h1>
+
+</div>

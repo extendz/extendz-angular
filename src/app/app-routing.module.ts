@@ -21,6 +21,10 @@ const routes: Routes = [
   {
     path: 'openlayer',
     loadChildren: './modules/openlayer-example/openlayer-example.module#OpenlayerExampleModule'
+  },
+  {
+    path: 'qr',
+    loadChildren: './modules/qr-example/qr-example.module#QRExampleModule'
   }
 ];
 
