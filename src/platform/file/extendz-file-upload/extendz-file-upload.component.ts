@@ -1,12 +1,12 @@
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { MatMenu, MatMenuTrigger } from '@angular/material';
 
-import { Property, RelationTypes } from '../../api-browser/api-table/models';
-import { ObjectWithLinks, RestService } from '../../common';
 import { mergeMap } from 'rxjs/operators/mergeMap';
 import { map } from 'rxjs/operators/map';
-import { forEach } from '@angular/router/src/utils/collection';
-import { MatMenu, MatMenuTrigger } from '@angular/material';
+
+import { Property, RelationTypes } from '../../api-browser/api-table/models';
+import { RestService, ObjectWithLinks } from '../../common/services';
 
 @Component({
   selector: 'ext-file-upload',
@@ -51,7 +51,7 @@ export class ExtendzFileUploadComponent implements OnInit {
         });
       }
     } // if
-  }
+  } // updateImageList
 
   handleFile(event: EventTarget) {
     let eventObj: MSInputMethodContext = <MSInputMethodContext>event;
@@ -69,7 +69,7 @@ export class ExtendzFileUploadComponent implements OnInit {
         formData.append(this.property.name, file);
       }
 
-      this.rest.http
+      let rest$ = this.rest.http
         .post(this.getUrl(), formData)
         .pipe(
           map((fileNames: string[]) => {
@@ -87,6 +87,7 @@ export class ExtendzFileUploadComponent implements OnInit {
         .subscribe((saved: ObjectWithLinks) => {
           this.item = saved;
           this.updateImageList();
+          rest$.unsubscribe();
         });
     }
   } // handleFile()

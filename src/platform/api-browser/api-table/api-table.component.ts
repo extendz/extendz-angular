@@ -86,7 +86,7 @@ export class ApiTableComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.selection = new SelectionModel<string>(this.multiSelect, []);
     this.all$ = this.service
-      .getModel(this.model)
+      .getModel(this.model, 'dataTable')
       .pipe(
         mergeMap((meta: ModelMeta) => this.handleMetaModel(meta)),
         map((tableResponse: TableResponse) => this.handdleDataResponse(tableResponse))

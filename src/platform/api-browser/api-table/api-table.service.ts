@@ -18,9 +18,14 @@ export class ApiTableService {
     private rest: RestService
   ) {}
 
-  getModel(model: string): Observable<ModelMeta> {
+  getModel(model: string, projecion?: string): Observable<ModelMeta> {
+    let params: HttpParams = new HttpParams();
+    if (projecion) {
+      params = params.append('projection', projecion);
+    }
+
     let url = this.conf.basePath + '/' + this.apiConfig.modelsEndpont + '/' + model.toLowerCase();
-    return this.rest.http.get<ModelMeta>(url);
+    return this.rest.http.get<ModelMeta>(url, { params });
   } // getModel()
 
   getTableData(meta: ModelMeta, pageAndSort?: PageAndSort): Observable<TableResponse> {
