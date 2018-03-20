@@ -30,151 +30,101 @@
   </mat-tab>
   <mat-tab label="Setup">
     <div class="tab-content">
-      <div>
-        <br>
-        <br>
-        <hr>
-        <h2 class="demo-header">
-          Material Calender Demo
-        </h2>
-        <p class="demo-info">
-          <b>The normal calender shows on left corner.When we clicked on the date.we can see what events are involved to that
-            days.
-          </b>
-        </p>
+      <h3 class="doc-header">Installing</h3>
 
-        <h2 class="demo-header">
-          How to get started
-        </h2>
-        <p class="demo-info">
-          <b>Create mainly two packages.called basic and advanced.Our calender interfaces are included In basic packeges.and
-            other lists views are included on advance package. To get start install following material and flex layout by
-            following this command
-            <br>
-          </b>
-        </p>
-        <td-highlight lang="typescript">
-          <![CDATA[
+      <td-highlight lang="typescript">
+        <![CDATA[
               
-              npm install --save @angular/material @angular/cdk
-              npm install @angular/flex-layout@latest --save
+              npm install --save @extendz/calendar
               
                     ]]>
-        </td-highlight>
-        <h2 class="demo-header">
-          Dependencies and Imports
-        </h2>
-        <p class="demo-info">
-          <b>Imports following imports to the advance package module.ts file.
-            <br>
-          </b>
-          <br>
-          <td-highlight lang="typescript">
-            <![CDATA[
-                    
-                    @NgModule({
-                      imports: [
-                        CommonModule,
-                        MatCardModule,
-                        FlexLayoutModule,
-                        CalendarModules,
-                      ],
-                    })
+      </td-highlight>
+      <h3 class="doc-header">Register</h3>
+
+      <td-highlight lang="typescript">
+        <![CDATA[
+            import {ExtendzCalendarModule} from "@extendz/calendar"  
+
+            @NgModule({
+              imports: [
+               ExtendzCalendarModule,
+              ],
+            })
                           ]]>
-          </td-highlight>
-          <br>
-          <br>
+      </td-highlight>
+      <p>Define html code</p>
 
-          <b>Imports following imports to the basic package module.ts file.
-            <br>
-          </b>
-          <br>
-          <td-highlight lang="typescript">
-            <![CDATA[
-                        
-                    @NgModule({
-                      imports: [
-                        CommonModule,
-                        FlexLayoutModule,
-                        MatIconModule,
-                        MatToolbarModule,
-                        MatButtonModule,
-                        HttpClientModule
-                      ],
-                    })
-                              ]]>
-          </td-highlight>
-        </p>
-        <h2 class="demo-header">
-          Calender-date.component.ts
-        </h2>
-        <p class="demo-info">
-          <b>We used @Output() / @Input() directives for data transing and assigning.
-            <br>
-            <br> @Output() :
-            <br> Event handling,data emit
-            <br>
-            <br> @Input() :
-            <br> Property binding,data retrieve
-
-
-          </b>
-        </p>
-        <td-highlight lang="typescript">
-          <![CDATA[
-                            
-                    export class CalendarDateComponent {
-                      fullday: string[];
-                      @Input() day: string;
-                      @Input() month: string;
-                      data: object;
-                      sendDate: string;
-                    
-                      @Output() selected: EventEmitter<string> = new EventEmitter<string>();
-                    
-                      constructor() {}
-                    
-                      onDateSelect(date: string) {
-                        this.sendDate = date;
-                        this.selected.emit(this.sendDate);
-                      }
-                    
-                    }
-                    
-                                  ]]>
-        </td-highlight>
-        <h2 class="demo-header">
-          Calender.service.ts
-        </h2>
-        <br>
-        <td-highlight lang="typescript">
-          <![CDATA[
-                                
-                  import { Injectable } from '@angular/core';
-                  import { HttpClient } from '@angular/common/http';
-                  import { Observable } from 'rxjs/Observable';
-                  import 'rxjs';
-                  @Injectable()
-                  export class CalendarService {
-                    constructor(private http: HttpClient) {}
-                  
-                    public getJSON(): Observable<any> {
-                      return this.http.get('assets/db.json');
-                    }
-                  }
-                        
-                                      ]]>
-        </td-highlight>
-
-
-      </div>
-
+      <td-highlight lang="html">
+        <![CDATA[   
+        <ext-calendar (select)="onSelect($event)"></ext-calendar>
+                        ]]>
+      </td-highlight>
     </div>
   </mat-tab>
 
   <mat-tab label="API">
     <div class="tab-content">
+      <h3 class="doc-header">Events</h3>
+      <p>
+        @Output()
+      </p>
+      <td-highlight lang="typescript">
+        <![CDATA[
+  
+          @Output() select: EventEmitter<string> = new EventEmitter<string>();
+  
+          /***
+          *When click any date.It call onDayClick() method.Then it retrieve that date.
+          **/
+          onDayClick(day: Date) {
+            this.selectDate = this.datePipe.transform(day, this.dateFormat);
+            this.select.emit(this.selectDate);
+          } 
+  
+             ]]>
+      </td-highlight>
+
+      <p>
+        @Input()
+      </p>
+      <td-highlight lang="typescript">
+        <![CDATA[
+
+      @Input() startMonth: number = this.today.getMonth();
+      @Input() startYear: number = this.today.getFullYear();
+    
+      @Input() dateFormat: string = 'dd/MM/yyyy';
+      @Input() dayLabelFormat: string = 'EEE';
+      @Input() titleFormat: string = 'LLLL yyyy';
+      @Input() dayFormat: string = 'd';
+    
+      @Input() timeZone: string;
+      @Input() disableSelection: boolean = false;
+      @Input() disableFutureSelection: boolean = false;
+           ]]>
+      </td-highlight>
+      <br>
+      <br>
+      <mat-table #table [dataSource]="dataSource">
+
+        <ng-container matColumnDef="Options">
+          <mat-header-cell *matHeaderCellDef> Options </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.Options}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="Type">
+          <mat-header-cell *matHeaderCellDef> Type </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.Type}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="Descriptions">
+          <mat-header-cell *matHeaderCellDef> Descriptions </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.Descriptions}} </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
     </div>
   </mat-tab>
-
 </mat-tab-group>

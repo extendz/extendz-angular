@@ -31,7 +31,7 @@ import { Color } from 'openlayers';
 export class ExtendzCalendarComponent implements OnInit {
   selectDate: string;
   today: Date = new Date();
-
+  selectDay: Date;
   @Output() select: EventEmitter<string> = new EventEmitter<string>();
 
   @Input() startMonth: number = this.today.getMonth();
@@ -100,7 +100,6 @@ export class ExtendzCalendarComponent implements OnInit {
    * @description When clicked the one of day on calendar their retrieve date.
    * And emit that day for select event to calendar-date component.
    */
-  selectDay: Date;
   onDayClick(day: Date) {
     this.selectDate = this.datePipe.transform(day, this.dateFormat);
     this.select.emit(this.selectDate);
