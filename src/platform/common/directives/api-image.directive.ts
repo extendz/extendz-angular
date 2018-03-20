@@ -19,6 +19,7 @@ export class ApiImageDirective implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log(this.url)
     if (this.item && this.item[this.property]) {
       let imageNames = this.item[this.property];
       // Single image

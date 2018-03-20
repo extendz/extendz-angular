@@ -1,6 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatButtonModule, MatIconModule, MatInputModule, MatMenuModule } from '@angular/material';
+import {
+  MatButtonModule,
+  MatIconModule,
+  MatInputModule,
+  MatMenuModule,
+  MatProgressSpinnerModule
+} from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { ExtendzFileUploadComponent } from './extendz-file-upload.component';
@@ -20,6 +26,7 @@ import { ExtendzDirectiveModule } from '../../common/directives/extendz-directiv
     MatButtonModule,
     MatMenuModule,
     MatIconModule,
+    MatProgressSpinnerModule,
     MatInputModule
   ],
   declarations: [ExtendzFileUploadComponent],

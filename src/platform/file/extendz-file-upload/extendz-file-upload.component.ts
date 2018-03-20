@@ -5,8 +5,10 @@ import { MatMenu, MatMenuTrigger } from '@angular/material';
 import { mergeMap } from 'rxjs/operators/mergeMap';
 import { map } from 'rxjs/operators/map';
 
+import { Image } from './models/image';
 import { Property, RelationTypes } from '../../api-browser/api-table/models';
 import { RestService, ObjectWithLinks } from '../../common/services';
+import { forEach } from '@angular/router/src/utils/collection';
 
 @Component({
   selector: 'ext-file-upload',
@@ -23,7 +25,7 @@ export class ExtendzFileUploadComponent implements OnInit {
    */
   @Input() item: ObjectWithLinks;
 
-  imageUrls: string[];
+  images: Image[] = [];
 
   allowMultiple: boolean = false;
 
@@ -38,16 +40,15 @@ export class ExtendzFileUploadComponent implements OnInit {
   } // ngOnInit()
 
   updateImageList(): void {
-    this.imageUrls = [];
     if (this.item[this.property.name]) {
       let imageNames = this.item[this.property.name];
       // Single image
       if (typeof imageNames == 'string') {
-        this.imageUrls = [this.getFileUrl(imageNames)];
+        this.images = [new Image(this.getFileUrl(imageNames))];
       } else {
         let list: string[] = <string[]>imageNames;
         list.forEach(imageName => {
-          this.imageUrls.push(this.getFileUrl(imageName));
+          this.images.push(new Image(this.getFileUrl(imageName), false));
         });
       }
     } // if
@@ -56,6 +57,21 @@ export class ExtendzFileUploadComponent implements OnInit {
   handleFile(event: EventTarget) {
     let eventObj: MSInputMethodContext = <MSInputMethodContext>event;
     let target: HTMLInputElement = <HTMLInputElement>eventObj.target;
+    // initialize the image list
+    for (let index = 0; index < target.files.length; index++) {
+      const file = target.files[index];
+      let uploadingImage = new Image();
+      uploadingImage.loading = true;
+      let reader = new FileReader();
+      reader.onload = (event: ProgressEvent) => {
+        uploadingImage.url = reader.result;
+        this.images.unshift(uploadingImage);
+      };
+      reader.readAsDataURL(file);
+    }
+
+    return;
+
     //this.imageUrls.unshift('local');
     /**
      * There should be at least one image selected.

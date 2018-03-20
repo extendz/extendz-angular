@@ -6,7 +6,7 @@
 
   <div fxLayout="row" fxLayout.xs="column" fxLayoutWrap style="width: 100%">
     <!-- Add button -->
-    <button fxFlex="30%" fxFlex.xs="100%" *ngIf="allowMultiple || imageUrls.length === 0" class="upload-button image-title" type="button"
+    <button fxFlex="30%" fxFlex.xs="100%" *ngIf="allowMultiple || images?.length === 0" class="upload-button image-title" type="button"
       mat-button (click)="imgFileInput.click()">
       <mat-icon>
         <svg id="add" viewBox="0 0 24 24">
@@ -16,16 +16,20 @@
       </mat-icon>
     </button>
 
+
     <!-- [ngStyle]="{'background-image': 'url(' + url + ')'}" -->
-    <button fxFlex="30%" fxFlex.xs="100%" *ngFor="let url of imageUrls" [matMenuTriggerFor]="appMenu" extApiImage [url]="url"
+    <button fxFlex="30%" fxFlex.xs="100%" *ngFor="let image of images" [matMenuTriggerFor]="appMenu" extApiImage [url]="image.url"
       class="upload-button" type="button" mat-button>
-      <mat-icon>
+      <mat-icon *ngIf="!image.loading">
         <svg id="edit" viewBox="0 0 24 24">
           <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"
           />
           <path d="M0 0h24v24H0z" fill="none" />
         </svg>
       </mat-icon>
+      <div fxLayoutAlign="center center">
+        <mat-spinner *ngIf="image.loading"></mat-spinner>
+      </div>
     </button>
     <mat-menu #appMenu="matMenu" yPosition="above">
       <!-- <button mat-menu-item (click)="imgFileInput.click()">Edit</button> -->
