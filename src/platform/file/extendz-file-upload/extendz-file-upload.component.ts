@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { MatMenu, MatMenuTrigger } from '@angular/material';
+import { MatMenu, MatMenuTrigger, MatSnackBar } from '@angular/material';
 
 import { mergeMap } from 'rxjs/operators/mergeMap';
 import { map } from 'rxjs/operators/map';
@@ -29,7 +29,7 @@ export class ExtendzFileUploadComponent implements OnInit {
 
   allowMultiple: boolean = false;
 
-  constructor(private rest: RestService) {}
+  constructor(private rest: RestService, private snackBar: MatSnackBar) {}
 
   ngOnInit() {
     if (this.property.relationShipType === RelationTypes.MULTIPLE) {
@@ -54,6 +54,38 @@ export class ExtendzFileUploadComponent implements OnInit {
     } // if
   } // updateImageList
 
+  uploadFile(file: File, image: Image): any {
+    let formData = new FormData();
+    formData.append(this.property.name, file);
+    let rest$ = this.rest.http
+      .post(this.getUrl(), formData)
+      .pipe(
+        map((fileNames: string[]) => {
+          if (this.property.relationShipType != RelationTypes.MULTIPLE) {
+            this.item[this.property.name] = fileNames[0];
+          } else {
+            // Add existing
+            let current: any = this.item[this.property.name];
+            this.item[this.property.name] = fileNames.concat(current);
+          }
+          return this.item;
+        }),
+        mergeMap((item: ObjectWithLinks) => this.rest.save(item))
+      )
+      .subscribe(
+        (saved: ObjectWithLinks) => {
+          //this.item = saved;
+          image.loading = false;
+          rest$.unsubscribe();
+        },
+        error => {
+          this.snackBar.open('Upload failed', null, { duration: 3000 });
+          image.loading = false;
+          image.broken = true;
+        }
+      );
+  } // uploadFile()
+
   handleFile(event: EventTarget) {
     let eventObj: MSInputMethodContext = <MSInputMethodContext>event;
     let target: HTMLInputElement = <HTMLInputElement>eventObj.target;
@@ -66,13 +98,12 @@ export class ExtendzFileUploadComponent implements OnInit {
       reader.onload = (event: ProgressEvent) => {
         uploadingImage.url = reader.result;
         this.images.unshift(uploadingImage);
+        this.uploadFile(file, uploadingImage);
       };
       reader.readAsDataURL(file);
     }
+    if (1 === 1) return;
 
-    return;
-
-    //this.imageUrls.unshift('local');
     /**
      * There should be at least one image selected.
      */

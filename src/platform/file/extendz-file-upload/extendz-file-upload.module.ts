@@ -5,7 +5,8 @@ import {
   MatIconModule,
   MatInputModule,
   MatMenuModule,
-  MatProgressSpinnerModule
+  MatProgressSpinnerModule,
+  MatSnackBarModule
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
@@ -24,6 +25,7 @@ import { ExtendzDirectiveModule } from '../../common/directives/extendz-directiv
     ExtendzDirectiveModule,
     // Mat
     MatButtonModule,
+    MatSnackBarModule,
     MatMenuModule,
     MatIconModule,
     MatProgressSpinnerModule,
