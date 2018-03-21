@@ -1,0 +1,25 @@
+.header {
+    width: 100%;
+    height: 30vh;
+}
+
+.profile-header {
+    background-color: black;
+    height: 30vh;
+    padding: 2vw;
+}
+
+.white {
+    color: white;
+}
+
+.white-72 {
+    font-size: 70px;
+    width: 70px;
+    height: 70px;
+    color: #fff;
+    border: 1px solid white;
+    margin-top: 1vh;
+    padding: 1vw;
+    border-radius: 50%;
+}

@@ -13,7 +13,11 @@ const routes: Routes = [
     children: [
       { path: 'oauth2', component: Oauth2ExampleComponent },
       { path: 'facebook', component: FacebookExampleComponent },
-      { path: 'google', component: GoogleExampleComponent }
+      { path: 'google', component: GoogleExampleComponent },
+      {
+        path: 'profile',
+        loadChildren: './profile-example/profile-example.module#ProfileExampleModule'
+      }
     ]
   }
 ];

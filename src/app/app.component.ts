@@ -59,6 +59,12 @@ export class AppComponent {
         title: 'Google',
         subTitle: 'Login with Google',
         url: ['login', 'google']
+      },
+      {
+        icon: 'person',
+        title: 'Profile',
+        subTitle: 'Profile for sidenav',
+        url: ['login', 'profile']
       }
       // {
       //   icon: 'keycloak',
