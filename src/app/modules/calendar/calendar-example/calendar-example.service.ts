@@ -8,7 +8,7 @@ import { CalendarEvent } from './models/calendarEvent';
 export class CalendarExampleService {
   constructor(private http: HttpClient) {}
 
-  getCalendarEvents(): Observable<CalendarEvent> {
-    return this.http.get<CalendarEvent>('assets/mock-db/calendar.json');
+  getCalendarEvents(): Observable<CalendarEvent[]> {
+    return this.http.get<CalendarEvent[]>('assets/mock-db/calendar.json');
   }
 }

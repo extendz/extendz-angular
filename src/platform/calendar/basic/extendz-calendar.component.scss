@@ -15,45 +15,151 @@
  */
 
 .date {
-    padding: 1vh;
-    color: black;
-    font-weight: 300;
-    cursor: pointer;
+  color: black;
+  font-weight: 300;
+  cursor: pointer;
+  text-align: center;
 }
 
 .dissabled {
-    color: #999;
+  color: #999;
 }
 
 .event {
-    color: mat-color(primary);
+  color: mat-color(primary);
 }
 
 .dayOfWeek {
-    padding: 1vh;
-    font-weight: bolder;
+  padding: 0.1vh;
+  font-weight: bolder;
 }
 
 .dayOfWeek p {
-    padding: 0;
-    margin: 0;
-    font-weight: bolder;
+  padding: 0;
+  margin: 0;
+  font-weight: bolder;
 }
 
 .row {
-    padding-left: 2vw;
-    min-height: 10vh;
-    height: auto;
-    padding-top: 2vh;
-    border-bottom: 1px solid #eee;
+  padding-left: 2vw;
+  min-height: 10vh;
+  height: auto;
+  padding-top: 2vh;
+  border-bottom: 1px solid #eee;
 }
 
 .today {
-    background-color: #0277BD;
+  background-color: #0277bd;
+  padding: 5px;
+  width: 20px;
+  height: 20px;
+  border-radius: 500px;
+  color: white;
+  text-align: center;
+  margin: 11px 8px 0 12px;
+}
+.selectDay {
+  background-color: #ccd6db;
+  padding: 5px;
+  width: 20px;
+  height: 20px;
+  border-radius: 500px;
+  color: black;
+  text-align: center;
+  margin: 11px 8px 0 12.3px;
+}
+@media only screen and (min-width: 768px) and (max-width: 1024px){
+  .today {
+    background-color: #0277bd;
     padding: 5px;
-    font-weight: 400;
-    width: 10px;
-    height: 10px;
+    width: 20px;
+    height: 20px;
     border-radius: 500px;
     color: white;
+    text-align: center;
+    margin: 11px 5px 0 5px;
+  }
+  .selectDay {
+    background-color: #ccd6db;
+    padding: 5px;
+    width: 20px;
+    height: 20px;
+    border-radius: 500px;
+    color: black;
+    text-align: center;
+    margin: 11px 5px 0 5px;
+  }
+  
 }
+@media only screen and (max-width: 375px) {
+  .selectDay {
+    background-color: #ccd6db;
+    padding: 5px;
+    width: 20px;
+    height: 20px;
+    border-radius: 500px;
+    color: black;
+    text-align: center;
+    margin: 11px 5px 0 9.5px;
+  }
+  .today {
+    background-color: #0277bd;
+    padding: 5px;
+    width: 20px;
+    height: 20px;
+    border-radius: 500px;
+    color: white;
+    text-align: center;
+    margin: 11px 6px 0 9px;
+  }
+
+}
+
+@media only screen and (max-width: 360px) {
+  .selectDay {
+    background-color: #ccd6db;
+    padding: 5px;
+    width: 20px;
+    height: 20px;
+    border-radius: 500px;
+    color: black;
+    text-align: center;
+    margin: 11px 5px 0 8.5px;
+  }
+  .today {
+    background-color: #0277bd;
+    padding: 5px;
+    width: 20px;
+    height: 20px;
+    border-radius: 500px;
+    color: white;
+    text-align: center;
+    margin: 11px 6px 0 9px;
+  }
+
+}
+
+@media only screen and (max-width: 320px) {
+  .selectDay {
+    background-color: #ccd6db;
+    padding: 5px;
+    width: 20px;
+    height: 20px;
+    border-radius: 500px;
+    color: black;
+    text-align: center;
+    margin: 11px 5.5px 0 6px;
+  }
+  .today {
+    background-color: #0277bd;
+    padding: 5px;
+    width: 20px;
+    height: 20px;
+    border-radius: 500px;
+    color: white;
+    text-align: center;
+    margin: 11px 6.5px 0 5px;
+  }
+  
+}
+

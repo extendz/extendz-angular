@@ -6,7 +6,8 @@ import {
   MatCardModule,
   MatListModule,
   MatIconModule,
-  MatButtonModule
+  MatButtonModule,
+  MatTableModule
 } from '@angular/material';
 import { CovalentHighlightModule } from '@covalent/highlight';
 
@@ -29,7 +30,8 @@ import { ExtendzCalendarModule } from '../../../../platform';
     MatIconModule,
     MatButtonModule,
     MatCardModule,
-    MatListModule
+    MatListModule,
+    MatTableModule
   ],
   declarations: [CalendarExampleComponent],
   providers: [CalendarExampleService]

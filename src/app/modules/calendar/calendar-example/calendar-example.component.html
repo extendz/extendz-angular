@@ -7,7 +7,7 @@
 
         <!-- calendar.component.html -->
         <div fxFlex="40">
-          <ext-calendar></ext-calendar>
+          <ext-calendar (select)="onSelect($event)"></ext-calendar>
         </div>
 
         <!-- date and month -->
@@ -15,7 +15,7 @@
           <mat-card class="advance-card">
             <mat-card-content>
               <mat-list role="list">
-                <mat-list-item *ngFor="let event of events$ | async">
+                <mat-list-item *ngFor="let event of events$">
                   <mat-icon mat-list-icon [svgIcon]="event.icon"></mat-icon>
                   <h4 mat-line>{{event.title}}</h4>
                   <p mat-line> {{event.description}} </p>
@@ -30,12 +30,101 @@
   </mat-tab>
   <mat-tab label="Setup">
     <div class="tab-content">
+      <h3 class="doc-header">Installing</h3>
+
+      <td-highlight lang="typescript">
+        <![CDATA[
+              
+              npm install --save @extendz/calendar
+              
+                    ]]>
+      </td-highlight>
+      <h3 class="doc-header">Register</h3>
+
+      <td-highlight lang="typescript">
+        <![CDATA[
+            import {ExtendzCalendarModule} from "@extendz/calendar"  
+
+            @NgModule({
+              imports: [
+               ExtendzCalendarModule,
+              ],
+            })
+                          ]]>
+      </td-highlight>
+      <p>Define html code</p>
+
+      <td-highlight lang="html">
+        <![CDATA[   
+        <ext-calendar (select)="onSelect($event)"></ext-calendar>
+                        ]]>
+      </td-highlight>
     </div>
   </mat-tab>
 
   <mat-tab label="API">
     <div class="tab-content">
+      <h3 class="doc-header">Events</h3>
+      <p>
+        @Output()
+      </p>
+      <td-highlight lang="typescript">
+        <![CDATA[
+  
+          @Output() select: EventEmitter<string> = new EventEmitter<string>();
+  
+          /***
+          *When click any date.It call onDayClick() method.Then it retrieve that date.
+          **/
+          onDayClick(day: Date) {
+            this.selectDate = this.datePipe.transform(day, this.dateFormat);
+            this.select.emit(this.selectDate);
+          } 
+  
+             ]]>
+      </td-highlight>
+
+      <p>
+        @Input()
+      </p>
+      <td-highlight lang="typescript">
+        <![CDATA[
+
+      @Input() startMonth: number = this.today.getMonth();
+      @Input() startYear: number = this.today.getFullYear();
+    
+      @Input() dateFormat: string = 'dd/MM/yyyy';
+      @Input() dayLabelFormat: string = 'EEE';
+      @Input() titleFormat: string = 'LLLL yyyy';
+      @Input() dayFormat: string = 'd';
+    
+      @Input() timeZone: string;
+      @Input() disableSelection: boolean = false;
+      @Input() disableFutureSelection: boolean = false;
+           ]]>
+      </td-highlight>
+      <br>
+      <br>
+      <mat-table #table [dataSource]="dataSource">
+
+        <ng-container matColumnDef="Options">
+          <mat-header-cell *matHeaderCellDef> Options </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.Options}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="Type">
+          <mat-header-cell *matHeaderCellDef> Type </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.Type}} </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="Descriptions">
+          <mat-header-cell *matHeaderCellDef> Descriptions </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.Descriptions}} </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
     </div>
   </mat-tab>
-
 </mat-tab-group>
