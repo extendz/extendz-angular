@@ -1,0 +1,53 @@
+<div fxLayout="column" style="border: 1px solid #999">
+  <div fxLayout="row" fxLayoutAlign="center center">
+    <button mat-icon-button (click)="previous()">
+      <mat-icon>
+        <svg id="previous" viewBox="0 0 24 24">
+          <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
+          <path d="M0 0h24v24H0z" fill="none" />
+        </svg>
+      </mat-icon>
+    </button>
+
+    <span fxFlex></span>
+
+    <span><b>{{calendar.start | date:titleFormat:timeZone}}</b></span>
+
+    <span fxFlex></span>
+
+    <button mat-icon-button (click)="next()">
+      <mat-icon>
+        <svg id="next" viewBox="0 0 24 24">
+          <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
+          <path d="M0 0h24v24H0z" fill="none" />
+        </svg>
+      </mat-icon>
+    </button>
+  </div>
+  <div fxLayout="column" fxFlex="100%" style="height:250px">
+    <!-- Calendar View -->
+    <div fxLayout="column" fxFlex>
+      <div fxLayout="row">
+        <div fxFlex *ngFor='let day of calendar.weeks[0]' class="dayOfWeek dissabled">
+          <p style="text-align:center">{{ day | date:dayLabelFormat }}</p>
+        </div>
+      </div>
+
+      <div *ngFor="let week of calendar.weeks" fxLayout="row" fxFlex>
+        <div class="date" [ngClass]="{'dissabled': !sameMonth(day)}" *ngFor="let day of week" (click)="onDayClick(day)" fxLayout="column"
+          fxFlex>
+          <div fxLayout="column" fxLayoutGap="0.5vh">
+            <ng-container *ngIf="day===selectDay;else second">
+              <p class="selectDay">{{ day | date:dayFormat }}</p>
+            </ng-container>
+            <ng-template #second>
+
+              <p [ngClass]="{ 'today' : isToday(day)}"> {{ day | date:dayFormat }}</p>
+
+            </ng-template>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

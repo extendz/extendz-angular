@@ -99,12 +99,6 @@ export class AppComponent {
 
     this.otherComponentMenuItems = [
       {
-        icon: 'map',
-        title: 'Google Map',
-        subTitle: 'Google Map',
-        url: ['map']
-      },
-      {
         icon: 'date_range',
         title: 'Calendar',
         subTitle: 'Material Calendar',

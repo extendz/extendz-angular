@@ -1,33 +1,36 @@
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+  (adsbygoogle = window.adsbygoogle || []).push({
+    google_ad_client: "ca-pub-3599838431822425",
+    enable_page_level_ads: true
+  });
+</script>
 <mat-sidenav-container>
-  <mat-sidenav #sidenav [opened]="media.isActive('xs') || media.isActive('sm')   ? false :true"
-               [mode]="media.isActive('xs') ? 'over' : 'side'">
-
-    <mat-toolbar color="primary" class="mat-elevation-z1">
-      <button mat-icon-button (click)="sidenav.toggle()" MatTooltip="Toggle SideNav">
-        <mat-icon svgIcon="app:menu"></mat-icon>
-      </button>
-      <span>{{title}}</span>
-    </mat-toolbar>
-
-    <div style="margin: 5px;">
-      <!--Pages -->
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            <div fxLayout="row" fxLayoutAlign="center center">
-              <mat-icon mat-list-icon svgIcon="app:book"></mat-icon>
-              <span>Pages</span>
-            </div>
-          </mat-panel-title>
-        </mat-expansion-panel-header>
-        <mat-list>
-          <a mat-list-item *ngFor="let item of pagesMenuItems" [routerLink]="item.url"
-             (click)="media.isActive('xs') && sidenav.toggle()">
-            <mat-icon mat-list-icon svgIcon="app:{{item.icon}}"></mat-icon>
-            <h4 mat-line>{{item.title}}</h4>
-          </a>
-        </mat-list>
-      </mat-expansion-panel>
+    <mat-sidenav #sidenav [opened]="media.isActive('xs') || media.isActive('sm')   ? false :true" [mode]="media.isActive('xs') ? 'over' : 'side'">
+        <mat-toolbar color="primary" class="mat-elevation-z1">
+            <button mat-icon-button (click)="sidenav.toggle()" MatTooltip="Toggle SideNav">
+                <mat-icon svgIcon="app:menu"> </mat-icon>
+            </button>
+            <span>{{title}}</span>
+        </mat-toolbar>
+        <div [ngClass]="{'margined': !media.isActive('xs')}">
+            <!--Pages -->
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <div fxLayout="row" fxLayoutAlign="center center">
+                            <mat-icon mat-list-icon svgIcon="app:book"></mat-icon>
+                            <span>Pages</span>
+                        </div>
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <mat-list>
+                    <a mat-list-item *ngFor="let item of pagesMenuItems" [routerLink]="item.url" (click)="media.isActive('xs') && sidenav.toggle()">
+                        <mat-icon mat-list-icon svgIcon="app:{{item.icon}}"></mat-icon>
+                        <h4 mat-line>{{item.title}}</h4>
+                    </a>
+                </mat-list>
+            </mat-expansion-panel>
 
       <mat-expansion-panel>
         <mat-expansion-panel-header>
@@ -47,30 +50,66 @@
         </mat-list>
       </mat-expansion-panel>
 
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            <div fxLayout="row" fxLayoutAlign="center center">
-              <mat-icon mat-list-icon svgIcon="app:map"></mat-icon>
-              <span>Mpas</span>
-            </div>
-          </mat-panel-title>
-        </mat-expansion-panel-header>
-        <mat-list>
-          <a mat-list-item [routerLink]="['map']" (click)="!media.isActive('xs') && sidenav.toggle()">
-            <mat-icon mat-list-icon svgIcon="app:map"></mat-icon>
-            <h4 mat-line>Google Map</h4>
-          </a>
-        </mat-list>
-        <mat-list>
-          <mat-list-item [routerLink]="['openlayer']" (click)="!media.isActive('xs') && sidenav.toggle()">
-            <mat-icon mat-list-icon svgIcon="app:openlayer" style="color: white"></mat-icon>
-            <h4 mat-line>Openlayer</h4>
-            <!-- <p mat-line>{{item.subTitle}}</p> -->
-          </mat-list-item>
-        </mat-list>
-      </mat-expansion-panel>
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <div fxLayout="row" fxLayoutAlign="center center">
+                            <mat-icon mat-list-icon svgIcon="app:map"></mat-icon>
+                            <span>Maps</span>
+                        </div>
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <mat-list>
+                    <a mat-list-item [routerLink]="['map']" (click)="!media.isActive('xs') && sidenav.toggle()">
+                        <mat-icon mat-list-icon svgIcon="app:map"></mat-icon>
+                        <h4 mat-line>Google Map</h4>
+                    </a>
+                </mat-list>
+                <mat-list>
+                    <mat-list-item [routerLink]="['openlayer']" (click)="!media.isActive('xs') && sidenav.toggle()">
+                        <mat-icon mat-list-icon svgIcon="app:openlayer" style="color: white"></mat-icon>
+                        <h4 mat-line>Openlayer</h4>
+                        <!-- <p mat-line>{{item.subTitle}}</p> -->
+                    </mat-list-item>
+                </mat-list>
+            </mat-expansion-panel>
 
+            <mat-expansion-panel class="mat-elevation-z1">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <div fxLayout="row" fxLayoutAlign="center center">
+                            <mat-icon mat-list-icon svgIcon="app:brightness_auto"></mat-icon>
+                            <span>API Browser</span>
+                        </div>
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <mat-list>
+                    <a mat-list-item *ngFor="let item of apiMenuItms" [routerLink]="item.url" (click)="media.isActive('xs') && sidenav.toggle()">
+                        <mat-icon mat-list-icon svgIcon="app:{{item.icon}}"></mat-icon>
+                        <h4 mat-line>{{item.title}}</h4>
+                    </a>
+                </mat-list>
+            </mat-expansion-panel>
+
+            <!--Other-->
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <div fxLayout="row" fxLayoutAlign="center center">
+                            <mat-icon mat-list-icon svgIcon="app:date_range"></mat-icon>
+                            <span>Other components</span>
+                        </div>
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <mat-list>
+                    <a mat-list-item *ngFor="let item of otherComponentMenuItems" [routerLink]="item.url" (click)="media.isActive('xs') && sidenav.toggle()">
+                        <mat-icon mat-list-icon svgIcon="app:{{item.icon}}"></mat-icon>
+                        <h4 mat-line>{{item.title}}</h4>
+                    </a>
+                </mat-list>
+            </mat-expansion-panel>
+        </div>
+    </mat-sidenav>
       <!--Chart component starts here-->
       <mat-expansion-panel style="background-color: #eee" displayMode="'flat'">
         <mat-expansion-panel-header>

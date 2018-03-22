@@ -26,6 +26,10 @@ const routes: Routes = [
     path: 'chart',
     loadChildren: './modules/charts/charts.module#ChartsModule'
   },
+  {
+    path: 'calendar',
+    loadChildren: './modules/calendar/calendar-example/calendar-example.module#CalendarExampleModule'
+  }
 ];
 
 @NgModule({
