@@ -13,7 +13,7 @@
             </button>
             <span>{{title}}</span>
         </mat-toolbar>
-        <div style="margin: 5px;">
+        <div [ngClass]="{'margined': !media.isActive('xs')}">
             <!--Pages -->
             <mat-expansion-panel>
                 <mat-expansion-panel-header>
@@ -73,7 +73,7 @@
                 </mat-list>
             </mat-expansion-panel>
 
-            <mat-expansion-panel>
+            <mat-expansion-panel class="mat-elevation-z1">
                 <mat-expansion-panel-header>
                     <mat-panel-title>
                         <div fxLayout="row" fxLayoutAlign="center center">
