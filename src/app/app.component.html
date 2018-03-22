@@ -1,13 +1,12 @@
 <mat-sidenav-container>
-    <mat-sidenav  #sidenav [opened]="media.isActive('xs') || media.isActive('sm')   ? false :true"
-        [mode]="media.isActive('xs') ? 'over' : 'side'">
+    <mat-sidenav #sidenav [opened]="media.isActive('xs') || media.isActive('sm')   ? false :true" [mode]="media.isActive('xs') ? 'over' : 'side'">
         <mat-toolbar color="primary" class="mat-elevation-z1">
             <button mat-icon-button (click)="sidenav.toggle()" MatTooltip="Toggle SideNav">
                 <mat-icon svgIcon="app:menu"> </mat-icon>
             </button>
             <span>{{title}}</span>
         </mat-toolbar>
-        <div style="margin: 5px;">
+        <div [ngClass]="{'margined': !media.isActive('xs')}">
             <!--Pages -->
             <mat-expansion-panel>
                 <mat-expansion-panel-header>
@@ -48,7 +47,7 @@
                     <mat-panel-title>
                         <div fxLayout="row" fxLayoutAlign="center center">
                             <mat-icon mat-list-icon svgIcon="app:map"></mat-icon>
-                            <span>Mpas</span>
+                            <span>Maps</span>
                         </div>
                     </mat-panel-title>
                 </mat-expansion-panel-header>
@@ -67,7 +66,7 @@
                 </mat-list>
             </mat-expansion-panel>
 
-            <mat-expansion-panel>
+            <mat-expansion-panel class="mat-elevation-z1">
                 <mat-expansion-panel-header>
                     <mat-panel-title>
                         <div fxLayout="row" fxLayoutAlign="center center">
