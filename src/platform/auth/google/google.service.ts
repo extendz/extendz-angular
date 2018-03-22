@@ -103,7 +103,7 @@ export class GoogleService {
     });
   } // doLogin()
 
-  private fetchGoogleUserDetails(observer : Observer<AccessToken>) {
+  private fetchGoogleUserDetails(observer: Observer<AccessToken>) {
     let currentUser = this.gauth.currentUser.get();
     // Emmit the token
     let accessToken: AccessToken = {
@@ -121,6 +121,12 @@ export class GoogleService {
       given_name: profile.getGivenName(),
       family_name: profile.getFamilyName()
     };
+
+    // Save on local storage
+    if (this.config.saveOnSuccess && this.config.saveOnSuccess === true) {
+      this.principal.setUser(userInfo);
+    }
+
     // Emmit userInfo
     this.userInfoEmitter.emit(userInfo);
     observer.complete();

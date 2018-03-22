@@ -8,9 +8,10 @@ import { AuthRoutingModule } from './auth-routing.module';
 import { AuthComponent } from './auth.component';
 import { Oauth2ExampleComponent } from './oauth2-example/oauth2-example.component';
 
-import { ExtendzOauth2Module, ExtendzFacebookModule, ExtendzGoogleModule } from '../../../platform';
 import { FacebookExampleComponent } from './facebook-example/facebook-example.component';
 import { GoogleExampleComponent } from './google-example/google-example.component';
+import { ExtendzOauth2Module, ExtendzFacebookModule } from '../../../platform';
+import { ExtendzGoogleModule } from '../../../platform/auth/google';
 
 @NgModule({
   imports: [
@@ -27,6 +28,7 @@ import { GoogleExampleComponent } from './google-example/google-example.componen
     }),
     ExtendzGoogleModule.forRoot({
       client_id: '476518848997-iivshtcbmvqur358fc566muejigf978s.apps.googleusercontent.com',
+      saveOnSuccess: true,
       exchangeServer: {
         url:
           'https://extendz-keycloak.herokuapp.com/auth/realms/extendz/protocol/openid-connect/token',

@@ -48,12 +48,10 @@ export class Oauth2Component implements OnInit, OnDestroy {
   serviceSubscripion$: Subscription;
 
   @Input() config: Oauth2Config;
-
   /**
    * Emmit on successful token receive.
    */
   @Output() token: EventEmitter<AccessToken> = new EventEmitter<AccessToken>();
-
   /**
    * Emmit on successful user infomation receive.
    */
