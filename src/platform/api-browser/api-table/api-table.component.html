@@ -1,16 +1,15 @@
 <div *ngIf="tableResponse?.page?.totalPages === 0;else table">
   <h1 align="center" class="gray">Please create a new record !</h1>
 </div>
-<ng-template #table>
 
+<ng-template #table>
   <!-- Search bar -->
-  <div fxLayout="row" fxLayoutGap="2vw" fxLayoutAlign="center center" style="padding: 1vw">
-    <!-- <button mat-icon-button (click)="addNew()">
-   
-  </button> -->
-    <h3>{{model | camelCase}} ({{selection.selected.length}})</h3>
+  <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="2vw" fxLayoutGap.xs="0" fxLayoutAlign="center center" style="padding: 1vw">
+    <h3>{{model | camelCase}}
+      <span *ngIf="selection.selected.length > 0">({{selection.selected.length}})</span>
+    </h3>
     <span fxFlex></span>
-    <mat-form-field>
+    <mat-form-field [ngClass]="{'full-width': media.isActive('xs')}">
       <!-- (keyup)="applyFilter($event.target.value)"  -->
       <input matInput autofocus placeholder="Search">
       <button mat-icon-button [matMenuTriggerFor]="appMenu" matSuffix>
@@ -30,7 +29,7 @@
 
   <div *ngIf="media.isActive('xs');else desktop">
     <!-- Mobile -->
-    <div style="background-color: #eee;">
+    <div style="margin-bottom: 2vh">
       <span fxFlex="2%"></span>
       <!-- Header -->
       <div fxLayout="column" fxFlex fxLayoutGap="5px" style="margin-top: 1vh">
