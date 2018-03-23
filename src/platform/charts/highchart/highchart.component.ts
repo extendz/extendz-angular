@@ -14,10 +14,16 @@
 * limitations under the License.
 */
 
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  Output,
+  EventEmitter,
+  ViewChild,
+  ElementRef
+} from '@angular/core';
 import * as Highcharts from 'highcharts';
-import { Config } from './models/config';
-import { Options } from './models/options';
 
 @Component({
   selector: 'ext-highchart',
@@ -30,7 +36,7 @@ export class HighchartComponent implements OnInit {
    */
   @Input() options: Highcharts.Options = {};
 
-  @ViewChild('chart') chart;
+  @ViewChild('chart') chart: ElementRef;
 
   constructor() {}
 
