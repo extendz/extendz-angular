@@ -14,7 +14,7 @@
 * limitations under the License.
 */
 
-import { NgModule } from '@angular/core';
+import { NgModule, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HighchartComponent } from './highchart.component';
 
@@ -25,10 +25,8 @@ import { HighchartComponent } from './highchart.component';
  */
 
 @NgModule({
-  imports: [
-    CommonModule
-  ],
+  imports: [CommonModule],
   declarations: [HighchartComponent],
   exports: [HighchartComponent]
 })
-export class ExtendzHighchartModule { }
+export class ExtendzHighchartModule {}
