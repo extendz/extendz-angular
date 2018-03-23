@@ -1,0 +1,165 @@
+/**
+ *   Copyright 2018 the original author or authors
+ *
+ *   Licensed under the Apache License, Version 2.0 (the "License");
+ *   you may not use this file except in compliance with the License.
+ *   You may obtain a copy of the License at
+ *
+ *       http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *   Unless required by applicable law or agreed to in writing, software
+ *   distributed under the License is distributed on an "AS IS" BASIS,
+ *   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *   See the License for the specific language governing permissions and
+ *   limitations under the License.
+ */
+
+.date {
+  color: black;
+  font-weight: 300;
+  cursor: pointer;
+  text-align: center;
+}
+
+.dissabled {
+  color: #999;
+}
+
+.event {
+  color: mat-color(primary);
+}
+
+.dayOfWeek {
+  padding: 0.1vh;
+  font-weight: bolder;
+}
+
+.dayOfWeek p {
+  padding: 0;
+  margin: 0;
+  font-weight: bolder;
+}
+
+.row {
+  padding-left: 2vw;
+  min-height: 10vh;
+  height: auto;
+  padding-top: 2vh;
+  border-bottom: 1px solid #eee;
+}
+
+.today {
+  background-color: #0277bd;
+  padding: 5px;
+  width: 20px;
+  height: 20px;
+  border-radius: 500px;
+  color: white;
+  text-align: center;
+  margin: 11px 8px 0 12px;
+}
+.selectDay {
+  background-color: #ccd6db;
+  padding: 5px;
+  width: 20px;
+  height: 20px;
+  border-radius: 500px;
+  color: black;
+  text-align: center;
+  margin: 11px 8px 0 12.3px;
+}
+@media only screen and (min-width: 768px) and (max-width: 1024px){
+  .today {
+    background-color: #0277bd;
+    padding: 5px;
+    width: 20px;
+    height: 20px;
+    border-radius: 500px;
+    color: white;
+    text-align: center;
+    margin: 11px 5px 0 5px;
+  }
+  .selectDay {
+    background-color: #ccd6db;
+    padding: 5px;
+    width: 20px;
+    height: 20px;
+    border-radius: 500px;
+    color: black;
+    text-align: center;
+    margin: 11px 5px 0 5px;
+  }
+  
+}
+@media only screen and (max-width: 375px) {
+  .selectDay {
+    background-color: #ccd6db;
+    padding: 5px;
+    width: 20px;
+    height: 20px;
+    border-radius: 500px;
+    color: black;
+    text-align: center;
+    margin: 11px 5px 0 9.5px;
+  }
+  .today {
+    background-color: #0277bd;
+    padding: 5px;
+    width: 20px;
+    height: 20px;
+    border-radius: 500px;
+    color: white;
+    text-align: center;
+    margin: 11px 6px 0 9px;
+  }
+
+}
+
+@media only screen and (max-width: 360px) {
+  .selectDay {
+    background-color: #ccd6db;
+    padding: 5px;
+    width: 20px;
+    height: 20px;
+    border-radius: 500px;
+    color: black;
+    text-align: center;
+    margin: 11px 5px 0 8.5px;
+  }
+  .today {
+    background-color: #0277bd;
+    padding: 5px;
+    width: 20px;
+    height: 20px;
+    border-radius: 500px;
+    color: white;
+    text-align: center;
+    margin: 11px 6px 0 9px;
+  }
+
+}
+
+@media only screen and (max-width: 320px) {
+  .selectDay {
+    background-color: #ccd6db;
+    padding: 5px;
+    width: 20px;
+    height: 20px;
+    border-radius: 500px;
+    color: black;
+    text-align: center;
+    margin: 11px 5.5px 0 6px;
+  }
+  .today {
+    background-color: #0277bd;
+    padding: 5px;
+    width: 20px;
+    height: 20px;
+    border-radius: 500px;
+    color: white;
+    text-align: center;
+    margin: 11px 6.5px 0 5px;
+  }
+  
+}
+
