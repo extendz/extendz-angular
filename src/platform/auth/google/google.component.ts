@@ -33,7 +33,6 @@ export class GoogleComponent implements OnDestroy {
    * Emmit on successful token receive.
    */
   @Output() token: EventEmitter<AccessToken> = new EventEmitter<AccessToken>();
-
   /**
    * Emmit on successful user infomation receive.
    */
@@ -50,11 +49,10 @@ export class GoogleComponent implements OnDestroy {
 
   login() {
     this.loadingService.register('gl');
-    let loging$ = this.googleService
+    this.all$ = this.googleService
       .login(this.token, this.userInfo)
       .pipe(finalize(() => this.zone.run(() => this.loadingService.resolve('gl'))), take(1))
       .subscribe();
-    this.all$.add(loging$);
   } // login()
 
   ngOnDestroy(): void {
