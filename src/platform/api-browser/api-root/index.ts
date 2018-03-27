@@ -14,3 +14,4 @@
  * limitations under the License.
  */
 export * from './extendz-api-root.module';
+export * from './models';

@@ -16,3 +16,4 @@
 export * from './api-root';
 export * from './models';
 export * from './extendz-api.module';
+export * from './api-table-host/extendz-api-table-host.module';

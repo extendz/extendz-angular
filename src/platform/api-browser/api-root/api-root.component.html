@@ -23,7 +23,7 @@
                 <mat-card-subtitle>{{item.url}}</mat-card-subtitle>
                 <span fxFlex> </span>
                 <div fxLayoutAlign="center center">
-                    <button mat-button [routerLink]="[item.name]">View</button>
+                    <button mat-button (click)="onSelect(item)">View</button>
                 </div>
             </mat-card-header>
         </mat-card>

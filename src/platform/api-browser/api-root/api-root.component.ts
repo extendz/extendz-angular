@@ -13,7 +13,7 @@
  *    See the License for the specific language governing permissions and
  *    limitations under the License.
  */
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators/map';
@@ -29,9 +29,19 @@ import { Model } from './models';
 export class ApiRootComponent implements OnInit {
   models$: Observable<Model[]>;
 
+  @Output() select: EventEmitter<Model> = new EventEmitter<Model>();
+
   constructor(private apiRootService: ApiRootService) {}
 
   ngOnInit(): void {
     this.models$ = this.apiRootService.getRoot();
   } // ngOnInit()
+
+  /**
+   * On Select a model
+   * @param model selected Model
+   */
+  onSelect(model: Model) {
+    this.select.emit(model);
+  }
 } // class
