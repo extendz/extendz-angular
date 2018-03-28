@@ -20,9 +20,6 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { PageEvent, MatCheckboxChange } from '@angular/material';
 import { ObservableMedia } from '@angular/flex-layout';
 
-import { ApiTableService } from './api-table.service';
-import { PageAndSort, ModelMeta, ObjectWithLinks } from './models';
-
 import { debounceTime } from 'rxjs/operators/debounceTime';
 import { Subscription } from 'rxjs/Subscription';
 import { tap } from 'rxjs/operators/tap';
@@ -30,10 +27,11 @@ import { mergeMap } from 'rxjs/operators/mergeMap';
 import { map } from 'rxjs/operators/map';
 import { of } from 'rxjs/observable/of';
 
-import { TableResponse } from './models/modelData/tableResponse';
-import { Property } from './models/modelMeta/property';
-
+import { ApiTableService } from './api-table.service';
 import { TableDataSource } from './dataSource/tableDataSource';
+
+import { ModelMeta, Property, PageAndSort } from '../models';
+import { ObjectWithLinks, HateosPagedResponse } from '../../common';
 
 @Component({
   selector: 'ext-api-table',
@@ -46,7 +44,7 @@ export class ApiTableComponent implements OnInit, OnDestroy {
   columns: string[];
   allColumns: string[];
   modelMeta: ModelMeta;
-  tableResponse: TableResponse;
+  tableResponse: HateosPagedResponse;
   data: Object[];
 
   url: string;
@@ -89,7 +87,7 @@ export class ApiTableComponent implements OnInit, OnDestroy {
       .getModel(this.model, 'dataTable')
       .pipe(
         mergeMap((meta: ModelMeta) => this.handleMetaModel(meta)),
-        map((tableResponse: TableResponse) => this.handdleDataResponse(tableResponse))
+        map((tableResponse: HateosPagedResponse) => this.handdleDataResponse(tableResponse))
       )
       .subscribe(d => {
         // Select the values from input
@@ -113,7 +111,7 @@ export class ApiTableComponent implements OnInit, OnDestroy {
     return this.service.getTableData(meta);
   } // handleMetaModel()
 
-  private handdleDataResponse(tableResponse: TableResponse) {
+  private handdleDataResponse(tableResponse: HateosPagedResponse) {
     this.tableResponse = tableResponse;
     this.url = this.modelMeta.url;
     this.selector = this.url.substring(this.url.lastIndexOf('/') + 1);
@@ -133,8 +131,9 @@ export class ApiTableComponent implements OnInit, OnDestroy {
    * @param item
    */
   public editRow(item: ObjectWithLinks) {
-    let id = this.service.getItemId(item._links.self.href);
-    this.router.navigate([id], { relativeTo: this.activatedRoute });
+    this.select.emit(item);
+    //let id = this.service.getItemId(item._links.self.href);
+    //this.router.navigate([id], { relativeTo: this.activatedRoute });
   } // editRow()
 
   pageEvent(event: PageEvent) {
@@ -144,7 +143,7 @@ export class ApiTableComponent implements OnInit, OnDestroy {
     };
     this.service
       .getTableData(this.modelMeta, pageAndSort)
-      .subscribe((tableResponse: TableResponse) => this.handdleDataResponse(tableResponse));
+      .subscribe((tableResponse: HateosPagedResponse) => this.handdleDataResponse(tableResponse));
   } // pageEvent()
 
   isAllSelected() {

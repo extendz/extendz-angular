@@ -4,10 +4,8 @@ import { ObservableMedia } from '@angular/flex-layout';
 
 import { Observable } from 'rxjs/Observable';
 
-import { TableResponse, PageAndSort, ModelMeta, ObjectWithLinks } from './models/';
-
-import { RestService, ExtRestConfig } from '../../common';
-import { ExtendzApiConfig } from '../models';
+import { RestService, ExtRestConfig, HateosPagedResponse, ObjectWithLinks } from '../../common';
+import { ExtendzApiConfig, ModelMeta, PageAndSort } from '../models';
 
 @Injectable()
 export class ApiTableService {
@@ -28,18 +26,14 @@ export class ApiTableService {
     return this.rest.http.get<ModelMeta>(url, { params });
   } // getModel()
 
-  getTableData(meta: ModelMeta, pageAndSort?: PageAndSort): Observable<TableResponse> {
+  getTableData(meta: ModelMeta, pageAndSort?: PageAndSort): Observable<HateosPagedResponse> {
     let params: HttpParams = new HttpParams();
     params = params.append('projection', 'dataTable');
     if (pageAndSort) {
       params = params.append('page', pageAndSort.page.toString());
     }
-    return this.rest.http.get<TableResponse>(this.conf.basePath + meta.url, { params });
+    return this.rest.http.get<HateosPagedResponse>(this.conf.basePath + meta.url, { params });
   } // getTableData()
-
-  getItemId(url: string) {
-    return this.rest.getId(url);
-  } // getItemId
 
   getItem(url: any): Observable<ObjectWithLinks> {
     return this.rest.http.get<ObjectWithLinks>(url);

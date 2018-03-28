@@ -15,19 +15,19 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { ApiItemComponent } from './api-item.component';
-import { ApiTableService } from '../api-table/api-table.service';
 import { ApiItemService } from './api-item.service';
-
-import { ExtendPipesModule } from '../../common/pipes/extend-pipes.module';
 import { ExtendzApiSelectModule } from '../extendz-api-select/extendz-api-select.module';
-import { ExtendzFileUploadModule } from '../..';
+import { ApiTableService } from '../api-table/api-table.service';
+
+import { ExtendPipesModule } from '../../common';
+
+import { ExtendzFileUploadModule } from '../../file/';
 
 @NgModule({
   imports: [
     CommonModule,
     FlexLayoutModule,
     ReactiveFormsModule,
-    MatMomentDateModule,
     //Exentedz
     ExtendPipesModule,
     ExtendzApiSelectModule,
@@ -40,7 +40,8 @@ import { ExtendzFileUploadModule } from '../..';
     MatCardModule,
     MatButtonModule,
     MatSnackBarModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    MatMomentDateModule
   ],
   declarations: [ApiItemComponent],
   exports: [ApiItemComponent],

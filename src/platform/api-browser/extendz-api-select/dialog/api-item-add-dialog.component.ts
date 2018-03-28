@@ -1,8 +1,9 @@
 import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { Property, RelationTypes } from '../../api-table/models';
+
 import { ObjectWithLinks } from '../../..';
 import { DialogData } from './models/dialogData';
+import { RelationTypes } from '../../models';
 
 @Component({
   selector: 'ext-api-item-add',

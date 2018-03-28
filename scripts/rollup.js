@@ -25,6 +25,9 @@ gulp.task('rollup-code', '', function() {
   const globals = {
     tslib: 'tslib',
 
+    // Moment
+    'moment':'moment',
+
     // Angular dependencies
     '@angular/animations': 'ng.animations',
     '@angular/animations/browser': 'ng.animations.browser',
@@ -60,13 +63,11 @@ gulp.task('rollup-code', '', function() {
     '@angular/cdk/portal': 'ng.cdk.portal',
     '@angular/cdk/keycodes': 'ng.cdk.keycodes',
     '@angular/cdk/bidi': 'ng.cdk.bidi',
-    '@angular/cdk/coercion': 'ng.cdk.coercion',
+    //'@angular/cdk/coercion': 'ng.cdk.coercion',
     '@angular/cdk/scrolling': 'ng.cdk.scrolling',
 
     //Covalent dependencies
     '@covalent/core': 'td.core',
-
-    '@hrandika/login': 'hrandika.login',
 
     // Rxjs dependencies
     'rxjs/Subject': 'Rx',

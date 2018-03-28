@@ -8,11 +8,12 @@ import { mergeMap } from 'rxjs/operators/mergeMap';
 import { map } from 'rxjs/operators/map';
 import { take } from 'rxjs/operators/take';
 
-import { DialogData } from '../api-item/dialog/models/dialogData';
-import { Property, ModelMeta, TableResponse, RelationTypes } from '../api-table/models';
-import { ApiItemAddDialogComponent } from '../api-item/dialog/api-item-add-dialog.component';
+import { Property, ModelMeta, RelationTypes } from '../models';
+import { ObjectWithLinks, HateosPagedResponse } from '../../common';
+
 import { ApiTableService } from '../api-table/api-table.service';
-import { ObjectWithLinks } from '../../index';
+import { DialogData } from './dialog/models/dialogData';
+import { ApiItemAddDialogComponent } from './dialog/api-item-add-dialog.component';
 
 @Component({
   selector: 'ext-api-select',
@@ -154,7 +155,7 @@ export class ExtendzApiSelectComponent implements OnInit, OnDestroy, ControlValu
       .pipe(take(1))
       .subscribe(
         (response: any) => {
-          let tableResponse: TableResponse = response;
+          let tableResponse: HateosPagedResponse = response;
           if (tableResponse._embedded && tableResponse._embedded[this.property.name]) {
             this.handleMultipleResponse(tableResponse);
           } else {
@@ -170,7 +171,7 @@ export class ExtendzApiSelectComponent implements OnInit, OnDestroy, ControlValu
       );
   } // getResponse()
 
-  private handleMultipleResponse(response: TableResponse) {
+  private handleMultipleResponse(response: HateosPagedResponse) {
     let data: ObjectWithLinks[] = response._embedded[this.property.name];
     this.response = data;
     this.value = data.map(d => d._links.self.href);
@@ -202,11 +203,11 @@ export class ExtendzApiSelectComponent implements OnInit, OnDestroy, ControlValu
     }
   } // handleSingleResponse()
 
-  private handleResponse(response: ObjectWithLinks | TableResponse, selectedObjects: number) {
+  private handleResponse(response: ObjectWithLinks | HateosPagedResponse, selectedObjects: number) {
     switch (this.property.relationShipType) {
       case RelationTypes.MULTIPLE:
         //this.value = response;
-        let tableResponse: TableResponse = response;
+        let tableResponse: HateosPagedResponse = response;
         let data: ObjectWithLinks[] = tableResponse._embedded[this.property.name];
         if (data.length === 0) {
         }

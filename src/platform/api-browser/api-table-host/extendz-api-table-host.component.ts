@@ -16,15 +16,17 @@
 
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ObjectWithLinks } from '../api-table/models';
+
 import { Subscription } from 'rxjs/Subscription';
+
+import { RestService, ObjectWithLinks } from '../../common';
 
 @Component({
   selector: 'ext-api-table-host',
   templateUrl: './api-table-host.component.html',
   styleUrls: ['./api-table-host.component.css']
 })
-export class ApiTableHostComponent implements OnInit, OnDestroy {
+export class ExtendzApiTableHostComponent implements OnInit, OnDestroy {
   /**
    * Selected model name
    */
@@ -38,7 +40,11 @@ export class ApiTableHostComponent implements OnInit, OnDestroy {
    */
   all$: Subscription;
 
-  constructor(private activatedRoute: ActivatedRoute, private router: Router) {}
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
+    private rest: RestService
+  ) {}
 
   ngOnInit() {
     this.all$ = this.activatedRoute.params.subscribe(param => {
@@ -52,6 +58,10 @@ export class ApiTableHostComponent implements OnInit, OnDestroy {
   }
 
   onSelect(item: ObjectWithLinks) {
-    this.router.navigate([this.router.url, '0']);
+    let id = '0';
+    if (item && item._links.self.href) {
+      id = this.rest.getId(item._links.self.href);
+    }
+    this.router.navigate([id], { relativeTo: this.activatedRoute });
   } //onSelect
 } // class

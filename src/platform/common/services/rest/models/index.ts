@@ -16,3 +16,5 @@
 export * from './errorResponse';
 export * from './extRest.conf';
 export * from './objectWithLinks';
+export * from './hatoesResponse';
+export * from './hatoesPagedResponse';

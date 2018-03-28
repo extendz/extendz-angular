@@ -19,7 +19,7 @@ import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators/map';
 
 import { ApiRootService } from './api-root.service';
-import { Model } from './models';
+import { ModelMeta } from '../models';
 
 @Component({
   selector: 'ext-api-root',
@@ -27,9 +27,9 @@ import { Model } from './models';
   styleUrls: ['./api-root.component.scss']
 })
 export class ApiRootComponent implements OnInit {
-  models$: Observable<Model[]>;
+  models$: Observable<ModelMeta[]>;
 
-  @Output() select: EventEmitter<Model> = new EventEmitter<Model>();
+  @Output() select: EventEmitter<ModelMeta> = new EventEmitter<ModelMeta>();
 
   constructor(private apiRootService: ApiRootService) {}
 
@@ -41,7 +41,7 @@ export class ApiRootComponent implements OnInit {
    * On Select a model
    * @param model selected Model
    */
-  onSelect(model: Model) {
+  onSelect(model: ModelMeta) {
     this.select.emit(model);
   }
 } // class

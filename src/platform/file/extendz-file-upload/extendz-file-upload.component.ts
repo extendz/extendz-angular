@@ -6,9 +6,8 @@ import { mergeMap } from 'rxjs/operators/mergeMap';
 import { map } from 'rxjs/operators/map';
 
 import { Image } from './models/image';
-import { Property, RelationTypes } from '../../api-browser/api-table/models';
-import { RestService, ObjectWithLinks } from '../../common/services';
-import { forEach } from '@angular/router/src/utils/collection';
+import { Property, RelationTypes } from '../../api-browser/models';
+import { RestService, ObjectWithLinks } from '../../common';
 
 @Component({
   selector: 'ext-file-upload',

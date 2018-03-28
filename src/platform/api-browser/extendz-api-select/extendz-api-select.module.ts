@@ -5,9 +5,9 @@ import { MatInputModule, MatIconModule, MatButtonModule, MatDialogModule } from 
 
 import { ExtendzApiSelectComponent } from './extendz-api-select.component';
 import { ExtendPipesModule } from '../../common/pipes';
-import { ApiItemAddDialogComponent } from '../api-item/dialog/api-item-add-dialog.component';
 import { ExtendzApiTableModule } from '../api-table/extendz-api-table.module';
 import { ApiTableService } from '../api-table/api-table.service';
+import { ApiItemAddDialogComponent } from './dialog/api-item-add-dialog.component';
 
 @NgModule({
   imports: [

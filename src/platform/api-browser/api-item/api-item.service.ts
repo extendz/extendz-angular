@@ -5,8 +5,8 @@ import { MatSnackBar, MatDialog } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 
-import { ModelMeta, ObjectWithLinks } from '../api-table/models';
-import { RestService, ExtRestConfig } from '../../common';
+import { ModelMeta } from '../models';
+import { RestService, ExtRestConfig, ObjectWithLinks } from '../../common';
 
 @Injectable()
 export class ApiItemService {

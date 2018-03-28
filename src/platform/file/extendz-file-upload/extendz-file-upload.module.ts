@@ -11,9 +11,7 @@ import {
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { ExtendzFileUploadComponent } from './extendz-file-upload.component';
-import { ExtendPipesModule } from '../../common/pipes';
-import { ExtendzRestModule } from '../../common/services';
-import { ExtendzDirectiveModule } from '../../common/directives/extendz-directives.module';
+import { ExtendPipesModule, ExtendzRestModule, ExtendzDirectiveModule } from '../../common/';
 
 @NgModule({
   imports: [

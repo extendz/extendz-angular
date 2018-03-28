@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { of } from 'rxjs/observable/of';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Model } from '../../../../platform/api-browser/api-root/models';
+import { ModelMeta } from '../../../../platform';
 
 @Component({
   selector: 'app-api-root-example',
@@ -13,7 +13,7 @@ export class ApiRootExampleComponent implements OnInit {
 
   ngOnInit() {}
 
-  onSelect(model: Model) {
+  onSelect(model: ModelMeta) {
     this.router.navigate([model.name], { relativeTo: this.activeRoute });
   }
 }

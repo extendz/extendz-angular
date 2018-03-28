@@ -13,7 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+// Module
 export * from './api-root';
+export * from './api-item/';
+
 export * from './models';
 export * from './extendz-api.module';
+
 export * from './api-table-host/extendz-api-table-host.module';
+export * from './api-table-host/extendz-api-table-host.component';
+
+export * from './extendz-api-item-host/extendz-api-item-host.module';
+export * from './extendz-api-item-host/extendz-api-item-host.component';
+
+export * from './extendz-api-select/extendz-api-select.module';

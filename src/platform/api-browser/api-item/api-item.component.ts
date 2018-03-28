@@ -26,7 +26,8 @@ import { mergeMap } from 'rxjs/operators/mergeMap';
 import { ApiItemService } from './api-item.service';
 import { ApiTableService } from '../api-table/api-table.service';
 
-import { ModelMeta, ObjectWithLinks, Property, Href } from '../api-table/models';
+import { ModelMeta, Property } from '../models';
+import { ObjectWithLinks } from '../../common';
 
 @Component({
   selector: 'ext-api-item',

@@ -1,7 +1,7 @@
 <ext-api-table [model]="model" (select)="onSelect($event)"></ext-api-table>
 <div style="height: 100px;width: 100%"></div>
 <div>
-    <button mat-fab class="bottom-right" [routerLink]="[0]">
+    <button mat-fab class="bottom-right" (click)="onSelect()">
         <mat-icon>
             <svg id="add" viewBox="0 0 24 24">
                 <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z" />
