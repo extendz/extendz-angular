@@ -20,11 +20,8 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { PageEvent, MatCheckboxChange } from '@angular/material';
 import { ObservableMedia } from '@angular/flex-layout';
 
-import { debounceTime } from 'rxjs/operators/debounceTime';
 import { Subscription } from 'rxjs/Subscription';
-import { tap } from 'rxjs/operators/tap';
-import { mergeMap } from 'rxjs/operators/mergeMap';
-import { map } from 'rxjs/operators/map';
+import { tap, mergeMap, map, debounceTime } from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';
 
 import { ApiTableService } from './api-table.service';
@@ -39,9 +36,21 @@ import { ObjectWithLinks, HateosPagedResponse } from '../../common';
   styleUrls: ['./api-table.component.css']
 })
 export class ApiTableComponent implements OnInit, OnDestroy {
+  /**
+   * All Subscriptions
+   */
   all$: Subscription;
+  /**
+   * Data table instance
+   */
   tableDataSource: TableDataSource;
+  /**
+   * Collumns in the model meta
+   */
   columns: string[];
+  /**
+   * All columns including select and edit
+   */
   allColumns: string[];
   modelMeta: ModelMeta;
   tableResponse: HateosPagedResponse;
@@ -132,8 +141,6 @@ export class ApiTableComponent implements OnInit, OnDestroy {
    */
   public editRow(item: ObjectWithLinks) {
     this.select.emit(item);
-    //let id = this.service.getItemId(item._links.self.href);
-    //this.router.navigate([id], { relativeTo: this.activatedRoute });
   } // editRow()
 
   pageEvent(event: PageEvent) {
@@ -151,6 +158,14 @@ export class ApiTableComponent implements OnInit, OnDestroy {
     const numRows = this.data.length;
     return numSelected === numRows;
   } // isAllSelected()
+
+  delete(item: ObjectWithLinks) {
+    this.service.rest.deleteWithConfirm(item._links.self.href);
+  }
+
+  deleteAll() {
+    this.service.rest.deleteAllWithConfirm(this.selection.selected);
+  }
 
   selectionChange(event: MatCheckboxChange) {
     this.selected = this.selection.selected;

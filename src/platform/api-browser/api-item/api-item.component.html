@@ -51,13 +51,13 @@
         <div *ngFor="let prop of modelMeta?.properties">
 
           <!-- Number -->
-          <!-- <mat-form-field fxFlex *ngIf="prop.type == 'number'">
+          <mat-form-field fxFlex *ngIf="prop.type == 'number'">
             <input matInput type="number" [placeholder]="prop.name | camelCase" [formControlName]="prop.name">
             <mat-error *ngIf="itemFormGroup.controls[prop.name].hasError('required')">
               {{prop.name | camelCase}}
               <strong>required</strong>
             </mat-error>
-          </mat-form-field> -->
+          </mat-form-field>
 
           <!-- String -->
           <mat-form-field fxFlex *ngIf="prop.type == 'string'">
@@ -142,4 +142,4 @@
   <div fxFlex="10%" fxFlex.xs="0"></div>
 </div>
 
-<div style="height: 85px"></div>
+<div style="height: 20vh"></div>

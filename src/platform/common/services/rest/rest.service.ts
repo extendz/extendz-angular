@@ -23,6 +23,10 @@ import { map } from 'rxjs/operators/map';
 import { DeleteDialogComponent } from './dialog-delete/delete-dialog.componet';
 import { ExtRestConfig } from '../../services/rest/models';
 import { ObjectWithLinks } from './models/';
+import { filter, concat, mergeMap, zip } from 'rxjs/operators';
+import { merge } from 'rxjs/observable/merge';
+import { of } from 'rxjs/observable/of';
+import { forkJoin } from 'rxjs/observable/forkJoin';
 
 @Injectable()
 export class RestService {
@@ -77,12 +81,27 @@ export class RestService {
     return this.http.patch<ObjectWithLinks>(item._links.self.href, item);
   }
 
+  /**
+   * Delete all
+   * @param urls
+   */
+  deleteAllWithConfirm(urls: string[]): Observable<Response[]> {
+    return this.showDeleteConfimDialog().pipe(
+      filter(result => result),
+      mergeMap(() => {
+        let requests: Observable<Response>[] = [];
+        urls.forEach(url => requests.push(this.http.get<Response>(url)));
+        return forkJoin(requests);
+      })
+    );
+  } // deleteAllWithConfirm
+
   deleteWithConfirm(url: string): void {
+    this.deleteAllWithConfirm([url]);
+  } //  deleteWithConfirm()
+
+  private showDeleteConfimDialog() {
     let dialogRef = this.dialog.open(DeleteDialogComponent);
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.http.delete(url);
-      }
-    });
-  } //  delete()
+    return dialogRef.afterClosed();
+  }
 } // class

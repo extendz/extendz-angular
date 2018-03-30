@@ -98,7 +98,7 @@ export class ExtendzApiSelectComponent implements OnInit, OnDestroy, ControlValu
       data.response = [...data.response, ...this.response];
     }
     let dialogRef = this.dialog.open(ApiItemAddDialogComponent, {
-      width: '100vw',
+      minWidth: '100vw',
       data
     });
     dialogRef.afterClosed().subscribe((result: string[]) => {
@@ -125,7 +125,7 @@ export class ExtendzApiSelectComponent implements OnInit, OnDestroy, ControlValu
           let str: any = response[this.modelMeta.title];
           this.displayValue = str;
           if (results.length > 1) {
-            this.displayValue = this.displayValue + ' ,' + (results.length - 1) + ' more...';
+            this.displayValue = this.displayValue + ' and ' + (results.length - 1) + ' more...';
           }
         }
         res.unsubscribe();

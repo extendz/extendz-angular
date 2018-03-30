@@ -13,7 +13,7 @@ export class ApiTableService {
     private conf: ExtRestConfig,
     private media: ObservableMedia,
     private apiConfig: ExtendzApiConfig,
-    private rest: RestService
+    public rest: RestService
   ) {}
 
   getModel(model: string, projecion?: string): Observable<ModelMeta> {
