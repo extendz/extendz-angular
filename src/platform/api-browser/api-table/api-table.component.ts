@@ -21,8 +21,9 @@ import { PageEvent, MatCheckboxChange } from '@angular/material';
 import { ObservableMedia } from '@angular/flex-layout';
 
 import { Subscription } from 'rxjs/Subscription';
-import { tap, mergeMap, map, debounceTime } from 'rxjs/operators';
 import { of } from 'rxjs/observable/of';
+import { mergeMap } from 'rxjs/operators/mergeMap';
+import { map } from 'rxjs/operators/map';
 
 import { ApiTableService } from './api-table.service';
 import { TableDataSource } from './dataSource/tableDataSource';
