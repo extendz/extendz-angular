@@ -8,8 +8,13 @@ import { mergeMap } from 'rxjs/operators/mergeMap';
 import { map } from 'rxjs/operators/map';
 import { take } from 'rxjs/operators/take';
 
-import { Property, ModelMeta, RelationTypes } from '../models';
-import { ObjectWithLinks, HateosPagedResponse } from '../../common';
+import {
+  ObjectWithLinks,
+  HateosPagedResponse,
+  Property,
+  ModelMeta,
+  RelationTypes
+} from '../../common';
 
 import { ApiTableService } from '../api-table/api-table.service';
 import { DialogData } from './dialog/models/dialogData';

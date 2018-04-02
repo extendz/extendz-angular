@@ -1,5 +1,4 @@
-import { Property } from '../../../models';
-import { ObjectWithLinks } from '../../../../common/services/rest/models';
+import { Property, ObjectWithLinks } from '../../../../common';
 
 export class DialogData {
   property?: Property;

@@ -32,7 +32,7 @@ export class ExtendzApiTableHostComponent implements OnInit, OnDestroy {
    */
   model: string;
   /**
-   * Id for the selected item.0 for a new object
+   * Id to be selected on view. This is used in table in a slection dialog.
    */
   id: string;
   /***

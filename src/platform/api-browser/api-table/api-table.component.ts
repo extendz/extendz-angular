@@ -27,8 +27,8 @@ import { of } from 'rxjs/observable/of';
 import { ApiTableService } from './api-table.service';
 import { TableDataSource } from './dataSource/tableDataSource';
 
-import { ModelMeta, Property, PageAndSort } from '../models';
-import { ObjectWithLinks, HateosPagedResponse } from '../../common';
+import { PageAndSort } from '../models';
+import { ObjectWithLinks, HateosPagedResponse, ModelMeta, Property } from '../../common';
 
 @Component({
   selector: 'ext-api-table',

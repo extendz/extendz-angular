@@ -1,29 +1,30 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { ObservableMedia } from '@angular/flex-layout';
 
 import { Observable } from 'rxjs/Observable';
 
-import { RestService, ExtRestConfig, HateosPagedResponse, ObjectWithLinks } from '../../common';
-import { ExtendzApiConfig, ModelMeta, PageAndSort } from '../models';
+import {
+  RestService,
+  ExtRestConfig,
+  HateosPagedResponse,
+  ObjectWithLinks,
+  ModelMeta,
+  ModelMetaService
+} from '../../common';
+
+import { ExtendzApiConfig, PageAndSort } from '../models';
 
 @Injectable()
 export class ApiTableService {
   constructor(
     private conf: ExtRestConfig,
-    private media: ObservableMedia,
+    private modelMetaService: ModelMetaService,
     private apiConfig: ExtendzApiConfig,
     public rest: RestService
   ) {}
 
   getModel(model: string, projecion?: string): Observable<ModelMeta> {
-    let params: HttpParams = new HttpParams();
-    if (projecion) {
-      params = params.append('projection', projecion);
-    }
-
-    let url = this.conf.basePath + '/' + this.apiConfig.modelsEndpont + '/' + model.toLowerCase();
-    return this.rest.http.get<ModelMeta>(url, { params });
+    return this.modelMetaService.getModel(model, projecion);
   } // getModel()
 
   getTableData(meta: ModelMeta, pageAndSort?: PageAndSort): Observable<HateosPagedResponse> {

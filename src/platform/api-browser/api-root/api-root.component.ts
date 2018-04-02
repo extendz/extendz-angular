@@ -19,7 +19,7 @@ import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators/map';
 
 import { ApiRootService } from './api-root.service';
-import { ModelMeta } from '../models';
+import { ModelMeta } from '../../common';
 
 @Component({
   selector: 'ext-api-root',

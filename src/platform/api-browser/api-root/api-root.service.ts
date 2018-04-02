@@ -22,21 +22,17 @@ import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators/map';
 import { of } from 'rxjs/observable/of';
 
-import { ExtRestConfig, ObjectWithLinks, RestService } from '../../common';
+import { ModelMetaService, ModelMeta } from '../../common';
 
-import { ExtendzApiConfig, ModelMeta } from '../models';
-
-import { Href } from '../../common/services/rest/models/href';
+import { ExtendzApiConfig } from '../models';
 
 @Injectable()
 export class ApiRootService {
   constructor(
     private apiConfig: ExtendzApiConfig,
-    private restConfig: ExtRestConfig,
     private iconRegistry: MatIconRegistry,
     private sanitizer: DomSanitizer,
-    private http: HttpClient,
-    private rest: RestService
+    private modelService: ModelMetaService
   ) {
     this.iconRegistry.addSvgIconSetInNamespace(
       'api-root',
@@ -45,6 +41,6 @@ export class ApiRootService {
   } // constructor()
 
   public getRoot(): Observable<ModelMeta[]> {
-    return this.rest.http.get<ModelMeta[]>(this.restConfig.basePath + '/models');
+    return this.modelService.getModels();
   }
 } // class

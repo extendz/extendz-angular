@@ -19,7 +19,4 @@ export * from './extendzApi.config';
 export * from './extendzApiRoot.conf';
 
 // models
-export * from './modelMeta';
 export * from './pageAndSort';
-export * from './projection';
-export * from './property';
