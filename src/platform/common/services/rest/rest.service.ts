@@ -19,21 +19,22 @@ import { MatSnackBar, MatDialog } from '@angular/material';
 
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators/map';
-
-import { DeleteDialogComponent } from './dialog-delete/delete-dialog.componet';
-import { ExtRestConfig } from '../../services/rest/models';
-import { ObjectWithLinks } from './models/';
-import { filter, concat, mergeMap, zip } from 'rxjs/operators';
+import { filter } from 'rxjs/operators/filter';
 import { merge } from 'rxjs/observable/merge';
 import { of } from 'rxjs/observable/of';
 import { forkJoin } from 'rxjs/observable/forkJoin';
+import { mergeMap } from 'rxjs/operators/mergeMap';
+
+import { DeleteDialogComponent } from './dialog-delete/delete-dialog.componet';
+import { ObjectWithLinks } from './models/';
+import { ExtRestConfig } from '../../services/rest/models';
 
 @Injectable()
 export class RestService {
   constructor(
     private restConfig: ExtRestConfig,
     public http: HttpClient,
-    public dialog: MatDialog
+    private dialog: MatDialog
   ) {}
 
   /**
@@ -59,7 +60,7 @@ export class RestService {
   } // getId()
 
   /**
-   * Get All the data elements and paging information
+   * Get All the data elements and without Paging Information
    * @param modelName
    * @param httpOptions
    */
@@ -69,6 +70,14 @@ export class RestService {
       .pipe(map((res: any) => res._embedded[modelName]));
   } // findAll
 
+  findAllByProperty(url: string, propertyName: string, httpOptions?: Object) {
+    return this.http.get(url, httpOptions).pipe(map((res: any) => res._embedded[propertyName]));
+  }
+
+  /**
+   * Save thte Object
+   * @param item
+   */
   save(item: ObjectWithLinks): Observable<ObjectWithLinks> {
     if (item._links) {
       return this.patch(item);
@@ -77,6 +86,9 @@ export class RestService {
     }
   } // save()
 
+  /**
+   * Patch the given object.
+   */
   patch(item: ObjectWithLinks): Observable<ObjectWithLinks> {
     return this.http.patch<ObjectWithLinks>(item._links.self.href, item);
   }

@@ -1,0 +1,70 @@
+<form (submit)="submitForm()" [formGroup]="itemFormGroup" fxLayoutAlign="start center" fxLayoutAlign.xs="center start " fxLayout="row"
+  fxLayoutGap="2vw" fxLayout.xs="column">
+  <div *ngFor="let prop of modelMeta.properties">
+    <!-- Number -->
+    <mat-form-field fxFlex *ngIf="prop.type == 'number'">
+      <input matInput type="number" [placeholder]="prop.name | camelCase" [formControlName]="prop.name">
+      <mat-error *ngIf="itemFormGroup.controls[prop.name].hasError('required')">
+        {{prop.name | camelCase}}
+        <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <!-- String -->
+    <mat-form-field fxFlex *ngIf="prop.type == 'string'">
+      <input matInput [placeholder]="prop.name | camelCase" [formControlName]="prop.name">
+      <mat-error *ngIf="itemFormGroup.controls[prop.name].hasError('required')">
+        {{prop.name | camelCase}}
+        <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Color -->
+    <mat-form-field fxFlex *ngIf="prop.type == 'color'">
+      <input type="color" matInput [placeholder]="prop.name | camelCase" [formControlName]="prop.name">
+      <mat-error *ngIf="itemFormGroup.controls[prop.name].hasError('required')">
+        {{prop.name | camelCase}}
+        <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Enum -->
+    <mat-form-field fxFlex *ngIf="prop.relationShipType && prop.relationShipType === 'ENUM'">
+      <mat-select [placeholder]="prop.name | camelCase" [formControlName]="prop.name">
+        <mat-option *ngFor="let enum of prop.enums" [value]="enum">
+          {{ enum }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="itemFormGroup.controls[prop.name].hasError('required')">
+        {{prop.name | camelCase}}
+        <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <!-- 
+      Object 
+      Remove mapped by property and assign it.
+    -->
+    <div fxFlex *ngIf="prop.relationShipType && (prop.relationShipType === 'SINGLE' && property.mappedBy !== prop.name)">
+      <mat-form-field>
+        <mat-select [placeholder]="prop.name | camelCase" [formControlName]="prop.name">
+          <mat-option *ngFor="let item of (propertyMap[prop.name] | async)" [value]="item">
+            {{ item }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <!-- {{item._links.self.href | json}} {{prop.mappedBySource}} -->
+    </div>
+
+
+  </div>
+  <button mat-icon-button type="submit">
+    <mat-icon>
+      <svg id="save" viewBox="0 0 24 24">
+        <path d="M0 0h24v24H0z" fill="none" />
+        <path d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-5 16c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-10H5V5h10v4z"
+        />
+      </svg>
+    </mat-icon>
+  </button>
+</form>

@@ -1,4 +1,12 @@
-import { Component, OnInit, Input, forwardRef, OnDestroy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  forwardRef,
+  OnDestroy,
+  Output,
+  EventEmitter
+} from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -38,9 +46,14 @@ export class ExtendzApiSelectComponent implements OnInit, OnDestroy, ControlValu
    */
   @Input() property: Property;
   /**
+   * Main editing item
+   */
+  @Input() item: ObjectWithLinks;
+  @Output() itemChange: EventEmitter<ObjectWithLinks> = new EventEmitter<ObjectWithLinks>();
+  /**
    * Meta data for selected property
    */
-  modelMeta: ModelMeta;
+  public modelMeta: ModelMeta;
   /**
    * All subscriptions
    */
@@ -52,7 +65,7 @@ export class ExtendzApiSelectComponent implements OnInit, OnDestroy, ControlValu
   /**
    * Selected item
    */
-  item: Object[];
+  items: Object[];
   /**
    * When selected with the dialog box the first element response it taken to consideration.
    */
@@ -62,6 +75,10 @@ export class ExtendzApiSelectComponent implements OnInit, OnDestroy, ControlValu
    * Seperation is needed since the acctual selected value is an URL and the display values is a human readble text.
    */
   displayValue: string = '';
+  /**
+   * Empty array to contain the quick add items
+   */
+  qItems: number[] = [1];
   /**
    * On Change the selected form value
    */
@@ -110,10 +127,10 @@ export class ExtendzApiSelectComponent implements OnInit, OnDestroy, ControlValu
       /**
        * Selected items will be send as an array. Even with for single selection.
        */
-      if (result && result.length === 1) {
-        this.getResponse(result[0]);
-      } else if (result) {
+      if (this.property.relationShipType === RelationTypes.MULTIPLE) {
         this.handleDialogMultipleSection(result);
+      } else {
+        this.getResponse(result[0]);
       }
     });
   } // openDialog()
@@ -137,22 +154,21 @@ export class ExtendzApiSelectComponent implements OnInit, OnDestroy, ControlValu
       });
   } // handleDialogMultipleSection()
 
-  get value() {
-    return this.item;
-  }
-
-  set value(val: Object) {
-    // If the value changed then get the reponse.Otherwise there will be a loop
-    //if (this.item !== val) this.getResponse(val);
-    if (this.response === null) this.getResponse(val);
-    //this.item = [val];
-    this.onChange(val);
-    this.onTouched();
-  }
-
   private getItem(url: any) {
     return this.apiTableService.getItem(url).pipe(take(1));
   }
+
+  /**
+   * On quick save event is fired
+   * @param item
+   */
+  onSave(item: ObjectWithLinks) {
+    if (this.property.relationShipType === RelationTypes.MULTIPLE) {
+      this.handleMultipleResponse([item]);
+    } else {
+      this.handleSingleResponse(item);
+    }
+  } // onSave
 
   private getResponse(url: any) {
     let res: Subscription = this.apiTableService
@@ -161,13 +177,14 @@ export class ExtendzApiSelectComponent implements OnInit, OnDestroy, ControlValu
       .subscribe(
         (response: any) => {
           let tableResponse: HateosPagedResponse = response;
+          // One to Many relationship
+          console.log(this.property, response);
           if (tableResponse._embedded && tableResponse._embedded[this.property.name]) {
-            this.handleMultipleResponse(tableResponse);
+            this.handleMultipleResponse(tableResponse._embedded[this.property.name]);
           } else {
             let singleResponse: ObjectWithLinks = response;
             this.handleSingleResponse(singleResponse);
           }
-          //this.handleResponse(response, selectedObjects);
         },
         error => {
           this.response = undefined;
@@ -176,11 +193,12 @@ export class ExtendzApiSelectComponent implements OnInit, OnDestroy, ControlValu
       );
   } // getResponse()
 
-  private handleMultipleResponse(response: HateosPagedResponse) {
-    let data: ObjectWithLinks[] = response._embedded[this.property.name];
-    this.response = data;
-    this.value = data.map(d => d._links.self.href);
-    if (data.length !== 0) {
+  private handleMultipleResponse(data: ObjectWithLinks[]) {
+    if (this.response) this.response = [...this.response, ...data];
+    else this.response = [...data];
+    // Map the slef link
+    this.value = this.response.map(d => d._links.self.href);
+    if (this.response.length !== 0) {
       let firstItem = data[0];
       if (this.modelMeta.title) {
         let str: any = firstItem[this.modelMeta.title];
@@ -208,31 +226,16 @@ export class ExtendzApiSelectComponent implements OnInit, OnDestroy, ControlValu
     }
   } // handleSingleResponse()
 
-  private handleResponse(response: ObjectWithLinks | HateosPagedResponse, selectedObjects: number) {
-    switch (this.property.relationShipType) {
-      case RelationTypes.MULTIPLE:
-        //this.value = response;
-        let tableResponse: HateosPagedResponse = response;
-        let data: ObjectWithLinks[] = tableResponse._embedded[this.property.name];
-        if (data.length === 0) {
-        }
-        break;
-      case RelationTypes.SINGLE:
-        // this.item = response;
-        let item: any = response;
-        //this.response = response;
-        if (this.modelMeta.title) {
-          this.displayValue = item[this.modelMeta.title];
-          if (selectedObjects) {
-            this.setMultipleDisplay(selectedObjects);
-          }
-        } else {
-          // this.displayValue = response._links.self.href;
-        }
-        break;
-    }
-    // this.value = response._links.self.href;
-  } //handleResponse
+  get value() {
+    return this.items;
+  }
+
+  set value(val: Object) {
+    // If the value changed then get the reponse.Otherwise there will be a loop
+    if (this.response === null) this.getResponse(val);
+    this.onChange(val);
+    this.onTouched();
+  }
 
   registerOnChange(fn: Function) {
     this.onChange = fn;
