@@ -1,12 +1,12 @@
 /**
  *    Copyright 2018 the original author or authors
- * 
+ *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
  *    You may obtain a copy of the License at
- * 
+ *
  *        http://www.apache.org/licenses/LICENSE-2.0
- * 
+ *
  *    Unless required by applicable law or agreed to in writing, software
  *    distributed under the License is distributed on an "AS IS" BASIS,
  *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -109,7 +109,6 @@ export class ExtendzOpenlayerService {
   public featurs: Array<ol.Feature>;
   public polygonFeaturs: Array<ol.Feature> = [];
   public pointFeaturs: Array<ol.Feature> = [];
-
 
   public singleCoordinats: ol.Coordinate;
   public coordinats: Array<ol.Coordinate> = [];
@@ -214,7 +213,7 @@ export class ExtendzOpenlayerService {
     this.jobID = olOption.tiffImage.jobId;
     this.onDraw = olOption.drawEmmiter;
     this.onDelete = olOption.deleteEmmiter;
-            
+
     if (olOption.drawType == 0 || olOption.drawType == 1) {
       this.setToolExist(olOption.drawType, olOption.tooltype, olOption.points, olOption.color);
     }
@@ -234,21 +233,21 @@ export class ExtendzOpenlayerService {
       case OpenLayerToolType.POINT:
         this.drawType = OpenLayerToolType.POINT;
         this.updatePointTool(toolType, color);
-        if(this.pointFeaturs){
+        if (this.pointFeaturs) {
           this.addExistingFeaturs(this.pointFeaturs);
         }
-        if(this.polygonFeaturs){
+        if (this.polygonFeaturs) {
           this.polygonFeaturs = [];
         }
-        
+
         break;
       case OpenLayerToolType.POLYGON:
         this.drawType = OpenLayerToolType.POLYGON;
         this.updatePolygonTool(toolType, color);
-        if(this.polygonFeaturs){
+        if (this.polygonFeaturs) {
           this.addExistingFeaturs(this.polygonFeaturs);
         }
-        if(this.pointFeaturs){
+        if (this.pointFeaturs) {
           this.pointFeaturs = [];
         }
         break;
@@ -267,7 +266,6 @@ export class ExtendzOpenlayerService {
   setToolExist(tool: OpenLayerToolType, toolType: string, points: Array<LatLng>, color: string) {
     this.preSetTool();
     switch (tool) {
-      
       case OpenLayerToolType.POINT:
         this.drawType = OpenLayerToolType.POINT;
         this.updatePointToolFromExist(toolType, points, color);
@@ -292,7 +290,7 @@ export class ExtendzOpenlayerService {
     if (this.currentFeatures) {
       this.currentFeatures.clear();
     }
-    
+
     if (this.vectorSource) {
       this.vectorSource.clear();
     }
@@ -355,26 +353,25 @@ export class ExtendzOpenlayerService {
    * @description create polygon using draw interaction
    */
   createPolygon(toolType: string) {
-        
     this.subcribeToSourceEvent('addfeature').subscribe((event: ol.interaction.Draw.Event) => {
       event.feature.setProperties({
-        "toolType" : toolType
+        toolType: toolType
       });
       let geom = event.feature;
       let cordinates: ol.Coordinate[][];
       let latlngArray: Array<LatLng>;
-      this.returnCoordinate = this.getCoordinatsFromGeometry(geom,toolType);      
+      this.returnCoordinate = this.getCoordinatsFromGeometry(geom, toolType);
       if (this.returnCoordinate.coordiantes.length <= 3) {
         console.log('Area not selected', null, {
           duration: 2000
         });
         return;
       }
-      
+
       this.onDraw.emit(this.returnCoordinate);
       const feature = new ol.Feature(geom.getGeometry());
       feature.setProperties({
-        "toolType" : toolType
+        toolType: toolType
       });
       feature.setStyle(this.polygonObject.style);
       this.polygonFeaturs.push(feature);
@@ -385,27 +382,28 @@ export class ExtendzOpenlayerService {
 
   /**
    * @author Rumes
+   * @author Randika Hapugoda
    * @description create point using draw interaction
    */
   createPoints(toolType: string) {
     this.subcribeToCurrentDrawEvent<{}>('drawstart').subscribe(
       (event: ol.interaction.Draw.Event) => {
         event.feature.setProperties({
-          "toolType" : toolType
+          toolType: toolType
         });
         let geom = event.feature.getGeometry();
         this.drawStarted = true;
       }
-    ); // End subcribeToCurrentDrawEvent()
+    ); // createPoints()
 
     this.subcribeToCurrentDrawEvent<{}>('drawend').subscribe((event: ol.interaction.Draw.Event) => {
       event.feature.setProperties({
-        "toolType" : toolType
+        toolType: toolType
       });
       let geom = event.feature;
       geom.setStyle(this.pointObject.style);
       this.pointFeaturs.push(geom);
-      this.returnCoordinate = this.getCoordinatsFromGeometry(geom,toolType);
+      this.returnCoordinate = this.getCoordinatsFromGeometry(geom, toolType);
       this.returnCollection.push(this.returnCoordinate);
       this.onDraw.emit(this.returnCoordinate);
       this.drawStarted = false;
@@ -433,7 +431,7 @@ export class ExtendzOpenlayerService {
   updatePointToolFromExist(toolType: string, points: Array<LatLng>, color: string) {
     var pointTool = new PointTool();
     console.log(color);
-    
+
     this.pointObject = pointTool.creatNewDraw(color);
     this.createFeatureVector(points, 'point', this.pointObject.style);
     this.map.addLayer(this.vectorLayer);
@@ -450,7 +448,7 @@ export class ExtendzOpenlayerService {
   updatePolygonToolFromExist(toolType: string, points: Array<LatLng>, color: string) {
     var polygonTool = new PolygonTool();
     console.log(color);
-    
+
     this.polygonObject = polygonTool.createNewDraw(color);
     this.currentFeatures = this.consantrationFeatures;
     this.currentDraw = this.polygonObject.draw;
@@ -517,8 +515,7 @@ export class ExtendzOpenlayerService {
     let active = this.currentDraw.getActive();
     if (active) {
       this.map.removeInteraction(this.currentDraw);
-      this.selectionInteraction = new ol.interaction.Select({
-      });
+      this.selectionInteraction = new ol.interaction.Select({});
 
       this.subcribeToSelectEvent('select').subscribe((e: ol.interaction.Select.Event) => {
         if (e.selected.length > 0) {
@@ -544,21 +541,27 @@ export class ExtendzOpenlayerService {
    * @description Remove the passed Feature from the Vector Source
    */
   deleteFeature(feature: ol.Feature) {
-   
     this.vectorSource.removeFeature(feature);
     this.removedFeature = feature;
-    this.returnCoordinate = this.getCoordinatsFromGeometry(this.removedFeature);    
-    this.checkInFeaturesArray(this.removedFeature);    
+    this.returnCoordinate = this.getCoordinatsFromGeometry(this.removedFeature);
+    this.checkInFeaturesArray(this.removedFeature);
     this.onDelete.emit(this.returnCoordinate);
     this.featureDeleted = true;
   }
-  subcribeToCurrentDrawEvent<E>(eventName: string): Observable<E> {
-    return Observable.create((observer: Observer<E>) => {
-      this.currentDraw.on(eventName, (arg: E) => {
+
+  /**
+   * Subscribe to draw current draw event.
+   *
+   * @author Randika Hapugoda
+   * @param eventName
+   */
+  subcribeToCurrentDrawEvent<E>(eventName: string): Observable<ol.interaction.Draw.Event> {
+    return Observable.create((observer: Observer<ol.interaction.Draw.Event>) => {
+      this.currentDraw.on(eventName, (arg: ol.interaction.Draw.Event) => {
         this.zone.run(() => observer.next(arg));
       });
     });
-  } // End subcribeToPolygonEvent ()
+  } // subcribeToCurrentDrawEvent()
 
   subcribeToSourceEvent<E>(eventName: string): Observable<E> {
     return Observable.create((observer: Observer<E>) => {
@@ -566,7 +569,7 @@ export class ExtendzOpenlayerService {
         this.zone.run(() => observer.next(arg));
       });
     });
-  } // End subcribeToPolygonEvent ()
+  } // subcribeToSourceEvent ()
 
   subcribeToViewPortEvent<E>(eventName: string): Observable<E> {
     return Observable.create((observer: Observer<E>) => {
@@ -577,15 +580,15 @@ export class ExtendzOpenlayerService {
         // let originalEvent: any = event.originalEvent;
       });
     });
-  } // End subcribeToPolygonEvent ()
+  } // subcribeToViewPortEvent ()
 
-  subcribeToSelectEvent<E>(eventName: string): Observable<E> {
-    return Observable.create((observer: Observer<E>) => {
-      this.selectionInteraction.on(eventName, (arg: E) => {
+  subcribeToSelectEvent<E>(eventName: string): Observable<ol.interaction.Select.Event> {
+    return Observable.create((observer: Observer<ol.interaction.Select.Event>) => {
+      this.selectionInteraction.on(eventName, (arg: ol.interaction.Select.Event) => {
         this.zone.run(() => observer.next(arg));
       });
     });
-  }
+  } // subcribeToSelectEvent()
 
   /**
    * @author Rumes
@@ -619,25 +622,26 @@ export class ExtendzOpenlayerService {
   }
 
   /**
-   * 
-   * @param geom 
+   *
+   * @param geom
    * @param drawTool
    * @author Rumes
-   * @description get the feature geomatry and return ReturnObject 
+   * @description get the feature geomatry and return ReturnObject
    */
   getCoordinatsFromGeometry(removedFeature: ol.Feature, drawTool?: string): ReturnObject {
-
     let geom = removedFeature.getGeometry();
     let cordinates: ol.Coordinate[][];
     let cordinate: ol.Coordinate;
     let latlngArray: Array<LatLng>;
-    let drawToolIn: string = removedFeature.getProperties().toolType ? removedFeature.getProperties().toolType : '';
+    let drawToolIn: string = removedFeature.getProperties().toolType
+      ? removedFeature.getProperties().toolType
+      : '';
     console.log(drawToolIn);
-    
+
     if (geom instanceof ol.geom.Point) {
       cordinate = geom.getCoordinates();
       this.returnCoordinate = {
-        jobId:this.jobID,
+        jobId: this.jobID,
         coordiantes: [
           {
             lat: cordinate[0],
@@ -653,7 +657,7 @@ export class ExtendzOpenlayerService {
       latlngArray = [];
       latlngArray = this.coordinatsToLatLng(cordinates[0]);
       this.returnCoordinate = {
-        jobId:this.jobID,
+        jobId: this.jobID,
         coordiantes: latlngArray,
         drawType: 'POLYGON',
         drawTool: drawToolIn
@@ -664,23 +668,25 @@ export class ExtendzOpenlayerService {
     return this.returnCoordinate;
   }
 
-  addExistingFeaturs(features : Array<ol.Feature>){
-    if(features){
+  addExistingFeaturs(features: Array<ol.Feature>) {
+    if (features) {
       features.forEach(element => {
         console.log(element.getStyle());
-        
+
         this.vectorSource.addFeature(element);
       });
     }
   }
-  checkInFeaturesArray(feature:ol.Feature){
-    if(this.drawType == OpenLayerToolType.POINT){
-      this.pointFeaturs = this.pointFeaturs.filter((x) => x.getGeometry() != feature.getGeometry())
+  checkInFeaturesArray(feature: ol.Feature) {
+    if (this.drawType == OpenLayerToolType.POINT) {
+      this.pointFeaturs = this.pointFeaturs.filter(x => x.getGeometry() != feature.getGeometry());
     }
-    if(this.drawType == OpenLayerToolType.POLYGON){
+    if (this.drawType == OpenLayerToolType.POLYGON) {
       console.log(feature);
-      
-      this.polygonFeaturs = this.polygonFeaturs.filter((x) => x.getGeometry() != feature.getGeometry());
+
+      this.polygonFeaturs = this.polygonFeaturs.filter(
+        x => x.getGeometry() != feature.getGeometry()
+      );
       console.log(this.polygonFeaturs);
     }
   }
