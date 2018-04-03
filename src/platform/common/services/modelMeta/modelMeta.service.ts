@@ -18,7 +18,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
-import { map } from 'rxjs/operators';
+import { map } from 'rxjs/operators/map';
 import { of } from 'rxjs/observable/of';
 
 import { ExtRestConfig } from '../rest';

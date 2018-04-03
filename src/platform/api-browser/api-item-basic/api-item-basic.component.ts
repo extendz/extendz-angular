@@ -15,6 +15,14 @@ import { Observable } from 'rxjs/Observable';
 import { ApiItemService } from '../api-item/api-item.service';
 import { ObjectWithLinks, ModelMeta, Property, ModelMetaService } from '../../common';
 
+export class PropertyMap {
+  [key: string]: Observable<any>;
+}
+
+export class PropertyTitleMap {
+  [key: string]: Observable<ModelMeta>;
+}
+
 @Component({
   selector: 'ext-api-item-basic',
   templateUrl: './api-item-basic.component.html',
@@ -47,12 +55,12 @@ export class ApiItemBasicComponent implements OnInit {
    * ****** EXPERIMENTAL ******
    * Collected values for the Objects with same object mapping
    */
-  propertyMap: Object = {};
+  propertyMap: PropertyMap = {};
   /**
    * ****** EXPERIMENTAL ******
    * Collected titlte for the Objects with same object mapping
    */
-  propertyTitleMap: Object = {};
+  propertyTitleMap: PropertyTitleMap = {};
 
   constructor(
     private service: ApiItemService,
