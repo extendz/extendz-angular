@@ -9,12 +9,11 @@ import {
 import { MatSnackBar } from '@angular/material';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
-
-import { ModelMeta, Property } from '../models';
-import { ApiItemService } from '../api-item/api-item.service';
-import { ObjectWithLinks } from '../../common/services';
 import { of } from 'rxjs/observable/of';
 import { Observable } from 'rxjs/Observable';
+
+import { ApiItemService } from '../api-item/api-item.service';
+import { ObjectWithLinks, ModelMeta, Property, ModelMetaService } from '../../common';
 
 @Component({
   selector: 'ext-api-item-basic',
@@ -24,7 +23,8 @@ import { Observable } from 'rxjs/Observable';
 })
 export class ApiItemBasicComponent implements OnInit {
   /**
-   * Main meta model
+   * Main meta model. Don't get confused with the property Model meta.
+   * Use the ModelMetaService and property.reference to get the model meta for the property.
    */
   @Input() modelMeta: ModelMeta;
   /**
@@ -43,11 +43,22 @@ export class ApiItemBasicComponent implements OnInit {
    * Form used to create an item(Entity)
    */
   itemFormGroup: FormGroup = new FormGroup({});
-
-  objectItems: ObjectWithLinks[] = [];
+  /**
+   * ****** EXPERIMENTAL ******
+   * Collected values for the Objects with same object mapping
+   */
   propertyMap: Object = {};
+  /**
+   * ****** EXPERIMENTAL ******
+   * Collected titlte for the Objects with same object mapping
+   */
+  propertyTitleMap: Object = {};
 
-  constructor(private service: ApiItemService, private snackBar: MatSnackBar) {}
+  constructor(
+    private service: ApiItemService,
+    private modelMetaService: ModelMetaService,
+    private snackBar: MatSnackBar
+  ) {}
 
   ngOnInit() {
     this.handleMetaModel();
@@ -60,10 +71,8 @@ export class ApiItemBasicComponent implements OnInit {
         let url = this.item._links.self.href + '/' + property.mappedBySource;
         let s = this.service.rest.findAllByProperty(url, property.mappedBySource);
         this.propertyMap[property.name] = s;
-        // .subscribe(d => {
-        //   this.propertyMap.set(property.name, d);
-        //   console.log("setting property",property.name)
-        // });
+        // Get the model for the the property to extract the title
+        this.propertyTitleMap[property.name] = this.modelMetaService.getModel(property.reference);
       }
       if (property.required) formCtrl.setValidators(Validators.required);
       this.itemFormGroup.addControl(property.name, formCtrl);
@@ -72,7 +81,7 @@ export class ApiItemBasicComponent implements OnInit {
   /**
    * Post Request
    */
-  submitForm(): void {
+  public submitForm(): void {
     if (this.itemFormGroup.valid) {
       // Append the relationship to the model
       let savingObject = this.itemFormGroup.value;
@@ -86,20 +95,6 @@ export class ApiItemBasicComponent implements OnInit {
       );
     }
   } // save()
-
-  getItems(property: string) {
-    let url: string = this.item._links[property].toString();
-    this.service.rest.findAllByProperty(url, property).subscribe(d => {
-      console.log(d);
-    });
-    // let sub = this.service.rest
-    // .findAllByProperty(this.item._links.self.href, this.property.mappedBySource)
-    // .subscribe(d => {
-    //   this.objectItems = d;
-    //   console.log('GOt objects', d);
-    //   sub.unsubscribe();
-    // });
-  }
 
   private handleErrors(httpErrorResponse: HttpErrorResponse) {
     let message = httpErrorResponse.message;

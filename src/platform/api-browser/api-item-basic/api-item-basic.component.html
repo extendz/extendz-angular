@@ -1,6 +1,6 @@
-<form (submit)="submitForm()" [formGroup]="itemFormGroup" fxLayoutAlign="start center" fxLayoutAlign.xs="center start " fxLayout="row"
+<form (submit)="submitForm()" [formGroup]="itemFormGroup" fxLayoutAlign="start center" fxLayoutAlign.xs="center start" fxLayout="row"
   fxLayoutGap="2vw" fxLayout.xs="column">
-  <div *ngFor="let prop of modelMeta.properties">
+  <div *ngFor="let prop of modelMeta.properties" class="full-width">
     <!-- Number -->
     <mat-form-field fxFlex *ngIf="prop.type == 'number'">
       <input matInput type="number" [placeholder]="prop.name | camelCase" [formControlName]="prop.name">
@@ -45,11 +45,11 @@
       Object 
       Remove mapped by property and assign it.
     -->
-    <div fxFlex *ngIf="prop.relationShipType && (prop.relationShipType === 'SINGLE' && property.mappedBy !== prop.name)">
-      <mat-form-field>
+    <div  *ngIf="prop.relationShipType && (prop.relationShipType === 'SINGLE' && property.mappedBy !== prop.name)">
+      <mat-form-field fxFlex>
         <mat-select [placeholder]="prop.name | camelCase" [formControlName]="prop.name">
           <mat-option *ngFor="let item of (propertyMap[prop.name] | async)" [value]="item">
-            {{ item }}
+            {{ item[(propertyTitleMap[prop.name]| async).title] }}
           </mat-option>
         </mat-select>
       </mat-form-field>

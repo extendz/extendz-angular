@@ -147,7 +147,7 @@ export class ExtendzApiSelectComponent implements OnInit, OnDestroy, ControlValu
           let str: any = response[this.modelMeta.title];
           this.displayValue = str;
           if (results.length > 1) {
-            this.displayValue = this.displayValue + ' and ' + (results.length - 1) + ' more...';
+            this.setMultipleDisplay(results.length);
           }
         }
         res.unsubscribe();
@@ -178,9 +178,9 @@ export class ExtendzApiSelectComponent implements OnInit, OnDestroy, ControlValu
         (response: any) => {
           let tableResponse: HateosPagedResponse = response;
           // One to Many relationship
-          console.log(this.property, response);
-          if (tableResponse._embedded && tableResponse._embedded[this.property.name]) {
-            this.handleMultipleResponse(tableResponse._embedded[this.property.name]);
+          if (tableResponse._embedded) {
+            let key = Object.keys(tableResponse._embedded)[0];
+            this.handleMultipleResponse(tableResponse._embedded[key]);
           } else {
             let singleResponse: ObjectWithLinks = response;
             this.handleSingleResponse(singleResponse);
@@ -211,7 +211,7 @@ export class ExtendzApiSelectComponent implements OnInit, OnDestroy, ControlValu
   } // handleMultipleResponse()
 
   private setMultipleDisplay(more: number) {
-    this.displayValue = this.displayValue + ' and ' + (more - 1) + ' more...';
+    if (more > 2) this.displayValue = this.displayValue + ' and ' + (more - 1) + ' more...';
   }
 
   private handleSingleResponse(response: ObjectWithLinks) {
