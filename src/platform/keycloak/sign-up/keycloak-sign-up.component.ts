@@ -1,12 +1,11 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, Validators, ValidatorFn } from '@angular/forms';
 
-import { mergeMap } from 'rxjs/operators';
 import { Subscription } from 'rxjs/Subscription';
 
 import { KeycloakSignUpConfig } from './models/keycloak-singup.config';
 import { KeycloakSignUpService } from './keycloak-sign-up.service';
-import { AccessToken } from '../../auth/common';
+import { UserRepresentationBase } from './models';
 
 @Component({
   selector: 'ext-keycloak-sign-up',
@@ -19,13 +18,9 @@ export class KeycloakSignUpComponent {
    */
   signUpForm: FormGroup;
   /**
-   * All subscriptions
-   */
-  all$: Subscription;
-  /**
    *
    */
-  @Output() success: EventEmitter<any> = new EventEmitter();
+  @Output() success: EventEmitter<UserRepresentationBase> = new EventEmitter();
 
   constructor(
     private formBuilder: FormBuilder,
@@ -65,31 +60,20 @@ export class KeycloakSignUpComponent {
       confirmPasswordFeild &&
       confirmPasswordFeild.value
     ) {
-      // console.log(passwordField.value, confirmPasswordFeild.value);
       if (passwordField.value != confirmPasswordFeild.value) {
-        // console.log('false');
         confirmPasswordFeild.setErrors({ MatchPassword: true });
-        // g.get('confirmPassword').setErrors({ MatchPassword: true });
-      } else {
-        // console.log('true');
       }
     }
   } // matchPassword()
 
   signUp() {
     if (this.signUpForm.valid) {
-      this.all$ = this.service
-        .singup()
-        .pipe(
-          mergeMap((token: AccessToken) =>
-            this.service.createUser(this.signUpForm.value, token.access_token)
-          )
-        )
-        .subscribe();
+      let sub = this.service
+        .signUp(this.signUpForm.value)
+        .subscribe((newUser: UserRepresentationBase) => {
+          this.success.emit(newUser);
+          sub.unsubscribe();
+        });
     }
   } //signUp()
-
-  ngOnDestroy(): void {
-    this.all$.unsubscribe();
-  } // ngOnDestroy()
 }

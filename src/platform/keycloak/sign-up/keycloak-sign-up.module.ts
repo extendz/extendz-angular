@@ -11,6 +11,7 @@ import { KeycloakSignUpService } from './keycloak-sign-up.service';
 
 import { ExtendPipesModule } from '../../common/';
 import { KeycloakConfig } from '../models';
+import { FlexLayoutModule } from '@angular/flex-layout';
 
 export const EXT_KEYCLOAK_SINGUP_CONFIG = new InjectionToken<ExtendzKeycloakSignUpModule>(
   'extKeycloakSignUp.config'
@@ -20,6 +21,7 @@ export const EXT_KEYCLOAK_SINGUP_CONFIG = new InjectionToken<ExtendzKeycloakSign
   imports: [
     CommonModule,
     ExtendPipesModule,
+    FlexLayoutModule,
     ReactiveFormsModule,
     //Material
     MatInputModule,

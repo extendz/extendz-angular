@@ -14,9 +14,9 @@
     limitations under the License.
 -->
 
-<form [formGroup]="signUpForm" (submit)="signUp()">
+<form [formGroup]="signUpForm" (submit)="signUp()" fxLayout="column">
     <div *ngFor="let feild of singUpConfig.fields">
-        <div *ngIf="feild.name == 'password' else other_content">
+        <div *ngIf="feild.name == 'password' else commonFeild">
             <mat-form-field class="full-width">
                 <input matInput placeholder="Password" type="password" formControlName="password">
                 <mat-error>
@@ -30,7 +30,7 @@
                 </mat-error>
             </mat-form-field>
         </div>
-        <ng-template #other_content>
+        <ng-template #commonFeild>
             <mat-form-field class="full-width">
                 <input matInput [placeholder]="feild.name | camelCase" [formControlName]="feild.name" />
                 <mat-error>
@@ -39,7 +39,10 @@
             </mat-form-field>
         </ng-template>
     </div>
-    <button mat-raised-button type="submit">Sign Up</button>
+    <div fxLayoutAlign="center center">
+        <button mat-raised-button type="submit">Sign Up</button>
+    </div>
+
 </form>
 
 <ng-template #error let-name="name">

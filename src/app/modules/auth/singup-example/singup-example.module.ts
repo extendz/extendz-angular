@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MatTabsModule } from '@angular/material';
 
 import { SingupExampleRoutingModule } from './singup-example-routing.module';
 import { SingupExampleComponent } from './singup-example.component';
@@ -8,7 +9,6 @@ import {
   ExtendzKeycloakSignUpModule,
   FeildTypes
 } from '../../../../platform';
-import { MatTabsModule } from '@angular/material';
 
 @NgModule({
   imports: [
@@ -16,9 +16,12 @@ import { MatTabsModule } from '@angular/material';
     SingupExampleRoutingModule,
     MatTabsModule,
     ExtendzKeycloakModule.forRoot({
-      server: 'https://extendz-keycloak.herokuapp.com/auth',
-      realm: 'extendz',
-      client_id: 'angular',
+      //server: 'https://extendz-keycloak.herokuapp.com/auth',
+      server: 'http://192.168.120.14:8080/auth',
+      //realm: 'extendz',
+      realm: 'rsmetrics',
+      //client_id: 'angular',
+      client_id: 'ceylon-angular',
       frontAdmin: {
         userName: 'frontadmin',
         password: 'admin'
@@ -33,7 +36,7 @@ import { MatTabsModule } from '@angular/material';
         },
         {
           name: FeildTypes.Email,
-          required: true,
+          //required: true,
           min: 2,
           max: 18
         },
@@ -44,9 +47,9 @@ import { MatTabsModule } from '@angular/material';
           name: FeildTypes.lastName
         },
         {
-          name: FeildTypes.Password,
-          required: true,
-          min: 5
+          name: FeildTypes.Password
+          //required: true,
+          // min: 5
         }
       ]
     })

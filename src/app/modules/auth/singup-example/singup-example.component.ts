@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserRepresentationBase } from '../../../../platform';
 
 @Component({
   selector: 'app-singup-example',
@@ -6,10 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./singup-example.component.css']
 })
 export class SingupExampleComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
+  ngOnInit() {}
 
-  ngOnInit() {
+  onSuccess(user: UserRepresentationBase) {
+    console.log(user);
   }
-
 }
