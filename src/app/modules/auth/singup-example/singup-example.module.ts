@@ -4,52 +4,29 @@ import { MatTabsModule } from '@angular/material';
 
 import { SingupExampleRoutingModule } from './singup-example-routing.module';
 import { SingupExampleComponent } from './singup-example.component';
-import {
-  ExtendzKeycloakModule,
-  ExtendzKeycloakSignUpModule,
-  FeildTypes
-} from '../../../../platform';
+import { ExtendzKeycloakModule, ExtendzKeycloakSignUpModule } from '../../../../platform';
+import { ExtendzSignUpModule } from '../../../../platform/auth/sing-up';
+import { FieldType } from '../../../../platform/auth/sing-up/models/singUp.config';
 
 @NgModule({
   imports: [
     CommonModule,
     SingupExampleRoutingModule,
     MatTabsModule,
-    ExtendzKeycloakModule.forRoot({
-      //server: 'https://extendz-keycloak.herokuapp.com/auth',
-      server: 'http://192.168.120.14:8080/auth',
-      //realm: 'extendz',
-      realm: 'rsmetrics',
-      //client_id: 'angular',
-      client_id: 'ceylon-angular',
-      frontAdmin: {
-        userName: 'frontadmin',
-        password: 'admin'
-      }
-    }),
-    ExtendzKeycloakSignUpModule.forRoot({
+    ExtendzSignUpModule.forRoot({
+      url: 'user/sign-up',
       fields: [
         {
-          name: FeildTypes.Username,
-          min: 1,
-          required: true
+          title: 'User Name',
+          type: FieldType.Text
         },
         {
-          name: FeildTypes.Email,
-          //required: true,
-          min: 2,
-          max: 18
+          title: 'Password',
+          type: FieldType.Password
         },
         {
-          name: FeildTypes.firstName
-        },
-        {
-          name: FeildTypes.lastName
-        },
-        {
-          name: FeildTypes.Password
-          //required: true,
-          // min: 5
+          title: 'Email',
+          type: FieldType.Email
         }
       ]
     })
