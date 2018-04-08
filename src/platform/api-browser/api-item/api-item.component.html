@@ -25,7 +25,7 @@
       <span fxFlex></span>
       <div fxLayout="row">
         <span fxFlex></span>
-        <button mat-icon-button>
+        <button mat-icon-button matTooltip="History">
           <mat-icon>
             <svg id="history" viewBox="0 0 24 24">
               <path d="M0 0h24v24H0z" fill="none" />
@@ -34,7 +34,7 @@
             </svg>
           </mat-icon>
         </button>
-        <button *ngIf="id!=0" mat-icon-button (click)="delete()">
+        <button *ngIf="id!=0" mat-icon-button (click)="delete()" matTooltip="Delete">
           <mat-icon>
             <svg id="delete" viewBox="0 0 24 24">
               <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z" />
@@ -103,7 +103,7 @@
           </mat-form-field>
         </div>
 
-        <button type="submit" mat-fab class="bottom-right" (click)="save()">
+        <button type="submit" mat-fab class="bottom-right" (click)="save()" matTooltip="Save">
           <mat-icon>
             <svg id="save" viewBox="0 0 24 24" class="primary-text">
               <path d="M0 0h24v24H0z" fill="none" />

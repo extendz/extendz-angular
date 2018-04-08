@@ -8,7 +8,8 @@ import {
   MatButtonModule,
   MatDialogModule,
   MatDatepickerModule,
-  MatSelectModule
+  MatSelectModule,
+  MatTooltipModule
 } from '@angular/material';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -34,6 +35,7 @@ import { ExtendzFileUploadModule } from '../../file/';
     ExtendzFileUploadModule,
     //Mat
     MatInputModule,
+    MatTooltipModule,
     MatSelectModule,
     MatDialogModule,
     MatIconModule,

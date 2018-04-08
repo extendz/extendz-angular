@@ -74,6 +74,10 @@ export class RestService {
     return this.http.get(url, httpOptions).pipe(map((res: any) => res._embedded[propertyName]));
   }
 
+  findOne(item: ObjectWithLinks) {
+    return this.http.get<ObjectWithLinks>(item._links.self.href);
+  }
+
   /**
    * Save thte Object
    * @param item

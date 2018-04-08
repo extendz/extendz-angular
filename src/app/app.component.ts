@@ -92,6 +92,12 @@ export class AppComponent {
         title: 'Api Select',
         subTitle: 'HATEOS API Selector',
         url: ['apis', 'selector']
+      },
+      {
+        icon: 'brightness_auto',
+        title: 'Api Image',
+        subTitle: 'Show Images',
+        url: ['apis', 'image']
       }
     ];
 
