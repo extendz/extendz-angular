@@ -2,7 +2,7 @@
   <mat-tab label="Demo">
     <div class="tab-content">
       <div *ngIf="products$ | async; let products">
-        <img extApiImage width="50%" [item]="products[0]" property="images">
+        <img extApiImage width="50%" position="1" [item]="products[0]" property="images">
       </div>
     </div>
   </mat-tab>
