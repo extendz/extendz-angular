@@ -35,7 +35,17 @@ export class SingUpConfig implements ISingUpConfig {
 }
 
 export class Field {
+  /**
+   * Display value
+   */
   title: string;
+  /**
+   * Form value
+   */
+  name: string;
+  /**
+   * Type
+   */
   type: FieldType;
   required?: boolean;
   pattern?: Pattern;

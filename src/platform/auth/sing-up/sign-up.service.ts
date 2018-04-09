@@ -15,9 +15,12 @@
  */
 
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+
 import { RestService } from '../../common';
-import { SingUpConfig } from './models/singUp.config';
 import { ExtRestConfig } from '../../common/services';
+import { SingUpConfig } from './models/singUp.config';
+
 
 @Injectable()
 export class SingUpService {
@@ -25,11 +28,10 @@ export class SingUpService {
     private rest: RestService,
     private restConfig: ExtRestConfig,
     private config: SingUpConfig
-  ) {
-    console.log('cob', restConfig.basePath, config.url);
-  }
+  ) {}
 
-  postSignUp() {
-    //this.rest.http.post();
-  }
+  postSignUp(saveObject: object): Observable<object> {
+    let url = this.restConfig.basePath + '/' + this.config.url;
+    return this.rest.http.post<object>(url, saveObject);
+  } // postSignUp()
 }

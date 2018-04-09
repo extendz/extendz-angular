@@ -18,7 +18,7 @@ import { NgModule, ModuleWithProviders, InjectionToken, Provider } from '@angula
 import { CommonModule } from '@angular/common';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms';
-import { MatInputModule, MatIconModule, MatButtonModule } from '@angular/material';
+import { MatInputModule, MatIconModule, MatButtonModule, MatSnackBarModule } from '@angular/material';
 
 import { SignUpComponent } from './sign-up.component';
 import { ISingUpConfig, SingUpConfig } from './models/singUp.config';
@@ -49,6 +49,7 @@ export const SIGNUP_PROVIDER: Provider = {
     ReactiveFormsModule,
     //Material
     MatInputModule,
+    MatSnackBarModule,
     MatIconModule,
     MatButtonModule
   ],

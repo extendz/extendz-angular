@@ -18,14 +18,19 @@ import { FieldType } from '../../../../platform/auth/sing-up/models/singUp.confi
       fields: [
         {
           title: 'User Name',
-          type: FieldType.Text
+          name: 'userName',
+          type: FieldType.Text,
+          required: true
         },
         {
           title: 'Password',
-          type: FieldType.Password
+          name: 'password',
+          type: FieldType.Password,
+          required: true
         },
         {
           title: 'Email',
+          name: 'email',
           type: FieldType.Email
         }
       ]

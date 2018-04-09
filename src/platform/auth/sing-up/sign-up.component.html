@@ -18,73 +18,35 @@
     <div *ngFor="let field of fields">
         <!-- {{field | json}} -->
         <mat-form-field class="full-width">
-            <input matInput [placeholder]="field.title | camelCase" [type]="field.type" [formControlName]="field.title">
+            <input matInput [placeholder]="field.title" [type]="field.type" [formControlName]="field.name">
             <mat-error>
                 <ng-container *ngTemplateOutlet="error;context:field"> </ng-container>
             </mat-error>
         </mat-form-field>
-
-        <!-- <div *ngIf="field.type == 'Password' else commonFeild">
-            <mat-form-field class="full-width">
-                <input matInput [placeholder]="field.title | camelCase" type="password" [formControlName]="field.title">
-                <mat-error>
-                    <ng-container *ngTemplateOutlet="error;context:field"> </ng-container>
-                </mat-error>
-            </mat-form-field>
-            <mat-form-field class="full-width">
-                <input matInput [placeholder]="field.title+'Confirm' | camelCase" type="password" [formControlName]="field.title+'Confirm'">
-                <mat-error>
-                    <ng-container *ngTemplateOutlet="error;context:field"></ng-container>
-                </mat-error>
-            </mat-form-field>
-        </div> -->
-
-        <!-- <div *ngIf="feild.name == 'password' else commonFeild">
-            <mat-form-field class="full-width">
-                <input matInput placeholder="Password" type="password" formControlName="password">
-                <mat-error>
-                    <ng-container *ngTemplateOutlet="error;context:feild"> </ng-container>
-                </mat-error>
-            </mat-form-field>
-            <mat-form-field class="full-width">
-                <input matInput placeholder="Confirm Password" type="password" formControlName="passwordConfirm">
-                <mat-error>
-                    <ng-container *ngTemplateOutlet="error;context:feild"></ng-container>
-                </mat-error>
-            </mat-form-field>
-        </div> -->
-        <!-- <ng-template #commonFeild>
-            <mat-form-field class="full-width">
-                <input matInput [placeholder]="field.title | camelCase" [formControlName]="field.title" />
-                <mat-error>
-                </mat-error>
-            </mat-form-field>
-        </ng-template> -->
     </div>
     <div fxLayoutAlign="center center">
         <button mat-raised-button type="submit">Sign Up</button>
     </div>
 </form>
 
-<ng-template #error let-title="title">
-
-    <mat-error *ngIf="signUpFormGroup.controls[title].errors?.required">
-        {{title | camelCase}}
+<ng-template #error let-name="name" let-title="title">
+    <mat-error *ngIf="signUpFormGroup.controls[name].errors?.required">
+        <span>{{title}}</span> is 
         <strong>required</strong>
     </mat-error>
-    <mat-error *ngIf="signUpFormGroup.controls[title].errors?.mismatchWith">
-        <span>{{title | camelCase}} does not match with</span>
-        <strong>{{signUpFormGroup.controls[title].errors?.mismatchWith}}</strong>
+    <mat-error *ngIf="signUpFormGroup.controls[name].errors?.mismatchWith">
+        <span>{{name | camelCase}} does not match with</span>
+        <strong>{{signUpFormGroup.controls[name].errors?.mismatchWith}}</strong>
     </mat-error>
-    <mat-error *ngIf="signUpFormGroup.controls[title].errors?.pattern">
+    <mat-error *ngIf="signUpFormGroup.controls[name].errors?.pattern">
         {{pattern.errorMessage | camelCase}}
     </mat-error>
-    <mat-error *ngIf="signUpFormGroup.controls[title].errors?.minlength">
-        {{title | camelCase}} need at least
+    <mat-error *ngIf="signUpFormGroup.controls[name].errors?.minlength">
+        {{name | camelCase}} need at least
         <strong>{{signUpFormGroup.controls[name].errors.minlength.requiredLength}}</strong> character(s).
     </mat-error>
-    <mat-error *ngIf="signUpFormGroup.controls[title].errors?.maxlength">
-        {{title | camelCase}} must be no longer than
-        <strong>{{signUpFormGroup.controls[title].errors.maxlength.requiredLength}} characters</strong>.
+    <mat-error *ngIf="signUpFormGroup.controls[name].errors?.maxlength">
+        {{name | camelCase}} must be no longer than
+        <strong>{{signUpFormGroup.controls[name].errors.maxlength.requiredLength}} characters</strong>.
     </mat-error>
 </ng-template>

@@ -14,15 +14,26 @@
  *    limitations under the License.
  */
 
-import { Component, OnInit } from '@angular/core';
-import { SingUpConfig, FieldType, Field } from './models/singUp.config';
+import { Component, OnDestroy, Output, EventEmitter } from '@angular/core';
+import { MatSnackBar } from '@angular/material';
+import { HttpErrorResponse } from '@angular/common/http';
 import { FormGroup, FormBuilder, ValidatorFn, Validators, FormControl } from '@angular/forms';
+
+import { Subscription } from 'rxjs/Subscription';
+import { take } from 'rxjs/operators/take';
+import { finalize } from 'rxjs/operators/finalize';
+
+import { SingUpConfig, FieldType, Field } from './models/singUp.config';
 import { ExtendzFormGroup } from './formGroup';
 import { ExtendzFormBuilder } from './formBuilder';
 import { SingUpService } from './sign-up.service';
 
 export function getConfirmFielTitle(field: Field) {
-  return `Confirm${field.title}`;
+  return `Confirm ${field.title}`;
+}
+
+export function getConfirmFieldName(field: Field) {
+  return `confirm${field.name}`;
 }
 
 @Component({
@@ -30,25 +41,28 @@ export function getConfirmFielTitle(field: Field) {
   templateUrl: './sign-up.component.html',
   styleUrls: ['./sign-up.component.css']
 })
-export class SignUpComponent implements OnInit {
-  /**
-   * Sign up form
-   */
+export class SignUpComponent implements OnDestroy {
+  /** Sign up form  */
   public signUpFormGroup: ExtendzFormGroup;
-  /**
-   * Fields for the given form. Not using the direct form config since there can be modifications.
-   */
+  /**  Fields for the given form. Not using the direct form config since there can be modifications.   */
   public fields: Field[] = [];
+  /** Subscriptions */
+  public all$: Subscription;
+  /** Success Event */
+  @Output() success: EventEmitter<object> = new EventEmitter();
 
   constructor(
     private formBuilder: ExtendzFormBuilder,
     public config: SingUpConfig,
-    private service: SingUpService
+    private service: SingUpService,
+    private snackBar: MatSnackBar
   ) {
     this.createForm();
   }
 
-  ngOnInit() {}
+  ngOnDestroy(): void {
+    if (this.all$) this.all$.unsubscribe();
+  }
   /**
    * Create the singup form
    */
@@ -65,17 +79,19 @@ export class SignUpComponent implements OnInit {
       if (field.required) validators.push(Validators.required);
 
       let ctrl: FormControl = new FormControl(null, validators);
-      this.signUpFormGroup.addControl(field.title, ctrl);
+      this.signUpFormGroup.addControl(field.name, ctrl);
 
       this.fields.push(field);
       // Password feilds automatically will have a confirm password feild
       if (field.type == FieldType.Password) {
-        let title = getConfirmFielTitle(field);
+        let name = getConfirmFieldName(field);
+        // Make a clone of the field
         let confirmField = { ...field };
-        confirmField.title = title;
+        confirmField.title = getConfirmFielTitle(field);
+        confirmField.name = name;
         this.fields.push(confirmField);
         let confiCtrl = new FormControl(null, validators);
-        this.signUpFormGroup.addControl(title, confiCtrl);
+        this.signUpFormGroup.addControl(name, confiCtrl);
       }
     });
   } // createForm
@@ -83,8 +99,8 @@ export class SignUpComponent implements OnInit {
   private matchPassword(formGroup: ExtendzFormGroup): void {
     if (formGroup.feilds)
       formGroup.feilds.filter(f => f.type == FieldType.Password).forEach(field => {
-        let p = formGroup.get(field.title);
-        let pc = formGroup.get(getConfirmFielTitle(field));
+        let p = formGroup.get(field.name);
+        let pc = formGroup.get(getConfirmFieldName(field));
         if (p && p.value && pc && pc.value) {
           if (p.value != pc.value) {
             pc.setErrors({
@@ -95,5 +111,28 @@ export class SignUpComponent implements OnInit {
       });
   } // matchPassword()
 
-  public signUp(): void {}
+  public signUp(): void {
+    if (this.signUpFormGroup.valid) {
+      let sub = this.service
+        .postSignUp(this.signUpFormGroup.value)
+        .pipe(
+          take(1),
+          finalize(() => {
+            sub.unsubscribe();
+          })
+        )
+        .subscribe(
+          () => {
+            this.success.emit(this.signUpFormGroup.value);
+          },
+          (error: HttpErrorResponse) => {
+            if (error.status == 409) {
+              this.snackBar.open('User name already taken.Please try another.', null, {
+                duration: 3000
+              });
+            }
+          }
+        );
+    }
+  } // signUp()
 } // class
