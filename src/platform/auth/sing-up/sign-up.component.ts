@@ -27,6 +27,7 @@ import { SingUpConfig, FieldType, Field } from './models/singUp.config';
 import { ExtendzFormGroup } from './formGroup';
 import { ExtendzFormBuilder } from './formBuilder';
 import { SingUpService } from './sign-up.service';
+import { ObjectWithLinks } from '../../common';
 
 export function getConfirmFielTitle(field: Field) {
   return `Confirm ${field.title}`;
@@ -122,8 +123,8 @@ export class SignUpComponent implements OnDestroy {
           })
         )
         .subscribe(
-          () => {
-            this.success.emit(this.signUpFormGroup.value);
+          (user: ObjectWithLinks) => {
+            this.success.emit(user);
           },
           (error: HttpErrorResponse) => {
             if (error.status == 409) {

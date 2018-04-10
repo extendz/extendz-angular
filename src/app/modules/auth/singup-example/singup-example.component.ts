@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { UserRepresentationBase } from '../../../../platform';
+import { ObjectWithLinks } from '../../../../platform';
+import { UserSingUpDto } from './models/userSignUpDto';
+import { ExtendzFormGroup } from '../../../../../deploy/platform/auth/sing-up/formGroup';
 
 @Component({
   selector: 'app-singup-example',
@@ -7,11 +9,12 @@ import { UserRepresentationBase } from '../../../../platform';
   styleUrls: ['./singup-example.component.css']
 })
 export class SingupExampleComponent implements OnInit {
+  formz: ExtendzFormGroup;
   constructor() {}
 
   ngOnInit() {}
 
-  onSuccess(user: UserRepresentationBase) {
+  onSuccess(user: ObjectWithLinks) {
     console.log(user);
   }
 }

@@ -4,9 +4,7 @@ import { MatTabsModule } from '@angular/material';
 
 import { SingupExampleRoutingModule } from './singup-example-routing.module';
 import { SingupExampleComponent } from './singup-example.component';
-import { ExtendzKeycloakModule, ExtendzKeycloakSignUpModule } from '../../../../platform';
-import { ExtendzSignUpModule } from '../../../../platform/auth/sing-up';
-import { FieldType } from '../../../../platform/auth/sing-up/models/singUp.config';
+import { ExtendzSignUpModule, FieldType, EMAIL_REGEX } from '../../../../platform/auth/sing-up';
 
 @NgModule({
   imports: [
@@ -31,7 +29,11 @@ import { FieldType } from '../../../../platform/auth/sing-up/models/singUp.confi
         {
           title: 'Email',
           name: 'email',
-          type: FieldType.Email
+          type: FieldType.Email,
+          pattern: {
+            pattern: EMAIL_REGEX,
+            errorMessage: 'Email not valid'
+          }
         }
       ]
     })

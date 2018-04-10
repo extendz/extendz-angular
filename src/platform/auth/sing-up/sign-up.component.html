@@ -13,7 +13,6 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 -->
-
 <form [formGroup]="signUpFormGroup" (submit)="signUp()" fxLayout="column">
     <div *ngFor="let field of fields">
         <!-- {{field | json}} -->
@@ -29,7 +28,7 @@
     </div>
 </form>
 
-<ng-template #error let-name="name" let-title="title">
+<ng-template #error let-name="name" let-title="title" let-pattern="pattern">
     <mat-error *ngIf="signUpFormGroup.controls[name].errors?.required">
         <span>{{title}}</span> is 
         <strong>required</strong>

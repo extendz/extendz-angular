@@ -13,14 +13,12 @@
  *    See the License for the specific language governing permissions and
  *    limitations under the License.
  */
-
 import { Injectable } from '@angular/core';
+
 import { Observable } from 'rxjs/Observable';
 
-import { RestService } from '../../common';
-import { ExtRestConfig } from '../../common/services';
+import { RestService, ExtRestConfig } from '../../common';
 import { SingUpConfig } from './models/singUp.config';
-
 
 @Injectable()
 export class SingUpService {

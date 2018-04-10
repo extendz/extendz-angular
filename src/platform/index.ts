@@ -18,4 +18,3 @@ export * from './auth';
 export * from './common';
 export * from './extendz-google-map';
 export * from './file';
-export * from './keycloak';
