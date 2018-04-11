@@ -45,17 +45,16 @@
       Object 
       Remove mapped by property and assign it.
     -->
-    <div  *ngIf="prop.relationShipType && (prop.relationShipType === 'SINGLE' && property.mappedBy !== prop.name)">
+    <div *ngIf="prop.relationShipType && (prop.relationShipType === 'SINGLE' && property.mappedBy !== prop.name)">
       <mat-form-field fxFlex>
         <mat-select [placeholder]="prop.name | camelCase" [formControlName]="prop.name">
-          <mat-option *ngFor="let item of (propertyMap[prop.name] | async)" [value]="item">
-            {{ item[(propertyTitleMap[prop.name]| async).title] }}
+          <mat-option *ngFor="let item of (propertyMap[prop.name] | async)" [value]="item._links.self.href">
+            {{ item[(propertyTitleMap[prop.name] | async).title] }}
           </mat-option>
         </mat-select>
       </mat-form-field>
       <!-- {{item._links.self.href | json}} {{prop.mappedBySource}} -->
     </div>
-
 
   </div>
   <button mat-icon-button type="submit">
