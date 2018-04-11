@@ -17,7 +17,7 @@
     <div *ngFor="let field of fields">
         <!-- {{field | json}} -->
         <mat-form-field class="full-width">
-            <input matInput [placeholder]="field.title" [type]="field.type" [formControlName]="field.name">
+            <input matInput autocomplete="false" [placeholder]="field.title" [type]="field.type" [formControlName]="field.name">
             <mat-error>
                 <ng-container *ngTemplateOutlet="error;context:field"> </ng-container>
             </mat-error>

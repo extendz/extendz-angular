@@ -17,8 +17,7 @@
 <mat-tab-group mat-stretch-tabs="yes">
   <mat-tab label="Demo">
     <div class="tab-content">
-        <!-- [(form)]="form" -->
-      <ext-sign-up (success)="onSuccess($event)"></ext-sign-up>
+      <ext-sign-up [(form)]="form" (success)="onSuccess($event)"></ext-sign-up>
       Valid {{form?.valid}}
     </div>
   </mat-tab>

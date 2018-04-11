@@ -14,7 +14,15 @@
  *    limitations under the License.
  */
 
-import { Component, OnDestroy, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnDestroy,
+  Output,
+  EventEmitter,
+  Input,
+  OnInit,
+  ChangeDetectionStrategy
+} from '@angular/core';
 import { MatSnackBar } from '@angular/material';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FormGroup, FormBuilder, ValidatorFn, Validators, FormControl } from '@angular/forms';
@@ -40,7 +48,8 @@ export function getConfirmFieldName(field: Field) {
 @Component({
   selector: 'ext-sign-up',
   templateUrl: './sign-up.component.html',
-  styleUrls: ['./sign-up.component.css']
+  styleUrls: ['./sign-up.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SignUpComponent implements OnDestroy {
   /** Sign up form  */
@@ -49,6 +58,10 @@ export class SignUpComponent implements OnDestroy {
   public fields: Field[] = [];
   /** Subscriptions */
   public all$: Subscription;
+  /** Sign up Form  */
+  @Input() form: ExtendzFormGroup;
+  @Output() formChange: EventEmitter<ExtendzFormGroup> = new EventEmitter();
+
   /** Success Event */
   @Output() success: EventEmitter<object> = new EventEmitter();
 
@@ -59,6 +72,12 @@ export class SignUpComponent implements OnDestroy {
     private snackBar: MatSnackBar
   ) {
     this.createForm();
+  }
+
+  ngOnInit(): void {
+    setTimeout(() => {
+      this.formChange.emit(this.signUpFormGroup);
+    });
   }
 
   ngOnDestroy(): void {
