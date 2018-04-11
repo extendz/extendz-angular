@@ -102,23 +102,25 @@
   <ng-template #desktop>
 
     <mat-table #table [dataSource]="tableDataSource ">
+      <!-- Select Column -->
       <ng-container matColumnDef="select">
-        <mat-header-cell *matHeaderCellDef>
+        <mat-header-cell *matHeaderCellDef fxFlex="48px">
           <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()">
           </mat-checkbox>
         </mat-header-cell>
-        <mat-cell *matCellDef="let row">
+        <mat-cell *matCellDef="let row" fxFlex="48px">
           <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row._links.self.href) : null;selectionChange(row._links.self.href)"
             [checked]="selection.isSelected(row._links.self.href)">
           </mat-checkbox>
         </mat-cell>
       </ng-container>
 
+      <!-- Edit Column -->
       <ng-container matColumnDef="edit">
-        <mat-header-cell *matHeaderCellDef>
+        <mat-header-cell *matHeaderCellDef fxFlex="48px">
           Edit
         </mat-header-cell>
-        <mat-cell *matCellDef="let row">
+        <mat-cell *matCellDef="let row" fxFlex="48px">
           <button mat-icon-button (click)="editRow(row)">
             <mat-icon>
               <svg id="edit" viewBox="0 0 24 24">
@@ -131,11 +133,12 @@
         </mat-cell>
       </ng-container>
 
-      <ng-container *ngFor="let column of columns" matColumnDef={{column}}>
-        <mat-header-cell *matHeaderCellDef>
+      <!-- Other Column -->
+      <ng-container *ngFor="let column of columns" [matColumnDef]="column">
+        <mat-header-cell *matHeaderCellDef fxFlex>
           <p>{{column | camelCase}}</p>
         </mat-header-cell>
-        <mat-cell *matCellDef="let element">
+        <mat-cell *matCellDef="let element" fxFlex>
           <ng-container *ngIf="column === 'Select All';else name">
             <p style="margin-left: 15px">
               <mat-checkbox [checked]="false" (change)="selectAll($event)"></mat-checkbox>
@@ -155,7 +158,6 @@
 
   </ng-template>
 </ng-template>
-
-<mat-paginator class="mat-elevation-z5 bottom" [length]="tableResponse?.page?.totalPages" (page)="pageEvent($event)" [pageSize]="tableResponse?.page?.size"
+<mat-paginator class="mat-elevation-z5 bottom" [length]="tableResponse?.page?.totalElements" (page)="pageEvent($event)" [pageSize]="tableResponse?.page?.size"
   [pageSizeOptions]="[10, 20, 50]">
 </mat-paginator>

@@ -16,28 +16,22 @@
 
 @import '~@angular/material/theming';
 .container {
-  padding: 1vw;
+    padding: 1vw;
+}
+
+mat-card:hover {
+  cursor: pointer;
 }
 
 mat-icon.size-32 {
-  width: 32px;
-  height: 32px;
-  line-height: 32px;
-  background-color: #eee;
-  border-radius: 50px;
-}
-
-.primary {
-  padding: 5px;
-  color: #03A9F4;
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+    border-radius: 50px;
 }
 
 .white-card {
-  padding: 2vw;
-  background-color: white;
-  margin-bottom: 5px;
-}
-
-.title {
-  font-weight: bolder;
+    padding: 2vw;
+    background-color: white;
+    margin-bottom: 5px;
 }

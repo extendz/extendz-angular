@@ -19,6 +19,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators/map';
+import { tap } from 'rxjs/operators/tap';
 import { of } from 'rxjs/observable/of';
 
 import { ExtRestConfig } from '../rest';
@@ -48,9 +49,7 @@ export class ModelMetaService {
    * @param projecion
    */
   getModel(model: string, projecion?: string) {
-    this.getModels().pipe();
-
-    if (this.modelMap && this.modelMap.has(model) && this.modelMap.get(model).properties) {
+    if (this.modelMap && this.modelMap.has(model)) {
       return of(this.modelMap.get(model));
     } else {
       let params: HttpParams = new HttpParams();
@@ -58,15 +57,16 @@ export class ModelMetaService {
         params = params.append('projection', projecion);
       }
       let url = this.getModelMetaBaseUrl() + '/' + model.toLowerCase();
-      return this.http.get<ModelMeta>(url, { params }).pipe(
-        map((modelMeta: ModelMeta) => {
-          if (!this.modelMap) this.modelMap = new Map();
-          this.modelMap.set(model, modelMeta);
-          return modelMeta;
-        })
-      );
+      return this.http
+        .get<ModelMeta>(url, { params })
+        .pipe(tap((modelMeta: ModelMeta) => this.addToMap(modelMeta)));
     }
   } // getModel()
+
+  private addToMap(modelMeta: ModelMeta, projection?: string) {
+    if (!this.modelMap) this.modelMap = new Map();
+    this.modelMap.set(modelMeta.name + '_' + projection, modelMeta);
+  }
 
   /**
    * Get all the models exposed by the backend.
@@ -80,12 +80,9 @@ export class ModelMetaService {
           .get<ModelMeta[]>(this.getModelMetaBaseUrl())
           // Cache
           .pipe(
-            map((modelMetas: ModelMeta[]) => {
-              if (!this.modelMap) this.modelMap = new Map();
+            tap((modelMetas: ModelMeta[]) => {
               this.initiated = true;
-              // TODO Check for existing. If not then replace
-              modelMetas.forEach(modelMeta => this.modelMap.set(modelMeta.name, modelMeta));
-              return modelMetas;
+              modelMetas.forEach(modelMeta => this.addToMap(modelMeta));
             })
           )
       );

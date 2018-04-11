@@ -6,5 +6,10 @@
 }
 
 .meta-name {
-    text-align: center
+    text-align: center;
+    color: #999
+}
+
+mat-icon {
+    color: #999;
 }
