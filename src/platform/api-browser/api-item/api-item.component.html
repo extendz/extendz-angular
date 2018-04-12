@@ -17,7 +17,7 @@
 
   <div fxFlex="10%" fxFlex.xs="1vw"></div>
 
-  <div fxFlex>
+  <div fxFlex style="margin-top:1vh">
     <mat-card [ngClass]="{'mat-elevation-z0' : media.isActive('xs')}">
       <!--header -->
       <div fxLayout="row" fxLayoutAlign="center center">
@@ -25,7 +25,7 @@
           <span *ngIf="!item?._links?.self?.href" class="primary">New </span>{{modelMeta?.name | camelCase}}
         </h3>
         <span fxFlex></span>
-        <button  *ngIf="id!=0" mat-icon-button matTooltip="History">
+        <button *ngIf="id!=0" mat-icon-button matTooltip="History">
           <mat-icon>
             <svg id="history" viewBox="0 0 24 24">
               <path d="M0 0h24v24H0z" fill="none" />
@@ -42,10 +42,6 @@
             </svg>
           </mat-icon>
         </button>
-      </div>
-
-    </div>
-
       </div>
 
       <form [formGroup]="itemFormGroup" fxLayout.xs="column" fxLayout.lg="row" fxLayoutGap.lg="1vw" fxLayoutWrap>

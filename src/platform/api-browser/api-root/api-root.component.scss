@@ -14,13 +14,30 @@
  *   limitations under the License.
  */
 
-@import '~@angular/material/theming';
+@mixin api-root-theme($theme) {
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    .model-meta mat-card-content mat-icon {
+        color: mat-color($primary, 300)
+    }
+    .model-meta:hover mat-card-content strong {
+        color: mat-color($primary)
+    }
+    .model-meta:hover mat-card-content mat-icon {
+        color: mat-color($primary)
+    }
+}
+
 .container {
     padding: 1vw;
 }
 
+mat-card {
+    margin-top: 0.5vw
+}
+
 mat-card:hover {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 mat-icon.size-32 {
@@ -28,10 +45,4 @@ mat-icon.size-32 {
     height: 32px;
     line-height: 32px;
     border-radius: 50px;
-}
-
-.white-card {
-    padding: 2vw;
-    background-color: white;
-    margin-bottom: 5px;
 }

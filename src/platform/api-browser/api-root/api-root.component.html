@@ -13,19 +13,16 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 -->
-<div *ngIf="models$ | async as models else loading" fxLayoutAlign="center" fxLayoutAlign.xs="center" fxLayout="row"
-    fxLayout.xs="column" fxLayoutGap="1vw" fxLayoutGap.xs="2vw" fxLayoutGap.md="1%" fxLayoutGap.lg="0.5vw" fxLayoutWrap>
+<div *ngIf="models$ | async as models else loading" fxLayoutAlign="center" fxLayoutAlign.xs="center" fxLayout="row" fxLayout.xs="column"
+    fxLayoutGap="1vw" fxLayoutGap.xs="2vw" fxLayoutGap.md="1%" fxLayoutGap.lg="0.5vw" fxLayoutWrap>
     <div fxFlex="50vw" fxFlex.lg="21vw" fxFlex.md="49%" fxFlex.xs="100" fxFlex.sm="80" *ngFor="let item of models ">
-        <mat-card style="margin-top: 0.5vw" (click)="onSelect(item)">
-            <mat-card-header>
-                <mat-icon mat-card-avatar svgIcon="api-root:{{item.name.toLowerCase()}}" class="primary size-32"></mat-icon>
-                <mat-card-title>{{item.name | camelCase}}</mat-card-title>
-                <!-- <mat-card-subtitle>{{item.url}}</mat-card-subtitle> -->
-                <span fxFlex> </span>
-                <!-- <div fxLayoutAlign="center center">
-                    <button mat-button (click)="onSelect(item)">View</button>
-                </div> -->
-            </mat-card-header>
+        <mat-card class="model-meta" (click)="onSelect(item)">
+            <mat-card-content>
+                <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="2vw">
+                    <mat-icon mat-card-avatar svgIcon="api-root:{{item.name.toLowerCase()}}"></mat-icon>
+                    <strong>{{item.name | camelCase}}</strong>
+                </div>
+            </mat-card-content>
         </mat-card>
     </div>
 </div>

@@ -1,0 +1,4 @@
+@import './api-root/api-root.component.scss';
+@mixin ext-api-browser-theme($theme) {
+  @include api-root-theme($theme);
+}
