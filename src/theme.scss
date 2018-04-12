@@ -1,7 +1,7 @@
 @import '~@angular/material/theming';
 @import '~@covalent/core/theming/all-theme';
 @import '~@covalent/highlight/highlight-theme';
-@import '~platform/theming/theme';
+@import '~platform/common/theming/theme';
 @include mat-core();
 // theme
 $primary: mat-palette($mat-light-blue);
