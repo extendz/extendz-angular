@@ -13,7 +13,11 @@ const routes: Routes = [
     children: [
       { path: 'oauth2', component: Oauth2ExampleComponent },
       { path: 'facebook', component: FacebookExampleComponent },
-      { path: 'google', component: GoogleExampleComponent }
+      { path: 'google', component: GoogleExampleComponent },
+      {
+        path: 'sign-up',
+        loadChildren: './singup-example/singup-example.module#SingupExampleModule'
+      }
     ]
   }
 ];

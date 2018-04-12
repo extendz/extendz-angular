@@ -57,11 +57,6 @@ export class Oauth2Service {
   } // logout()
 
   getUserInfo(accessToken: AccessToken) {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        Authorization: 'bearer ' + accessToken.access_token
-      })
-    };
-    return this.http.get(this.config.userInfoUrl, httpOptions);
+    return this.http.get(this.config.userInfoUrl);
   } // getUserInfo()
 } // class

@@ -12,14 +12,13 @@ import {
   ModelMetaService
 } from '../../common';
 
-import { ExtendzApiConfig, PageAndSort } from '../models';
+import { PageAndSort } from '../models';
 
 @Injectable()
 export class ApiTableService {
   constructor(
     private conf: ExtRestConfig,
     private modelMetaService: ModelMetaService,
-    private apiConfig: ExtendzApiConfig,
     public rest: RestService
   ) {}
   /**Get the model */

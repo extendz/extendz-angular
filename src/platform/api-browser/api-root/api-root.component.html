@@ -16,7 +16,7 @@
 <div *ngIf="models$ | async as models else loading" fxLayoutAlign="center" fxLayoutAlign.xs="center" fxLayout="row" fxLayout.xs="column"
     fxLayoutGap="1vw" fxLayoutGap.xs="2vw" fxLayoutGap.md="1%" fxLayoutGap.lg="0.5vw" fxLayoutWrap>
     <div fxFlex="50vw" fxFlex.lg="21vw" fxFlex.md="49%" fxFlex.xs="100" fxFlex.sm="80" *ngFor="let item of models ">
-        <mat-card class="model-meta" (click)="onSelect(item)">
+        <mat-card class="model-meta" (click)="onSelect(item)" matRipple>
             <mat-card-content>
                 <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="2vw">
                     <mat-icon mat-card-avatar svgIcon="api-root:{{item.name.toLowerCase()}}"></mat-icon>

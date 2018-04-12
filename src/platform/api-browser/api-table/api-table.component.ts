@@ -34,7 +34,7 @@ import { ObjectWithLinks, HateosPagedResponse, ModelMeta, Property } from '../..
 @Component({
   selector: 'ext-api-table',
   templateUrl: './api-table.component.html',
-  styleUrls: ['./api-table.component.css']
+  styleUrls: ['./api-table.component.scss']
 })
 export class ApiTableComponent implements OnInit, OnDestroy {
   /**
@@ -109,12 +109,6 @@ export class ApiTableComponent implements OnInit, OnDestroy {
     this.modelMeta = meta;
     let properties: Property[] = null;
     let projections = meta.projections;
-    // Check for projections
-    // if (projections && projections['dataTable']) {
-    //   properties = projections['dataTable'];
-    // } else {
-    //   properties = meta.properties;
-    // }
     properties = meta.properties;
     this.columns = properties.filter(r => r.type !== 'file').map(p => p.name);
     this.allColumns = ['select', ...this.columns, 'edit'];

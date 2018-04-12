@@ -31,7 +31,7 @@ import { ObjectWithLinks, ModelMeta, Property } from '../../common';
 @Component({
   selector: 'ext-api-item',
   templateUrl: './api-item.component.html',
-  styleUrls: ['./api-item.component.css']
+  styleUrls: ['./api-item.component.scss']
 })
 export class ApiItemComponent implements OnInit, OnDestroy {
   all$: Subscription;
