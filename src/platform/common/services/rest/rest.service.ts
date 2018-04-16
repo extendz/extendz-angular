@@ -26,7 +26,7 @@ import { forkJoin } from 'rxjs/observable/forkJoin';
 import { mergeMap } from 'rxjs/operators/mergeMap';
 
 import { DeleteDialogComponent } from './dialog-delete/delete-dialog.componet';
-import { ObjectWithLinks } from './models/';
+import { ObjectWithLinks, HateosPagedResponse } from './models/';
 import { ExtRestConfig } from '../../services/rest/models';
 
 @Injectable()
@@ -55,7 +55,7 @@ export class RestService {
    * Get Id from a url with tailing id
    * @param url
    */
-  getId(url: string) {
+  public getId(url: string) {
     return url.substring(url.lastIndexOf('/') + 1);
   } // getId()
 
@@ -76,6 +76,15 @@ export class RestService {
 
   findOne(item: ObjectWithLinks) {
     return this.http.get<ObjectWithLinks>(item._links.self.href);
+  }
+
+  /**
+   * Search for all the result
+   * @param url
+   * @param httpOptions
+   */
+  public search(url: string, httpOptions?: Object) {
+    return this.http.get<HateosPagedResponse>(url, httpOptions);
   }
 
   /**
@@ -106,14 +115,14 @@ export class RestService {
       filter(result => result),
       mergeMap(() => {
         let requests: Observable<Response>[] = [];
-        urls.forEach(url => requests.push(this.http.get<Response>(url)));
+        urls.forEach(url => requests.push(this.http.delete<Response>(url)));
         return forkJoin(requests);
       })
     );
   } // deleteAllWithConfirm
 
-  deleteWithConfirm(url: string): void {
-    this.deleteAllWithConfirm([url]);
+  deleteWithConfirm(url: string): Observable<Response> {
+    return this.deleteAllWithConfirm([url]).pipe(map(d => d[0]));
   } //  deleteWithConfirm()
 
   private showDeleteConfimDialog() {
