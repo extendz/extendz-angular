@@ -52,6 +52,16 @@ export class ExtendzOpenlayerService {
   private onDelete: EventEmitter<any>;
 
   /**
+   * shape drawing start time
+   */
+  private shapeDrawStartTime: Date;
+
+  /**
+   * shape drawing end time
+   */
+  private shapeDrawEndTime: Date;
+
+  /**
    * Object that hold customized POLYGON DRAW Interaction, source, vector,style
    */
   public polygonObject: any;
@@ -224,7 +234,7 @@ export class ExtendzOpenlayerService {
    * @author Rumes
    * @param tool
    * @param color
-   * @param toolType
+   * @param toolTypemarc antoni gretest hits
    * @description manage the tool type
    */
   setTool(tool: OpenLayerToolType, toolType?: string, color?: string) {
@@ -353,10 +363,20 @@ export class ExtendzOpenlayerService {
    * @description create polygon using draw interaction
    */
   createPolygon(toolType: string) {
+    this.subcribeToCurrentDrawEvent<{}>('drawstart').subscribe(
+      (event: ol.interaction.Draw.Event) => {
+        this.shapeDrawStartTime = new Date();
+        this.drawStarted = true;
+      }
+    );
+
     this.subcribeToSourceEvent('addfeature').subscribe((event: ol.interaction.Draw.Event) => {
       event.feature.setProperties({
         toolType: toolType
       });
+
+      this.shapeDrawEndTime = new Date();
+
       let geom = event.feature;
       let cordinates: ol.Coordinate[][];
       let latlngArray: Array<LatLng>;
@@ -649,7 +669,8 @@ export class ExtendzOpenlayerService {
           }
         ],
         drawType: 'POINT',
-        drawTool: drawToolIn
+        drawTool: drawToolIn,
+        duration: 1
       };
     }
     if (geom instanceof ol.geom.Polygon) {
@@ -660,7 +681,8 @@ export class ExtendzOpenlayerService {
         jobId: this.jobID,
         coordiantes: latlngArray,
         drawType: 'POLYGON',
-        drawTool: drawToolIn
+        drawTool: drawToolIn,
+        duration: 1
       };
       this.returnCollection.push();
     }

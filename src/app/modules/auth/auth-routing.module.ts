@@ -17,6 +17,10 @@ const routes: Routes = [
       {
         path: 'sign-up',
         loadChildren: './singup-example/singup-example.module#SingupExampleModule'
+      },
+      {
+        path: 'profile',
+        loadChildren: './profile-example/profile-example.module#ProfileExampleModule'
       }
     ]
   }

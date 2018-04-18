@@ -66,6 +66,12 @@ export class AppComponent {
         title: 'Sign Up',
         subTitle: 'Sing Up wiht Keycloack',
         url: ['login', 'sign-up']
+      },
+      {
+        icon: 'person',
+        title: 'Profile',
+        subTitle: 'Simple Profile',
+        url: ['login', 'profile']
       }
     ];
 
@@ -107,19 +113,13 @@ export class AppComponent {
 
     this.otherComponentMenuItems = [
       {
-        icon: 'map',
-        title: 'Google Map',
-        subTitle: 'Google Map',
-        url: ['map']
-      },
-      {
         icon: 'date_range',
         title: 'Calendar',
         subTitle: 'Material Calendar',
         url: ['calendar']
       },
       {
-        icon: 'openlayer',
+        icon: 'layers',
         title: 'Openlayer',
         subTitle: 'Openlayer',
         url: ['openlayer']

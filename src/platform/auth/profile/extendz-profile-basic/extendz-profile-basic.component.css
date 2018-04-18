@@ -1,0 +1,31 @@
+.header {
+    width: 100%;
+    height: auto;
+    margin-bottom: 1vh;
+    padding: 1vh;
+}
+
+.white {
+    color: white;
+}
+
+.gray-fg {
+    color: #999;
+}
+
+.email {
+    margin-bottom: 1vh;
+}
+
+.user-name {
+    margin: 0;
+}
+
+.white-72 {
+    font-size: 64px;
+    width: 64px;
+    height: 64px;
+    padding: 2px;
+    background-color: white;
+    border-radius: 50%;
+}
