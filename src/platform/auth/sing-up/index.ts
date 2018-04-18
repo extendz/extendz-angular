@@ -14,6 +14,6 @@
  *    limitations under the License.
  */
 
-export * from './models/singUp.config';
+export * from './models';
 export * from './sign-up.module';
 export * from './sign-up.component';
