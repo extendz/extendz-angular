@@ -14,6 +14,7 @@ export class AppComponent {
   title: string = 'Extendz';
   pagesMenuItems: MenuItem[];
   authenticationMenuItems: MenuItem[];
+  keycloakMenuItems: MenuItem[];
   apiMenuItms: MenuItem[];
   otherComponentMenuItems: MenuItem[];
 
@@ -59,25 +60,34 @@ export class AppComponent {
         title: 'Google',
         subTitle: 'Login with Google',
         url: ['login', 'google']
+      },
+      {
+        icon: 'person_add',
+        title: 'Sign Up',
+        subTitle: 'Sing Up wiht Keycloack',
+        url: ['login', 'sign-up']
       }
-      // {
-      //   icon: 'keycloak',
-      //   title: 'Keycloak Oauth2',
-      //   subTitle: 'Wrapper arround the oauth2',
-      //   url: ['login', 'keycloak-oauth2']
-      // },
-      // {
-      //   icon: 'keycloak',
-      //   title: 'Keycloak Users',
-      //   subTitle: 'Get keycloak users',
-      //   url: ['login', 'keycloak-users']
-      // },
-      // {
-      //   icon: 'keycloak',
-      //   title: 'Keycloak Sign Up',
-      //   subTitle: 'Register new Keycloak user',
-      //   url: ['login', 'keycloak-register']
-      // }
+    ];
+
+    this.keycloakMenuItems = [
+      {
+        icon: 'security',
+        title: 'Keycloak Oauth2',
+        subTitle: 'Wrapper arround the oauth2',
+        url: ['login', 'keycloak-oauth2']
+      },
+      {
+        icon: 'people',
+        title: 'Keycloak Users',
+        subTitle: 'Get keycloak users',
+        url: ['login', 'keycloak-users']
+      },
+      {
+        icon: 'person_add',
+        title: 'Keycloak Sign Up',
+        subTitle: 'Register new Keycloak user',
+        url: ['login', 'keycloak-register']
+      }
     ];
 
     this.apiMenuItms = [
