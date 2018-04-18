@@ -31,6 +31,8 @@ import { Oauth2Service } from './oauth2.service';
 
 import { AccessToken, TokenService, PrincipalService, UserInfo } from '../common';
 import { Oauth2Config } from './models/oauth2.conf';
+import { tap } from 'rxjs/operators/tap';
+import { filter } from 'rxjs/operators/filter';
 
 @Component({
   selector: 'ext-login-oauth2',
@@ -71,6 +73,18 @@ export class Oauth2Component implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.service.init(this.config);
+    let sub = this.principalService
+      .getUser()
+      .pipe(
+        filter(user => user != null),
+        tap(user => {
+          this.userInfo.emit(user);
+          this.token.emit(this.tokenService.getToken());
+        })
+      )
+      .subscribe(user => {
+        if (sub) sub.unsubscribe();
+      });
   } // ngOnInit()
 
   createForm() {
@@ -94,7 +108,7 @@ export class Oauth2Component implements OnInit, OnDestroy {
       .pipe(
         finalize(() => this.loadingService.resolve('overlayStarSyntax')),
         take(1),
-        map((accessToken: AccessToken) => this.tokenService.setToken(accessToken)),
+        tap((accessToken: AccessToken) => this.tokenService.setToken(accessToken)),
         mergeMap((accessToken: AccessToken) => {
           this.token.emit(accessToken);
           return this.service.getUserInfo(accessToken);
