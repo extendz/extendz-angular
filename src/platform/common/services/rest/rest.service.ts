@@ -87,10 +87,7 @@ export class RestService {
     return this.http.get<HateosPagedResponse>(url, httpOptions);
   }
 
-  /**
-   * Save thte Object
-   * @param item
-   */
+  /** Save thte Object.*/
   save(item: ObjectWithLinks): Observable<ObjectWithLinks> {
     if (item._links) {
       return this.patch(item);
@@ -99,17 +96,17 @@ export class RestService {
     }
   } // save()
 
-  /**
-   * Patch the given object.
-   */
+  /** Patch the given object.*/
   patch(item: ObjectWithLinks): Observable<ObjectWithLinks> {
     return this.http.patch<ObjectWithLinks>(item._links.self.href, item);
+  } // patch
+
+  /** Put the given object. */
+  put(item: ObjectWithLinks): Observable<ObjectWithLinks> {
+    return this.http.put<ObjectWithLinks>(item._links.self.href, item);
   }
 
-  /**
-   * Delete all
-   * @param urls
-   */
+  /** Delete all */
   deleteAllWithConfirm(urls: string[]): Observable<Response[]> {
     return this.showDeleteConfimDialog().pipe(
       filter(result => result),
