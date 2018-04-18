@@ -1,0 +1,18 @@
+// imports
+@import './api-root/api-root.component.scss';
+@import './api-table/api-table.component.scss';
+@import './api-item/api-item.component.scss';
+// themes
+@mixin ext-api-browser-theme($theme) {
+    @include api-root-theme($theme);
+    @include api-table-theme($theme);
+    @include api-item-theme($theme);
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    .icon-button {
+        color: mat-color($accent, 300);
+    }
+    .shaded-title {
+        color: mat-color($accent, 300)
+    }
+}

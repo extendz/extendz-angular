@@ -31,11 +31,12 @@ import { ObjectWithLinks, ModelMeta, Property } from '../../common';
 @Component({
   selector: 'ext-api-item',
   templateUrl: './api-item.component.html',
-  styleUrls: ['./api-item.component.css']
+  styleUrls: ['./api-item.component.scss']
 })
 export class ApiItemComponent implements OnInit, OnDestroy {
   all$: Subscription;
   modelMeta: ModelMeta;
+  properties: Property[];
   item: ObjectWithLinks;
   /**
    * Id for the selected item
@@ -108,6 +109,7 @@ export class ApiItemComponent implements OnInit, OnDestroy {
 
   private handleMetaModel(meta: ModelMeta) {
     this.modelMeta = meta;
+    this.properties = meta.properties.filter(p => p.type !== 'file');
     this.modelMeta.properties.forEach(prop => {
       let testCtrl = new FormControl();
       if (prop.required) testCtrl.setValidators(Validators.required);

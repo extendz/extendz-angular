@@ -14,6 +14,9 @@ const routes: Routes = [
     path: 'root/:name/:id',
     loadChildren: './api-item-example/api-item-example.module#ApiItemExampleModule'
   }
+  ,{
+    path:'image',loadChildren:'./api-image-example/api-image-example.module#ApiImageExampleModule'
+  }
 ];
 
 @NgModule({

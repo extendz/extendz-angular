@@ -1,56 +1,52 @@
 <div *ngIf="tableResponse?.page?.totalPages === 0;else table">
-  <h1 align="center" class="gray">Please create a new record !</h1>
+  <h1 align="center" class="shaded-title">Please create a new record !</h1>
 </div>
 
 <ng-template #table>
+
   <!-- Search bar -->
-  <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="2vw" fxLayoutGap.xs="0" fxLayoutAlign="center center" style="padding:0 5vw 0 5vw">
-    <h3>{{model | camelCase}}
-      <span *ngIf="selection.selected.length > 0">({{selection.selected.length}})</span>
-    </h3>
-    <span fxFlex></span>
-    <mat-form-field [ngClass]="{'full-width': media.isActive('xs')}">
-      <!-- (keyup)="applyFilter($event.target.value)"  -->
-      <input matInput autofocus placeholder="Search">
-      <button mat-icon-button [matMenuTriggerFor]="appMenu" matSuffix>
-        <mat-icon>
-          <svg id="more_vert" viewBox="0 0 24 24">
-            <path d="M0 0h24v24H0z" fill="none" />
-            <path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"
-            />
-          </svg>
-        </mat-icon>
-      </button>
-    </mat-form-field>
-    <mat-menu #appMenu="matMenu">
-      <button mat-menu-item *ngFor="let prop of modelMeta?.properties">{{prop.name | camelCase}}</button>
-    </mat-menu>
-  </div>
+  <mat-card class="mat-elevation-z0">
+    <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="2vw" fxLayoutGap.xs="0" fxLayoutAlign="center start">
+      <mat-form-field [ngClass]="{'full-width': media.isActive('xs')}">
+        <!-- (keyup)="applyFilter($event.target.value)"  -->
+        <input matInput autofocus placeholder="Search">
+        <button mat-icon-button [matMenuTriggerFor]="appMenu" matSuffix>
+          <mat-icon>
+            <svg id="more_vert" viewBox="0 0 24 24">
+              <path d="M0 0h24v24H0z" fill="none" />
+              <path d="M12 8c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2zm0 2c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm0 6c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"
+              />
+            </svg>
+          </mat-icon>
+        </button>
+        <mat-menu #appMenu="matMenu">
+          <button mat-menu-item *ngFor="let prop of modelMeta?.properties">{{prop.name | camelCase}}</button>
+        </mat-menu>
+      </mat-form-field>
+      <div fxFlex fxLayout="row" fxLayoutAlign="center center" fxLayoutGap.xs="2vw">
+        <div *ngIf="media.isActive('xs')">
+          <ng-container *ngTemplateOutlet="selectAll"> </ng-container>
+        </div>
+        <span fxFlex></span>
+        <h3 class="shaded-title">{{model | camelCase}}
+          <span *ngIf="selection.selected.length > 0">({{selection.selected.length}})</span>
+        </h3>
+        <span fxFlex></span>
+        <!-- <button mat-icon-button (click)="deleteAll()">
+          <ng-container *ngTemplateOutlet="delete"> </ng-container>
+        </button> -->
+      </div>
+
+    </div>
+  </mat-card>
 
   <div *ngIf="media.isActive('xs');else desktop">
     <!-- Mobile -->
     <div style="margin-bottom: 2vh">
       <span fxFlex="3vw"></span>
       <!-- Header -->
-      <div fxLayout="column" fxFlex fxLayoutGap="5px" style="margin-top: 1vh">
-        <!-- <mat-card>
-          <mat-card-content>
-            
-          </mat-card-content>
-        </mat-card> -->
-        <div fxLayout="row" fxLayoutAlign="center center" style="padding-left: 2vw;padding-right: 2vw">
-          <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()">
-          </mat-checkbox>
-          <span fxFlex></span>
-          <button mat-icon-button (click)="deleteAll()">
-            <mat-icon>
-              <svg id="delete" viewBox="0 0 24 24">
-                <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z" />
-                <path d="M0 0h24v24H0z" fill="none" />
-              </svg>
-            </mat-icon>
-          </button>
-        </div>
+      <div fxLayout="column" fxFlex fxLayoutGap="5px">
+
         <!-- Table -->
         <div *ngFor="let row of data">
           <mat-card fxFlex>
@@ -68,23 +64,13 @@
                   [checked]="selection.isSelected(row._links.self.href)">
                 </mat-checkbox>
                 <span fxFlex></span>
-
                 <button mat-icon-button (click)="editRow(row)">
                   <mat-icon>
-                    <svg id="edit" viewBox="0 0 24 24">
-                      <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"
-                      />
-                      <path d="M0 0h24v24H0z" fill="none" />
-                    </svg>
+                    <ng-container *ngTemplateOutlet="edit"> </ng-container>
                   </mat-icon>
                 </button>
                 <button mat-icon-button (click)="delete(row)">
-                  <mat-icon>
-                    <svg id="delete" viewBox="0 0 24 24">
-                      <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z" />
-                      <path d="M0 0h24v24H0z" fill="none" />
-                    </svg>
-                  </mat-icon>
+                  <ng-container *ngTemplateOutlet="delete"> </ng-container>
                 </button>
               </div>
             </mat-card-actions>
@@ -93,49 +79,42 @@
       </div>
       <span fxFlex="3vw"></span>
     </div>
-    <!-- <mat-paginator class="mat-elevation-z3 bottom" [length]="tableResponse?.page?.totalPages" (page)="pageEvent($event)" [pageSize]="tableResponse?.page?.size"
-      [pageSizeOptions]="[10, 20, 50]">
-    </mat-paginator> -->
   </div>
 
   <!-- Desktop -->
   <ng-template #desktop>
 
     <mat-table #table [dataSource]="tableDataSource ">
+      <!-- Select Column -->
       <ng-container matColumnDef="select">
-        <mat-header-cell *matHeaderCellDef>
-          <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()">
-          </mat-checkbox>
+        <mat-header-cell *matHeaderCellDef fxFlex="48px">
+
         </mat-header-cell>
-        <mat-cell *matCellDef="let row">
+        <mat-cell *matCellDef="let row" fxFlex="48px">
           <mat-checkbox (click)="$event.stopPropagation()" (change)="$event ? selection.toggle(row._links.self.href) : null;selectionChange(row._links.self.href)"
             [checked]="selection.isSelected(row._links.self.href)">
           </mat-checkbox>
         </mat-cell>
       </ng-container>
 
+      <!-- Edit Column -->
       <ng-container matColumnDef="edit">
-        <mat-header-cell *matHeaderCellDef>
+        <mat-header-cell *matHeaderCellDef fxFlex="48px">
           Edit
         </mat-header-cell>
-        <mat-cell *matCellDef="let row">
+        <mat-cell *matCellDef="let row" fxFlex="48px">
           <button mat-icon-button (click)="editRow(row)">
-            <mat-icon>
-              <svg id="edit" viewBox="0 0 24 24">
-                <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"
-                />
-                <path d="M0 0h24v24H0z" fill="none" />
-              </svg>
-            </mat-icon>
+            <ng-container *ngTemplateOutlet="edit"> </ng-container>
           </button>
         </mat-cell>
       </ng-container>
 
-      <ng-container *ngFor="let column of columns" matColumnDef={{column}}>
-        <mat-header-cell *matHeaderCellDef>
+      <!-- Other Column -->
+      <ng-container *ngFor="let column of columns" [matColumnDef]="column">
+        <mat-header-cell *matHeaderCellDef fxFlex>
           <p>{{column | camelCase}}</p>
         </mat-header-cell>
-        <mat-cell *matCellDef="let element">
+        <mat-cell *matCellDef="let element" fxFlex>
           <ng-container *ngIf="column === 'Select All';else name">
             <p style="margin-left: 15px">
               <mat-checkbox [checked]="false" (change)="selectAll($event)"></mat-checkbox>
@@ -155,7 +134,30 @@
 
   </ng-template>
 </ng-template>
-
-<mat-paginator class="mat-elevation-z5 bottom" [length]="tableResponse?.page?.totalPages" (page)="pageEvent($event)" [pageSize]="tableResponse?.page?.size"
+<mat-paginator class="mat-elevation-z5 bottom" [length]="tableResponse?.page?.totalElements" (page)="pageEvent($event)" [pageSize]="tableResponse?.page?.size"
   [pageSizeOptions]="[10, 20, 50]">
 </mat-paginator>
+<!-- Icons-->
+<ng-template #edit>
+  <mat-icon>
+    <svg id="edit" class="icon-button" viewBox="0 0 24 24">
+      <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"
+      />
+      <path d="M0 0h24v24H0z" fill="none" />
+    </svg>
+  </mat-icon>
+</ng-template>
+
+<ng-template #delete>
+  <mat-icon>
+    <svg id="delete" class="icon-button" viewBox="0 0 24 24">
+      <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z" />
+      <path d="M0 0h24v24H0z" fill="none" />
+    </svg>
+  </mat-icon>
+</ng-template>
+
+<ng-template #selectAll>
+  <mat-checkbox (change)="$event ? masterToggle() : null" [checked]="selection.hasValue() && isAllSelected()" [indeterminate]="selection.hasValue() && !isAllSelected()">
+  </mat-checkbox>
+</ng-template>

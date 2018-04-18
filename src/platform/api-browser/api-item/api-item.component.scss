@@ -1,0 +1,11 @@
+@mixin api-item-theme($theme) {
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+}
+
+.bottom-right {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 100;
+}

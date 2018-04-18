@@ -1,0 +1,6 @@
+// imports
+@import '../../api-browser/api-browser-theme.scss';
+// Themes
+@mixin extendz-theme($theme, $config: null) {
+  @include ext-api-browser-theme($theme);
+}

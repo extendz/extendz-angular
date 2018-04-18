@@ -14,19 +14,19 @@
     limitations under the License.
 -->
 <div>
+
   <div fxFlex="10%" fxFlex.xs="1vw"></div>
-  <div fxFlex>
-    <!--header -->
-    <div fxLayout="row" fxLayout.xs="column">
-      <h3 class="meta-name">
-        <span *ngIf="!item?._links?.self?.href" class="primary">New </span>{{modelMeta?.name | camelCase}}
-        <span *ngIf="item?._links?.self?.href">: {{id}}</span>
-      </h3>
-      <span fxFlex></span>
-      <div fxLayout="row">
+
+  <div fxFlex style="margin-top:1vh">
+    <mat-card [ngClass]="{'mat-elevation-z0' : media.isActive('xs')}">
+      <!--header -->
+      <div fxLayout="row" fxLayoutAlign="center center">
+        <h3 class="shaded-title">
+          <span *ngIf="id ==0 && !item?._links?.self?.href" class="shaded-title">New </span>{{modelMeta?.name | camelCase}}
+        </h3>
         <span fxFlex></span>
-        <button mat-icon-button>
-          <mat-icon>
+        <button *ngIf="id!=0" mat-icon-button matTooltip="History">
+          <mat-icon class="icon-button">
             <svg id="history" viewBox="0 0 24 24">
               <path d="M0 0h24v24H0z" fill="none" />
               <path d="M13 3c-4.97 0-9 4.03-9 9H1l3.89 3.89.07.14L9 12H6c0-3.87 3.13-7 7-7s7 3.13 7 7-3.13 7-7 7c-1.93 0-3.68-.79-4.94-2.06l-1.42 1.42C8.27 19.99 10.51 21 13 21c4.97 0 9-4.03 9-9s-4.03-9-9-9zm-1 5v5l4.28 2.54.72-1.21-3.5-2.08V8H12z"
@@ -34,8 +34,8 @@
             </svg>
           </mat-icon>
         </button>
-        <button *ngIf="id!=0" mat-icon-button (click)="delete()">
-          <mat-icon>
+        <button *ngIf="id!=0" mat-icon-button (click)="delete()" matTooltip="Delete">
+          <mat-icon class="icon-button">
             <svg id="delete" viewBox="0 0 24 24">
               <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z" />
               <path d="M0 0h24v24H0z" fill="none" />
@@ -44,15 +44,11 @@
         </button>
       </div>
 
-    </div>
-
-    <mat-card [ngClass]="{'mat-elevation-z0' : media.isActive('xs')}">
-      <form [formGroup]="itemFormGroup" fxLayout="column">
-        <div *ngFor="let prop of modelMeta?.properties">
-
+      <form [formGroup]="itemFormGroup" fxLayout.xs="column" fxLayout.lg="row" fxLayoutGap.lg="1vw" fxLayoutWrap>
+        <div fxFlex="100" fxFlex.lg="48" *ngFor="let prop of properties">
           <!-- Number -->
-          <mat-form-field fxFlex *ngIf="prop.type == 'number'">
-            <input matInput type="number" [placeholder]="prop.name | camelCase" [formControlName]="prop.name">
+          <mat-form-field *ngIf="prop.type == 'number'">
+            <input style="width: 100%;" matInput type="number" [placeholder]="prop.name | camelCase" [formControlName]="prop.name">
             <mat-error *ngIf="itemFormGroup.controls[prop.name].hasError('required')">
               {{prop.name | camelCase}}
               <strong>required</strong>
@@ -103,7 +99,7 @@
           </mat-form-field>
         </div>
 
-        <button type="submit" mat-fab class="bottom-right" (click)="save()">
+        <button type="submit" mat-fab class="bottom-right" (click)="save()" matTooltip="Save">
           <mat-icon>
             <svg id="save" viewBox="0 0 24 24" class="primary-text">
               <path d="M0 0h24v24H0z" fill="none" />
@@ -128,4 +124,4 @@
   <div fxFlex="10%" fxFlex.xs="0"></div>
 </div>
 
-<div style="height: 20vh"></div>
+<div style="height: 10vh"></div>

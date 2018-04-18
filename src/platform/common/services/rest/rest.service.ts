@@ -26,7 +26,7 @@ import { forkJoin } from 'rxjs/observable/forkJoin';
 import { mergeMap } from 'rxjs/operators/mergeMap';
 
 import { DeleteDialogComponent } from './dialog-delete/delete-dialog.componet';
-import { ObjectWithLinks } from './models/';
+import { ObjectWithLinks, HateosPagedResponse } from './models/';
 import { ExtRestConfig } from '../../services/rest/models';
 
 @Injectable()
@@ -55,7 +55,7 @@ export class RestService {
    * Get Id from a url with tailing id
    * @param url
    */
-  getId(url: string) {
+  public getId(url: string) {
     return url.substring(url.lastIndexOf('/') + 1);
   } // getId()
 
@@ -74,10 +74,20 @@ export class RestService {
     return this.http.get(url, httpOptions).pipe(map((res: any) => res._embedded[propertyName]));
   }
 
+  findOne(item: ObjectWithLinks) {
+    return this.http.get<ObjectWithLinks>(item._links.self.href);
+  }
+
   /**
-   * Save thte Object
-   * @param item
+   * Search for all the result
+   * @param url
+   * @param httpOptions
    */
+  public search(url: string, httpOptions?: Object) {
+    return this.http.get<HateosPagedResponse>(url, httpOptions);
+  }
+
+  /** Save thte Object.*/
   save(item: ObjectWithLinks): Observable<ObjectWithLinks> {
     if (item._links) {
       return this.patch(item);
@@ -86,30 +96,30 @@ export class RestService {
     }
   } // save()
 
-  /**
-   * Patch the given object.
-   */
+  /** Patch the given object.*/
   patch(item: ObjectWithLinks): Observable<ObjectWithLinks> {
     return this.http.patch<ObjectWithLinks>(item._links.self.href, item);
+  } // patch
+
+  /** Put the given object. */
+  put(item: ObjectWithLinks): Observable<ObjectWithLinks> {
+    return this.http.put<ObjectWithLinks>(item._links.self.href, item);
   }
 
-  /**
-   * Delete all
-   * @param urls
-   */
+  /** Delete all */
   deleteAllWithConfirm(urls: string[]): Observable<Response[]> {
     return this.showDeleteConfimDialog().pipe(
       filter(result => result),
       mergeMap(() => {
         let requests: Observable<Response>[] = [];
-        urls.forEach(url => requests.push(this.http.get<Response>(url)));
+        urls.forEach(url => requests.push(this.http.delete<Response>(url)));
         return forkJoin(requests);
       })
     );
   } // deleteAllWithConfirm
 
-  deleteWithConfirm(url: string): void {
-    this.deleteAllWithConfirm([url]);
+  deleteWithConfirm(url: string): Observable<Response> {
+    return this.deleteAllWithConfirm([url]).pipe(map(d => d[0]));
   } //  deleteWithConfirm()
 
   private showDeleteConfimDialog() {

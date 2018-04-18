@@ -21,7 +21,7 @@ export class ApiTableService {
     private modelMetaService: ModelMetaService,
     public rest: RestService
   ) {}
-
+  /**Get the model */
   getModel(model: string, projecion?: string): Observable<ModelMeta> {
     return this.modelMetaService.getModel(model, projecion);
   } // getModel()
@@ -31,6 +31,7 @@ export class ApiTableService {
     params = params.append('projection', 'dataTable');
     if (pageAndSort) {
       params = params.append('page', pageAndSort.page.toString());
+      params = params.append('size', pageAndSort.size.toString());
     }
     return this.rest.http.get<HateosPagedResponse>(this.conf.basePath + meta.url, { params });
   } // getTableData()

@@ -20,7 +20,8 @@ import {
   MatIconModule,
   MatCardModule,
   MatProgressSpinnerModule,
-  MatProgressBarModule
+  MatProgressBarModule,
+  MatRippleModule
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
@@ -38,6 +39,7 @@ import { ExtendPipesModule, RestService } from '../../common';
     ExtendPipesModule,
     // Mat
     MatButtonModule,
+    MatRippleModule,
     MatIconModule,
     MatCardModule,
     MatProgressBarModule

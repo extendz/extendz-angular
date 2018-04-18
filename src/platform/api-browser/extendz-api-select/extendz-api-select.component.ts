@@ -136,6 +136,7 @@ export class ExtendzApiSelectComponent implements OnInit, OnDestroy, ControlValu
   } // openDialog()
 
   private handleDialogMultipleSection(results: string[]) {
+    if (!results) return;
     // Get a display value
     let res: Subscription = this.apiTableService
       .getItem(results[0])
@@ -168,7 +169,7 @@ export class ExtendzApiSelectComponent implements OnInit, OnDestroy, ControlValu
     } else {
       this.handleSingleResponse(item);
     }
-  } // onSave
+  } // onSave()
 
   private getResponse(url: any) {
     let res: Subscription = this.apiTableService
@@ -196,22 +197,22 @@ export class ExtendzApiSelectComponent implements OnInit, OnDestroy, ControlValu
   private handleMultipleResponse(data: ObjectWithLinks[]) {
     if (this.response) this.response = [...this.response, ...data];
     else this.response = [...data];
-    // Map the slef link
+    // Map the self link
     this.value = this.response.map(d => d._links.self.href);
     if (this.response.length !== 0) {
-      let firstItem = data[0];
+      let firstItem = this.response[0];
       if (this.modelMeta.title) {
         let str: any = firstItem[this.modelMeta.title];
         this.displayValue = str;
-        if (data.length) {
-          this.setMultipleDisplay(data.length);
+        if (this.response.length) {
+          this.setMultipleDisplay(this.response.length);
         }
       }
     }
   } // handleMultipleResponse()
 
   private setMultipleDisplay(more: number) {
-    if (more > 2) this.displayValue = this.displayValue + ' and ' + (more - 1) + ' more...';
+    if (more >= 2) this.displayValue = this.displayValue + ' and ' + (more - 1) + ' more.';
   }
 
   private handleSingleResponse(response: ObjectWithLinks) {
