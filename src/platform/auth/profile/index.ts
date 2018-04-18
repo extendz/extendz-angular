@@ -1,1 +1,2 @@
-export * from './extendz-profile-basic';
+export * from './profile-basic';
+export * from './profile-button';

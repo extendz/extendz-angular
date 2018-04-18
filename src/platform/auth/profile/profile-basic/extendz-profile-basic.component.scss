@@ -1,3 +1,9 @@
+@mixin auth-profile-basic-theme($theme) {
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    
+}
+
 .header {
     width: 100%;
     height: auto;
@@ -5,6 +11,9 @@
     padding: 1vh;
 }
 
+.name{
+    margin-top: 1vh
+}
 .white {
     color: white;
 }

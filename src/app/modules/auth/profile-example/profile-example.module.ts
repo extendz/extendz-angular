@@ -3,7 +3,10 @@ import { CommonModule } from '@angular/common';
 import { ProfileExampleRoutingModule } from './profile-example-routing.module';
 import { ProfileExampleComponent } from './profile-example.component';
 import { MatTabsModule } from '@angular/material';
-import { ExtendzProfileBasicModule } from '../../../../platform/auth/profile/';
+import {
+  ExtendzProfileBasicModule,
+  ExtendzProfileButtonModule
+} from '../../../../platform/auth/profile/';
 
 @NgModule({
   imports: [
@@ -11,7 +14,8 @@ import { ExtendzProfileBasicModule } from '../../../../platform/auth/profile/';
     ProfileExampleRoutingModule,
     //Mat
     MatTabsModule,
-    ExtendzProfileBasicModule
+    ExtendzProfileBasicModule,
+    ExtendzProfileButtonModule
   ],
   declarations: [ProfileExampleComponent]
 })

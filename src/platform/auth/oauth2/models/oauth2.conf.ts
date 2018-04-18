@@ -14,44 +14,43 @@
 * limitations under the License.
 */
 
+export interface IOauth2Config {
+  /** Token url */
+  tokenUrl: string;
+  /** User Information url*/
+  userInfoUrl: string;
+  /** Logout url */
+  logoutUrl?: string;
+  /** Scopes */
+  scope?: string;
+  /** Grant type.*/
+  grantType?: string;
+  /** Client Secret */
+  clientSecret?: string;
+  /** Client Id  */
+  clinetId?: string;
+}
+
 /**
  * Oauth2 Server configurations.
  * @author Randika Hapugoda
  */
-export class Oauth2Config {
-  /**
-   * Token url
-   */
+export class Oauth2Config implements IOauth2Config {
   tokenUrl: string;
-
-  /**
-   * User Information url
-   */
   userInfoUrl: string;
-
-  /**
-   * Logout url
-   */
   logoutUrl?: string;
-
-  /**
-   * Scopes
-   */
   scope?: string;
-
-  /**
-   * Grant type.
-   * Ex:Password
-   */
   grantType?: string;
-
-  /**
-   * Client Secret
-   */
   clientSecret?: string;
-
-  /**
-   * Client Id
-   */
   clinetId?: string;
+
+  constructor(config: IOauth2Config) {
+    this.tokenUrl = config.tokenUrl;
+    this.userInfoUrl = config.userInfoUrl;
+    if (config.logoutUrl) this.logoutUrl = config.logoutUrl;
+    if (config.scope) this.scope = config.scope;
+    if (config.grantType) this.grantType = config.grantType;
+    if (config.clientSecret) this.clientSecret = config.clientSecret;
+    if (config.clinetId) this.clinetId = config.clinetId;
+  }
 }

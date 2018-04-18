@@ -7,9 +7,8 @@
                 <path d="M0 0h24v24H0z" fill="none" />
             </svg>
         </mat-icon>
-    </ng-template>
-    
-    <h1 class="headline user-name">{{user.given_name}} {{user?.family_name}}</h1>
+    </ng-template>    
+    <span class="name"><strong>{{user.given_name}} {{user?.family_name}}</strong></span>
     <span class="email">{{user?.email}} </span>
-    <button mat-button mat-raised-button>Logout</button>
+    <!-- <button mat-button mat-raised-button>Logout</button> -->
 </div>

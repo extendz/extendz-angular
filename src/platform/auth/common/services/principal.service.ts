@@ -33,22 +33,15 @@ import { SociallUser, UserInfo } from '../models/';
  */
 @Injectable()
 export class PrincipalService {
-  /**
-   * Unique key for the storage to use.
-   */
+  /** Unique key for the storage to use.*/
   private USER_KEY: string = 'USER';
 
-  /**
-   * User Subscription
-   */
+  /** User Subscription*/
   private user$: Observable<UserInfo>;
-  private observer: Observer<UserInfo>;
 
   constructor(private http: HttpClient, private storage: LocalStorageService) {}
 
-  /**
-   * Get cached user form the local storage
-   */
+  /** Get cached user form the local storage */
   private getFromStoreage(): UserInfo {
     return this.storage.retrieve(this.USER_KEY);
   } // getFromStoreage()
@@ -61,7 +54,7 @@ export class PrincipalService {
     this.storage.store(this.USER_KEY, user);
   } // setUser()
 
-  remove(): void {
+  private clear(): void {
     this.storage.clear(this.USER_KEY);
-  } //  remove()
+  } //  clear()
 } // class

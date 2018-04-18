@@ -47,8 +47,6 @@ export class Oauth2Component implements OnInit, OnDestroy {
 
   serviceSubscripion$: Subscription;
 
-  @Input() config: Oauth2Config;
-
   /** Emmit on successful token receive. */
   @Output() token: EventEmitter<AccessToken> = new EventEmitter<AccessToken>();
 
@@ -66,7 +64,6 @@ export class Oauth2Component implements OnInit, OnDestroy {
   } // constructor()
 
   ngOnInit() {
-    this.service.init(this.config);
     let sub = this.principalService
       .getUser()
       .pipe(

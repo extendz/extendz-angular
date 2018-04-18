@@ -28,13 +28,7 @@ import { AccessToken } from '../common/';
  */
 @Injectable()
 export class Oauth2Service {
-  config: Oauth2Config;
-
-  constructor(private http: HttpClient) {} // constructor()
-
-  init(config: Oauth2Config) {
-    this.config = config;
-  } //init()
+  constructor(private http: HttpClient, private config: Oauth2Config) {} // constructor()
 
   login(credentail: Credential): Observable<AccessToken> {
     let body = new URLSearchParams();
@@ -52,8 +46,14 @@ export class Oauth2Service {
     });
   } // login()
 
-  logout() {
-    this.http.post(this.config.logoutUrl, {});
+  /**this is not working : https://issues.jboss.org/browse/KEYCLOAK-2939?page=com.atlassian.jira.plugin.system.issuetabpanels%3Acomment-tabpanel&showAll=true */
+  logout(accessToken: AccessToken) {
+    let body = new URLSearchParams();
+    body.set('client_id', this.config.clinetId);
+    body.set('refresh_token', accessToken.refresh_token);
+    return this.http.post(this.config.logoutUrl, body.toString(), {
+      headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+    });
   } // logout()
 
   getUserInfo(accessToken: AccessToken) {

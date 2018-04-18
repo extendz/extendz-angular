@@ -15,10 +15,11 @@
  */
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ExtendzProfileBasicComponent } from './extendz-profile-basic.component';
-import { ExtendzAuthCommonModule } from '../../common';
 import { MatIconModule, MatButtonModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
+
+import { ExtendzProfileBasicComponent } from './extendz-profile-basic.component';
+import { ExtendzAuthCommonModule } from '../../common';
 
 /**
  * Provide user profile to a side navigation.
