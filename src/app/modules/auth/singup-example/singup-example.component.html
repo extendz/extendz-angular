@@ -1,3 +1,35 @@
-<p>
-  singup-example works!
-</p>
+<!--
+    Copyright 2018 the original author or authors
+ 
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+ 
+        http://www.apache.org/licenses/LICENSE-2.0
+ 
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+
+<mat-tab-group mat-stretch-tabs="yes">
+  <mat-tab label="Demo">
+    <div class="tab-content">
+      <ext-sign-up [(form)]="form" (success)="onSuccess($event)"></ext-sign-up>
+      Valid {{form?.valid}}
+    </div>
+  </mat-tab>
+  <mat-tab label="Setup">
+    <div class="tab-content">
+
+    </div>
+  </mat-tab>
+
+  <mat-tab label="API">
+    <div class="tab-content">
+    </div>
+  </mat-tab>
+
+</mat-tab-group>

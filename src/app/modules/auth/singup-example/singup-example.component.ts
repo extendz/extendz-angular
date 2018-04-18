@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ObjectWithLinks } from '../../../../platform';
+import { UserSingUpDto } from './models/userSignUpDto';
+import { ExtendzFormGroup } from '../../../../../deploy/platform/auth/sing-up/formGroup';
 
 @Component({
   selector: 'app-singup-example',
@@ -6,10 +9,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./singup-example.component.css']
 })
 export class SingupExampleComponent implements OnInit {
+  formz: ExtendzFormGroup;
+  constructor() {}
 
-  constructor() { }
+  ngOnInit() {}
 
-  ngOnInit() {
+  onSuccess(user: ObjectWithLinks) {
+    console.log(user);
   }
-
 }
