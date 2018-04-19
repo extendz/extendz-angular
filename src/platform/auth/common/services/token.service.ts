@@ -56,4 +56,4 @@ export class TokenService {
   remove(): void {
     this.storage.clear(this.TOKEN_KEY);
   } //  remove()
-} // End class TokenService
+} // class

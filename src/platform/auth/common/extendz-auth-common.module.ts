@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { NgModule } from '@angular/core';
+import { NgModule, InjectionToken, ModuleWithProviders, Provider } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { Ng2Webstorage } from 'ngx-webstorage';
@@ -21,6 +21,22 @@ import { Ng2Webstorage } from 'ngx-webstorage';
 import { PrincipalService } from './services/principal.service';
 import { TokenService } from './services/token.service';
 import { TokenExchangeService } from './services/tokenExchange.service';
+import { AuthConfig, IAuthConfig } from './config/auth-common.config';
+import { EXT_REST_CONFIG, ExtRestConfig } from '../../common';
+
+export const EXT_AUTH_CONFIG: InjectionToken<AuthConfig> = new InjectionToken<AuthConfig>(
+  'extAuthCommon.config'
+);
+
+export function authFactory(restConf: ExtRestConfig, config: IAuthConfig): AuthConfig {
+  return new AuthConfig(config);
+}
+
+export const AUTH_PROVIDER: Provider = {
+  provide: AuthConfig,
+  useFactory: authFactory,
+  deps: [EXT_REST_CONFIG, EXT_AUTH_CONFIG]
+};
 
 /**
  * Common Login Module for authentication.
@@ -30,4 +46,17 @@ import { TokenExchangeService } from './services/tokenExchange.service';
   imports: [CommonModule, Ng2Webstorage],
   providers: [TokenService, PrincipalService, TokenExchangeService]
 })
-export class ExtendzAuthCommonModule {}
+export class ExtendzAuthCommonModule {
+  static forRoot(config: IAuthConfig): ModuleWithProviders {
+    return {
+      ngModule: ExtendzAuthCommonModule,
+      providers: [
+        {
+          provide: EXT_AUTH_CONFIG,
+          useValue: config
+        },
+        AUTH_PROVIDER
+      ]
+    };
+  } // forRoot()
+}

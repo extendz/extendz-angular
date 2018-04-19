@@ -22,7 +22,7 @@ import { map } from 'rxjs/operators/map';
 import { tap } from 'rxjs/operators/tap';
 import { of } from 'rxjs/observable/of';
 
-import { ExtRestConfig } from '../rest';
+import { ExtRestConfig, RestService } from '../rest';
 import { ModelMeta, ExtModelMetaConfig } from './models';
 
 @Injectable()
@@ -36,11 +36,7 @@ export class ModelMetaService {
    */
   initiated: boolean;
 
-  constructor(
-    private restConfig: ExtRestConfig,
-    private config: ExtModelMetaConfig,
-    private http: HttpClient
-  ) {}
+  constructor(private config: ExtModelMetaConfig, private rest: RestService) {}
 
   /**
    * Get a single module
@@ -56,9 +52,9 @@ export class ModelMetaService {
       if (projecion) {
         params = params.append('projection', projecion);
       }
-      let url = this.getModelMetaBaseUrl() + '/' + model.toLowerCase();
-      return this.http
-        .get<ModelMeta>(url, { params })
+      let url = this.config.modelsUrl + '/' + model.toLowerCase();
+      return this.rest
+        .get(url, { params })
         .pipe(tap((modelMeta: ModelMeta) => this.addToMap(modelMeta)));
     }
   } // getModel()
@@ -68,27 +64,16 @@ export class ModelMetaService {
     this.modelMap.set(modelMeta.name + '_' + projection, modelMeta);
   }
 
-  /**
-   * Get all the models exposed by the backend.
-   */
+  /** Get all the models exposed by the backend.*/
   getModels(): Observable<ModelMeta[]> {
     if (this.initiated) {
       return of(Array.from(this.modelMap.values()));
     } else
-      return (
-        this.http
-          .get<ModelMeta[]>(this.getModelMetaBaseUrl())
-          // Cache
-          .pipe(
-            tap((modelMetas: ModelMeta[]) => {
-              this.initiated = true;
-              modelMetas.forEach(modelMeta => this.addToMap(modelMeta));
-            })
-          )
+      return this.rest.get(this.config.modelsUrl).pipe(
+        tap((modelMetas: ModelMeta[]) => {
+          this.initiated = true;
+          modelMetas.forEach(modelMeta => this.addToMap(modelMeta));
+        })
       );
   } // getModels()
-
-  private getModelMetaBaseUrl() {
-    return this.restConfig.basePath + '/' + this.config.modelsUrl;
-  }
-}
+} // class

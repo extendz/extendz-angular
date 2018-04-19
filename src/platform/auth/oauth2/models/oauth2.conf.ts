@@ -20,7 +20,9 @@ export interface IOauth2Config {
   /** User Information url*/
   userInfoUrl: string;
   /** Logout url */
-  logoutUrl?: string;
+  logOutUrl: string;
+  /** On successful logout the router will navigate to location */
+  logOutSuccessRedirectUrl: string;
   /** Scopes */
   scope?: string;
   /** Grant type.*/
@@ -38,16 +40,20 @@ export interface IOauth2Config {
 export class Oauth2Config implements IOauth2Config {
   tokenUrl: string;
   userInfoUrl: string;
-  logoutUrl?: string;
+  logOutUrl: string;
+  logOutSuccessRedirectUrl: string;
   scope?: string;
   grantType?: string;
   clientSecret?: string;
   clinetId?: string;
 
   constructor(config: IOauth2Config) {
+    // Required
     this.tokenUrl = config.tokenUrl;
     this.userInfoUrl = config.userInfoUrl;
-    if (config.logoutUrl) this.logoutUrl = config.logoutUrl;
+    this.logOutUrl = config.logOutUrl;
+    this.logOutSuccessRedirectUrl = config.logOutSuccessRedirectUrl;
+
     if (config.scope) this.scope = config.scope;
     if (config.grantType) this.grantType = config.grantType;
     if (config.clientSecret) this.clientSecret = config.clientSecret;

@@ -32,7 +32,7 @@ import { ExtRestConfig } from '../../services/rest/models';
 @Injectable()
 export class RestService {
   constructor(
-    private restConfig: ExtRestConfig,
+    private config: ExtRestConfig,
     public http: HttpClient,
     private dialog: MatDialog
   ) {}
@@ -59,6 +59,14 @@ export class RestService {
     return url.substring(url.lastIndexOf('/') + 1);
   } // getId()
 
+  public get(url: string, httpOptions?: Object) {
+    return this.http.get(this.config.basePath + url, httpOptions);
+  } // get()
+
+  public post(url: string, object: object, httpOptions?: Object) {
+    return this.http.post(this.config.basePath + url, object, httpOptions);
+  } // get()
+
   /**
    * Get All the data elements and without Paging Information
    * @param modelName
@@ -66,7 +74,7 @@ export class RestService {
    */
   findAll(modelName: string, httpOptions?: Object): Observable<ObjectWithLinks[]> {
     return this.http
-      .get(this.restConfig.basePath + '/' + modelName, httpOptions)
+      .get(this.config.basePath + '/' + modelName, httpOptions)
       .pipe(map((res: any) => res._embedded[modelName]));
   } // findAll
 

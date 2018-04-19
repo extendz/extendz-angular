@@ -15,12 +15,14 @@
  */
 import { Injectable, OnInit } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 import { Observable } from 'rxjs/Observable';
 
 import { Credential } from './models/crerential';
 import { Oauth2Config } from './models/oauth2.conf';
 import { AccessToken } from '../common/';
+import { RestService } from '../../common';
 
 /**
  * Oauth2 Service.
@@ -28,7 +30,12 @@ import { AccessToken } from '../common/';
  */
 @Injectable()
 export class Oauth2Service {
-  constructor(private http: HttpClient, private config: Oauth2Config) {} // constructor()
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private rest: RestService,
+    private config: Oauth2Config
+  ) {} // constructor()
 
   login(credentail: Credential): Observable<AccessToken> {
     let body = new URLSearchParams();
@@ -46,15 +53,20 @@ export class Oauth2Service {
     });
   } // login()
 
-  /**this is not working : https://issues.jboss.org/browse/KEYCLOAK-2939?page=com.atlassian.jira.plugin.system.issuetabpanels%3Acomment-tabpanel&showAll=true */
   logout(accessToken: AccessToken) {
-    let body = new URLSearchParams();
-    body.set('client_id', this.config.clinetId);
-    body.set('refresh_token', accessToken.refresh_token);
-    return this.http.post(this.config.logoutUrl, body.toString(), {
-      headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
-    });
+    /** THIS is not working : https://issues.jboss.org/browse/KEYCLOAK-2939?page=com.atlassian.jira.plugin.system.issuetabpanels%3Acomment-tabpanel&showAll=true */
+    // let body = new URLSearchParams();
+    // body.set('client_id', this.config.clinetId);
+    // body.set('refresh_token', accessToken.refresh_token);
+    // return this.http.post(this.config.logoutUrl, body.toString(), {
+    //   headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+    // });
+    return this.rest.post(this.config.logOutUrl, {});
   } // logout()
+
+  logOutSuccess() {
+    this.router.navigate([this.config.logOutSuccessRedirectUrl]);
+  }
 
   getUserInfo(accessToken: AccessToken) {
     return this.http.get(this.config.userInfoUrl);

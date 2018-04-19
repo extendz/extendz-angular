@@ -40,6 +40,8 @@ import {
 } from '../platform';
 import { AppRoutingModule } from './app-routing.module';
 import { ExtendzRestModule } from '../platform/common/services';
+import { EXT_AUTH_CONFIG } from '../platform/auth/common';
+import { AuthConfig } from '../platform/auth/common/config/auth-common.config';
 
 @NgModule({
   declarations: [AppComponent],
@@ -53,7 +55,9 @@ import { ExtendzRestModule } from '../platform/common/services';
     //   enabled: environment.production
     // }),
     // Extendz
-    ExtendzAuthCommonModule,
+    ExtendzAuthCommonModule.forRoot({
+      profileUrl: '/user/profile'
+    }),
     ExtendzRestModule.forRoot({
       basePath: environment.basePath
     }),

@@ -23,7 +23,9 @@ import { ExtendzGoogleModule } from '../../../platform/auth/google';
       userInfoUrl:
         'https://extendz-keycloak.herokuapp.com/auth/realms/extendz/protocol/openid-connect/userinfo',
       clinetId: 'angular',
-      grantType: 'password'
+      grantType: 'password',
+      logOutUrl: 'logout',
+      logOutSuccessRedirectUrl: '/'
     }),
     ExtendzFacebookModule.forRoot({
       appId: '341194909711465',
