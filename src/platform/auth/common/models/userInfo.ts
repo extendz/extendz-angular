@@ -45,5 +45,8 @@ export class UserInfo {
    */
   preferred_username?: string;
 
+  /** URL of the End-User's profile page. The contents of this Web page SHOULD be about the End-User. */
+  profile?: string;
+  /** End-User's preferred e-mail address. Its value MUST conform to the RFC 5322 [RFC5322] addr-spec syntax. The RP MUST NOT rely upon this value being unique, as discussed in Section 5.7. */
   email?: string;
 }
