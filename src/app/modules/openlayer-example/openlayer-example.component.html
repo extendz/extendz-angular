@@ -11,11 +11,14 @@
         </div>
     </mat-tab>
     <mat-tab label="Demo">
-
+        <!-- <div style="height: 80vh">
+            <ext-openlayer [image]="tiffImage"  [polygontyps]="polygonOptions" [pointstyps]="pointOptions" (onDraw)="onDraw($event)">
+            </ext-openlayer>
+        </div> -->
     </mat-tab>
+    
 </mat-tab-group>
 <div style="height: 80vh">
-    <ext-openlayer [image]="tiffImage" [drawtype]="openlayerTool.POINT" [points]="polygon" [polygontyps]="polygonOptions" [pointstyps]="pointOptions"
-        [drawcolor]="'rgba(204,0,0,0.5)'" (onDraw)="onDraw($event)">
+    <ext-openlayer [image]="tiffImage"  [polygontyps]="polygonOptions" [pointstyps]="pointOptions" (onDraw)="onDraw($event)">
     </ext-openlayer>
 </div>

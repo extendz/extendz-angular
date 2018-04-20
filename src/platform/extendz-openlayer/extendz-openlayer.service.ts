@@ -14,7 +14,7 @@
  *    limitations under the License.
  */
 
-import { Injectable, NgZone, EventEmitter } from '@angular/core';
+import { Injectable, NgZone, EventEmitter, SimpleChanges } from '@angular/core';
 import {} from '@types/openlayers';
 import * as ol from 'openlayers';
 import { TiffImage, OlOptions, LatLng, ReturnObject } from './models/index';
@@ -130,6 +130,8 @@ export class ExtendzOpenlayerService {
 
   public drawStarted: boolean;
 
+  public tiffImage:TiffImage;
+
   /**
    * Projection for the image. Since we use lat,lng we use EPSG:4326. Also we show a png image so the units will be pixels
    */
@@ -181,8 +183,9 @@ export class ExtendzOpenlayerService {
    */
   initMap(olOption: OlOptions) {
     // set initial extent
+    this.tiffImage = olOption.tiffImage;
     if (olOption.tiffImage.extent) {
-      this.extent = olOption.tiffImage.extent;
+      this.extent =this.tiffImage.extent;
     }
 
     //initial projection
@@ -194,7 +197,7 @@ export class ExtendzOpenlayerService {
 
     // initial source
     this.source = new ol.source.ImageStatic({
-      url: olOption.tiffImage.imageUrl,
+      url: this.tiffImage.imageUrl,
       imageExtent: this.extent,
       projection: this.projection
     });
@@ -229,6 +232,26 @@ export class ExtendzOpenlayerService {
       this.setToolExist(olOption.drawType, olOption.tooltype, olOption.points, olOption.color);
     }
   } // initMap()ointToolType
+
+  onChangeImage(changes : SimpleChanges, opt: OlOptions) {
+    // Only listen to changes on job
+    if (!changes['tiffImage']) {
+      return;
+    }
+    if (changes['tiffImage'].currentValue != this.tiffImage) {
+      this.tiffImage = opt.tiffImage;
+      this.extent = this.tiffImage.extent;
+      this.map.removeLayer(this.imageLayer);
+      this.imageLayer = new ol.layer.Image({
+        source: new ol.source.ImageStatic({
+          url: this.tiffImage.imageUrl,
+          imageExtent:this.extent,
+          projection: this.projection
+        })
+      });
+      this.map.addLayer(this.imageLayer);
+    }
+  } // End onChange
 
   /**
    * @method setTool

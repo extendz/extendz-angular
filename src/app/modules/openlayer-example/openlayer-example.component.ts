@@ -9,7 +9,7 @@ import { TiffImage, LatLng, Tool, OpenLayerTool, OpenLayerToolType } from '../..
 export class OpenlayerExampleComponent implements OnInit {
   tiffImage : TiffImage = {
     jobId:1,
-    imageUrl:"assets/img/demo.png",
+    imageUrl:"assets/img/37.png",
     extent:[-76.51367693405734, 42.42886985890468, -76.51169990480923, 42.42984853959061]
   };
 
@@ -62,7 +62,6 @@ export class OpenlayerExampleComponent implements OnInit {
   ngOnInit() {
   }
   onDraw(event){
-    console.log(event);
-    
+    console.log(event);  
   }
 }
