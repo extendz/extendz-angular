@@ -238,7 +238,7 @@ export class ExtendzOpenlayerService {
     if (!changes['tiffImage']) {
       return;
     }
-    if (changes['tiffImage'].currentValue != this.tiffImage) {
+    if (this.source) {
       this.tiffImage = opt.tiffImage;
       this.extent = this.tiffImage.extent;
       this.map.removeLayer(this.imageLayer);
@@ -402,10 +402,12 @@ export class ExtendzOpenlayerService {
 
       this.shapeDrawEndTime = new Date();
 
+      let duration:number = this.shapeDrawEndTime.getSeconds() - this.shapeDrawStartTime.getSeconds();
+
       let geom = event.feature;
       let cordinates: ol.Coordinate[][];
       let latlngArray: Array<LatLng>;
-      this.returnCoordinate = this.getCoordinatsFromGeometry(geom,toolType);      
+      this.returnCoordinate = this.getCoordinatsFromGeometry(geom,toolType,duration);      
       if (this.returnCoordinate.coordiantes.length <= 3) {
         console.log('Area not selected', null, {
           duration: 2000
