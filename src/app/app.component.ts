@@ -17,6 +17,8 @@ export class AppComponent {
   apiMenuItms: MenuItem[];
   otherComponentMenuItems: MenuItem[];
 
+  chartItems: MenuItem[];
+
   constructor(
     public media: ObservableMedia,
     private iconRegistry: MatIconRegistry,
@@ -97,12 +99,6 @@ export class AppComponent {
 
     this.otherComponentMenuItems = [
       {
-        icon: 'map',
-        title: 'Google Map',
-        subTitle: 'Google Map',
-        url: ['map']
-      },
-      {
         icon: 'date_range',
         title: 'Calendar',
         subTitle: 'Material Calendar',
@@ -113,6 +109,21 @@ export class AppComponent {
         title: 'Openlayer',
         subTitle: 'Openlayer',
         url: ['openlayer']
+      }
+    ];
+
+    this.chartItems = [
+      {
+        icon: 'highchart',
+        title: 'Highchart',
+        subTitle: 'Highcgart Component',
+        url: ['chart']
+      },
+      {
+        icon: 'heatmap',
+        title: 'Heat Map',
+        subTitle: 'Heat Map component',
+        url: ['heat-map']
       }
     ];
   } // constructor()

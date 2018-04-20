@@ -21,6 +21,14 @@ const routes: Routes = [
   {
     path: 'openlayer',
     loadChildren: './modules/openlayer-example/openlayer-example.module#OpenlayerExampleModule'
+  },
+  {
+    path: 'chart',
+    loadChildren: './modules/charts/charts.module#ChartsModule'
+  },
+  {
+    path: 'calendar',
+    loadChildren: './modules/calendar/calendar-example/calendar-example.module#CalendarExampleModule'
   }
 ];
 
