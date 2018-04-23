@@ -1,6 +1,6 @@
 {
   "name": "@extendz/extendz-calendar",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Extend UI Platform built on Angular Material",
   "main": "./bundles/core.umd.js",
   "module": "./index.js",
