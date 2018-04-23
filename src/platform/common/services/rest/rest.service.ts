@@ -32,7 +32,7 @@ import { ExtRestConfig } from '../../services/rest/models';
 @Injectable()
 export class RestService {
   constructor(
-    private config: ExtRestConfig,
+    public config: ExtRestConfig,
     public http: HttpClient,
     private dialog: MatDialog
   ) {}
