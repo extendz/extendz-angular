@@ -240,7 +240,9 @@ export class ExtendzOpenlayerService {
     if (this.source) {
       this.tiffImage = opt.tiffImage;
       this.extent = this.tiffImage.extent;
-      this.map.removeLayer(this.imageLayer);
+      if(this.imageLayer){
+        this.map.removeLayer(this.imageLayer);
+      }
       this.imageLayer = new ol.layer.Image({
         source: new ol.source.ImageStatic({
           url: this.tiffImage.imageUrl,
