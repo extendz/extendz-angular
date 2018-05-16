@@ -80,6 +80,10 @@ export class ExtendzApiSelectComponent implements OnInit, OnDestroy, ControlValu
    */
   qItems: number[] = [1];
   /**
+   * Quick add shows or not
+   */
+  public quickAdd: boolean = false;
+  /**
    * On Change the selected form value
    */
   onChange: any = () => {};
