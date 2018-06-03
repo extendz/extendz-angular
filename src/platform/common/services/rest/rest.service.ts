@@ -69,6 +69,15 @@ export class RestService {
   } // post()
 
   /**
+   * @description DELETE request with base pathe attached to it.
+   * @param url
+   * @param httpOptions
+   */
+  public delete(url: string, httpOptions?: Object): Observable<Response> {
+    return this.http.delete<Response>(this.config.basePath + url, httpOptions);
+  } // delete
+
+  /**
    * Get All the data elements and without Paging Information
    * @param modelName
    * @param httpOptions
@@ -121,7 +130,7 @@ export class RestService {
       filter(result => result),
       mergeMap(() => {
         let requests: Observable<Response>[] = [];
-        urls.forEach(url => requests.push(this.http.delete<Response>(this.config.basePath + url)));
+        urls.forEach(url => requests.push(this.delete(url)));
         return forkJoin(requests);
       })
     );
