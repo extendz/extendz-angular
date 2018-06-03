@@ -29,7 +29,7 @@ export class SingUpService {
   ) {}
 
   postSignUp(saveObject: object): Observable<object> {
-    let url = this.restConfig.basePath + '/' + this.config.url;
+    let url = this.restConfig.basePath + this.config.url;
     return this.rest.http.post<object>(url, saveObject);
   } // postSignUp()
 }

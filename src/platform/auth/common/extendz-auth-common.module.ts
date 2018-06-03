@@ -13,29 +13,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-import { NgModule, InjectionToken, ModuleWithProviders, Provider } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
+import { InjectionToken, ModuleWithProviders, NgModule, Provider } from '@angular/core';
 import { Ng2Webstorage } from 'ngx-webstorage';
-
+import { RestService } from '../../common';
+import { AuthConfig, IAuthConfig } from './config/auth-common.config';
 import { PrincipalService } from './services/principal.service';
 import { TokenService } from './services/token.service';
 import { TokenExchangeService } from './services/tokenExchange.service';
-import { AuthConfig, IAuthConfig } from './config/auth-common.config';
-import { EXT_REST_CONFIG, ExtRestConfig } from '../../common';
+
+
 
 export const EXT_AUTH_CONFIG: InjectionToken<AuthConfig> = new InjectionToken<AuthConfig>(
   'extAuthCommon.config'
 );
 
-export function authFactory(restConf: ExtRestConfig, config: IAuthConfig): AuthConfig {
+export function authFactory(restService: RestService, config: IAuthConfig): AuthConfig {
   return new AuthConfig(config);
 }
 
 export const AUTH_PROVIDER: Provider = {
   provide: AuthConfig,
   useFactory: authFactory,
-  deps: [EXT_REST_CONFIG, EXT_AUTH_CONFIG]
+  deps: [RestService, EXT_AUTH_CONFIG]
 };
 
 /**

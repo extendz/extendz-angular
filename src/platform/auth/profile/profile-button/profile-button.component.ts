@@ -43,8 +43,8 @@ export class ExtendzProfileButtonComponent {
     this.oauth2Service.logout(this.token.getToken()).subscribe(d => {
       console.log('Redirecting');
       this.oauth2Service.logOutSuccess();
-      //this.token.remove();
-      //this.principal.remove();
+      this.token.remove();
+      this.principal.remove();
     });
   } // logout
 } // class

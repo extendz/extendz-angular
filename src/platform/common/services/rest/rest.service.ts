@@ -31,11 +31,7 @@ import { ExtRestConfig } from '../../services/rest/models';
 
 @Injectable()
 export class RestService {
-  constructor(
-    public config: ExtRestConfig,
-    public http: HttpClient,
-    private dialog: MatDialog
-  ) {}
+  constructor(public config: ExtRestConfig, public http: HttpClient, private dialog: MatDialog) {}
 
   /**
    * Clear invalied url from server.
@@ -59,13 +55,18 @@ export class RestService {
     return url.substring(url.lastIndexOf('/') + 1);
   } // getId()
 
+  /**
+   * @description GET request with base pathe attached to it.
+   * @param url
+   * @param httpOptions
+   */
   public get(url: string, httpOptions?: Object) {
     return this.http.get(this.config.basePath + url, httpOptions);
   } // get()
 
   public post(url: string, object: object, httpOptions?: Object) {
     return this.http.post(this.config.basePath + url, object, httpOptions);
-  } // get()
+  } // post()
 
   /**
    * Get All the data elements and without Paging Information
@@ -92,7 +93,7 @@ export class RestService {
    * @param httpOptions
    */
   public search(url: string, httpOptions?: Object) {
-    return this.http.get<HateosPagedResponse>(url, httpOptions);
+    return this.http.get<HateosPagedResponse>(this.config.basePath + url, httpOptions);
   }
 
   /** Save thte Object.*/
@@ -120,7 +121,7 @@ export class RestService {
       filter(result => result),
       mergeMap(() => {
         let requests: Observable<Response>[] = [];
-        urls.forEach(url => requests.push(this.http.delete<Response>(url)));
+        urls.forEach(url => requests.push(this.http.delete<Response>(this.config.basePath + url)));
         return forkJoin(requests);
       })
     );
