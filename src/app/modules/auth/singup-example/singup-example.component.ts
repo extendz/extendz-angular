@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ObjectWithLinks } from '../../../../platform';
-import { UserSingUpDto } from './models/userSignUpDto';
-import { ExtendzFormGroup } from '../../../../../deploy/platform/auth/sing-up/formGroup';
+import {ExtendzFormGroup} from '../../../../platform/auth/sing-up/formGroup';
+
 
 @Component({
   selector: 'app-singup-example',
