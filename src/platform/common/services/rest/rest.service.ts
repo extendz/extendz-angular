@@ -19,18 +19,19 @@ import { MatSnackBar, MatDialog } from '@angular/material';
 
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators/map';
+import { filter } from 'rxjs/operators/filter';
+import { merge } from 'rxjs/observable/merge';
+import { of } from 'rxjs/observable/of';
+import { forkJoin } from 'rxjs/observable/forkJoin';
+import { mergeMap } from 'rxjs/operators/mergeMap';
 
 import { DeleteDialogComponent } from './dialog-delete/delete-dialog.componet';
+import { ObjectWithLinks, HateosPagedResponse } from './models/';
 import { ExtRestConfig } from '../../services/rest/models';
-import { ObjectWithLinks } from './models/';
 
 @Injectable()
 export class RestService {
-  constructor(
-    private restConfig: ExtRestConfig,
-    public http: HttpClient,
-    public dialog: MatDialog
-  ) {}
+  constructor(public config: ExtRestConfig, public http: HttpClient, private dialog: MatDialog) {}
 
   /**
    * Clear invalied url from server.
@@ -46,22 +47,101 @@ export class RestService {
     return url;
   } //  clearUrl()
 
-  getId(url: string) {
+  /**
+   * Get Id from a url with tailing id
+   * @param url
+   */
+  public getId(url: string) {
     return url.substring(url.lastIndexOf('/') + 1);
   } // getId()
 
-  findAll(modelName: string, httpOptions: Object): Observable<ObjectWithLinks> {
+  /**
+   * @description GET request with base pathe attached to it.
+   * @param url
+   * @param httpOptions
+   */
+  public get(url: string, httpOptions?: Object) {
+    return this.http.get(this.config.basePath + url, httpOptions);
+  } // get()
+
+  public post(url: string, object: object, httpOptions?: Object) {
+    return this.http.post(this.config.basePath + url, object, httpOptions);
+  } // post()
+
+  /**
+   * @description DELETE request with base pathe attached to it.
+   * @param url
+   * @param httpOptions
+   */
+  public delete(url: string, httpOptions?: Object): Observable<Response> {
+    return this.http.delete<Response>(this.config.basePath + url, httpOptions);
+  } // delete
+
+  /**
+   * Get All the data elements and without Paging Information
+   * @param modelName
+   * @param httpOptions
+   */
+  findAll(modelName: string, httpOptions?: Object): Observable<ObjectWithLinks[]> {
     return this.http
-      .get(this.restConfig.basePath + '/' + modelName, httpOptions)
+      .get(this.config.basePath + '/' + modelName, httpOptions)
       .pipe(map((res: any) => res._embedded[modelName]));
   } // findAll
 
-  deleteWithConfirm(url: string): void {
+  findAllByProperty(url: string, propertyName: string, httpOptions?: Object) {
+    return this.http.get(url, httpOptions).pipe(map((res: any) => res._embedded[propertyName]));
+  }
+
+  findOne(item: ObjectWithLinks) {
+    return this.http.get<ObjectWithLinks>(item._links.self.href);
+  }
+
+  /**
+   * Search for all the result
+   * @param url
+   * @param httpOptions
+   */
+  public search(url: string, httpOptions?: Object) {
+    return this.http.get<HateosPagedResponse>(this.config.basePath + url, httpOptions);
+  }
+
+  /** Save thte Object.*/
+  save(item: ObjectWithLinks): Observable<ObjectWithLinks> {
+    if (item._links) {
+      return this.patch(item);
+    } else {
+      return this.http.post<ObjectWithLinks>(item._links.self.href, item);
+    }
+  } // save()
+
+  /** Patch the given object.*/
+  patch(item: ObjectWithLinks): Observable<ObjectWithLinks> {
+    return this.http.patch<ObjectWithLinks>(item._links.self.href, item);
+  } // patch
+
+  /** Put the given object. */
+  put(item: ObjectWithLinks): Observable<ObjectWithLinks> {
+    return this.http.put<ObjectWithLinks>(item._links.self.href, item);
+  }
+
+  /** Delete all */
+  deleteAllWithConfirm(urls: string[]): Observable<Response[]> {
+    return this.showDeleteConfimDialog().pipe(
+      filter(result => result),
+      mergeMap(() => {
+        let requests: Observable<Response>[] = [];
+        urls.forEach(url => requests.push(this.delete(url)));
+        return forkJoin(requests);
+      })
+    );
+  } // deleteAllWithConfirm
+
+  deleteWithConfirm(url: string): Observable<Response> {
+    return this.deleteAllWithConfirm([url]).pipe(map(d => d[0]));
+  } //  deleteWithConfirm()
+
+  private showDeleteConfimDialog() {
     let dialogRef = this.dialog.open(DeleteDialogComponent);
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.http.delete(url);
-      }
-    });
-  } //  delete()
+    return dialogRef.afterClosed();
+  }
 } // class

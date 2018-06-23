@@ -17,50 +17,72 @@
 import { Component, OnInit, OnDestroy, Input, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { SelectionModel } from '@angular/cdk/collections';
-import { PageEvent } from '@angular/material';
+import { PageEvent, MatCheckboxChange } from '@angular/material';
 import { ObservableMedia } from '@angular/flex-layout';
 
-import { ApiTableService } from './api-table.service';
-import { ModelMeta } from './models/modelMeta';
-
-import { debounceTime } from 'rxjs/operators';
 import { Subscription } from 'rxjs/Subscription';
-import { tap } from 'rxjs/operators/tap';
+import { of } from 'rxjs/observable/of';
 import { mergeMap } from 'rxjs/operators/mergeMap';
 import { map } from 'rxjs/operators/map';
-import { of } from 'rxjs/observable/of';
 
-import { TableResponse } from './models/modelData/tableResponse';
-import { PageAndSort } from './models';
-
+import { ApiTableService } from './api-table.service';
 import { TableDataSource } from './dataSource/tableDataSource';
-import { ObjectWithLinks } from './models/modelData/objectWithLinks';
+
+import { PageAndSort } from '../models';
+import { ObjectWithLinks, HateosPagedResponse, ModelMeta, Property } from '../../common';
 
 @Component({
-  selector: 'app-api-table',
+  selector: 'ext-api-table',
   templateUrl: './api-table.component.html',
-  styleUrls: ['./api-table.component.css']
+  styleUrls: ['./api-table.component.scss']
 })
 export class ApiTableComponent implements OnInit, OnDestroy {
+  /**
+   * All Subscriptions
+   */
   all$: Subscription;
+  /**
+   * Data table instance
+   */
   tableDataSource: TableDataSource;
+  /**
+   * Collumns in the model meta
+   */
   columns: string[];
+  /**
+   * All columns including select and edit
+   */
   allColumns: string[];
   modelMeta: ModelMeta;
+  tableResponse: HateosPagedResponse;
+  data: Object[];
 
   url: string;
   selector: string;
   @Input() selectorName: string;
+
   @Input() searchClicked: boolean;
-
+  /**
+   * Selected model name
+   */
   @Input() model: string;
-
+  /**
+   * Table to have multiple selection
+   */
+  @Input() multiSelect: boolean = true;
+  /**
+   * Fire on selecting and item or empty one to indicate a emty item
+   */
   @Output() select: EventEmitter<ObjectWithLinks> = new EventEmitter<ObjectWithLinks>();
-
-  tableResponse: TableResponse;
-  selection = new SelectionModel<Object>(true, []);
-
-  data: Object[];
+  /**
+   * Selected Items
+   */
+  @Input() selected: string[];
+  @Output() selectedChange: EventEmitter<string[]> = new EventEmitter<string[]>();
+  /**
+   * Selection model
+   */
+  selection: SelectionModel<string>;
 
   constructor(
     public media: ObservableMedia,
@@ -70,28 +92,34 @@ export class ApiTableComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
+    this.selection = new SelectionModel<string>(this.multiSelect, []);
     this.all$ = this.service
-      .getModel(this.model)
+      .getModel(this.model, 'dataTable')
       .pipe(
         mergeMap((meta: ModelMeta) => this.handleMetaModel(meta)),
-        map((tableResponse: TableResponse) => this.handdleDataResponse(tableResponse))
+        map((tableResponse: HateosPagedResponse) => this.handdleDataResponse(tableResponse))
       )
-      .subscribe(d => {});
+      .subscribe(d => {
+        // Select the values from input
+        if (this.selected) this.selected.forEach((row: string) => this.selection.select(row));
+      });
   } // ngOnInit()
 
   private handleMetaModel(meta: ModelMeta) {
     this.modelMeta = meta;
-    this.columns = meta.properties.map(p => p.name);
+    let properties: Property[] = null;
+    let projections = meta.projections;
+    properties = meta.properties;
+    this.columns = properties.filter(r => r.type !== 'file').map(p => p.name);
     this.allColumns = ['select', ...this.columns, 'edit'];
     return this.service.getTableData(meta);
   } // handleMetaModel()
 
-  private handdleDataResponse(tableResponse: TableResponse) {
+  private handdleDataResponse(tableResponse: HateosPagedResponse) {
     this.tableResponse = tableResponse;
     this.url = this.modelMeta.url;
     this.selector = this.url.substring(this.url.lastIndexOf('/') + 1);
     this.data = tableResponse._embedded[this.selector];
-    console.log('data', this.data);
     this.tableDataSource = new TableDataSource(of(this.data));
   } // handdleDataResponse()
 
@@ -102,6 +130,14 @@ export class ApiTableComponent implements OnInit, OnDestroy {
     this.select.emit({});
   } // addNew()
 
+  /**
+   * Fire When existing item it clicked
+   * @param item
+   */
+  public editRow(item: ObjectWithLinks) {
+    this.select.emit(item);
+  } // editRow()
+
   pageEvent(event: PageEvent) {
     let pageAndSort: PageAndSort = {
       page: event.pageIndex,
@@ -109,40 +145,36 @@ export class ApiTableComponent implements OnInit, OnDestroy {
     };
     this.service
       .getTableData(this.modelMeta, pageAndSort)
-      .subscribe((tableResponse: TableResponse) => this.handdleDataResponse(tableResponse));
+      .subscribe((tableResponse: HateosPagedResponse) => this.handdleDataResponse(tableResponse));
   } // pageEvent()
 
   isAllSelected() {
     const numSelected = this.selection.selected.length;
     const numRows = this.data.length;
     return numSelected === numRows;
+  } // isAllSelected()
+
+  delete(item: ObjectWithLinks) {
+    this.service.rest.deleteWithConfirm(item._links.self.href);
   }
 
-  editRow(item: ObjectWithLinks) {
-    let id = this.service.getItemId(item._links.self.href);
-    this.router.navigate([id], { relativeTo: this.activatedRoute });
-  } // editRow()
+  deleteAll() {
+    this.service.rest.deleteAllWithConfirm(this.selection.selected);
+  }
+
+  selectionChange(event: MatCheckboxChange) {
+    this.selected = this.selection.selected;
+    this.selectedChange.emit(this.selected);
+  }
 
   /** Selects all rows if they are not all selected; otherwise clear selection. */
   masterToggle() {
     this.isAllSelected()
       ? this.selection.clear()
-      : this.data.forEach(row => this.selection.select(row));
+      : this.data.forEach((row: ObjectWithLinks) => this.selection.select(row._links.self.href));
   }
+
   ngOnDestroy(): void {
     if (this.all$) this.all$.unsubscribe();
   } // ngOnDestroy()
-
-  // applyFilter(filterValue: string) {
-  //   filterValue = filterValue.trim(); // Remove whitespace
-  //   console.log('filter value:', filterValue);
-  //   this.selectorService
-  //     .search(this.selector, filterValue, this.selectorName)
-  //     .pipe(debounceTime(1000))
-  //     .subscribe((json: any) => {
-  //       this.data = json;
-  //       console.log('data2', json);
-  //       this.tableDataSource = new TableDataSource(of(this.data));
-  //     });
-  // }
 }

@@ -1,20 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ApiTableHostComponent } from './api-table-host.component';
-
-import { ApiTableHostRoutingModule } from './api-table-host.routing.module';
-import { ExtendzApiTableModule } from '../api-table/extendz-api-table.module';
 import { MatIconModule, MatButtonModule } from '@angular/material';
+
+import { ExtendzApiTableHostComponent } from './extendz-api-table-host.component';
+import { ExtendzApiTableModule } from '../api-table/extendz-api-table.module';
 
 @NgModule({
   imports: [
-    ApiTableHostRoutingModule,
     CommonModule,
+    // Extendz
     ExtendzApiTableModule,
+    // Mat
     MatIconModule,
     MatButtonModule
   ],
-  declarations: [ApiTableHostComponent],
-  exports: [ApiTableHostComponent]
+  declarations: [ExtendzApiTableHostComponent],
+  exports: [ExtendzApiTableHostComponent]
 })
 export class ExtendzApiTableHostModule {}

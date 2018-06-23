@@ -16,20 +16,18 @@
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MatTabsModule } from '@angular/material';
 
 import { ApiRootExampleRoutingModule } from './api-root-example-routing.module';
 import { ApiRootExampleComponent } from './api-root-example.component';
-import { MatTabsModule } from '@angular/material';
 import { ExtendzApiRootModule, ExtendzApiModule } from '../../../../platform';
 
 @NgModule({
   imports: [
     CommonModule,
     ApiRootExampleRoutingModule,
+    // Mat
     MatTabsModule,
-    ExtendzApiModule.forRoot({
-      svgIconSet: 'assets/svg/api-icons.svg'
-    }),
     ExtendzApiRootModule
   ],
   declarations: [ApiRootExampleComponent]

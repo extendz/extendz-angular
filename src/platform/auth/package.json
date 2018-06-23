@@ -1,6 +1,6 @@
 {
   "name": "@extendz/auth",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Extend UI Platform Authentication Modules",
   "main": "./bundles/auth.umd.js",
   "module": "./index.js",
@@ -15,6 +15,7 @@
     "@angular/cdk": "^5.0.0",
     "@angular/material": "^5.0.0",
     "ngx-webstorage": "^2.0.1",
+    "@types/fb": "0.0.23",
     "@covalent/core": "^1.0.0-rc.4"
   },
   "peerDependencies": {

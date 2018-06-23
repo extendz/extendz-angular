@@ -1,0 +1,16 @@
+// imports
+@import '../../api-browser/api-browser-theme.scss';
+@import '../../auth/auth-theme.scss';
+// Themes
+@mixin extendz-theme($theme, $config: null) {
+  @include ext-api-browser-theme($theme);
+  @include ext-auth-theme($theme); // variables
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  .primary-bg {
+    background-color: mat-color($primary);
+  }
+  .icon-700 {
+    color: mat-color($primary, 700);
+  }
+}

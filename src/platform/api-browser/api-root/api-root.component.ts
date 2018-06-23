@@ -13,13 +13,13 @@
  *    See the License for the specific language governing permissions and
  *    limitations under the License.
  */
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators/map';
 
 import { ApiRootService } from './api-root.service';
-import { Model } from './models';
+import { ModelMeta } from '../../common';
 
 @Component({
   selector: 'ext-api-root',
@@ -27,11 +27,21 @@ import { Model } from './models';
   styleUrls: ['./api-root.component.scss']
 })
 export class ApiRootComponent implements OnInit {
-  models$: Observable<Model[]>;
+  models$: Observable<ModelMeta[]>;
+
+  @Output() select: EventEmitter<ModelMeta> = new EventEmitter<ModelMeta>();
 
   constructor(private apiRootService: ApiRootService) {}
 
   ngOnInit(): void {
     this.models$ = this.apiRootService.getRoot();
   } // ngOnInit()
+
+  /**
+   * On Select a model
+   * @param model selected Model
+   */
+  onSelect(model: ModelMeta) {
+    this.select.emit(model);
+  }
 } // class

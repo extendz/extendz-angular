@@ -1,0 +1,9 @@
+<mat-dialog-content>
+    <ext-api-table [model]="data.property.reference" [multiSelect]="multiSelect" [(selected)]="selected"></ext-api-table>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <button mat-button mat-dialog-close>Cancel</button>
+    <span fxFlex></span>
+    <button mat-button color="primary" (click)="onOkay()">Done</button>
+</mat-dialog-actions>

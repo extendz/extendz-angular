@@ -5,12 +5,11 @@ import { MatSnackBar, MatDialog } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 
-import { ModelMeta, ObjectWithLinks } from '../api-table/models';
-import { RestService, ExtRestConfig } from '../../common';
+import { RestService, ExtRestConfig, ObjectWithLinks, ModelMeta } from '../../common';
 
 @Injectable()
 export class ApiItemService {
-  constructor(private rest: RestService, private conf: ExtRestConfig) {}
+  constructor(public rest: RestService, private conf: ExtRestConfig) {}
 
   getItem(meta: ModelMeta, id: number | string): Observable<ObjectWithLinks> {
     if (id == 0) {

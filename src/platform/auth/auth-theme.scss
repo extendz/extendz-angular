@@ -1,0 +1,7 @@
+@import './profile/profile-basic/extendz-profile-basic.component.scss';
+@import './profile/profile-button/profile-button.component.scss';
+// themes
+@mixin ext-auth-theme($theme) {
+  @include auth-profile-basic-theme($theme);
+  @include auth-profile-button-theme($theme);
+}

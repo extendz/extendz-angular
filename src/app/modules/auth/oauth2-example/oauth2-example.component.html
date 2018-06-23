@@ -7,7 +7,7 @@
         <strong>user</strong> and
         <strong>password</strong> as credentials in the demo bellow</p>
       <mat-card class="mat-elevation-z6">
-        <ext-login-oauth2 [config]="config" (userInfo)="onUserInfo($event)" (token)="onToken($event)"></ext-login-oauth2>
+        <ext-login-oauth2 (userInfo)="onUserInfo($event)" (token)="onToken($event)"></ext-login-oauth2>
       </mat-card>
 
       <div>

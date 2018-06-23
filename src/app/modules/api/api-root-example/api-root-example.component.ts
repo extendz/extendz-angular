@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { of } from 'rxjs/observable/of';
+import { Router, ActivatedRoute } from '@angular/router';
+import { ModelMeta } from '../../../../platform';
 
 @Component({
   selector: 'app-api-root-example',
@@ -7,18 +9,11 @@ import { of } from 'rxjs/observable/of';
   styleUrls: ['./api-root-example.component.css']
 })
 export class ApiRootExampleComponent implements OnInit {
-  models$;
+  constructor(private router: Router, private activeRoute: ActivatedRoute) {}
 
-  constructor() {}
+  ngOnInit() {}
 
-  ngOnInit() {
-    this.models$ = of([
-      {
-        name: 'User'
-      },
-      {
-        name: 'Role'
-      }
-    ]);
+  onSelect(model: ModelMeta) {
+    this.router.navigate([model.name], { relativeTo: this.activeRoute });
   }
 }

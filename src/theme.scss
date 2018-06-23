@@ -1,14 +1,27 @@
 @import '~@angular/material/theming';
 @import '~@covalent/core/theming/all-theme';
 @import '~@covalent/highlight/highlight-theme';
+@import '~platform/common/theming/theme';
 @include mat-core();
+// theme
 $primary: mat-palette($mat-light-blue);
 $accent: mat-palette($mat-green);
 $warn: mat-palette($mat-red, 600);
+$iconColor:#999;
 $theme: mat-light-theme($primary, $accent, $warn);
 @include angular-material-theme($theme);
 @include covalent-theme($theme);
 @include covalent-highlight-theme();
+@include extendz-theme($theme);
+// CSS
 .doc-header {
-  color: mat-color($accent);
+    color: mat-color($accent);
+}
+
+.primary {
+    color: mat-color($primary);
+}
+
+.primary-text {
+    color: mat-color($primary, 50);
 }

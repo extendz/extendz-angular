@@ -14,44 +14,49 @@
 * limitations under the License.
 */
 
+export interface IOauth2Config {
+  /** Token url */
+  tokenUrl: string;
+  /** User Information url*/
+  userInfoUrl: string;
+  /** Logout url */
+  logOutUrl: string;
+  /** On successful logout the router will navigate to location */
+  logOutSuccessRedirectUrl: string;
+  /** Scopes */
+  scope?: string;
+  /** Grant type.*/
+  grantType?: string;
+  /** Client Secret */
+  clientSecret?: string;
+  /** Client Id  */
+  clinetId?: string;
+}
+
 /**
  * Oauth2 Server configurations.
  * @author Randika Hapugoda
  */
-export class Oauth2Config {
-  /**
-   * Token url
-   */
+export class Oauth2Config implements IOauth2Config {
   tokenUrl: string;
-
-  /**
-   * User Information url
-   */
   userInfoUrl: string;
-
-  /**
-   * Logout url
-   */
-  logoutUrl?: string;
-
-  /**
-   * Scopes
-   */
+  logOutUrl: string;
+  logOutSuccessRedirectUrl: string;
   scope?: string;
-
-  /**
-   * Grant type.
-   * Ex:Password
-   */
   grantType?: string;
-
-  /**
-   * Client Secret
-   */
   clientSecret?: string;
-
-  /**
-   * Client Id
-   */
   clinetId?: string;
+
+  constructor(config: IOauth2Config) {
+    // Required
+    this.tokenUrl = config.tokenUrl;
+    this.userInfoUrl = config.userInfoUrl;
+    this.logOutUrl = config.logOutUrl;
+    this.logOutSuccessRedirectUrl = config.logOutSuccessRedirectUrl;
+
+    if (config.scope) this.scope = config.scope;
+    if (config.grantType) this.grantType = config.grantType;
+    if (config.clientSecret) this.clientSecret = config.clientSecret;
+    if (config.clinetId) this.clinetId = config.clinetId;
+  }
 }

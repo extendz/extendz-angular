@@ -16,12 +16,13 @@
 import { NgModule } from '@angular/core';
 
 import { CamelCasePipe } from './camelCase.pipe';
+import { ShowTitlePipe } from './showTitle.pipe';
 /**
  * Commonly use pipes
  * @author Randika Hapugoda
  */
 @NgModule({
-  declarations: [CamelCasePipe],
-  exports: [CamelCasePipe]
+  declarations: [CamelCasePipe, ShowTitlePipe],
+  exports: [CamelCasePipe, ShowTitlePipe]
 })
 export class ExtendPipesModule {}

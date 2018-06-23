@@ -15,8 +15,7 @@
  */
 import { Links } from './links';
 
-
-export class ObjectWithLinks {
+export class ObjectWithLinks extends Object {
   _links?: Links;
   [key: string]: Object;
 }

@@ -8,15 +8,25 @@ import { AuthRoutingModule } from './auth-routing.module';
 import { AuthComponent } from './auth.component';
 import { Oauth2ExampleComponent } from './oauth2-example/oauth2-example.component';
 
-import { ExtendzOauth2Module, ExtendzFacebookModule, ExtendzGoogleModule } from '../../../platform';
 import { FacebookExampleComponent } from './facebook-example/facebook-example.component';
 import { GoogleExampleComponent } from './google-example/google-example.component';
+import { ExtendzOauth2Module, ExtendzFacebookModule } from '../../../platform';
+import { ExtendzGoogleModule } from '../../../platform/auth/google';
 
 @NgModule({
   imports: [
     CommonModule,
     AuthRoutingModule,
-    ExtendzOauth2Module,
+    ExtendzOauth2Module.forRoot({
+      tokenUrl:
+        'https://extendz-keycloak.herokuapp.com/auth/realms/extendz/protocol/openid-connect/token',
+      userInfoUrl:
+        'https://extendz-keycloak.herokuapp.com/auth/realms/extendz/protocol/openid-connect/userinfo',
+      clinetId: 'angular',
+      grantType: 'password',
+      logOutUrl: 'logout',
+      logOutSuccessRedirectUrl: '/'
+    }),
     ExtendzFacebookModule.forRoot({
       appId: '341194909711465',
       exchangeServer: {

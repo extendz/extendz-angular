@@ -13,7 +13,7 @@
 * See the License for the specific language governing permissions and
 * limitations under the License.
 */
-import { NgModule, ModuleWithProviders, InjectionToken } from '@angular/core';
+import { NgModule, ModuleWithProviders, InjectionToken, Provider } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -29,6 +29,21 @@ import { CovalentLoadingModule } from '@covalent/core/loading';
 import { Oauth2Service } from './oauth2.service';
 import { Oauth2Component } from './oauth2.component';
 import { ExtendzAuthCommonModule } from '../common';
+import { Oauth2Config, IOauth2Config } from './models';
+
+export const EXT_OAUTH2_CONFIG: InjectionToken<Oauth2Config> = new InjectionToken<Oauth2Config>(
+  'extOauth2.config'
+);
+
+export function oauth2Factory(config: IOauth2Config): Oauth2Config {
+  return new Oauth2Config(config);
+}
+
+export const OAUTH2_PROVIDER: Provider = {
+  provide: Oauth2Config,
+  useFactory: oauth2Factory,
+  deps: [EXT_OAUTH2_CONFIG]
+};
 
 @NgModule({
   imports: [
@@ -48,4 +63,17 @@ import { ExtendzAuthCommonModule } from '../common';
   providers: [Oauth2Service],
   exports: [Oauth2Component]
 })
-export class ExtendzOauth2Module {}
+export class ExtendzOauth2Module {
+  static forRoot(config: IOauth2Config): ModuleWithProviders {
+    return {
+      ngModule: ExtendzOauth2Module,
+      providers: [
+        {
+          provide: EXT_OAUTH2_CONFIG,
+          useValue: config
+        },
+        OAUTH2_PROVIDER
+      ]
+    };
+  } // forRoot()
+}

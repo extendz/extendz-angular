@@ -25,10 +25,10 @@ import { take } from 'rxjs/operators/take';
 import { finalize } from 'rxjs/operators/finalize';
 import { mergeMap } from 'rxjs/operators/mergeMap';
 import { of } from 'rxjs/observable/of';
-import { map } from 'rxjs/operators/map';
+import { tap } from 'rxjs/operators/tap';
+import { filter } from 'rxjs/operators/filter';
 
 import { Oauth2Service } from './oauth2.service';
-
 import { AccessToken, TokenService, PrincipalService, UserInfo } from '../common';
 import { Oauth2Config } from './models/oauth2.conf';
 
@@ -47,16 +47,10 @@ export class Oauth2Component implements OnInit, OnDestroy {
 
   serviceSubscripion$: Subscription;
 
-  @Input() config: Oauth2Config;
-
-  /**
-   * Emmit on successful token receive.
-   */
+  /** Emmit on successful token receive. */
   @Output() token: EventEmitter<AccessToken> = new EventEmitter<AccessToken>();
 
-  /**
-   * Emmit on successful user infomation receive.
-   */
+  /** Emmit on successful user infomation receive.*/
   @Output() userInfo: EventEmitter<UserInfo> = new EventEmitter<UserInfo>();
 
   constructor(
@@ -70,7 +64,18 @@ export class Oauth2Component implements OnInit, OnDestroy {
   } // constructor()
 
   ngOnInit() {
-    this.service.init(this.config);
+    let sub = this.principalService
+      .getUser()
+      .pipe(
+        filter(user => user != null),
+        tap(user => {
+          this.token.emit(this.tokenService.getToken());
+          this.userInfo.emit(user);
+        })
+      )
+      .subscribe(user => {
+        if (sub) sub.unsubscribe();
+      });
   } // ngOnInit()
 
   createForm() {
@@ -94,12 +99,12 @@ export class Oauth2Component implements OnInit, OnDestroy {
       .pipe(
         finalize(() => this.loadingService.resolve('overlayStarSyntax')),
         take(1),
-        map((accessToken: AccessToken) => this.tokenService.setToken(accessToken)),
+        tap((accessToken: AccessToken) => this.tokenService.setToken(accessToken)),
         mergeMap((accessToken: AccessToken) => {
           this.token.emit(accessToken);
           return this.service.getUserInfo(accessToken);
         }),
-        map((userInfo: UserInfo) => {
+        tap((userInfo: UserInfo) => {
           this.userInfo.emit(userInfo);
           this.principalService.setUser(userInfo);
         })

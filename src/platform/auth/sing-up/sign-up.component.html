@@ -1,0 +1,51 @@
+<!--
+    Copyright 2018 the original author or authors
+ 
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+ 
+        http://www.apache.org/licenses/LICENSE-2.0
+ 
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<form [formGroup]="signUpFormGroup" (submit)="signUp()" fxLayout="column">
+    <div *ngFor="let field of fields">
+        <!-- {{field | json}} -->
+        <mat-form-field class="full-width">
+            <input matInput autocomplete="false" [placeholder]="field.title" [type]="field.type" [formControlName]="field.name">
+            <mat-error>
+                <ng-container *ngTemplateOutlet="error;context:field"> </ng-container>
+            </mat-error>
+        </mat-form-field>
+    </div>
+    <div fxLayoutAlign="center center">
+        <button mat-raised-button type="submit">Sign Up</button>
+    </div>
+</form>
+
+<ng-template #error let-name="name" let-title="title" let-pattern="pattern">
+    <mat-error *ngIf="signUpFormGroup.controls[name].errors?.required">
+        <span>{{title}}</span> is 
+        <strong>required</strong>
+    </mat-error>
+    <mat-error *ngIf="signUpFormGroup.controls[name].errors?.mismatchWith">
+        <span>{{name | camelCase}} does not match with</span>
+        <strong>{{signUpFormGroup.controls[name].errors?.mismatchWith}}</strong>
+    </mat-error>
+    <mat-error *ngIf="signUpFormGroup.controls[name].errors?.pattern">
+        {{pattern.errorMessage | camelCase}}
+    </mat-error>
+    <mat-error *ngIf="signUpFormGroup.controls[name].errors?.minlength">
+        {{name | camelCase}} need at least
+        <strong>{{signUpFormGroup.controls[name].errors.minlength.requiredLength}}</strong> character(s).
+    </mat-error>
+    <mat-error *ngIf="signUpFormGroup.controls[name].errors?.maxlength">
+        {{name | camelCase}} must be no longer than
+        <strong>{{signUpFormGroup.controls[name].errors.maxlength.requiredLength}} characters</strong>.
+    </mat-error>
+</ng-template>

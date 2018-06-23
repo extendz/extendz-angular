@@ -17,51 +17,49 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
-import { Observer } from 'rxjs/Observer';
 import { of } from 'rxjs/observable/of';
-import { map } from 'rxjs/operators/map';
-import { catchError } from 'rxjs/operators/catchError';
+import { LocalStorageService } from 'ngx-webstorage';
 
-import { LocalStorageService, SessionStorageService } from 'ngx-webstorage';
-
-import { SociallUser, UserInfo } from '../models/';
+import { UserInfo } from '../models/';
+import { AuthConfig } from '../config/auth-common.config';
+import { ExtRestConfig, RestService } from '../../../common';
 
 /**
  * Handle security principal services.
- *
  * @author Randika Hapugoda
  */
 @Injectable()
 export class PrincipalService {
-  /**
-   * Unique key for the storage to use.
-   */
+  /** Unique key for the storage to use.*/
   private USER_KEY: string = 'USER';
 
-  /**
-   * User Subscription
-   */
+  /** User Subscription*/
   private user$: Observable<UserInfo>;
-  private observer: Observer<UserInfo>;
 
-  constructor(private http: HttpClient, private storage: LocalStorageService) {}
+  constructor(
+    private authConfig: AuthConfig,
+    private rest: RestService,
+    private storage: LocalStorageService
+  ) {}
 
-  /**
-   * Get cached user form the local storage
-   */
+  /** Get cached user form the local storage */
   private getFromStoreage(): UserInfo {
     return this.storage.retrieve(this.USER_KEY);
   } // getFromStoreage()
 
-  getUser(): Observable<UserInfo> {
+  public getUser(): Observable<UserInfo> {
     return of(this.getFromStoreage());
   } // getUser()
 
-  setUser(user: UserInfo): void {
+  public setUser(user: UserInfo): void {
     this.storage.store(this.USER_KEY, user);
   } // setUser()
 
-  remove(): void {
+  public getUserProfile() {
+    return this.rest.get(this.authConfig.profileUrl);
+  } // getUserProfile(()
+
+  public remove(): void {
     this.storage.clear(this.USER_KEY);
-  } //  remove()
+  } //  clear()
 } // class

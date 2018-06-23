@@ -16,8 +16,7 @@
 
 import { NgModule, InjectionToken, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { ExtendzApiConfig, IExtendzApiConfig } from './models/extendApi.config';
+import { IExtendzApiConfig, ExtendzApiConfig } from './models';
 
 export const EXT_API_CONFIG = new InjectionToken<ExtendzApiModule>('extApi.config');
 

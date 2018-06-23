@@ -1,0 +1,9 @@
+@mixin auth-profile-button-theme($theme) {
+    $primary: map-get($theme, primary);
+    $accent: map-get($theme, accent);
+    .profile {
+        border-radius: 50%;
+        padding: 15%;
+        background-color: mat-color($primary, 100);
+    }
+}

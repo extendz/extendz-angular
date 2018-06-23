@@ -26,13 +26,13 @@ export const EXT_REST_CONFIG: InjectionToken<ExtRestConfig> = new InjectionToken
   'extRest.config'
 );
 
-export function httpFactory(config: IExtRestConfig): ExtRestConfig {
+export function restFactory(config: IExtRestConfig): ExtRestConfig {
   return new ExtRestConfig(config);
 }
 
-export const HTTP_INTERCEPTOR_PROVIDER: Provider = {
+export const REST_PROVIDER: Provider = {
   provide: ExtRestConfig,
-  useFactory: httpFactory,
+  useFactory: restFactory,
   deps: [EXT_REST_CONFIG]
 };
 /**
@@ -52,7 +52,7 @@ export class ExtendzRestModule {
           provide: EXT_REST_CONFIG,
           useValue: config
         },
-        HTTP_INTERCEPTOR_PROVIDER
+        REST_PROVIDER
       ]
     };
   } // forRoot()

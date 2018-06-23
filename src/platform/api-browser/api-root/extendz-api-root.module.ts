@@ -20,26 +20,26 @@ import {
   MatIconModule,
   MatCardModule,
   MatProgressSpinnerModule,
-  MatProgressBarModule
+  MatProgressBarModule,
+  MatRippleModule
 } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 
 import { ApiRootService } from './api-root.service';
 
-import { ApiRootRoutingModule } from './api-root-routing.module';
 import { ApiRootComponent } from './api-root.component';
 
-import { ExtendPipesModule, ExtendzRestModule, RestService } from '../../common';
+import { ExtendPipesModule, RestService } from '../../common';
 
 @NgModule({
   imports: [
     CommonModule,
-    ApiRootRoutingModule,
     FlexLayoutModule,
+    // Extentz
     ExtendPipesModule,
-    ExtendzRestModule,
     // Mat
     MatButtonModule,
+    MatRippleModule,
     MatIconModule,
     MatCardModule,
     MatProgressBarModule

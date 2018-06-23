@@ -16,10 +16,10 @@
 import { Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs/Observable';
+import { of } from 'rxjs/observable/of';
 import { LocalStorageService } from 'ngx-webstorage';
 
 import { AccessToken } from '../models/accessToken';
-import { of } from 'rxjs/observable/of';
 
 @Injectable()
 export class TokenService {
@@ -56,4 +56,4 @@ export class TokenService {
   remove(): void {
     this.storage.clear(this.TOKEN_KEY);
   } //  remove()
-} // End class TokenService
+} // class

@@ -14,4 +14,5 @@
  * limitations under the License.
  */
 export * from './camelCase.pipe';
+export * from './showTitle.pipe';
 export * from './extend-pipes.module';

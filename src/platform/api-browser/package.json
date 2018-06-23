@@ -1,0 +1,29 @@
+{
+  "name": "@extendz/api-browser",
+  "version": "0.1.2",
+  "description": "Extend UI Platform Authentication Modules",
+  "main": "./bundles/auth.umd.js",
+  "module": "./index.js",
+  "typings": "./index.d.ts",
+  "keywords": ["angular", "material", "material design", "components", "extend", "reusable"],
+  "scripts": {},
+  "license": "MIT",
+  "author": "Extendz",
+  "contributors": ["Randika Hapugoda <hrandika@hotmail.com>"],
+  "dependencies": {
+    "tslib": "^1.7.1",
+    "@angular/cdk": "^5.0.0",
+    "@angular/material": "^5.0.0",
+    "@angular/material-moment-adapter": "^5.2.3",
+    "moment": "^2.20.1",
+    "ngx-webstorage": "^2.0.1",
+    "@covalent/core": "^1.0.0-rc.4"
+  },
+  "peerDependencies": {
+    "@angular/common": "^5.0.0",
+    "@angular/core": "^5.0.0",
+    "@angular/forms": "^5.0.0",
+    "@angular/router": "^5.0.0",
+    "rxjs": "^5.4.2"
+  }
+}

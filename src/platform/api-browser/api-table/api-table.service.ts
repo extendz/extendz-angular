@@ -3,36 +3,40 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
 
-import { TableResponse, PageAndSort, ModelMeta } from './models/';
+import {
+  RestService,
+  ExtRestConfig,
+  HateosPagedResponse,
+  ObjectWithLinks,
+  ModelMeta,
+  ModelMetaService
+} from '../../common';
 
-import { RestService, ExtRestConfig } from '../../common';
-import { ExtendzApiConfig } from '..';
+import { PageAndSort } from '../models';
 
 @Injectable()
 export class ApiTableService {
   constructor(
     private conf: ExtRestConfig,
-    private apiConfig: ExtendzApiConfig,
-    private http: HttpClient,
-    private rest: RestService
+    private modelMetaService: ModelMetaService,
+    public rest: RestService
   ) {}
-
-  getModel(model: string): Observable<ModelMeta> {
-    let url = this.conf.basePath + '/' + this.apiConfig.modelsEndpont + '/' + model.toLowerCase();
-    console.log(url);
-
-    return this.http.get<ModelMeta>(url);
+  /**Get the model */
+  getModel(model: string, projecion?: string): Observable<ModelMeta> {
+    return this.modelMetaService.getModel(model, projecion);
   } // getModel()
 
-  getTableData(meta: ModelMeta, pageAndSort?: PageAndSort): Observable<TableResponse> {
+  getTableData(meta: ModelMeta, pageAndSort?: PageAndSort): Observable<HateosPagedResponse> {
     let params: HttpParams = new HttpParams();
+    params = params.append('projection', 'dataTable');
     if (pageAndSort) {
       params = params.append('page', pageAndSort.page.toString());
+      params = params.append('size', pageAndSort.size.toString());
     }
-    return this.http.get<TableResponse>(this.conf.basePath + meta.url, { params });
+    return this.rest.http.get<HateosPagedResponse>(this.conf.basePath + meta.url, { params });
   } // getTableData()
 
-  getItemId(url: string) {
-    return this.rest.getId(url);
-  } // getItemId
+  getItem(url: any): Observable<ObjectWithLinks> {
+    return this.rest.http.get<ObjectWithLinks>(url);
+  }
 } // class

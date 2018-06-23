@@ -1,0 +1,25 @@
+{
+  "name": "@extendz/file",
+  "version": "0.1.2",
+  "description": "Extend UI Platform built on Angular Material",
+  "main": "./bundles/core.umd.js",
+  "module": "./index.js",
+  "typings": "./index.d.ts",
+  "keywords": ["angular", "material", "material design", "components", "extend", "reusable"],
+  "scripts": {},
+  "license": "MIT",
+  "author": "Randika Hapugoda",
+  "contributors": ["Randika Hapugoda <hrandika@hotmail.com>"],
+  "dependencies": {
+    "tslib": "^1.7.1"
+  },
+  "peerDependencies": {
+    "@angular/common": "^5.0.0",
+    "@angular/core": "^5.0.0",
+    "@angular/forms": "^5.0.0",
+    "@angular/router": "^5.0.0",
+    "@angular/cdk": "^5.0.0",
+    "@angular/material": "^5.0.0",
+    "rxjs": "^5.4.2"
+  }
+}
